@@ -1,0 +1,39 @@
+[build-system]
+requires = ["flit_core>=3.12,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "rtl-advisor"
+version = "0.1.0"
+description = "Pre-synthesis RTL analysis and benchmarking harness"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[project.optional-dependencies]
+sv = [
+  "pyslang==9.1.0",
+]
+train = [
+  "scikit-learn==1.9.0",
+]
+v2 = [
+  "pyslang==9.1.0",
+  "scikit-learn==1.9.0",
+]
+
+[project.scripts]
+rtl-advisor = "rtl_advisor.cli:entrypoint"
+
+[dependency-groups]
+dev = [
+  "pytest>=9.0,<10",
+]
+
+[tool.flit.module]
+name = "rtl_advisor"
+
+[tool.pytest.ini_options]
+addopts = "-q"
+pythonpath = ["src"]
+testpaths = ["tests"]

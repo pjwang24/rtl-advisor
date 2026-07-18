@@ -1,0 +1,8 @@
+{
+  "license": "Apache-2.0",
+  "license_url": "https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/036d106273e66855cd5214d49518fd0f0df7de61/flow/platforms/nangate45/LICENSE",
+  "liberty_path": "flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib",
+  "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+  "repository": "https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts",
+  "source_commit": "036d106273e66855cd5214d49518fd0f0df7de61"
+}

@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#101721">
+    <title>RTL Advisor — Pre-synthesis intelligence</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand" aria-label="RTL Advisor">
+          <div class="brand-mark" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div>
+            <strong>RTL ADVISOR</strong>
+            <small>MODEL EVALUATION</small>
+          </div>
+        </div>
+
+        <nav class="primary-nav" aria-label="Primary navigation">
+          <button class="nav-item active" data-view="overview" type="button">
+            <span class="nav-icon">⌁</span>
+            <span>Overview</span>
+          </button>
+          <button class="nav-item" data-view="cases" type="button">
+            <span class="nav-icon">▦</span>
+            <span>Evaluation cases</span>
+            <span class="nav-count" id="nav-case-count">—</span>
+          </button>
+          <button class="nav-item" data-view="workspace" type="button">
+            <span class="nav-icon">◇</span>
+            <span>Live workspace</span>
+            <span class="nav-lock" aria-label="Locked">LOCKED</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-meta">
+          <div class="rail-label">EVALUATION SOURCE</div>
+          <div class="source-card">
+            <div class="source-card-top">
+              <span class="pulse-dot amber"></span>
+              <strong>V2.2 evaluation set</strong>
+            </div>
+            <span id="source-status">Connecting…</span>
+          </div>
+          <div class="read-only-note">
+            <span>LOCAL ONLY</span>
+            <p>No RTL or evidence leaves this machine.</p>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="view-eyebrow">MODEL EVALUATION</p>
+            <h1 id="view-title">Model readiness</h1>
+          </div>
+          <div class="topbar-actions">
+            <div class="gate-pill" id="global-gate-pill">
+              <span class="pulse-dot amber"></span>
+              <span>Checking release status</span>
+            </div>
+            <button class="icon-button" id="refresh-button" type="button" aria-label="Refresh evidence">↻</button>
+          </div>
+        </header>
+
+        <div class="loading-screen" id="loading-screen" role="status">
+          <div class="loading-chip"></div>
+          <p>Loading evaluation results…</p>
+        </div>
+
+        <section class="view active" id="overview-view" aria-labelledby="view-title">
+          <article class="hero-card">
+            <div class="hero-copy">
+              <span class="section-kicker">CURRENT MODEL STATUS</span>
+              <h2>V2.2 is not ready<br><em>for live RTL use.</em></h2>
+              <p>
+                The model reliably avoids unnecessary changes, but it misses too many
+                useful RTL improvements. V2.3 must find at least eight additional
+                improvement cases while keeping the current error rate low.
+              </p>
+              <div class="hero-actions">
+                <button class="primary-button" type="button" data-jump="cases">Review missed improvements</button>
+                <button class="text-button" type="button" data-jump="workspace">Preview live workflow <span>→</span></button>
+              </div>
+            </div>
+            <div class="hero-graphic" aria-label="Overall decision score">
+              <div class="target-ring" id="accuracy-ring">
+                <div>
+                  <span id="hero-accuracy">—</span>
+                  <small>OVERALL<br>DECISION SCORE</small>
+                </div>
+              </div>
+              <div class="target-marker">
+                <strong id="hero-gap">—</strong>
+                <span>POINTS TO<br>RELEASE TARGET</span>
+              </div>
+            </div>
+          </article>
+
+          <section class="metric-grid" aria-label="Model evaluation metrics">
+            <article class="metric-card">
+              <div class="metric-label"><span>USEFUL CHANGES FOUND</span><span class="trend neutral">NEEDS WORK</span></div>
+              <strong id="metric-recall">—</strong>
+              <div class="metric-bar"><span id="metric-recall-bar"></span></div>
+              <p id="metric-recall-detail">Loading…</p>
+            </article>
+            <article class="metric-card">
+              <div class="metric-label"><span>CORRECT NO-CHANGE DECISIONS</span><span class="trend good">MEETS TARGET</span></div>
+              <strong id="metric-specificity">—</strong>
+              <div class="metric-bar good"><span id="metric-specificity-bar"></span></div>
+              <p id="metric-specificity-detail">Loading…</p>
+            </article>
+            <article class="metric-card">
+              <div class="metric-label"><span>INCORRECT RECOMMENDATIONS</span><span class="trend good">MEETS TARGET</span></div>
+              <strong id="metric-harmful">—</strong>
+              <div class="metric-bar inverse"><span id="metric-harmful-bar"></span></div>
+              <p id="metric-harmful-detail">Loading…</p>
+            </article>
+          </section>
+
+          <aside class="score-definition">
+            <span class="definition-icon">i</span>
+            <div>
+              <strong>How the overall decision score is calculated</strong>
+              <p id="score-definition-text">It gives equal weight to finding useful changes and correctly recommending no change.</p>
+            </div>
+          </aside>
+
+          <div class="overview-grid">
+            <article class="panel family-panel">
+              <div class="panel-header">
+                <div>
+                  <span class="section-kicker">RESULTS BY RTL PATTERN</span>
+                  <h3>Where the model is working</h3>
+                </div>
+                <span class="panel-meta">104 CASES / RTL PATTERN</span>
+              </div>
+              <div class="family-list" id="family-list"></div>
+            </article>
+
+            <article class="panel gate-panel">
+              <div class="panel-header">
+                <div>
+                  <span class="section-kicker">RELEASE CHECKS</span>
+                  <h3>Requirements for live use</h3>
+                </div>
+              </div>
+              <div class="gate-list" id="gate-list"></div>
+              <div class="gate-callout">
+                <span class="callout-icon">8</span>
+                <div>
+                  <strong>Eight more improvements must be found</strong>
+                  <p>This is the minimum V2.3 target on the same 936-case evaluation set.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <article class="panel failure-panel">
+            <div class="panel-header">
+              <div>
+                <span class="section-kicker">MISSED AND INCORRECT RESULTS</span>
+                <h3>Why useful changes were missed</h3>
+              </div>
+              <button class="text-button" type="button" data-jump="cases">Open case explorer <span>→</span></button>
+            </div>
+            <div class="failure-layout">
+              <div class="failure-bars" id="failure-bars"></div>
+              <div class="diagnostic-note">
+                <span class="note-number">00</span>
+                <div>
+                  <strong>Wrong candidate selected</strong>
+                  <p>Zero cases. Whenever V2.2 recommended a useful change, it chose the best measured candidate.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="view" id="cases-view" aria-labelledby="view-title">
+          <div class="case-toolbar">
+            <label class="search-field">
+              <span aria-hidden="true">⌕</span>
+              <input id="case-search" type="search" placeholder="Search case, RTL pattern, or result…" autocomplete="off">
+            </label>
+            <label class="select-field">
+              <span>RTL pattern</span>
+              <select id="family-filter"><option value="">All RTL patterns</option></select>
+            </label>
+            <label class="select-field">
+              <span>Outcome</span>
+              <select id="category-filter">
+                <option value="">All outcomes</option>
+                <option value="covered_best">Useful change found</option>
+                <option value="no_candidate_clears_threshold">Confidence too low</option>
+                <option value="unsupported_family">More training data needed</option>
+                <option value="harmful_nonopportunity">Incorrect recommendation</option>
+                <option value="true_abstention">Correct no-change decision</option>
+              </select>
+            </label>
+          </div>
+
+          <article class="panel table-panel">
+            <div class="table-summary">
+              <div><strong id="case-result-count">—</strong><span>matching cases</span></div>
+              <span class="calibration-badge">EVALUATION DATA</span>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Case</th>
+                    <th>RTL pattern</th>
+                    <th>Outcome</th>
+                    <th>Model decision</th>
+                    <th>Highest confidence</th>
+                    <th>Input range</th>
+                    <th><span class="visually-hidden">Open</span></th>
+                  </tr>
+                </thead>
+                <tbody id="case-table-body"></tbody>
+              </table>
+            </div>
+            <div class="pagination">
+              <span id="pagination-label">—</span>
+              <div>
+                <button class="page-button" id="previous-page" type="button">← Previous</button>
+                <button class="page-button" id="next-page" type="button">Next →</button>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="view" id="workspace-view" aria-labelledby="view-title">
+          <article class="workspace-card">
+            <div class="workspace-preview">
+              <div class="editor-titlebar">
+                <div><span></span><span></span><span></span></div>
+                <strong>design_top.sv</strong>
+                <span>SystemVerilog</span>
+              </div>
+              <pre aria-hidden="true"><code><span class="syntax-muted">01</span>  module design_top (
+<span class="syntax-muted">02</span>    input  logic [31:0] a, b, c, d,
+<span class="syntax-muted">03</span>    output logic [33:0] result
+<span class="syntax-muted">04</span>  );
+<span class="syntax-muted">05</span>
+<span class="syntax-muted">06</span>    <span class="syntax-keyword">assign</span> result = ((a + b) + c) + d;
+<span class="syntax-muted">07</span>
+<span class="syntax-muted">08</span>  endmodule</code></pre>
+              <div class="preview-finding">
+                <span class="finding-line">6</span>
+                <div>
+                  <strong>Potential adder-tree improvement</strong>
+                  <p>A balanced tree may reduce arithmetic depth while preserving behavior.</p>
+                </div>
+              </div>
+            </div>
+            <div class="workspace-lock-panel">
+              <span class="lock-orbit"><i>◇</i></span>
+              <span class="section-kicker">ROLLOUT STATUS</span>
+              <h2>Live analysis is<br>not enabled yet.</h2>
+              <p>
+                The workflow and result format are ready. RTL upload and filelist execution stay
+                disabled until V2.3 meets the model-quality targets and passes OpenROAD validation.
+              </p>
+              <div class="unlock-steps">
+                <div class="done"><span>✓</span><p><strong>Frontend contract</strong><small>Versioned API v1</small></p></div>
+                <div class="active"><span>2</span><p><strong>V2.3 model evaluation</strong><small>Target: ≥70% overall decision score</small></p></div>
+                <div><span>3</span><p><strong>OpenROAD validation</strong><small>Generated RTL only</small></p></div>
+              </div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="case-dialog" id="case-dialog">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div>
+            <span class="section-kicker">EVALUATION CASE</span>
+            <h2 id="dialog-case-id">Case detail</h2>
+            <p id="dialog-family">—</p>
+          </div>
+          <button class="dialog-close" id="dialog-close" type="button" aria-label="Close case detail">×</button>
+        </header>
+        <div class="dialog-status" id="dialog-status"></div>
+        <div class="dialog-grid">
+          <section class="rtl-panel">
+            <div class="subpanel-header">
+              <div><strong>Baseline RTL</strong><span id="dialog-rtl-file">—</span></div>
+              <span class="language-badge">SYSTEMVERILOG</span>
+            </div>
+            <pre class="code-view"><code id="dialog-source"></code></pre>
+          </section>
+          <section class="candidate-panel">
+            <div class="subpanel-header">
+              <div><strong>Candidate results</strong><span>Model prediction compared with synthesis</span></div>
+            </div>
+            <div id="dialog-candidates"></div>
+          </section>
+        </div>
+        <footer class="dialog-footer">
+          <p><span class="pulse-dot green"></span> Lint and formal equivalence passed for every candidate shown.</p>
+          <span id="dialog-provenance">—</span>
+        </footer>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

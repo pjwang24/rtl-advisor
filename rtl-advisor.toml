@@ -1,0 +1,27 @@
+[project]
+artifacts_dir = "artifacts"
+corpus_dir = "corpus"
+
+[tools]
+verilator = "verilator"
+yosys = "yosys"
+codex = "codex"
+timeout_seconds = 30
+
+[synthesis]
+driving_cell = "BUF_X1"
+output_load_ff = 10.0
+
+[codex]
+model = "gpt-5.6-sol"
+default_effort = "xhigh"
+timeout_seconds = 600
+
+[liberty]
+name = "Nangate45 typical"
+path = "third_party/nangate45/NangateOpenCellLibrary_typical.lib"
+url = "https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/036d106273e66855cd5214d49518fd0f0df7de61/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib"
+sha256 = "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1"
+license_path = "third_party/nangate45/LICENSE"
+license_url = "https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/036d106273e66855cd5214d49518fd0f0df7de61/flow/platforms/nangate45/LICENSE"
+source_commit = "036d106273e66855cd5214d49518fd0f0df7de61"
