@@ -16,17 +16,165 @@ must not make failed or diagnostic-only models appear production-ready.
 
 ## 2. Product boundary
 
+### 2.1 User entry points and component relationship
+
+```mermaid
+flowchart LR
+    terminal[Engineer in terminal] --> cli[RTL Advisor CLI]
+    codex[Engineer in Codex] --> plugin[RTL Advisor plugin]
+    plugin --> skill[analyze-rtl skill]
+    skill -->|V1| cli
+
+    editor[Editor, CI, or dashboard] -. later .-> mcp[Optional RTL Advisor MCP server]
+    skill -. optional later .-> mcp
+
+    cli --> core[RTL Advisor core and evidence engine]
+    mcp --> core
+
+    core --> analysis[Parsing, rules, and calibrated models]
+    core --> candidate[Isolated candidate generation]
+    core --> formal[Yosys formal equivalence]
+    core --> synthesis[Synthesis and calibration]
+    core --> evidence[Versioned JSON evidence]
+```
+
+Solid lines are the V1 implementation. Dashed lines are later options, not V1
+requirements.
+
+- The **plugin** is the installable, shareable package engineers select in
+  Codex. It can bundle skills and, later, MCP configuration.
+- The **skill** is the Codex workflow that interprets the engineer's intent,
+  selects supported operations, and explains results.
+- The **CLI** is both the direct terminal interface and the V1 execution bridge
+  used by the skill.
+- The **core and evidence engine** owns all recommendation decisions,
+  candidates, verification results, and provenance.
+- An **MCP server** would be an optional structured connection to that same core
+  or to approved internal services. It must not become another recommendation
+  engine.
+
+Engineers use the CLI directly in a terminal. In Codex, they install or select
+the plugin and ask for the task in plain language; Codex invokes the bundled
+skill. Engineers should not need to invoke MCP by name. If MCP is added, the
+skill, editor, CI integration, or dashboard calls its tools behind the user
+interface.
+
+### 2.2 Responsibility and task delegation
+
+| Task | V1 owner | Later MCP role |
+| --- | --- | --- |
+| Understand timing, area, or balanced intent | Codex skill | None |
+| Discover supported inputs, tools, and model readiness | CLI capability command | Expose the same capability result as a tool |
+| Parse RTL and compile context | RTL Advisor core | Transport the request only |
+| Decide whether a change is recommended | RTL Advisor core | No independent decision logic |
+| Explain a finding and its limitations | Codex skill | Supply structured evidence to the skill |
+| Generate an isolated candidate | RTL Advisor core through CLI | Expose the same core operation as a tool |
+| Prove logical equivalence | Formal backend controlled by the core | Submit or monitor an approved remote formal job |
+| Run synthesis and compare PPA | Synthesis backend controlled by the core | Submit or monitor an approved remote synthesis job |
+| Store hashes, commands, logs, and result artifacts | RTL Advisor CLI/core | Return stable artifact identifiers or approved links |
+| Retrieve changing internal documents or design metadata | Out of scope unless available as approved local files | Query an approved internal service with user-scoped access |
+| Present results in terminal, Codex, editor, CI, or dashboard | The selected user interface | Provide one structured tool contract across interfaces |
+
+### 2.3 When MCP is justified
+
+MCP becomes useful when RTL Advisor needs a live, structured, permission-aware
+connection that a local subprocess and local files cannot provide cleanly. Add
+it only when at least one concrete integration requires it.
+
+| Need | MCP or connector value | Example for RTL Advisor |
+| --- | --- | --- |
+| Authenticated internal knowledge | Search and fetch current information using the engineer's approved access | Coding standards, design methodology, waiver policy, IP integration guides, or tool-flow documentation stored in SharePoint, Google Drive, Confluence, or an internal search service |
+| Live design metadata | Query structured records without copying whole databases into the repository | Block ownership, hierarchy, approved build manifest, target library, clock targets, supported corners, or exception ownership |
+| Remote EDA compute | Submit, monitor, cancel, and retrieve approved jobs through a stable tool interface | Internal Yosys, Genus, Conformal, formal, or OpenROAD farms that cannot run on the engineer's laptop |
+| Historical evidence | Retrieve current results from a shared system of record | Prior synthesis runs, calibrated-family evidence, waiver history, regression status, or benchmark provenance |
+| Cross-surface reuse | Give Codex, an editor, CI, and a dashboard the same typed operations | `review`, `generate_candidate`, `verify`, `submit_synthesis`, and `get_result` tools backed by the same core |
+| Controlled actions | Apply per-user authorization, approvals, and audit records to material actions | Post a code-review note, open a tracking issue, request an owner review, or launch a licensed EDA job |
+| Managed remote deployment | Reach RTL Advisor when the core runs as an internal service rather than on the local filesystem | A centrally maintained advisor service with versioned models and tool installations |
+
+Internal documents are a good MCP use case only when they are private, changing,
+and must be searched with current user authorization. If a design rule or CLI
+contract is small, stable, and already versioned in this repository, it should
+remain a skill reference or normal project documentation. MCP would add network,
+authentication, availability, and security costs without improving that case.
+
+MCP is **not** required for:
+
+- Reading approved RTL and manifests already present in the workspace.
+- Running the local RTL Advisor CLI, Yosys, Verilator, or OpenROAD.
+- Using stable documentation committed with the repository.
+- Producing versioned JSON evidence and local artifacts.
+- Running CI jobs that can call the CLI directly.
+- Packaging the workflow as a Codex plugin.
+
+If MCP is introduced, use separate least-privilege connections where practical:
+one read-only knowledge connection for internal documentation, one compute
+connection for EDA jobs, and a separate write-capable connection for code-review
+or issue actions. Default document and metadata tools to read-only. Require
+explicit approval for writes, job submissions, or any transfer of RTL. Log tool
+requests and artifact identifiers without exposing proprietary RTL or secrets.
+Only approved internal servers should receive company data.
+
+### 2.4 Example delegation flows
+
+#### V1: local review and candidate verification
+
+1. An engineer asks Codex: "Review `alu.sv` for timing opportunities and tell
+   me whether synthesis probably handles them."
+2. Codex triggers the plugin's `analyze-rtl` skill.
+3. The skill calls `rtl-advisor agent capabilities --json` and confirms that
+   the input, objective, tools, and model are supported.
+4. The skill calls `rtl-advisor agent review alu.sv --objective timing --json`.
+5. The CLI delegates parsing and the recommendation decision to the core. The
+   core returns a stable decision, source location, evidence, limitation, run
+   ID, and artifact paths.
+6. The skill explains the unchanged decision in plain language and shows the
+   exact reproducible command.
+7. If the engineer explicitly requests a candidate, the skill calls the
+   candidate command. The core writes it only to an isolated artifact workspace.
+8. The skill calls the verification command. Yosys formal equivalence proves or
+   rejects the candidate, and the core records the result and hashes.
+9. The skill reports the diff and proof result. A failed or stale proof is
+   reported as a failure; Codex does not reinterpret it as safe.
+
+#### Later: internal knowledge and remote EDA flow
+
+1. An engineer asks for the same review using the current internal coding guide,
+   approved target constraints, and a Genus confirmation run.
+2. The skill uses a read-only internal knowledge connector or MCP tool to fetch
+   the relevant guide sections and record their source identifiers.
+3. The skill queries approved design metadata for the block's target flow. It
+   does not infer missing clocks, libraries, or constraints.
+4. The skill calls the RTL Advisor review tool exposed by an internal MCP server,
+   which delegates to the same core used by the CLI.
+5. After explicit engineer approval, the compute tool submits the generated
+   candidate and approved constraints to the internal Genus or formal service.
+6. The MCP server returns a job ID; later calls retrieve status and versioned
+   artifacts. The plugin explains the core result and links the internal
+   evidence.
+7. If documentation access, authorization, tool availability, or a proof fails,
+   the workflow stops at that boundary and reports the exact missing evidence.
+
+This later flow does not permit internal documentation, an MCP server, or Codex
+to override formal correctness or the core release gates.
+
+### 2.5 Decision for Plugin V1
+
+Do not add MCP to Plugin V1. The local CLI already provides the required
+analysis, candidate, formal, synthesis, and evidence operations. Introducing
+MCP now would add another transport and security boundary before a real remote
+integration exists.
+
+Revisit the decision when the first approved internal integration is selected.
+Before implementation, define its data classification, hosting boundary,
+authentication, tool allowlist, approval rules, audit requirements, failure
+behavior, and whether RTL content is allowed to cross that connection.
+
+The architecture is therefore:
+
 ```text
-Engineer in terminal ───────────────┐
-                                    ▼
-                              RTL Advisor CLI
-                                    │
-Engineer talking to Codex ─► Codex plugin/skill
-                                    │
-                                    └── invokes the same CLI commands
-                                                │
-                                                ▼
-                                      versioned JSON evidence
+V1:    Codex -> plugin -> analyze-rtl skill -> CLI -> RTL Advisor core
+Later: Codex -> plugin -> analyze-rtl skill -> optional MCP -> same core
+        Editor / CI / dashboard -------------> optional MCP -> same core
 ```
 
 The CLI owns:

@@ -301,3 +301,37 @@ and supported-family scope, the frozen V2.3 plan should not be edited or run
 unchanged. The next model must use a new versioned plan, train only on the six
 supported families, retain the three unsupported families as no-change, and
 pass a newly sealed blind evaluation before any production claim.
+
+## Plugin, skill, CLI, and MCP architecture clarification
+
+Expanded `implementation plan/codex plugin v1.md` so the engineer-facing
+interfaces and delegation path are explicit.
+
+- Added a Mermaid architecture graph covering the terminal, Codex plugin,
+  `analyze-rtl` skill, CLI, optional future MCP server, shared RTL Advisor core,
+  formal backend, synthesis backend, and versioned evidence.
+- Clarified that the plugin is the installable user-facing bundle, the skill is
+  the conversational workflow, the CLI is the V1 execution bridge, and the core
+  owns every recommendation and correctness decision.
+- Documented that engineers use the CLI in a terminal or the plugin through
+  Codex; MCP is optional infrastructure called by a skill or another client and
+  is not a separate engineer-facing product.
+- Added a task-delegation table that keeps parsing, ranking, candidate creation,
+  equivalence, synthesis, and provenance in the existing core.
+- Added concrete MCP triggers: authenticated internal knowledge, live design
+  metadata, remote EDA compute, shared historical evidence, cross-surface typed
+  operations, controlled external actions, and managed internal deployment.
+- Clarified that local RTL analysis, local EDA tools, repository documentation,
+  JSON artifacts, direct CLI-based CI, and plugin packaging do not require MCP.
+- Added least-privilege and approval guidance for internal documentation,
+  compute, write actions, RTL transfer, auditing, and failure handling.
+- Added a complete V1 local-review/candidate/formal flow and a later internal-
+  knowledge/remote-Genus flow, including approval and failure paths.
+- Retained the V1 decision: do not add MCP until a concrete approved remote or
+  internal integration exists.
+
+Updated Codex plugin plan SHA-256:
+
+```text
+3fdad39e184d613a5e1cbdaff624a9bbe43b42168587c7bb93d5d2f7a126adeb
+```
