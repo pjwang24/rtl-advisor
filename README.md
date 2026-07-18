@@ -1,424 +1,311 @@
 # RTL Advisor
 
-RTL Advisor is a reproducible harness for generating SystemVerilog variants,
-proving logical equivalence, measuring synthesis results, and benchmarking
-pre-synthesis feedback.
+RTL Advisor is an experimental pre-synthesis review tool for SystemVerilog. It
+tries to identify RTL changes that could improve timing or area, explain the
+reason at the source-code level, and verify that a proposed rewrite preserves
+the design's behavior.
 
-The current implementation covers Step 1 (project setup), Step 2 (the first
-generated lint and formal-equivalence case), Step 3 (mapped delay/area
-comparison), and Step 4A (hierarchy-preserving RTL graphs plus the first
-pre-synthesis resource-sharing rule), and Step 4B (blinded Codex-only and
-hybrid analysis). Step 5A adds the reusable family registry and the second
-end-to-end transformation family. Step 5B1 adds priority selection and the
-first case where hybrid direction prediction outperforms Codex-only. Step
-5B2a adds common-operand mux placement and bidirectional tradeoff findings.
-Step 5B2b-1 adds decode factoring and calibrates recommendations against an
-exactly neutral synthesis result. Step 5B2b-2 adds comparator selection and a
-case where hybrid feedback prevents a harmful source-level optimization. Step
-5B2b-3 adds wide variable-shift analysis and guarded shift-amount narrowing.
-Step 5B2b-4 adds signed-width analysis and redundant-extension calibration.
-Step 5B2b-5 completes the nine-family set with population-count restructuring.
-Step 5C adds safe patch validation, Step 5D accepts the full 68-case corpus,
-and Step 6 completes the five-arm smoke and 240-call held-out pilot.
+> **Current status:** research prototype for generated and approved open RTL.
+> The evaluation and formal-verification harness is working, but the
+> recommendation engine is not yet ready for production RTL decisions.
+
+## The problem
+
+RTL engineers make structural choices that can influence timing, area, and cell
+count. The effect is often discovered only after synthesis or physical design,
+when changing the RTL is slower and more disruptive.
+
+Existing tools each solve part of the problem:
+
+- Lint finds syntax, safety, and coding problems, but usually does not predict
+  implementation value.
+- Synthesis performs many optimizations automatically, but it does not always
+  explain which source-level choice mattered.
+- Timing analysis identifies critical paths after implementation work has
+  already started.
+- Formal equivalence proves that two designs behave the same, but it does not
+  say whether one implementation is faster or smaller.
+- A language model can explain RTL and suggest changes, but a suggestion alone
+  is not correctness or PPA evidence.
+
+The main bottleneck is therefore not generating another rewrite. It is deciding
+which rewrite is safe, useful, and likely to remain useful after a strong
+synthesis tool has optimized both versions.
+
+## A simple example
+
+Consider an addition written as a serial expression:
+
+```systemverilog
+assign y = a + b + c + d;
+```
+
+A tool might suggest a balanced form:
+
+```systemverilog
+assign y = (a + b) + (c + d);
+```
+
+The balanced form may reduce logic depth, but the real answer depends on widths,
+signedness, constraints, technology, and synthesis settings. RTL Advisor is
+being built to do more than show the second code sample:
+
+1. Locate the source pattern.
+2. Explain the possible timing and area tradeoff.
+3. Generate the alternative in an isolated workspace.
+4. Prove the candidate equivalent to the baseline.
+5. Compare implementation evidence when synthesis is available.
+6. State whether the change is recommended, unnecessary, or target-dependent.
+
+The original RTL is never modified automatically.
+
+## Our approach
+
+```text
+Generated or approved RTL
+          │
+          ▼
+ Parse, lint, and structural analysis
+          │
+          ▼
+ Rules and calibrated prediction
+          │
+          ▼
+ Source-linked finding and explanation
+          │
+          ├── no change recommended
+          ├── synthesis likely handles it
+          ├── target-flow confirmation needed
+          └── candidate created in isolation
+                         │
+                         ▼
+                  Formal equivalence
+                         │
+                         ▼
+                Optional synthesis evidence
+```
+
+The CLI is the single execution and evidence engine. Codex may translate an
+engineer's request into CLI operations and explain the result, but it cannot
+override the deterministic decision, formal proof, or measured evidence.
+
+Normal user-facing outcomes are intended to be:
+
+- **Recommended** — evidence supports reviewing the proposed change.
+- **Synthesis likely handles this** — the rewrite may improve readability, but
+  implementation benefit is not expected.
+- **Target-flow confirmation needed** — the result depends on synthesis settings
+  or technology.
+- **No change recommended** — no safe and useful candidate cleared the release
+  checks.
+- **Analysis unavailable** — the input, tools, or model are not ready for a
+  trustworthy result.
+
+## How engineers will use it
+
+RTL Advisor is designed around several interfaces backed by the same CLI:
+
+- **Terminal:** reproducible commands for analysis, formal verification,
+  synthesis comparison, and automation.
+- **Codex plugin:** conversational requests such as “analyze this module for
+  timing risks” or “generate the candidate and run equivalence.”
+- **Editor and code review:** future source annotations and non-blocking review
+  comments.
+- **Internal dashboard:** model readiness, evaluation evidence, and team-level
+  review status.
+
+The local dashboard currently presents frozen evaluation results only. Live RTL
+recommendations remain disabled while the model release checks are failing.
+
+The repository-owned plugin design is documented in
+[`implementation plan/codex plugin v1.md`](implementation%20plan/codex%20plugin%20v1.md).
+
+## What works today
+
+- Deterministic generation of nine RTL transformation families.
+- Verilator and PySlang linting.
+- Yosys-based RTL-to-RTL formal equivalence checks.
+- Intentional incorrect controls that must fail equivalence.
+- Yosys/ABC synthesis against a pinned Nangate45 library.
+- Delay, area, and cell-count comparison with immutable provenance.
+- Isolated candidate generation that leaves the original RTL unchanged.
+- OpenROAD placement-and-routing cross-checks on generated designs.
+- Rules, calibrated models, and audited Codex explanations.
+- A local, read-only evaluation dashboard.
+- Reproducible benchmark plans, hashes, caches, and reports.
+
+The complete repository regression currently contains **153 passing tests**.
+
+## Current evidence
+
+All results below use generated RTL. They demonstrate the evaluation system and
+identify the remaining research gap; they do not establish production accuracy.
+
+| Evidence | Current result | What it means |
+|---|---:|---|
+| Latest synthesis-robustness formal checks | 81/81 passed | Every candidate compared in that pilot was proven equivalent to its baseline. |
+| Standard-flow benefits retained under stronger synthesis | 15/21 (71.4%) | Synthesis removes some apparent RTL benefits, but not all of them. |
+| Benefits removed by stronger synthesis | 6 | Advice based on one synthesis recipe can be misleading. |
+| Candidates useful only under the stronger recipe | 7 | Marginal PPA conclusions can depend on tool settings. |
+| OpenROAD complete cases | 26/27 | The generated physical-design cross-check is operational. |
+| Yosys/OpenROAD candidate-action agreement | 80.8% | The cheaper synthesis labels often, but not always, preserve the physical conclusion. |
+| V1 best high-level decision result | 17/36 (47.2%) | The original rules-plus-Codex advisor was not accurate enough. |
+| V2.2 useful changes found | 86/230 (37.4%) | The safer model misses too many real opportunities. |
+| V2.2 incorrect recommendations | 4/90 (4.4%) | Recommendation safety is promising on calibration data. |
+| V2.2 overall release score | 68.4%, below the 70% requirement | V2.2 correctly remains locked and diagnostic-only. |
+
+The synthesis-robustness pilot used 27 cases and 108 stronger-synthesis runs.
+Of the 21 candidates that looked useful under the standard recipe, 15 remained
+useful, six were optimized away, and seven different candidates became useful
+only under the stronger recipe. This supports flow-aware recommendations, but a
+27-case generated pilot is not enough to generalize to large IP or SoC blocks.
+
+The OpenROAD cross-check passed its registered evidence gate: 26 of 27 cases
+completed, candidate-action agreement was 80.8%, and delay/area/cell-count
+direction agreement ranged from 79.5% to 83.3%. This supports using Yosys as an
+experimental label source; it is not a replacement for a target implementation
+flow.
+
+## Is it production-ready?
+
+No—not as a trusted recommendation engine.
+
+The project is ready for:
+
+- Generated-RTL research and benchmarking.
+- Demonstrating formal candidate validation.
+- An opt-in, non-blocking internal evaluation using approved open RTL.
+- Developing the CLI, Codex plugin, and dashboard around honest readiness
+  states.
+
+The project is not ready for:
+
+- Production recommendations on proprietary block or SoC RTL.
+- Automatically changing source RTL.
+- Blocking a code review or release based on predicted PPA.
+- Replacing signoff synthesis, timing analysis, formal tools, or engineering
+  judgment.
+
+Formal equivalence is an important safety gate, but it only proves behavioral
+agreement for the checked candidate. It does not prove that the advisor chose a
+useful candidate, that the result generalizes, or that the target synthesis flow
+will preserve the benefit.
+
+Before a production pilot, the project needs:
+
+1. A much larger synthesis-robust calibration sweep across all generated cases.
+2. Better coverage of useful changes without increasing incorrect advice.
+3. A newly generated, sealed blind evaluation that is not used during tuning.
+4. Replication with an approved commercial synthesis flow such as Genus, using
+   generated RTL first.
+5. Block-scale testing on diverse approved open designs, including realistic
+   filelists, parameters, packages, macros, clocks, and constraints.
+6. Engineer review studies measuring whether findings are understandable and
+   useful in practice.
+7. Internal deployment, security, runtime, and failure-handling validation.
+
+Proposed production-pilot targets include:
+
+- At least 80% of issued recommendations remain useful across the supported
+  synthesis configurations.
+- At least 50% of robust useful opportunities are found.
+- No more than 5% of issued recommendations are harmful.
+- At least 75% PPA-direction accuracy where a direction is shown.
+- 100% current, hash-matched formal-equivalence success for candidates presented
+  as behavior-preserving.
+
+These are targets, not current claims.
+
+## Quick demonstration
+
+Prerequisites include Python 3.13, `uv`, Yosys/ABC, and Verilator. PySlang and
+the training dependencies are installed through the project environment.
 
 ```bash
 uv sync --no-editable
 uv run --no-editable rtl-advisor setup
-uv run --no-editable pytest
 ```
 
-`--no-editable` avoids a macOS managed-environment issue where Python 3.13
-skips editable-package `.pth` files carrying the hidden filesystem flag.
-After changing CLI source code, refresh the installed command with:
+Generate and evaluate one adder-association example:
 
 ```bash
-uv sync --no-editable --reinstall-package rtl-advisor
+uv run --no-editable rtl-advisor corpus generate \
+  --family adder_reduction_association \
+  --suite development
+
+uv run --no-editable rtl-advisor lint \
+  corpus/development/dev_aa_0001
+
+uv run --no-editable rtl-advisor equivalence \
+  corpus/development/dev_aa_0001
+
+uv run --no-editable rtl-advisor synth \
+  corpus/development/dev_aa_0001
+
+uv run --no-editable rtl-advisor analyze \
+  corpus/development/dev_aa_0001 \
+  --variant v0 \
+  --mode rules
 ```
 
-Use JSON output for automation:
+The equivalence command proves `v1`-`v3` equivalent to `v0` and confirms that
+the intentionally incorrect `n0` control is not equivalent. Synthesis is allowed
+only after the required proof exists.
+
+Launch the local evaluation dashboard:
 
 ```bash
-uv run --no-editable rtl-advisor setup --json
+uv run --no-editable rtl-advisor frontend
 ```
 
-Generate and validate the first case:
-
-```bash
-uv run --no-editable rtl-advisor corpus generate
-uv run --no-editable rtl-advisor lint corpus/development/dev_rs_0001
-uv run --no-editable rtl-advisor equivalence corpus/development/dev_rs_0001
-uv run --no-editable rtl-advisor synth corpus/development/dev_rs_0001
-uv run --no-editable rtl-advisor graph corpus/development/dev_rs_0001 --variant v0
-uv run --no-editable rtl-advisor analyze corpus/development/dev_rs_0001 --variant v0 --mode rules
-uv run --no-editable rtl-advisor analyze corpus/development/dev_rs_0001 --variant v0 --mode codex --effort xhigh
-uv run --no-editable rtl-advisor analyze corpus/development/dev_rs_0001 --variant v0 --mode hybrid --effort xhigh
-```
-
-Generate and validate the adder-association family:
-
-```bash
-uv run --no-editable rtl-advisor corpus generate --family adder_reduction_association --suite development
-uv run --no-editable rtl-advisor lint corpus/development/dev_aa_0001
-uv run --no-editable rtl-advisor equivalence corpus/development/dev_aa_0001
-uv run --no-editable rtl-advisor synth corpus/development/dev_aa_0001
-uv run --no-editable rtl-advisor analyze corpus/development/dev_aa_0001 --variant v0 --mode rules
-```
-
-Generate and validate the priority-selection family:
-
-```bash
-uv run --no-editable rtl-advisor corpus generate --family priority_selection --suite development
-uv run --no-editable rtl-advisor lint corpus/development/dev_pr_0001
-uv run --no-editable rtl-advisor equivalence corpus/development/dev_pr_0001
-uv run --no-editable rtl-advisor synth corpus/development/dev_pr_0001
-uv run --no-editable rtl-advisor analyze corpus/development/dev_pr_0001 --variant v0 --mode rules
-```
-
-Generate and validate the mux-placement family:
-
-```bash
-uv run --no-editable rtl-advisor corpus generate --family mux_placement --suite development
-uv run --no-editable rtl-advisor lint corpus/development/dev_mp_0001
-uv run --no-editable rtl-advisor equivalence corpus/development/dev_mp_0001
-uv run --no-editable rtl-advisor synth corpus/development/dev_mp_0001
-uv run --no-editable rtl-advisor analyze corpus/development/dev_mp_0001 --variant v0 --mode rules
-```
-
-Generate and validate the decode-factoring family:
-
-```bash
-uv run --no-editable rtl-advisor corpus generate --family decode_factoring --suite development
-uv run --no-editable rtl-advisor lint corpus/development/dev_df_0001
-uv run --no-editable rtl-advisor equivalence corpus/development/dev_df_0001
-uv run --no-editable rtl-advisor synth corpus/development/dev_df_0001
-uv run --no-editable rtl-advisor analyze corpus/development/dev_df_0001 --variant v0 --mode rules
-```
-
-Generate and validate the comparator-selection family:
-
-```bash
-uv run --no-editable rtl-advisor corpus generate --family comparator_selection --suite development
-uv run --no-editable rtl-advisor lint corpus/development/dev_cs_0001
-uv run --no-editable rtl-advisor equivalence corpus/development/dev_cs_0001
-uv run --no-editable rtl-advisor synth corpus/development/dev_cs_0001
-uv run --no-editable rtl-advisor analyze corpus/development/dev_cs_0001 --variant v0 --mode rules
-```
-
-Generate and validate the variable-shift family:
-
-```bash
-uv run --no-editable rtl-advisor corpus generate --family variable_shift --suite development
-uv run --no-editable rtl-advisor lint corpus/development/dev_vs_0001
-uv run --no-editable rtl-advisor equivalence corpus/development/dev_vs_0001
-uv run --no-editable rtl-advisor synth corpus/development/dev_vs_0001
-uv run --no-editable rtl-advisor analyze corpus/development/dev_vs_0001 --variant v0 --mode rules
-```
-
-Generate and validate the width/signedness family:
-
-```bash
-uv run --no-editable rtl-advisor corpus generate --family width_signedness --suite development
-uv run --no-editable rtl-advisor lint corpus/development/dev_ws_0001
-uv run --no-editable rtl-advisor equivalence corpus/development/dev_ws_0001
-uv run --no-editable rtl-advisor synth corpus/development/dev_ws_0001
-uv run --no-editable rtl-advisor analyze corpus/development/dev_ws_0001 --variant v0 --mode rules
-```
-
-Generate and validate the popcount/saturation family:
-
-```bash
-uv run --no-editable rtl-advisor corpus generate --family popcount_saturation --suite development
-uv run --no-editable rtl-advisor lint corpus/development/dev_pc_0001
-uv run --no-editable rtl-advisor equivalence corpus/development/dev_pc_0001
-uv run --no-editable rtl-advisor synth corpus/development/dev_pc_0001
-uv run --no-editable rtl-advisor analyze corpus/development/dev_pc_0001 --variant v0 --mode rules
-```
-
-Explicitly emit and validate a candidate patch in an isolated workspace:
-
-```bash
-uv run --no-editable rtl-advisor analyze corpus/development/dev_vs_0001 --variant v0 --mode rules --emit-patch --patch-candidate v1
-```
-
-The command never modifies corpus RTL. It normalizes the candidate into a
-disposable copy, emits a unified diff, runs Verilator lint, proves equivalence,
-and maps both versions with Yosys/ABC. Synthesis runs only after lint and formal
-success. The command returns failure for rejected patches and preserves the
-counterexample and stage records.
-
-Generate and validate the complete deterministic suites:
-
-```bash
-uv run --no-editable rtl-advisor corpus generate-suite --suite development
-uv run --no-editable rtl-advisor corpus validate-suite --suite development
-uv run --no-editable rtl-advisor corpus generate-suite --suite heldout
-uv run --no-editable rtl-advisor corpus validate-suite --suite heldout
-```
-
-The development allocation contains 32 cases; held-out contains four cases per
-family for 36 total. Held-out identifiers are opaque hashes, and their widths
-and seeds are disjoint from development. Every case has one baseline, three
-equivalent candidates, and one inequivalent control.
-
-Run or resume the bounded smoke benchmark and rebuild its report:
-
-```bash
-uv run --no-editable rtl-advisor benchmark run --suite smoke --arm all
-uv run --no-editable rtl-advisor benchmark report --suite smoke
-```
-
-The completed full campaign uses `--suite pilot`: 36 rules records and 240
-model records, including repeat measurements. It caches completed runs and
-preserves explicit failures. Reports are regenerated solely from the immutable
-JSON records under `artifacts/benchmarks`.
-
-The first family contains a baseline (`v0`), three equivalent resource-sharing
-rewrites (`v1`-`v3`), and an intentionally incorrect negative control (`n0`).
-Equivalence succeeds only when all four expected proof outcomes are observed.
-
-The synthesis command refuses unproven candidates, maps the baseline and
-equivalent candidate against the pinned Nangate45 library, and writes delay,
-area, cell-count, provenance, mapped-netlist, and comparison artifacts.
-
-The graph command deliberately stops before flattening or technology mapping.
-It retains module instances, typed operator nodes, bit-level dependencies,
-Yosys source locations, provenance, deterministic hashes, and cache keys. The
-rules analyzer currently detects duplicate adders or multipliers feeding a
-result mux and recommends selecting operands before the shared operator. Its
-finding records the structural evidence, source location, confidence, expected
-area/cell direction, and the risk that the rewrite can worsen timing.
-
-For the generated `dev_rs_0001` case, v0 receives one recommendation at
-`rtl/v0.sv:17`; v1, which already implements the sharing pattern, receives
-a reverse timing-oriented mux-placement recommendation.
-
-Codex-only receives blinded RTL plus the registered transformation catalog.
-Hybrid receives the same input plus sanitized rules-only findings. Neither
-input contains case IDs, variant IDs, synthesis metrics, or outcome labels.
-Every Codex run is ephemeral, read-only, isolated from user configuration, and
-constrained by a checked JSON response schema. JSONL events are retained for
-audit, and a result is rejected if Codex invokes a command, web search, MCP
-tool, or other non-reasoning item. Invalid responses and timeouts produce
-explicit failure records rather than silently disappearing.
-
-The live Sol/xhigh smoke run found the resource-sharing opportunity in v0 in
-both Codex-only and hybrid modes. Hybrid cited the correct source region;
-Codex-only was off by one line, providing an early measurable accuracy
-difference. On v1, both modes recognized the existing area-oriented sharing
-and proposed the reverse timing/area tradeoff with explicit area risk. These
-are predictions only; the model-visible inputs contain no synthesis labels.
-
-The v1 implementation plan is complete. Hybrid xhigh has the best held-out
-actionable-accuracy point estimate, but it does not satisfy the preregistered
-materiality and confidence rule; see the final pilot report under
-`artifacts/benchmarks/pilot/report.md`.
-
-Corpus families are registered independently from the CLI. The adder-
-association family contains one three-level serial baseline, three equivalent
-two-level balanced trees, and a separate inequivalent `n0` control. Development
-and held-out generation use disjoint default widths and seeds; held-out case
-IDs are deterministic hashes that do not reveal the transformation family.
-
-For the permanent WIDTH=16 `dev_aa_0001` case, all five variants pass lint,
-v1-v3 are formally equivalent, and `n0` is formally inequivalent. Compared
-with the serial baseline, every balanced candidate improves mapped delay by
-8.88% and cell count by 5.58% while increasing area by 8.51%. The serial-chain
-rule fires on v0 and not on the balanced candidate. Live Sol/xhigh Codex-only
-and hybrid runs both recommend reassociation without seeing those labels; the
-Codex-only arm also identifies a valid intermediate-width opportunity.
-
-The priority-selection family contains a low-index-priority `if/else` baseline,
-three equivalent case/ternary/decoded candidates, and a separate altered-
-priority control. All variants lint, v1-v3 are formally equivalent, and `n0`
-is formally inequivalent. Compared with v0, candidates improve area by
-22.34-28.74% and cells by 12.21-38.93%, but worsen delay by 21.51-28.34%.
-This evidence corrected the deep-mux rule to predict area/cell improvement and
-uncertain timing. In live blinded runs, Codex-only incorrectly predicted delay
-improvement; hybrid predicted area/cell improvement and uncertain timing,
-matching the observed directions without receiving synthesis labels.
-
-The mux-placement family contains a baseline with two mutually exclusive
-additions sharing one operand, three equivalent candidates that select the
-differing operand before one adder, and an inequivalent control. At WIDTH=16,
-every candidate improves delay by 13.41% and cells by 0.73%, with only 0.93%
-area regression. The rules engine distinguishes common-operand mux placement
-from generic arithmetic sharing and can describe both transformation
-directions. Codex-only identifies the rewrite as resource sharing; hybrid uses
-the more precise mux-placement category. Both model arms predict the cell
-benefit and keep timing uncertain, while the structural rule predicts the
-observed delay improvement.
-
-The decode-factoring family repeats two opcode comparisons in its baseline and
-provides shared-decode, `case`, and masked-decode equivalents. Direct factoring
-in v1 is exactly neutral after mapping, showing why a structural cleanup should
-not automatically be advertised as a PPA improvement. The v2 `case` rewrite
-improves area by 8.90% and cells by 26.36% but worsens delay by 19.35%. The v3
-masked-decode rewrite improves delay by 7.84% and cells by 29.09% with a 5.74%
-area cost, satisfying the timing-benefit guardrail. Codex-only overpredicts the
-direct factoring benefit; hybrid inherits the calibrated rule and correctly
-predicts neutral delay, area, and cell count. Neither model selected v3, which
-creates a useful ranking-regret example for the benchmark.
-
-The comparator-selection family contains two parallel unsigned comparisons
-followed by a one-bit result mux. Its three equivalent candidates select two
-WIDTH-bit operands before one comparator. Despite appearing to share hardware,
-all three candidates are harmful under the benchmark guardrails. The direct
-shared form worsens delay by 6.33%, area by 18.30%, and cells by 0.99%. The
-other encodings worsen delay by about 0.88% and area by 11.78-12.53% while
-reducing cells by 5.94%. The calibrated rule therefore advises retaining the
-parallel comparisons unless target synthesis proves otherwise. Codex-only
-confidently recommends the harmful rewrite and predicts area/cell improvement;
-hybrid returns no actionable recommendation, matching the measured decision
-without receiving synthesis labels.
-
-The variable-shift family starts with a WIDTH-bit data value shifted by a
-WIDTH-bit amount. Its equivalent candidates preserve the required zero result
-for amounts greater than or equal to WIDTH while narrowing the barrel-shifter
-control, decoding fixed shifts, or using a guarded staged network. At WIDTH=16,
-the guarded narrow and staged forms improve delay by about 16.0%, area by
-7.99%, and cells by 8.26%. The fully decoded form improves delay by 14.85% but
-increases area by 38.62% and cells by 47.93%. Codex-only finds the correct
-guarded rewrite but leaves cell direction uncertain; hybrid predicts all three
-observed improvement directions. Both remain blinded to synthesis labels.
-
-The width/signedness family explicitly sign-extends two WIDTH-bit operands to
-2*WIDTH before a signed comparison. Natural-width direct and typed signed
-comparisons map exactly identically at WIDTH=16: delay, area, and cell-count
-changes are all 0.00%. A manual sign-split alternative worsens delay by 9.49%,
-area by 12.82%, and cells by 7.84%. The rule reconstructs the natural source
-width from repeated sign bits and recommends the direct form for clarity and
-sizing safety without promising PPA improvement. Codex-only overpredicts all
-three directions; hybrid predicts neutral PPA exactly.
-
-The popcount/saturation family counts 16 independent input bits using a serial
-accumulator baseline. A balanced tree improves delay by 15.71% but worsens area
-by 21.96% and cells by 13.51%. Chunked accumulation improves delay by 3.89%
-with 13.32% area regression, while the paired form improves delay by 12.49%
-with 21.03% area regression. None satisfies the default benefit guardrails.
-The calibrated rule presents balancing as a timing-driven area tradeoff.
-Codex-only incorrectly predicts improvement in every metric; hybrid predicts
-better delay, worse area, and uncertain cell count.
-
-Safe patch emission is opt-in through `--emit-patch`. The accepted
-`dev_vs_0001` v1 patch passes all three gates and reproduces its measured PPA
-improvements. An exercised negative control passes lint, fails equivalence,
-skips synthesis, returns a rejected record, and leaves every source file
-byte-for-byte unchanged.
-
-The permanent suite acceptance gate passes all 32 development and all 36
-held-out cases. Every case passes lint, all three candidates prove equivalent,
-every negative control proves inequivalent, and mapped synthesis records three
-comparisons. The full corpus therefore contains 68 cases, 340 RTL variants,
-272 formal candidate/control results, and 204 mapped candidate comparisons.
-
-The test suite currently contains 153 passing tests.
-
-The approved v1 implementation plan is stored in
-[`implementation plan/v1.md`](implementation%20plan/v1.md).
-
-## V2.1 recovery workflow
-
-The V2.1 workflow is versioned separately from the current live default. It uses
-generated RTL only, kernel-only pre-synthesis features, PySlang syntax facts,
-family nearest-neighbor OOD evidence, grouped-out-of-fold random forests, and a
-locked OpenROAD physical cross-check.
-
-```bash
-rtl-advisor benchmark diagnose-v2
-rtl-advisor benchmark openroad-lock-v2 \
-  --image openroad/orfs:latest \
-  --orfs-root third_party/OpenROAD-flow-scripts
-rtl-advisor benchmark openroad-run-v2 --workers 2
-rtl-advisor benchmark openroad-report-v2
-
-rtl-advisor corpus generate-suite-v21 --split calibration-v21
-rtl-advisor corpus generate-suite-v21 --split heldout-v21
-rtl-advisor corpus validate-suite-v21 \
-  --split calibration-v21 --synthesize --workers 4
-rtl-advisor corpus validate-suite-v21 --split heldout-v21 --workers 4
-rtl-advisor model train-v21
-
-# These commands remain blocked until calibration, formal, model, and physical
-# prerequisites all pass. Blind synthesis starts only after lock + unseal.
-rtl-advisor benchmark lock-v21
-rtl-advisor benchmark run-v21 --synthesis-workers 4
-rtl-advisor benchmark report-v21
-```
-
-The immutable implementation contract is in
-`implementation plan/v2.1.md`; execution status is recorded in
-`progress updates/july 14th.md`.
-
-## V2.2 family-risk workflow
-
-V2.2 preserves the V2.1 feature, direction, OOD, ranking, formal, and passing
-physical-evidence stacks. It replaces only the global eligibility gate with
-grouped-OOF family classifiers and a jointly constrained family-threshold
-policy.
-
-```bash
-rtl-advisor model train-v22
-rtl-advisor benchmark diagnose-v22
-
-# Live analysis and blind locking reject diagnostic-only calibration results.
-rtl-advisor analyze-v22 path/to/case --mode safe
-rtl-advisor benchmark lock-v22
-```
-
-The frozen calibration produced a safe diagnostic frontier—37.4% opportunity
-recall, 99.4% specificity, 4.4% harmful recommendations, and 68.4% balanced
-actionable accuracy—but missed the 70% calibration gate. Consequently no V2.2
-blind suite, lock, synthesis, or unseal artifact was created. The contract and
-exact evidence are recorded in `implementation plan/v2.2.md` and
-`progress updates/july 14th.md`.
-
-The frozen failure diagnostic shows that all 86 covered opportunities already
-select a measured-best candidate and measured-oracle reranking recovers no new
-cases. The 144 misses are 131 below-threshold cases plus 13 opportunities in
-unsupported families. The next iteration therefore targets eligibility-score
-separation and family support, not candidate-ranking replacement.
-
-## V2.3 stacked-eligibility recovery
-
-V2.3 is preregistered in `implementation plan/v2.3.md`. It adds 384 generated,
-formally checked calibration cases across the seven families that need support
-or better score separation. Stacked family models may use only live-available
-kernel features and leakage-checked pre-synthesis PPA predictions. The unchanged
-V2.2 risk optimizer is evaluated on the same 936-case reference distribution,
-and no V2.3 held-out suite may be generated until calibration and a targeted
-OpenROAD delta audit both pass.
-
-## Synthesis-redundancy pilot
-
-The V1 synthesis-redundancy benchmark tests whether RTL benefits measured with
-the standard Yosys/ABC recipe remain useful after stronger Yosys optimization.
-It uses 27 generated calibration cases, requires current RTL-to-RTL equivalence
-proofs for all 81 candidates, and runs 108 baseline/candidate synthesis jobs.
-
-```bash
-rtl-advisor benchmark synthesis-redundancy-v1 --workers 4
-```
-
-All 108 runs passed. Of 21 candidates that were useful under the standard
-recipe, 15 remained useful under stronger synthesis, six were removed, and
-seven additional candidates were useful only under the stronger recipe. This
-71.4% survival result supports continuing only with families whose benefit is
-repeatable across synthesis settings. The frozen experiment is documented in
-`implementation plan/synthesis redundancy v1.md`.
-
-## Local frontend
-
-Frontend V1 is a dependency-free, local-only dashboard over frozen V2.2 model
-evaluation results. It provides a plain-language release-readiness overview,
-results by RTL pattern, a filterable 936-case explorer, generated RTL and
-candidate drill-down, and a preview of the future live-analysis workflow.
-
-```bash
-PYTHONPATH=src .venv/bin/python -m rtl_advisor frontend
-```
-
-Open `http://127.0.0.1:8765`. The server binds only to localhost by default,
-loads no external assets, and rejects every mutation request. Live RTL analysis
-remains visibly locked until V2.3 meets its model-quality targets and passes its
-OpenROAD delta audit. The frozen boundary is documented in
-`implementation plan/frontend v1.md`.
+Then open `http://127.0.0.1:8765`. The dashboard is local, read-only, and backed
+by frozen V2.2 calibration evidence.
+
+Generated corpora, model artifacts, synthesis outputs, the Liberty file, and the
+OpenROAD checkout are intentionally not stored in Git. The CLI creates or
+downloads them through the registered workflows.
+
+## Next steps
+
+The evidence track is the production bottleneck:
+
+1. Generalize the 27-case synthesis-redundancy runner into a complete
+   calibration sweep and create flow-robust labels.
+2. Continue V2.3 calibration using those stronger labels and existing formal
+   gates.
+3. Run a fresh sealed blind benchmark only after calibration and physical checks
+   pass.
+4. Prepare a portable generated-RTL Genus handoff for the separate machine.
+5. Evaluate diverse approved open blocks before considering proprietary RTL.
+
+The interface track can proceed in parallel without claiming production
+readiness:
+
+1. Add a stable machine-readable CLI contract.
+2. Build the repository-owned `rtl-advisor` Codex plugin and `analyze-rtl`
+   skill.
+3. Require terminal-versus-Codex result parity.
+4. Reuse the same contract later for VS Code, CI, and the dashboard.
+
+## Project documentation
+
+- [V1 implementation plan](implementation%20plan/v1.md)
+- [V2 implementation plan](implementation%20plan/v2.md)
+- [V2.1 recovery plan](implementation%20plan/v2.1.md)
+- [V2.2 family-risk plan](implementation%20plan/v2.2.md)
+- [V2.3 recovery plan](implementation%20plan/v2.3.md)
+- [Synthesis-redundancy plan](implementation%20plan/synthesis%20redundancy%20v1.md)
+- [Frontend plan](implementation%20plan/frontend%20v1.md)
+- [Codex plugin plan](implementation%20plan/codex%20plugin%20v1.md)
+- [Progress updates](progress%20updates/)
+
+## Operating principles
+
+- Use generated or explicitly approved open RTL during development.
+- Never modify source RTL in place.
+- Keep measured evidence separate from predictions and explanations.
+- Require formal equivalence before describing a candidate as safe.
+- Never use held-out labels to tune the same version being evaluated.
+- Fail closed when tools, models, hashes, or evidence are missing or stale.
+- Treat commercial synthesis and signoff tools as external validation, not as
+  assumptions.
