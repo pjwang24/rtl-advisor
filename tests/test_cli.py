@@ -181,6 +181,21 @@ def test_synthesis_redundancy_parser_is_versioned() -> None:
     assert args.json_output is True
 
 
+def test_full_synthesis_robustness_parser_is_versioned() -> None:
+    args = build_parser().parse_args(
+        (
+            "benchmark",
+            "synthesis-robustness-full-v1",
+            "--workers",
+            "12",
+            "--json",
+        )
+    )
+    assert args.benchmark_command == "synthesis-robustness-full-v1"
+    assert args.workers == 12
+    assert args.json_output is True
+
+
 def test_frontend_parser_defaults_to_localhost() -> None:
     args = build_parser().parse_args(("frontend", "--port", "9001"))
     assert args.command == "frontend"

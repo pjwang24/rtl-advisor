@@ -367,6 +367,7 @@ def _aggressive_script(
 
 def _aggressive_cache_key(
     *,
+    flow_version: str = FLOW_VERSION,
     plan_hash: str,
     variant: VariantSpec,
     yosys_version: str,
@@ -376,7 +377,7 @@ def _aggressive_cache_key(
 ) -> str:
     return _stable_hash(
         {
-            "flow_version": FLOW_VERSION,
+            "flow_version": flow_version,
             "plan_hash": plan_hash,
             "source_sha256": variant.sha256,
             "top": variant.wrapper_top,
@@ -396,8 +397,11 @@ def _run_aggressive_variant(
     plan_hash: str,
     yosys_version: str,
     liberty_sha256: str,
+    output_root: Path | None = None,
+    flow_version: str = FLOW_VERSION,
 ) -> SynthesisResult:
     cache_key = _aggressive_cache_key(
+        flow_version=flow_version,
         plan_hash=plan_hash,
         variant=variant,
         yosys_version=yosys_version,
@@ -405,12 +409,10 @@ def _run_aggressive_variant(
         driving_cell=config.synthesis.driving_cell,
         output_load_ff=config.synthesis.output_load_ff,
     )
-    output_dir = (
-        config.artifacts_dir
-        / "synthesis-redundancy/v1/runs"
-        / manifest.case_id
-        / variant.variant_id
+    runs_root = output_root or (
+        config.artifacts_dir / "synthesis-redundancy/v1/runs"
     )
+    output_dir = runs_root / manifest.case_id / variant.variant_id
     result_path = output_dir / "result.json"
     log_path = output_dir / "synthesis.log"
     script_path = output_dir / "synthesis.ys"
@@ -502,7 +504,7 @@ def _run_aggressive_variant(
             "output_load_ff": config.synthesis.output_load_ff,
         },
         provenance={
-            "flow_version": FLOW_VERSION,
+            "flow_version": flow_version,
             "plan_hash": plan_hash,
             "yosys_version": yosys_version,
             "liberty_name": config.liberty.name,

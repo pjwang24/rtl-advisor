@@ -134,7 +134,7 @@ The repository-owned plugin design is documented in
 - A local, read-only evaluation dashboard.
 - Reproducible benchmark plans, hashes, caches, and reports.
 
-The complete repository regression currently contains **153 passing tests**.
+The complete repository regression currently contains **163 passing tests**.
 
 ## Current evidence
 
@@ -143,10 +143,12 @@ identify the remaining research gap; they do not establish production accuracy.
 
 | Evidence | Current result | What it means |
 |---|---:|---|
-| Latest synthesis-robustness formal checks | 81/81 passed | Every candidate compared in that pilot was proven equivalent to its baseline. |
-| Standard-flow benefits retained under stronger synthesis | 15/21 (71.4%) | Synthesis removes some apparent RTL benefits, but not all of them. |
-| Benefits removed by stronger synthesis | 6 | Advice based on one synthesis recipe can be misleading. |
-| Candidates useful only under the stronger recipe | 7 | Marginal PPA conclusions can depend on tool settings. |
+| Full synthesis-robustness formal checks | 2,808/2,808 passed | Every candidate in the complete calibration sweep was proven equivalent to its baseline. |
+| Stronger-synthesis runs | 3,744/3,744 passed | The complete 936-case calibration population was evaluated successfully. |
+| Standard-flow benefits retained as flow-robust | 314/391 (80.3%) | Most standard-flow benefits survived, but 77 candidates were removed or conflicted. |
+| Benefits removed by stronger synthesis | 67 | Advice based on one synthesis recipe can still be misleading. |
+| Candidates useful only under the stronger recipe | 180 | Many conclusions depend on synthesis settings and require target-flow confirmation. |
+| Cases with a flow-robust opportunity | 199/936 | Six of nine RTL families have enough positive and negative support for the next model. |
 | OpenROAD complete cases | 26/27 | The generated physical-design cross-check is operational. |
 | Yosys/OpenROAD candidate-action agreement | 80.8% | The cheaper synthesis labels often, but not always, preserve the physical conclusion. |
 | V1 best high-level decision result | 17/36 (47.2%) | The original rules-plus-Codex advisor was not accurate enough. |
@@ -154,11 +156,21 @@ identify the remaining research gap; they do not establish production accuracy.
 | V2.2 incorrect recommendations | 4/90 (4.4%) | Recommendation safety is promising on calibration data. |
 | V2.2 overall release score | 68.4%, below the 70% requirement | V2.2 correctly remains locked and diagnostic-only. |
 
-The synthesis-robustness pilot used 27 cases and 108 stronger-synthesis runs.
-Of the 21 candidates that looked useful under the standard recipe, 15 remained
-useful, six were optimized away, and seven different candidates became useful
-only under the stronger recipe. This supports flow-aware recommendations, but a
-27-case generated pilot is not enough to generalize to large IP or SoC blocks.
+The full synthesis-robustness sweep used all 936 generated calibration cases,
+2,808 formally equivalent candidates, and 3,744 stronger-synthesis runs. Of 391
+candidates that looked useful under the standard recipe, 314 remained useful
+with compatible delay and area direction. Sixty-seven were optimized away, ten
+had conflicting directions, and 180 different candidates became useful only
+under the stronger recipe.
+
+Six families have enough flow-robust opportunity and no-change examples for the
+next model: adder association, decode factoring, mux placement, popcount,
+priority selection, and width/signedness. Arithmetic resource sharing has only
+two robust opportunity cases; comparator selection and variable shifting have
+none in the current population.
+
+The 80.3% retention result measures the available calibration labels. It does
+not mean the current advisor issues 80.3% correct recommendations.
 
 The OpenROAD cross-check passed its registered evidence gate: 26 of 27 cases
 completed, candidate-action agreement was 80.8%, and delay/area/cell-count
@@ -193,7 +205,8 @@ will preserve the benefit.
 
 Before a production pilot, the project needs:
 
-1. A much larger synthesis-robust calibration sweep across all generated cases.
+1. A new recommendation model trained and calibrated against the completed
+   flow-robust labels.
 2. Better coverage of useful changes without increasing incorrect advice.
 3. A newly generated, sealed blind evaluation that is not used during tuning.
 4. Replication with an approved commercial synthesis flow such as Genus, using
@@ -267,12 +280,13 @@ downloads them through the registered workflows.
 
 ## Next steps
 
-The evidence track is the production bottleneck:
+The evidence track remains the production bottleneck:
 
-1. Generalize the 27-case synthesis-redundancy runner into a complete
-   calibration sweep and create flow-robust labels.
-2. Continue V2.3 calibration using those stronger labels and existing formal
-   gates.
+1. Design the next versioned model around the 2,808 flow-robust labels and the
+   six supported families. Do not modify the frozen V2.3 plan after observing
+   this new evidence.
+2. Keep arithmetic resource sharing, comparator selection, and variable shifting
+   research-only until they have sufficient robust opportunity support.
 3. Run a fresh sealed blind benchmark only after calibration and physical checks
    pass.
 4. Prepare a portable generated-RTL Genus handoff for the separate machine.
@@ -295,6 +309,7 @@ readiness:
 - [V2.2 family-risk plan](implementation%20plan/v2.2.md)
 - [V2.3 recovery plan](implementation%20plan/v2.3.md)
 - [Synthesis-redundancy plan](implementation%20plan/synthesis%20redundancy%20v1.md)
+- [Full-calibration synthesis-robustness plan](implementation%20plan/synthesis%20robustness%20full%20calibration%20v1.md)
 - [Frontend plan](implementation%20plan/frontend%20v1.md)
 - [Codex plugin plan](implementation%20plan/codex%20plugin%20v1.md)
 - [Progress updates](progress%20updates/)

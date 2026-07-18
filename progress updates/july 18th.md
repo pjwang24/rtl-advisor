@@ -213,3 +213,91 @@ report hash:
 ```text
 ee4339bce2f618153dbbaeb100b77d01a1e89c1418a42c4cbf9643a4553740b3
 ```
+
+## Full-calibration synthesis robustness V1
+
+The 27-case pilot was generalized into a frozen sweep over the complete 936-case
+V2/V2.1 generated calibration population. This experiment creates the
+flow-robust target table needed before another recommendation model is trained.
+
+### Frozen contract and implementation
+
+- Added `implementation plan/synthesis robustness full calibration v1.md` and
+  froze it before the new sweep began.
+- Frozen implementation-plan SHA-256:
+  `b760529e249e6c193c4ba7b537fdd07d1fd6631653046b05b92bb0c7ff2291df`.
+- Frozen all 936 case IDs, nine equal 104-case family allocations, topology
+  signatures, diagnostic categories, manifests, RTL hashes, 2,808 formal-proof
+  hashes, 3,744 standard-synthesis result hashes, and mapped-netlist hashes.
+- Frozen full-sweep plan hash:
+  `f51e92cbe7367081b50e1ccc7ea752a615a2a26ed63ca794628587c8ae3e0bbc`.
+- Added `rtl-advisor benchmark synthesis-robustness-full-v1 --workers 8`.
+- Added a resumable, checkpointed 3,744-run stronger-synthesis runner with
+  source/tool/library/constraint/plan-aware caches.
+- Added six mutually exclusive candidate classes, per-metric direction
+  compatibility, robust-best selection, per-family support checks, and aligned
+  JSON/JSONL training tables.
+- Used generated calibration RTL only. No company RTL, held-out labels, blind
+  labels, or commercial synthesis evidence were used.
+
+### Execution result
+
+- All 3,744 stronger-synthesis runs passed with zero failures.
+- All 2,808 candidate rows have current successful RTL-to-RTL formal proofs.
+- The standard recipe classified 391 candidates as useful.
+- The stronger recipe classified 504 candidates as useful.
+- 314 candidates are flow-robust: useful under both recipes with compatible
+  delay and area direction.
+- Standard-useful candidate retention is 314/391, or 80.3%.
+- Sixty-seven standard-flow benefits were removed by stronger synthesis.
+- Ten candidates were useful in both recipes but had a conflicting delay or
+  area direction.
+- 180 candidates were useful only under the stronger recipe.
+- 1,505 candidates were effectively absorbed by synthesis.
+- 732 candidates did not meet the balanced usefulness rule.
+- Delay, area, and cell-count direction compatibility are 92.2%, 95.8%, and
+  93.9%, respectively.
+- The final table contains exactly 2,808 unique candidate rows and reproduces
+  from 3,744 cached results with zero fresh runs.
+
+### Family result
+
+Six families meet the preregistered floor of at least ten robust opportunity
+cases and ten robust no-change cases:
+
+- `adder_reduction_association`: 47 robust opportunity cases and 71 robust
+  candidates; 100% standard-candidate retention.
+- `decode_factoring`: 15 cases and 30 candidates; 100% retention.
+- `mux_placement`: 20 cases and 46 candidates; 48.9% retention.
+- `popcount_saturation`: 32 cases and 68 candidates; 100% retention.
+- `priority_selection`: 71 cases and 71 candidates; 100% retention.
+- `width_signedness`: 12 cases and 26 candidates; 100% retention.
+
+Three families do not have sufficient robust positive support:
+
+- `arithmetic_resource_sharing`: two robust opportunity cases.
+- `comparator_selection`: zero robust opportunity cases.
+- `variable_shift`: zero robust opportunity cases.
+
+These three families must remain research-only or default to no change until new
+generated calibration evidence supports them.
+
+### Artifacts and model implication
+
+- Report: `artifacts/synthesis-robustness/full-calibration-v1/report.md`.
+- Semantic report hash:
+  `eb91748d068072d79d0616cf2450da0f59523627738abe2cc933b8312392c12b`.
+- Training-table semantic hash:
+  `9ac5bd1d39d6b49e56f79019706d5b671ebd6e89156fa384a28b59e9123f4b93`.
+- JSON training artifact SHA-256:
+  `e3b67b9f043f1dd55db9bb606d872e6cd310818bebc61fe58b6b0fc197b93013`.
+- JSONL training artifact SHA-256:
+  `77b33bc0388a247aefd0cced853313392712aba4f75dc1f36a342230106b594f`.
+
+The full result strengthens the product hypothesis but does not promote the
+advisor. The 80.3% figure is retention of measured calibration benefits, not
+current recommendation accuracy. Because this evidence changes the target label
+and supported-family scope, the frozen V2.3 plan should not be edited or run
+unchanged. The next model must use a new versioned plan, train only on the six
+supported families, retain the three unsupported families as no-change, and
+pass a newly sealed blind evaluation before any production claim.

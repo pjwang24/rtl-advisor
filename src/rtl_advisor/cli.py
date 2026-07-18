@@ -100,6 +100,10 @@ from rtl_advisor.synthesis_redundancy import (
     SynthesisRedundancyError,
     run_redundancy_benchmark,
 )
+from rtl_advisor.synthesis_robustness_full import (
+    SynthesisRobustnessFullError,
+    run_full_sweep,
+)
 from rtl_advisor.suite import (
     SuiteError,
     generate_suite,
@@ -557,6 +561,16 @@ def build_parser() -> argparse.ArgumentParser:
         "--workers", type=int, choices=range(1, 9), default=4
     )
     benchmark_redundancy_v1.add_argument(
+        "--json", action="store_true", dest="json_output"
+    )
+    benchmark_robustness_full_v1 = benchmark_subparsers.add_parser(
+        "synthesis-robustness-full-v1",
+        help="run the complete 936-case stronger-synthesis calibration sweep",
+    )
+    benchmark_robustness_full_v1.add_argument(
+        "--workers", type=int, choices=range(1, 17), default=8
+    )
+    benchmark_robustness_full_v1.add_argument(
         "--json", action="store_true", dest="json_output"
     )
     benchmark_orfs_v2 = benchmark_subparsers.add_parser(
@@ -1485,6 +1499,23 @@ def main(argv: Sequence[str] | None = None) -> int:
                 print(f"  report            {result['report_path']}")
             return 0 if result["status"] == "passed" else 1
 
+        if (
+            args.command == "benchmark"
+            and args.benchmark_command == "synthesis-robustness-full-v1"
+        ):
+            result = run_full_sweep(config, workers=args.workers)
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                print(
+                    f"Full synthesis robustness V1: {result['status']}  "
+                    f"passed={result['passed_count']}/{result['run_count']}  "
+                    f"fresh={result['fresh_count']}  cached={result['cached_count']}"
+                )
+                print(f"  training rows     {result['training_rows_path']}")
+                print(f"  report            {result['report_path']}")
+            return 0 if result["status"] == "passed" else 1
+
         if args.command == "benchmark" and args.benchmark_command == "openroad-plan-v2":
             plan_path = create_openroad_plan(config)
             plan = json.loads(plan_path.read_text(encoding="utf-8"))
@@ -1574,6 +1605,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         V2PostmortemError,
         DiagnosticV22Error,
         SynthesisRedundancyError,
+        SynthesisRobustnessFullError,
         FrontendAPIError,
         FrontendServerError,
     ) as exc:
