@@ -134,7 +134,7 @@ The repository-owned plugin design is documented in
 - A local, read-only evaluation dashboard.
 - Reproducible benchmark plans, hashes, caches, and reports.
 
-The complete repository regression currently contains **163 passing tests**.
+The complete repository regression currently contains **170 passing tests**.
 
 ## Current evidence
 
@@ -278,6 +278,22 @@ Generated corpora, model artifacts, synthesis outputs, the Liberty file, and the
 OpenROAD checkout are intentionally not stored in Git. The CLI creates or
 downloads them through the registered workflows.
 
+For terminal automation and the future Codex plugin, use the versioned JSON
+interface:
+
+```bash
+rtl-advisor agent capabilities --json
+rtl-advisor agent review path/to/manifest.json --objective timing --json
+rtl-advisor agent candidate <run-id> --finding <finding-id> --json
+rtl-advisor agent verify <run-id> --candidate <candidate-id> --json
+```
+
+The capabilities result currently reports that no recommendation model is ready
+for live use. Reviews can expose diagnostic findings, but candidate generation
+stays disabled unless a future model clears the documented release gates. The
+interface never modifies the input RTL, and only `agent verify` can mark an
+isolated candidate safe after current hash-matched formal equivalence.
+
 ## Next steps
 
 The evidence track remains the production bottleneck:
@@ -295,8 +311,8 @@ The evidence track remains the production bottleneck:
 The interface track can proceed in parallel without claiming production
 readiness:
 
-1. Add a stable machine-readable CLI contract.
-2. Build the repository-owned `rtl-advisor` Codex plugin and `analyze-rtl`
+1. The stable machine-readable CLI contract is implemented and tested.
+2. Next, build the repository-owned `rtl-advisor` Codex plugin and `analyze-rtl`
    skill.
 3. Require terminal-versus-Codex result parity.
 4. Reuse the same contract later for VS Code, CI, and the dashboard.

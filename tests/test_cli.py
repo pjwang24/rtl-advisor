@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 
 from rtl_advisor.cli import build_parser, main
 
@@ -201,3 +202,59 @@ def test_frontend_parser_defaults_to_localhost() -> None:
     assert args.command == "frontend"
     assert args.host == "127.0.0.1"
     assert args.port == 9001
+
+
+def test_agent_parser_exposes_versioned_automation_commands() -> None:
+    parser = build_parser()
+    capabilities = parser.parse_args(("agent", "capabilities", "--json"))
+    review = parser.parse_args(
+        (
+            "agent",
+            "review",
+            "top.sv",
+            "--top",
+            "top",
+            "--objective",
+            "timing",
+            "--json",
+        )
+    )
+    candidate = parser.parse_args(
+        ("agent", "candidate", "review-" + "a" * 20, "--finding", "finding01")
+    )
+    verify = parser.parse_args(
+        ("agent", "verify", "review-" + "a" * 20, "--candidate", "candidate01")
+    )
+
+    assert capabilities.agent_command == "capabilities"
+    assert review.top == "top"
+    assert review.objective == "timing"
+    assert candidate.finding == "finding01"
+    assert verify.candidate == "candidate01"
+
+
+def test_agent_capabilities_is_always_machine_readable(
+    tmp_path: Path,
+    capsys,
+) -> None:
+    tool = write_fake_tool(tmp_path)
+    library = tmp_path / "cells.lib"
+    library.write_bytes(b"abc")
+    (tmp_path / "LICENSE").write_text("test license\n", encoding="utf-8")
+    checksum = (
+        "ba7816bf8f01cfea414140de5dae2223"
+        "b00361a396177a9cb410ff61f20015ad"
+    )
+    config_path = write_test_config(
+        tmp_path,
+        liberty_sha256=checksum,
+        tool=tool,
+    )
+
+    exit_code = main(("--config", str(config_path), "agent", "capabilities"))
+    payload = json.loads(capsys.readouterr().out)
+
+    assert exit_code == 0
+    assert payload["document_type"] == "rtl-advisor.agent.capabilities"
+    assert payload["analysis"]["live_recommendation_ready"] is False
+    assert payload["semantic_hash"]

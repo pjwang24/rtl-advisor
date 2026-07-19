@@ -508,5 +508,58 @@ Plugin V1 is complete when:
 - The project README explains the human workflow without requiring model or EDA
   vocabulary.
 
-The next implementation action is Phase 1: add and test the stable CLI
-automation boundary before scaffolding the plugin that depends on it.
+## 13. Implementation status
+
+### Phase 1 — Complete
+
+The stable CLI automation boundary is implemented with schema version `1` and
+flow version `rtl-advisor-agent-v1`:
+
+```text
+rtl-advisor agent capabilities --json
+rtl-advisor agent review <input> --objective timing|area|balanced --json
+rtl-advisor agent candidate <run-id> --finding <finding-id> --json
+rtl-advisor agent verify <run-id> --candidate <candidate-id> --json
+```
+
+Implemented behavior:
+
+- `capabilities` reports input support, tool paths, Liberty integrity, registered
+  families, flow-robust family support, model installation, release status, and
+  current operation availability.
+- V2, V2.1, and V2.2 are explicitly reported as diagnostic-only. The next
+  flow-robust model is reported as unavailable. Therefore the interface reports
+  that no live recommendation model is ready.
+- `review` accepts a generated case or manifest, a source file with an explicit
+  top, a filelist with an explicit top, or a normalized `input.json` artifact.
+- Every review records a deterministic run ID, semantic result hash, normalized
+  command, compile context, source hashes, findings, model state, limitations,
+  and artifact paths.
+- A diagnostic-only review may return structural findings for inspection, but
+  its status is blocked, its user-facing decision is unavailable, and candidate
+  generation is disabled.
+- `candidate` accepts only an eligible, hash-valid review and writes the rewrite
+  to an isolated workspace. It records baseline and candidate hashes plus a
+  unified diff. It does not run or claim formal equivalence.
+- `verify` rechecks baseline and candidate source hashes, reruns lint, runs Yosys
+  formal equivalence, and records the proof context. Only a current passing
+  result sets `safe: true`.
+- Agent errors are versioned JSON documents with stable error codes and nonzero
+  exit status; clients do not need to scrape terminal text.
+- Existing `analyze-rtl --emit-candidates` behavior remains compatible and still
+  performs its immediate formal verification by default.
+
+Validation result:
+
+- A real generated development case returned deterministic findings and source
+  locations while correctly blocking promotion from the diagnostic-only model.
+- Candidate generation from that blocked review was rejected with the structured
+  error code `review_not_eligible`.
+- Candidate preparation and verification separation, source-tamper rejection,
+  semantic hashes, parser behavior, and capability states have automated tests.
+- The complete repository regression passes: 170 tests.
+
+### Next action — Phase 2
+
+Scaffold the repository-owned `rtl-advisor` plugin and its `analyze-rtl` skill
+against this completed CLI boundary. Do not add MCP in Plugin V1.

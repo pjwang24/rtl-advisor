@@ -7,6 +7,15 @@ import platform
 import sys
 from typing import Sequence
 
+from rtl_advisor.agent_api import (
+    AgentAPIError,
+    agent_candidate,
+    agent_capabilities,
+    agent_error_payload,
+    agent_exit_code,
+    agent_review,
+    agent_verify,
+)
 from rtl_advisor.advisor_v2 import (
     AdvisorV2Error,
     PROFILES,
@@ -420,6 +429,64 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=8765,
         help="local HTTP port (default: 8765)",
+    )
+
+    agent = subparsers.add_parser(
+        "agent",
+        help="stable JSON automation interface for terminal and Codex clients",
+    )
+    agent_subparsers = agent.add_subparsers(dest="agent_command", required=True)
+    agent_capabilities_parser = agent_subparsers.add_parser(
+        "capabilities",
+        help="report supported inputs, tools, models, and operations",
+    )
+    agent_capabilities_parser.add_argument(
+        "--json", action="store_true", dest="json_output"
+    )
+    agent_review_parser = agent_subparsers.add_parser(
+        "review",
+        help="run a read-only RTL review through the current release gates",
+    )
+    agent_review_parser.add_argument(
+        "input",
+        help="generated case, manifest, RTL source, filelist, or normalized input.json",
+    )
+    agent_review_parser.add_argument(
+        "--objective",
+        choices=("timing", "area", "balanced"),
+        default="balanced",
+    )
+    agent_review_parser.add_argument(
+        "--top", help="elaboration top for a source file or filelist"
+    )
+    agent_review_parser.add_argument(
+        "-I", action="append", default=[], dest="include_dirs"
+    )
+    agent_review_parser.add_argument(
+        "-D", action="append", default=[], dest="defines"
+    )
+    agent_review_parser.add_argument("--gate-model")
+    agent_review_parser.add_argument("--force", action="store_true")
+    agent_review_parser.add_argument(
+        "--json", action="store_true", dest="json_output"
+    )
+    agent_candidate_parser = agent_subparsers.add_parser(
+        "candidate",
+        help="prepare an isolated candidate from an eligible review",
+    )
+    agent_candidate_parser.add_argument("run_id")
+    agent_candidate_parser.add_argument("--finding", required=True)
+    agent_candidate_parser.add_argument(
+        "--json", action="store_true", dest="json_output"
+    )
+    agent_verify_parser = agent_subparsers.add_parser(
+        "verify",
+        help="run current hash-matched lint and formal equivalence",
+    )
+    agent_verify_parser.add_argument("run_id")
+    agent_verify_parser.add_argument("--candidate", required=True)
+    agent_verify_parser.add_argument(
+        "--json", action="store_true", dest="json_output"
     )
 
     model = subparsers.add_parser("model", help="train and inspect v2 gate models")
@@ -837,6 +904,46 @@ def _print_patch_validation(result: dict) -> None:
     print(f"  result            {result['result_path']}")
 
 
+def _normalized_agent_command(
+    config: ProjectConfig,
+    args: argparse.Namespace,
+) -> tuple[str, ...]:
+    command = [
+        "rtl-advisor",
+        "--config",
+        str(config.config_path),
+        "agent",
+        args.agent_command,
+    ]
+    if args.agent_command == "review":
+        input_path = Path(args.input).expanduser()
+        if not input_path.is_absolute():
+            input_path = config.root / input_path
+        command.extend((str(input_path.resolve()), "--objective", args.objective))
+        if args.top:
+            command.extend(("--top", args.top))
+        for include_dir in args.include_dirs:
+            include_path = Path(include_dir).expanduser()
+            if not include_path.is_absolute():
+                include_path = config.root / include_path
+            command.extend(("-I", str(include_path.resolve())))
+        for definition in args.defines:
+            command.extend(("-D", definition))
+        if args.gate_model:
+            model_path = Path(args.gate_model).expanduser()
+            if not model_path.is_absolute():
+                model_path = config.root / model_path
+            command.extend(("--gate-model", str(model_path.resolve())))
+        if args.force:
+            command.append("--force")
+    elif args.agent_command == "candidate":
+        command.extend((args.run_id, "--finding", args.finding))
+    elif args.agent_command == "verify":
+        command.extend((args.run_id, "--candidate", args.candidate))
+    command.append("--json")
+    return tuple(command)
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
@@ -855,6 +962,49 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0 if report.ok else 1
 
     try:
+        if args.command == "agent":
+            normalized_command = _normalized_agent_command(config, args)
+            try:
+                if args.agent_command == "capabilities":
+                    payload = agent_capabilities(
+                        config,
+                        normalized_command=normalized_command,
+                    )
+                elif args.agent_command == "review":
+                    payload = agent_review(
+                        config,
+                        args.input,
+                        objective=args.objective,
+                        top=args.top,
+                        include_dirs=tuple(args.include_dirs),
+                        defines=tuple(args.defines),
+                        gate_model_path=args.gate_model,
+                        force=args.force,
+                        normalized_command=normalized_command,
+                    )
+                elif args.agent_command == "candidate":
+                    payload = agent_candidate(
+                        config,
+                        args.run_id,
+                        finding_id=args.finding,
+                        normalized_command=normalized_command,
+                    )
+                else:
+                    payload = agent_verify(
+                        config,
+                        args.run_id,
+                        candidate_id=args.candidate,
+                        normalized_command=normalized_command,
+                    )
+            except AgentAPIError as exc:
+                payload = agent_error_payload(
+                    args.agent_command,
+                    exc,
+                    normalized_command=normalized_command,
+                )
+            print(json.dumps(payload, indent=2, sort_keys=True))
+            return agent_exit_code(payload)
+
         if args.command == "frontend":
             serve_frontend(config, host=args.host, port=args.port)
             return 0

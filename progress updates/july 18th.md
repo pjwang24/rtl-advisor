@@ -335,3 +335,65 @@ Updated Codex plugin plan SHA-256:
 ```text
 3fdad39e184d613a5e1cbdaff624a9bbe43b42168587c7bb93d5d2f7a126adeb
 ```
+
+## Codex plugin Phase 1: stable agent CLI boundary
+
+Completed Phase 1 of the Codex plugin plan before creating the plugin package.
+
+### Interface implemented
+
+- Added schema version `1` and flow version `rtl-advisor-agent-v1` in
+  `src/rtl_advisor/agent_api.py`.
+- Added `rtl-advisor agent capabilities --json`.
+- Added `rtl-advisor agent review <input> --objective
+  timing|area|balanced --json`.
+- Added `rtl-advisor agent candidate <run-id> --finding <finding-id> --json`.
+- Added `rtl-advisor agent verify <run-id> --candidate <candidate-id> --json`.
+- Agent commands always emit structured JSON, including structured errors, so a
+  plugin or CI client never needs to parse human-formatted terminal output.
+- Added deterministic run IDs, semantic result hashes, normalized commands,
+  compile context, source hashes, stable artifact paths, and explicit exit
+  behavior.
+
+### Readiness and safety behavior
+
+- Capabilities report the actual PySlang, Verilator, Yosys, Codex, and Liberty
+  availability and integrity on this laptop.
+- V2, V2.1, and V2.2 are explicitly reported as installed but diagnostic-only.
+- The next flow-robust model is reported as unavailable, so live recommendation
+  readiness and candidate-generation availability are false.
+- A real timing review of generated development case `dev_ws_0001` returned its
+  source location, diagnostic predictions, compile context, source hashes, and
+  limitations, but correctly returned a blocked result rather than promoting a
+  recommendation.
+- Candidate generation from that blocked review returned the structured error
+  code `review_not_eligible`.
+- Candidate preparation is now separate from verification. Preparation creates
+  an isolated candidate, candidate hashes, and a unified diff without claiming
+  equivalence.
+- Verification rechecks source integrity, reruns lint, runs Yosys formal
+  equivalence, records baseline and candidate proof hashes, and sets `safe: true`
+  only after a current passing proof.
+- Existing analysis and benchmark callers remain compatible because their
+  candidate-emission path still performs immediate formal verification by
+  default.
+
+### Validation
+
+- Added `tests/test_agent_api.py`.
+- Expanded CLI parser and machine-readable output tests.
+- Expanded candidate tests for prepare-versus-verify separation, unified diff
+  creation, source integrity, proof invocation, and no input mutation.
+- Added source-tamper rejection coverage before candidate generation.
+- Focused agent, candidate, and CLI suite: 21 tests passed.
+- Complete repository regression: 170 tests passed in 55.76 seconds.
+- Python compilation and `git diff --check` passed.
+
+The Codex plugin plan now records Phase 1 as complete and Phase 2 as the next
+action: scaffold the repository plugin and `analyze-rtl` skill without MCP.
+
+Updated Codex plugin plan SHA-256:
+
+```text
+21a00fc7748cee355e522a99234a4626e40561905e4c97b668a52f13cba814f0
+```

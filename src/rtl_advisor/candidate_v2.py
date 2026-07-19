@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import difflib
 import hashlib
 import json
 import os
@@ -34,6 +35,53 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _json_hash(payload: Any) -> str:
+    return hashlib.sha256(
+        json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+
+
+def _design_hash(design: DesignInputV2) -> str:
+    core = {
+        "schema_version": design.schema_version,
+        "top": design.top,
+        "files": [
+            {"path": source.path, "sha256": source.sha256}
+            for source in design.files
+        ],
+        "include_dirs": list(design.include_dirs),
+        "defines": list(design.defines),
+        "filelists": list(design.filelists),
+    }
+    return _json_hash(core)
+
+
+def _source_integrity(design: DesignInputV2) -> dict[str, Any]:
+    mismatches: list[dict[str, str | None]] = []
+    for source in design.files:
+        path = Path(source.path)
+        actual = _sha256(path) if path.is_file() else None
+        if actual != source.sha256:
+            mismatches.append(
+                {
+                    "path": source.path,
+                    "expected_sha256": source.sha256,
+                    "actual_sha256": actual,
+                }
+            )
+    return {"ok": not mismatches, "mismatches": mismatches}
+
+
+def _read_json(path: Path) -> dict[str, Any]:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise CandidateV2Error(f"invalid candidate artifact {path}: {exc}") from exc
+    if not isinstance(payload, dict):
+        raise CandidateV2Error(f"candidate artifact must be an object: {path}")
+    return payload
 
 
 def _yosys_quote(value: str | Path) -> str:
@@ -115,15 +163,44 @@ def _copy_design(
         else:
             shutil.copy2(original, target)
         copied.append(SourceFileV2(path=str(target), sha256=_sha256(target)))
-    return DesignInputV2(
+    copied_design = DesignInputV2(
         schema_version=design.schema_version,
         top=design.top,
         files=tuple(copied),
         include_dirs=design.include_dirs,
         defines=design.defines,
         filelists=design.filelists,
-        design_hash=design.design_hash,
+        design_hash="",
     )
+    return DesignInputV2(
+        schema_version=copied_design.schema_version,
+        top=copied_design.top,
+        files=copied_design.files,
+        include_dirs=copied_design.include_dirs,
+        defines=copied_design.defines,
+        filelists=copied_design.filelists,
+        design_hash=_design_hash(copied_design),
+    )
+
+
+def _write_candidate_diff(
+    baseline: DesignInputV2,
+    candidate: DesignInputV2,
+    path: Path,
+) -> None:
+    chunks: list[str] = []
+    for original, rewritten in zip(baseline.files, candidate.files, strict=True):
+        original_path = Path(original.path)
+        rewritten_path = Path(rewritten.path)
+        chunks.extend(
+            difflib.unified_diff(
+                original_path.read_text(encoding="utf-8").splitlines(keepends=True),
+                rewritten_path.read_text(encoding="utf-8").splitlines(keepends=True),
+                fromfile=original.path,
+                tofile=rewritten.path,
+            )
+        )
+    path.write_text("".join(chunks), encoding="utf-8")
 
 
 def _read_command(design: DesignInputV2) -> str:
@@ -181,6 +258,14 @@ def _prove_equivalence(
             "script_path": str(script_path),
             "log_path": str(log_path),
             "detail": detail,
+            "baseline_design_hash": baseline.design_hash,
+            "candidate_design_hash": candidate.design_hash,
+            "baseline_source_hashes": {
+                source.path: source.sha256 for source in baseline.files
+            },
+            "candidate_source_hashes": {
+                source.path: source.sha256 for source in candidate.files
+            },
         }
     except ToolExecutionError as exc:
         log_path.write_text(f"{exc}\n", encoding="utf-8")
@@ -191,6 +276,14 @@ def _prove_equivalence(
             "script_path": str(script_path),
             "log_path": str(log_path),
             "detail": str(exc),
+            "baseline_design_hash": baseline.design_hash,
+            "candidate_design_hash": candidate.design_hash,
+            "baseline_source_hashes": {
+                source.path: source.sha256 for source in baseline.files
+            },
+            "candidate_source_hashes": {
+                source.path: source.sha256 for source in candidate.files
+            },
         }
 
 
@@ -246,6 +339,7 @@ def emit_selected_candidate(
     analysis_path: Path,
     *,
     candidate_source: str = "templates",
+    verify_formal: bool = True,
 ) -> dict[str, Any]:
     selected_id = analysis.get("selected_candidate_id")
     selected = next(
@@ -280,33 +374,51 @@ def emit_selected_candidate(
     source_root = candidate_root / "source"
     source_root.mkdir(parents=True, exist_ok=True)
     candidate_design = _copy_design(design, source_root, replacement)
+    candidate_input_path = candidate_root / "input.json"
+    _write_json(candidate_input_path, candidate_design.to_dict())
+    diff_path = candidate_root / "candidate.diff"
+    _write_candidate_diff(design, candidate_design, diff_path)
     slang = lint_with_pyslang(candidate_design)
     _write_json(candidate_root / "slang.json", slang.to_dict())
     verilator = _verilator_lint(config, candidate_design, candidate_root)
     _write_json(candidate_root / "verilator.json", verilator)
     formal = (
         _prove_equivalence(config, design, candidate_design, candidate_root)
-        if slang.ok and verilator["status"] == "passed"
+        if verify_formal and slang.ok and verilator["status"] == "passed"
         else {
             "status": "not_run",
-            "detail": "candidate lint did not pass",
+            "detail": (
+                "candidate lint did not pass"
+                if not slang.ok or verilator["status"] != "passed"
+                else "formal verification was not requested"
+            ),
         }
     )
+    formal["proof_semantic_hash"] = _json_hash(formal)
     _write_json(candidate_root / "formal.json", formal)
-    accepted = (
-        slang.ok
-        and verilator["status"] == "passed"
-        and formal["status"] == "passed"
+    lint_passed = slang.ok and verilator["status"] == "passed"
+    accepted = lint_passed and formal["status"] == "passed"
+    status = (
+        "accepted"
+        if accepted
+        else "prepared"
+        if lint_passed and not verify_formal
+        else "rejected"
     )
     result = {
-        "status": "accepted" if accepted else "rejected",
+        "status": status,
         "flow_version": CANDIDATE_FLOW_VERSION,
         "candidate_id": selected_id,
         "template_id": selected.get("template_id"),
         "transformation_id": selected.get("transformation_id"),
         "source": candidate_source,
         "artifact_root": str(candidate_root),
+        "baseline_input_path": str(analysis_path.parent / "input.json"),
+        "candidate_input_path": str(candidate_input_path),
         "candidate_files": [as_source.path for as_source in candidate_design.files],
+        "candidate_design_hash": candidate_design.design_hash,
+        "diff_path": str(diff_path),
+        "diff_sha256": _sha256(diff_path),
         "lint": {
             "slang": slang.to_dict(),
             "verilator": verilator,
@@ -315,6 +427,93 @@ def emit_selected_candidate(
         "original_source_hashes": {
             source.path: source.sha256 for source in design.files
         },
+        "candidate_source_hashes": {
+            source.path: source.sha256 for source in candidate_design.files
+        },
+        "source_integrity": {
+            "original": _source_integrity(design),
+            "candidate": _source_integrity(candidate_design),
+        },
     }
     _write_json(candidate_root / "summary.json", result)
+    return result
+
+
+def verify_emitted_candidate(
+    config: ProjectConfig,
+    analysis_path: Path,
+    candidate_id: str,
+) -> dict[str, Any]:
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", candidate_id):
+        raise CandidateV2Error(f"invalid candidate ID: {candidate_id!r}")
+    analysis_path = analysis_path.expanduser().resolve()
+    candidate_root = (analysis_path.parent / "candidates" / candidate_id).resolve()
+    expected_root = (analysis_path.parent / "candidates").resolve()
+    if not candidate_root.is_relative_to(expected_root):
+        raise CandidateV2Error("candidate path escapes the analysis workspace")
+    summary_path = candidate_root / "summary.json"
+    summary = _read_json(summary_path)
+    if summary.get("candidate_id") != candidate_id:
+        raise CandidateV2Error("candidate summary ID mismatch")
+
+    baseline = _design_from_artifact(analysis_path.parent / "input.json")
+    candidate = _design_from_artifact(candidate_root / "input.json")
+    baseline_integrity = _source_integrity(baseline)
+    candidate_integrity = _source_integrity(candidate)
+    integrity_ok = baseline_integrity["ok"] and candidate_integrity["ok"]
+
+    if integrity_ok:
+        slang = lint_with_pyslang(candidate)
+        _write_json(candidate_root / "slang.json", slang.to_dict())
+        verilator = _verilator_lint(config, candidate, candidate_root)
+        _write_json(candidate_root / "verilator.json", verilator)
+    else:
+        slang = None
+        verilator = {
+            "status": "not_run",
+            "detail": "source integrity check failed",
+        }
+
+    lint_passed = (
+        slang is not None
+        and slang.ok
+        and verilator.get("status") == "passed"
+    )
+    formal = (
+        _prove_equivalence(config, baseline, candidate, candidate_root)
+        if lint_passed
+        else {
+            "status": "not_run",
+            "detail": (
+                "source integrity check failed"
+                if not integrity_ok
+                else "candidate lint did not pass"
+            ),
+            "baseline_design_hash": baseline.design_hash,
+            "candidate_design_hash": candidate.design_hash,
+        }
+    )
+    formal["proof_semantic_hash"] = _json_hash(formal)
+    _write_json(candidate_root / "formal.json", formal)
+
+    accepted = integrity_ok and lint_passed and formal["status"] == "passed"
+    result = {
+        **summary,
+        "status": "accepted" if accepted else "rejected",
+        "lint": {
+            "slang": (
+                slang.to_dict()
+                if slang is not None
+                else {"status": "not_run", "ok": False}
+            ),
+            "verilator": verilator,
+        },
+        "formal": formal,
+        "source_integrity": {
+            "original": baseline_integrity,
+            "candidate": candidate_integrity,
+        },
+        "safe": accepted,
+    }
+    _write_json(summary_path, result)
     return result
