@@ -10,4 +10,5 @@ artifacts/
 corpus/*
 !corpus/.gitkeep
 third_party/OpenROAD-flow-scripts/
+third_party/picorv32/
 third_party/nangate45/*.lib

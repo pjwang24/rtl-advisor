@@ -1,5 +1,13 @@
 # RTL Advisor Codex Plugin V1 Implementation Plan
 
+> **Track status — historical foundation, subordinate to MVP V1:** The
+> repository plugin, skill-to-CLI architecture, and no-MCP decision remain in
+> force. MVP V1 supersedes the historical Agent V1-only operation list for the
+> updated plugin: it explicitly requests Agent schema V2 and supports
+> `review`, `candidate`, `verify`, `measure`, and `report`, while existing CLI
+> operations continue to default to Agent V1. Where this document conflicts
+> with [MVP V1](MVP%20V1.md), MVP V1 controls.
+
 ## 1. Objective
 
 Create a repository-owned Codex plugin that lets engineers use RTL Advisor in

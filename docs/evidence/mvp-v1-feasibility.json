@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "document_type": "rtl-advisor.mvp.feasibility-lock",
+  "protocol": {
+    "candidate_synthesis_allowed": false,
+    "minimum_addends": 3,
+    "required_module_kind": "self-contained combinational top",
+    "required_operand_semantics": "unsigned equal-width",
+    "selection_order": [
+      "orfs-riscv32i",
+      "orfs-ibex",
+      "picorv32",
+      "orfs-cva6"
+    ]
+  },
+  "sources": [
+    {
+      "id": "orfs-riscv32i",
+      "revision": "036d106273e66855cd5214d49518fd0f0df7de61",
+      "snapshot_source_path": "flow/designs/src/riscv32i/alu.v",
+      "snapshot_source_sha256": "a08b4aa61ed7991e4dcf72275e2432767baf8cbfbb71f03c3f18b94c5024f78d",
+      "license": "Apache-2.0",
+      "license_path": "flow/designs/src/riscv32i/LICENSE",
+      "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "eligible_sites": [],
+      "compile_command": null,
+      "compile_status": "not_run_no_eligible_site",
+      "status": "no_qualifying_module"
+    },
+    {
+      "id": "orfs-ibex",
+      "revision": "77d801001554cce8fe69e742e96539eecbe74425",
+      "vendor_revision": "036d106273e66855cd5214d49518fd0f0df7de61",
+      "snapshot_source_path": "flow/designs/src/ibex_sv/ibex_multdiv_fast.sv",
+      "snapshot_source_sha256": "30f302d258aa96a303d426ebf543262a02a0531626815ca0b651df9a81d3b44f",
+      "license": "Apache-2.0",
+      "license_path": "flow/designs/src/ibex_sv/LICENSE",
+      "license_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "eligible_sites": [],
+      "compile_command": null,
+      "compile_status": "not_run_no_eligible_site",
+      "status": "no_qualifying_module"
+    },
+    {
+      "id": "picorv32",
+      "revision": "87c89acc18994c8cf9a2311e871818e87d304568",
+      "snapshot_source_path": "picorv32.v",
+      "snapshot_source_sha256": "0836050971b3c6cdd28ac3b1e5719a67fb645161912bef1e472e63995ceb0622",
+      "license": "ISC",
+      "license_path": "COPYING",
+      "license_sha256": "041ebc727233e5bf096dd41260cbb81014d3d29ca007a15f3b1807d4e9ff288e",
+      "eligible_sites": [],
+      "compile_command": null,
+      "compile_status": "not_run_no_eligible_site",
+      "status": "no_qualifying_module"
+    },
+    {
+      "id": "orfs-cva6",
+      "revision": "3a389af",
+      "vendor_revision": "036d106273e66855cd5214d49518fd0f0df7de61",
+      "snapshot_source_path": "flow/designs/src/cva6/core/cvfpu/src/fpu_div_sqrt_mvp/hdl/iteration_div_sqrt_mvp.sv",
+      "snapshot_source_sha256": "3cbdd9c9cf821570611729691956c40a5e3307feca4004cd3aa5f757e034a742",
+      "license": "Solderpad Hardware License 0.51",
+      "license_source_url": "https://github.com/openhwgroup/cva6/blob/3a389af/LICENSE",
+      "eligible_sites": [],
+      "compile_command": null,
+      "compile_status": "not_run_no_eligible_site",
+      "status": "no_qualifying_module"
+    }
+  ],
+  "near_matches": [
+    {
+      "project": "orfs-riscv32i",
+      "module": "alu",
+      "site": "alu.v:14",
+      "expression": "a2 + b2 + alucont[2]",
+      "operand_types": ["33u", "33u", "1u"],
+      "exclusions": ["unequal_width"]
+    },
+    {
+      "project": "orfs-ibex",
+      "module": "ibex_multdiv_fast",
+      "site": "ibex_multdiv_fast.sv:159",
+      "expression": "$signed(summand1) + $signed(summand2) + $signed(summand3)",
+      "operand_types": ["34s", "34s", "34s"],
+      "exclusions": ["signed", "generated_context", "sequential_module"]
+    },
+    {
+      "project": "picorv32",
+      "module": "picorv32_pcpi_mul",
+      "site": "picorv32.v:2265",
+      "expression": "next_rd[j +: CARRY_CHAIN] + next_rdx[j +: CARRY_CHAIN] + this_rs2[j +: CARRY_CHAIN]",
+      "operand_types": ["4u", "4u", "4u"],
+      "exclusions": ["sequential_module"]
+    },
+    {
+      "project": "orfs-cva6",
+      "module": "iteration_div_sqrt_mvp",
+      "site": "iteration_div_sqrt_mvp.sv:59",
+      "expression": "A_DI + B_DI + Cin_D",
+      "operand_types": ["25u", "25u", "1u"],
+      "exclusions": ["unequal_width"]
+    }
+  ],
+  "result": {
+    "status": "blocked",
+    "qualifying_module_count": 0,
+    "required_module_count": 2,
+    "reason": "The complete pre-registered corpus contains no module satisfying every frozen eligibility rule.",
+    "candidate_synthesis_run": false,
+    "ppa_inspected": false
+  }
+}

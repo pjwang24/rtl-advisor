@@ -1,5 +1,12 @@
 # RTL Advisor Frontend V1 Contract
 
+> **Track status — subordinate to MVP V1:** The V2.2 research dashboard in this
+> document remains a secondary evidence view. MVP V1 separately adds a
+> professional, read-only run viewer over stored `rtl-advisor-run-v1` artifacts
+> and `/api/runs/v1` endpoints. The browser still cannot upload RTL or start EDA
+> work. Where this document delays all live run viewing until V2.3, or otherwise
+> conflicts with [MVP V1](MVP%20V1.md), MVP V1 controls.
+
 ## Objective
 
 Frontend V1 provides a local interface for inspecting trusted RTL Advisor
