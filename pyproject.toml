@@ -1,10 +1,10 @@
 [build-system]
-requires = ["flit_core>=3.12,<4"]
+requires = ["flit_core==3.12.0"]
 build-backend = "flit_core.buildapi"
 
 [project]
 name = "rtl-advisor"
-version = "0.1.0"
+version = "0.2.0a1"
 description = "Pre-synthesis RTL analysis and benchmarking harness"
 readme = "README.md"
 requires-python = ">=3.13"
@@ -27,6 +27,7 @@ rtl-advisor = "rtl_advisor.cli:entrypoint"
 
 [dependency-groups]
 dev = [
+  "flit_core==3.12.0",
   "PyYAML>=6.0,<7",
   "pytest>=9.0,<10",
 ]
