@@ -31,27 +31,30 @@ useful.
 
 ## Intended workflow
 
-```text
-Generated or approved open RTL
-              |
-              v
-     Parse, lint, and analyze
-              |
-              v
-  Rules and calibrated ML model
-              |
-              v
- Source-linked engineering result
-       |                 |
-       |                 +--> No change / synthesis likely handles it
-       v
-Isolated candidate rewrite
-              |
-              v
-      Formal equivalence
-              |
-              v
- Same-flow synthesis comparison
+```mermaid
+flowchart TD
+    A["Generated or approved open RTL"] --> B["Parse, lint, and analyze"]
+    B --> C{"Input and structure supported?"}
+
+    C -- "No" --> C1["Analysis unavailable"]
+    C -- "Yes" --> D["Rules and calibrated ML model"]
+    D --> E["Source-linked engineering result"]
+    E --> F{"What does the evidence support?"}
+
+    F -- "No useful change" --> F1["No change recommended"]
+    F -- "Tool already optimizes it" --> F2["Synthesis likely handles it"]
+    F -- "Flow dependent" --> F3["Target-flow confirmation needed"]
+    F -- "Candidate supported" --> G["Isolated candidate rewrite"]
+
+    G --> H{"Formal equivalence"}
+    H -- "Failed or incomplete" --> H1["Candidate rejected or manually reviewed"]
+    H -- "Passed" --> I["Same-flow synthesis comparison"]
+
+    I --> J{"Measured outcome"}
+    J -- "Repeatable improvement" --> J1["Recommended with measured evidence"]
+    J -- "Optimized away" --> J2["Synthesis handles it"]
+    J -- "Flow dependent" --> J3["Target-flow confirmation needed"]
+    J -- "Regression" --> J4["No change recommended"]
 ```
 
 The original source is never modified automatically. The CLI is the authority
