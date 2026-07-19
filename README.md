@@ -131,10 +131,11 @@ The repository-owned plugin design is documented in
 - Isolated candidate generation that leaves the original RTL unchanged.
 - OpenROAD placement-and-routing cross-checks on generated designs.
 - Rules, calibrated models, and audited Codex explanations.
+- A locally installable Codex plugin backed by the same versioned CLI results.
 - A local, read-only evaluation dashboard.
 - Reproducible benchmark plans, hashes, caches, and reports.
 
-The complete repository regression currently contains **170 passing tests**.
+The complete repository regression currently contains **173 passing tests**.
 
 ## Current evidence
 
@@ -278,7 +279,7 @@ Generated corpora, model artifacts, synthesis outputs, the Liberty file, and the
 OpenROAD checkout are intentionally not stored in Git. The CLI creates or
 downloads them through the registered workflows.
 
-For terminal automation and the future Codex plugin, use the versioned JSON
+For terminal automation and the Codex plugin, use the versioned JSON
 interface:
 
 ```bash
@@ -293,6 +294,20 @@ for live use. Reviews can expose diagnostic findings, but candidate generation
 stays disabled unless a future model clears the documented release gates. The
 interface never modifies the input RTL, and only `agent verify` can mark an
 isolated candidate safe after current hash-matched formal equivalence.
+
+To install the current repository plugin for local evaluation, run these
+commands from the checkout root:
+
+```bash
+codex plugin marketplace add .
+codex plugin add rtl-advisor@personal
+```
+
+Start a new Codex conversation after installation, then ask, for example,
+"Use RTL Advisor to review this generated manifest for timing opportunities."
+The plugin first checks the installed CLI, tools, and model readiness. With the
+current diagnostic-only model, it can explain diagnostic findings but correctly
+returns **Analysis unavailable** instead of issuing a live recommendation.
 
 ## Next steps
 
@@ -312,9 +327,11 @@ The interface track can proceed in parallel without claiming production
 readiness:
 
 1. The stable machine-readable CLI contract is implemented and tested.
-2. Next, build the repository-owned `rtl-advisor` Codex plugin and `analyze-rtl`
-   skill.
-3. Require terminal-versus-Codex result parity.
+2. The repository-owned `rtl-advisor` Codex plugin and `analyze-rtl` skill are
+   implemented, validated, installed locally, and forward-tested.
+3. Next, expand terminal-versus-Codex parity tests across every result and
+   failure state, then exercise the explicit candidate/formal workflow when an
+   eligible model is available.
 4. Reuse the same contract later for VS Code, CI, and the dashboard.
 
 ## Project documentation

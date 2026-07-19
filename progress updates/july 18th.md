@@ -397,3 +397,76 @@ Updated Codex plugin plan SHA-256:
 ```text
 21a00fc7748cee355e522a99234a4626e40561905e4c97b668a52f13cba814f0
 ```
+
+## Codex plugin Phase 2: repository package and installed skill
+
+Completed Phase 2 of the Codex plugin plan and started the first Phase 3
+read-only conversational scenario.
+
+### Plugin package
+
+- Used the official plugin scaffold to create
+  `plugins/rtl-advisor/.codex-plugin/plugin.json` and the repository marketplace
+  at `.agents/plugins/marketplace.json`.
+- Registered `rtl-advisor` version `0.1.0` in the local `personal` marketplace.
+- Kept Plugin V1 intentionally small: it contains one `analyze-rtl` skill and no
+  MCP server, app connector, hook, or background service.
+- Used the official skill initializer to create the skill package and its Codex
+  UI metadata.
+- Added concise CLI-contract and result-interpretation references with no
+  placeholder content.
+
+### Skill and command boundary
+
+- Implemented the `analyze-rtl` workflow for generated or explicitly approved
+  open RTL.
+- The skill checks capabilities before analysis, keeps reviews read-only,
+  preserves blocked and diagnostic-only results, requires explicit intent before
+  candidate preparation, and requires a current hash-matched formal result
+  before calling a candidate safe.
+- Added `run_rtl_advisor.py` as the deterministic bridge to the four versioned
+  agent commands: `capabilities`, `review`, `candidate`, and `verify`.
+- The runner uses subprocess argument arrays without shell interpolation,
+  requires JSON schema version `1`, checks document types and semantic hashes,
+  preserves CLI exit codes, and contains no recommendation logic.
+- CLI resolution supports an explicit `RTL_ADVISOR_BIN`, a PATH installation,
+  the repository `.venv`, and the supported `uv run --no-editable` fallback.
+
+### Validation and installation
+
+- Added PyYAML to the development dependency group so the official validators
+  run reproducibly from the checked-in environment and lockfile.
+- The official skill validator passed with `Skill is valid!`.
+- The official plugin validator passed the complete package.
+- Added runner tests for valid capability forwarding, blocked-review exit-code
+  preservation, and semantic-hash mismatch rejection.
+- Installed and enabled `rtl-advisor@personal` at version `0.1.0` from the
+  repository marketplace.
+- Complete repository regression: 173 tests passed in 79.87 seconds.
+
+### Fresh-session forward test
+
+A new Codex session discovered `$rtl-advisor:analyze-rtl` and reviewed generated
+development case `dev_ws_0001` through the installed plugin. The workflow:
+
+- Checked current CLI, model, and tool capabilities first.
+- Returned **Analysis unavailable** because V2 remains diagnostic-only.
+- Preserved the CLI run ID, semantic hash, diagnostic finding, exact source line,
+  normalized command, limitations, and artifact paths.
+- Explained that candidate generation was disabled instead of inventing or
+  promoting an RTL recommendation.
+- Verified the input source hash and made no source changes.
+
+### Next action
+
+Continue Phase 3 by creating the terminal-versus-plugin parity matrix for every
+reference decision and failure state. Compare run IDs, semantic hashes,
+findings, decisions, evidence, source hashes, and explanation claims. Exercise
+the candidate and formal workflow only when a review is legitimately eligible;
+do not bypass the current diagnostic-only release gate.
+
+Updated Codex plugin plan SHA-256:
+
+```text
+9b3fc8b2ceb851e5f226efb08f9400d149b844d92e1abf190ad896e3a0d84ff5
+```

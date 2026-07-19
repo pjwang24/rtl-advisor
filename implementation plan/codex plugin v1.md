@@ -352,7 +352,8 @@ specific command guessing. It resolves the executable in this order:
 
 1. Explicit `RTL_ADVISOR_BIN` environment variable.
 2. `rtl-advisor` available on `PATH`.
-3. The repository's supported `uv run --no-editable rtl-advisor` command.
+3. The repository `.venv` Python running the checked-out package.
+4. The repository's supported `uv run --no-editable rtl-advisor` command.
 
 The runner accepts only the documented `agent` subcommands, passes arguments as
 an array without shell interpolation, requires JSON output, preserves the CLI
@@ -559,7 +560,43 @@ Validation result:
   semantic hashes, parser behavior, and capability states have automated tests.
 - The complete repository regression passes: 170 tests.
 
-### Next action — Phase 2
+### Phase 2 — Complete
 
-Scaffold the repository-owned `rtl-advisor` plugin and its `analyze-rtl` skill
-against this completed CLI boundary. Do not add MCP in Plugin V1.
+The repository-owned plugin is implemented without MCP:
+
+- Added `.agents/plugins/marketplace.json` with the local `personal`
+  marketplace entry for `rtl-advisor`.
+- Added `plugins/rtl-advisor/.codex-plugin/plugin.json` at version `0.1.0` with
+  the `analyze-rtl` skill and no undeclared server, app, hook, or connector.
+- Added a focused `SKILL.md` that keeps the CLI authoritative, defaults to
+  read-only analysis, requires explicit candidate intent, and permits a safety
+  claim only after current hash-matched formal equivalence.
+- Added `run_rtl_advisor.py`, which exposes only the four stable agent
+  operations, avoids shell interpolation, requires schema version `1`, verifies
+  semantic hashes and document types, and preserves the CLI exit status.
+- Added concise CLI-contract and result-interpretation references for the skill.
+- Added PyYAML to the development dependency group so the official plugin and
+  skill validators run reproducibly from the project environment.
+
+Validation result:
+
+- The official skill validator reports `Skill is valid!`.
+- The official plugin validator passes the complete plugin package.
+- The runner tests prove valid capability forwarding, blocked-review exit-code
+  preservation, and semantic-hash mismatch rejection.
+- The `personal` marketplace and `rtl-advisor@personal` plugin install
+  successfully, and the installed plugin is enabled at version `0.1.0`.
+- A fresh Codex session discovered `$rtl-advisor:analyze-rtl`, checked
+  capabilities, reviewed generated case `dev_ws_0001`, cited the exact source
+  line, preserved the diagnostic-only block, included the normalized command
+  and evidence artifacts, verified source integrity, and made no source change.
+- The complete repository regression passes: 173 tests.
+
+### Phase 3 — In progress
+
+The first read-only conversational scenario is complete. Next, build the
+terminal-versus-plugin parity matrix for every reference decision and failure
+state. Each scenario must compare run IDs, semantic hashes, findings, decisions,
+evidence, source hashes, and unsupported-claim behavior. Keep candidate and
+formal exercise separate until a review is legitimately eligible; do not bypass
+the current diagnostic-only model gate.

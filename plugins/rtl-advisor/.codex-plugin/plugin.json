@@ -1,0 +1,27 @@
+{
+  "name": "rtl-advisor",
+  "version": "0.1.0",
+  "description": "Evidence-backed pre-synthesis RTL review through the local RTL Advisor CLI.",
+  "author": {
+    "name": "RTL Advisor contributors",
+    "url": "https://github.com/pjwang24/rtl-advisor"
+  },
+  "homepage": "https://github.com/pjwang24/rtl-advisor",
+  "repository": "https://github.com/pjwang24/rtl-advisor",
+  "keywords": ["rtl", "hardware", "formal-verification", "synthesis"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "RTL Advisor",
+    "shortDescription": "Review RTL before synthesis with traceable evidence.",
+    "longDescription": "Review approved RTL for pre-synthesis opportunities, explain whether a change is supported, and verify isolated candidates with formal equivalence.",
+    "developerName": "RTL Advisor contributors",
+    "category": "Productivity",
+    "capabilities": ["Read", "Local analysis", "Formal verification"],
+    "websiteURL": "https://github.com/pjwang24/rtl-advisor",
+    "defaultPrompt": [
+      "Review approved RTL for timing opportunities.",
+      "Explain whether synthesis likely handles this RTL rewrite.",
+      "Show the evidence behind this RTL finding."
+    ]
+  }
+}

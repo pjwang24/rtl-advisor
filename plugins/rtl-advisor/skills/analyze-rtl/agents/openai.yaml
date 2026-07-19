@@ -1,0 +1,4 @@
+interface:
+  display_name: "Analyze RTL"
+  short_description: "Review RTL with evidence and formal safety"
+  default_prompt: "Use $analyze-rtl to review this approved RTL for timing opportunities."

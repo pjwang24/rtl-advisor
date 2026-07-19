@@ -27,6 +27,7 @@ rtl-advisor = "rtl_advisor.cli:entrypoint"
 
 [dependency-groups]
 dev = [
+  "PyYAML>=6.0,<7",
   "pytest>=9.0,<10",
 ]
 
