@@ -18,39 +18,39 @@
           </div>
           <div>
             <strong>RTL ADVISOR</strong>
-            <small>MODEL EVALUATION</small>
+            <small>DEVELOPER PREVIEW</small>
           </div>
         </div>
 
         <nav class="primary-nav" aria-label="Primary navigation">
-          <button class="nav-item active" data-view="overview" type="button">
+          <button class="nav-item active" data-view="runs" type="button">
+            <span class="nav-icon">◇</span>
+            <span>Runs</span>
+            <span class="nav-count" id="nav-run-count">—</span>
+          </button>
+          <button class="nav-item" data-view="overview" type="button">
             <span class="nav-icon">⌁</span>
-            <span>Overview</span>
+            <span>Research evidence</span>
           </button>
           <button class="nav-item" data-view="cases" type="button">
             <span class="nav-icon">▦</span>
             <span>Evaluation cases</span>
             <span class="nav-count" id="nav-case-count">—</span>
           </button>
-          <button class="nav-item" data-view="workspace" type="button">
-            <span class="nav-icon">◇</span>
-            <span>Live workspace</span>
-            <span class="nav-lock" aria-label="Locked">LOCKED</span>
-          </button>
         </nav>
 
         <div class="sidebar-meta">
-          <div class="rail-label">EVALUATION SOURCE</div>
+          <div class="rail-label">RUN SOURCE</div>
           <div class="source-card">
             <div class="source-card-top">
-              <span class="pulse-dot amber"></span>
-              <strong>V2.2 evaluation set</strong>
+              <span class="pulse-dot green"></span>
+              <strong>Local evidence</strong>
             </div>
             <span id="source-status">Connecting…</span>
           </div>
           <div class="read-only-note">
             <span>LOCAL ONLY</span>
-            <p>No RTL or evidence leaves this machine.</p>
+            <p>CLI and Codex create runs. This dashboard never executes tools or accepts uploads.</p>
           </div>
         </div>
       </aside>
@@ -58,13 +58,13 @@
       <main class="main-content">
         <header class="topbar">
           <div>
-            <p class="eyebrow" id="view-eyebrow">MODEL EVALUATION</p>
-            <h1 id="view-title">Model readiness</h1>
+            <p class="eyebrow" id="view-eyebrow">READ-ONLY EVIDENCE</p>
+            <h1 id="view-title">Analysis runs</h1>
           </div>
           <div class="topbar-actions">
             <div class="gate-pill" id="global-gate-pill">
-              <span class="pulse-dot amber"></span>
-              <span>Checking release status</span>
+              <span class="pulse-dot green"></span>
+              <span>Local · read only</span>
             </div>
             <button class="icon-button" id="refresh-button" type="button" aria-label="Refresh evidence">↻</button>
           </div>
@@ -72,10 +72,97 @@
 
         <div class="loading-screen" id="loading-screen" role="status">
           <div class="loading-chip"></div>
-          <p>Loading evaluation results…</p>
+          <p>Loading local run evidence…</p>
         </div>
 
-        <section class="view active" id="overview-view" aria-labelledby="view-title">
+        <section class="view active" id="runs-view" aria-labelledby="view-title">
+          <div class="runs-intro">
+            <div>
+              <span class="section-kicker">EVIDENCE-BACKED RTL REVIEW</span>
+              <h2>From source finding to measured result.</h2>
+              <p>Each run links the original source, isolated candidate, formal proof, and both Yosys/ABC synthesis comparisons. Continue work from the CLI or Codex; this view cannot modify RTL.</p>
+            </div>
+            <div class="read-only-badge"><span class="pulse-dot green"></span><strong>READ ONLY</strong><small>No uploads or execution</small></div>
+          </div>
+
+          <div class="runs-layout">
+            <aside class="panel run-list-panel" aria-label="Analysis runs">
+              <div class="panel-header compact">
+                <div><span class="section-kicker">LOCAL ARTIFACTS</span><h3>Recent runs</h3></div>
+                <span class="panel-meta" id="run-list-count">0 RUNS</span>
+              </div>
+              <div class="run-list" id="run-list"></div>
+              <div class="run-empty" id="run-empty">
+                <span>◇</span>
+                <strong>No analysis runs yet</strong>
+                <p>Use the CLI or Codex to review approved RTL. Completed stages will appear here automatically.</p>
+                <code>rtl-advisor agent review &lt;rtl&gt; --top &lt;top&gt; --objective timing --schema-version 2 --json</code>
+              </div>
+              <div class="run-invalid" id="run-invalid" hidden></div>
+            </aside>
+
+            <section class="run-detail-shell" id="run-detail-shell">
+              <div class="run-detail-empty" id="run-detail-empty">
+                <span>⌁</span>
+                <h2>Select a run</h2>
+                <p>Review its source finding, candidate diff, formal proof, synthesis evidence, and reproduction commands.</p>
+              </div>
+              <div class="run-detail" id="run-detail" hidden>
+                <article class="run-outcome" id="run-outcome">
+                  <div>
+                    <span class="section-kicker" id="run-outcome-kicker">CURRENT RESULT</span>
+                    <h2 id="run-outcome-label">—</h2>
+                    <p id="run-outcome-summary">—</p>
+                  </div>
+                  <div class="run-meta-grid">
+                    <div><span>RUN</span><code id="run-id">—</code></div>
+                    <div><span>TOP</span><strong id="run-top">—</strong></div>
+                    <div><span>OBJECTIVE</span><strong id="run-objective">—</strong></div>
+                  </div>
+                </article>
+
+                <ol class="stage-rail" id="stage-rail" aria-label="Run progress"></ol>
+
+                <div class="run-detail-grid">
+                  <article class="panel run-section finding-section">
+                    <div class="panel-header compact"><div><span class="section-kicker">SOURCE REVIEW</span><h3>Finding</h3></div><span class="status-chip" id="finding-status">—</span></div>
+                    <div id="finding-content"></div>
+                  </article>
+                  <article class="panel run-section proof-section">
+                    <div class="panel-header compact"><div><span class="section-kicker">LOGICAL SAFETY</span><h3>Formal equivalence</h3></div><span class="status-chip" id="formal-status">NOT RUN</span></div>
+                    <div id="formal-content"></div>
+                  </article>
+                </div>
+
+                <article class="panel run-section">
+                  <div class="panel-header compact">
+                    <div><span class="section-kicker">ISOLATED REWRITE</span><h3>Candidate diff</h3></div>
+                    <select class="candidate-select" id="candidate-select" aria-label="Candidate"></select>
+                  </div>
+                  <pre class="diff-view"><code id="candidate-diff">No candidate diff has been recorded.</code></pre>
+                </article>
+
+                <article class="panel run-section">
+                  <div class="panel-header compact"><div><span class="section-kicker">SAME-FLOW COMPARISON</span><h3>Yosys/ABC measurements</h3></div><span class="panel-meta">STANDARD + STRONGER</span></div>
+                  <div class="recipe-grid" id="recipe-grid"></div>
+                  <p class="evidence-caveat" id="measurement-caveat">Measurement has not been recorded.</p>
+                </article>
+
+                <article class="panel run-section evidence-section">
+                  <div class="panel-header compact"><div><span class="section-kicker">REPRODUCIBILITY</span><h3>Commands, hashes, and artifacts</h3></div><span class="panel-meta" id="artifact-count">—</span></div>
+                  <div class="evidence-tabs" role="tablist">
+                    <button class="evidence-tab active" data-evidence="commands" type="button">Commands</button>
+                    <button class="evidence-tab" data-evidence="hashes" type="button">Hashes</button>
+                    <button class="evidence-tab" data-evidence="artifacts" type="button">Logs &amp; artifacts</button>
+                  </div>
+                  <div class="evidence-list" id="evidence-list"></div>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="overview-view" aria-labelledby="view-title">
           <article class="hero-card">
             <div class="hero-copy">
               <span class="section-kicker">CURRENT MODEL STATUS</span>
@@ -87,7 +174,7 @@
               </p>
               <div class="hero-actions">
                 <button class="primary-button" type="button" data-jump="cases">Review missed improvements</button>
-                <button class="text-button" type="button" data-jump="workspace">Preview live workflow <span>→</span></button>
+                <button class="text-button" type="button" data-jump="runs">Open run evidence <span>→</span></button>
               </div>
             </div>
             <div class="hero-graphic" aria-label="Overall decision score">
@@ -238,46 +325,6 @@
           </article>
         </section>
 
-        <section class="view" id="workspace-view" aria-labelledby="view-title">
-          <article class="workspace-card">
-            <div class="workspace-preview">
-              <div class="editor-titlebar">
-                <div><span></span><span></span><span></span></div>
-                <strong>design_top.sv</strong>
-                <span>SystemVerilog</span>
-              </div>
-              <pre aria-hidden="true"><code><span class="syntax-muted">01</span>  module design_top (
-<span class="syntax-muted">02</span>    input  logic [31:0] a, b, c, d,
-<span class="syntax-muted">03</span>    output logic [33:0] result
-<span class="syntax-muted">04</span>  );
-<span class="syntax-muted">05</span>
-<span class="syntax-muted">06</span>    <span class="syntax-keyword">assign</span> result = ((a + b) + c) + d;
-<span class="syntax-muted">07</span>
-<span class="syntax-muted">08</span>  endmodule</code></pre>
-              <div class="preview-finding">
-                <span class="finding-line">6</span>
-                <div>
-                  <strong>Potential adder-tree improvement</strong>
-                  <p>A balanced tree may reduce arithmetic depth while preserving behavior.</p>
-                </div>
-              </div>
-            </div>
-            <div class="workspace-lock-panel">
-              <span class="lock-orbit"><i>◇</i></span>
-              <span class="section-kicker">ROLLOUT STATUS</span>
-              <h2>Live analysis is<br>not enabled yet.</h2>
-              <p>
-                The workflow and result format are ready. RTL upload and filelist execution stay
-                disabled until V2.3 meets the model-quality targets and passes OpenROAD validation.
-              </p>
-              <div class="unlock-steps">
-                <div class="done"><span>✓</span><p><strong>Frontend contract</strong><small>Versioned API v1</small></p></div>
-                <div class="active"><span>2</span><p><strong>V2.3 model evaluation</strong><small>Target: ≥70% overall decision score</small></p></div>
-                <div><span>3</span><p><strong>OpenROAD validation</strong><small>Generated RTL only</small></p></div>
-              </div>
-            </div>
-          </article>
-        </section>
       </main>
     </div>
 

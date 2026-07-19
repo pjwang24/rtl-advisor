@@ -1,7 +1,8 @@
 from pathlib import Path
 import json
 
-from rtl_advisor.cli import build_parser, main
+from rtl_advisor.cli import _normalized_agent_command, build_parser, main
+from rtl_advisor.config import load_config
 
 
 def write_fake_tool(root: Path) -> Path:
@@ -257,4 +258,199 @@ def test_agent_capabilities_is_always_machine_readable(
     assert exit_code == 0
     assert payload["document_type"] == "rtl-advisor.agent.capabilities"
     assert payload["analysis"]["live_recommendation_ready"] is False
+    assert "--schema-version" not in payload["command"]
     assert payload["semantic_hash"]
+
+
+def test_agent_v1_normalized_commands_match_pre_v2_golden(tmp_path: Path) -> None:
+    tool = write_fake_tool(tmp_path)
+    config_path = write_test_config(
+        tmp_path,
+        liberty_sha256="a" * 64,
+        tool=tool,
+    )
+    config = load_config(config_path)
+    parser = build_parser()
+    source = tmp_path / "rtl/top.sv"
+    include_dir = tmp_path / "include"
+    gate_model = tmp_path / "models/gate.json"
+
+    argument_sets = (
+        (
+            ("agent", "capabilities", "--schema-version", "1", "--json"),
+            (
+                "rtl-advisor",
+                "--config",
+                str(config_path),
+                "agent",
+                "capabilities",
+                "--json",
+            ),
+        ),
+        (
+            (
+                "agent",
+                "review",
+                "rtl/top.sv",
+                "--objective",
+                "timing",
+                "--top",
+                "top",
+                "-I",
+                "include",
+                "-D",
+                "WIDTH=8",
+                "--gate-model",
+                "models/gate.json",
+                "--force",
+                "--schema-version",
+                "1",
+                "--json",
+            ),
+            (
+                "rtl-advisor",
+                "--config",
+                str(config_path),
+                "agent",
+                "review",
+                str(source),
+                "--objective",
+                "timing",
+                "--top",
+                "top",
+                "-I",
+                str(include_dir),
+                "-D",
+                "WIDTH=8",
+                "--gate-model",
+                str(gate_model),
+                "--force",
+                "--json",
+            ),
+        ),
+        (
+            (
+                "agent",
+                "candidate",
+                "review-" + "a" * 20,
+                "--finding",
+                "finding01",
+                "--schema-version",
+                "1",
+                "--json",
+            ),
+            (
+                "rtl-advisor",
+                "--config",
+                str(config_path),
+                "agent",
+                "candidate",
+                "review-" + "a" * 20,
+                "--finding",
+                "finding01",
+                "--json",
+            ),
+        ),
+        (
+            (
+                "agent",
+                "verify",
+                "review-" + "a" * 20,
+                "--candidate",
+                "candidate01",
+                "--schema-version",
+                "1",
+                "--json",
+            ),
+            (
+                "rtl-advisor",
+                "--config",
+                str(config_path),
+                "agent",
+                "verify",
+                "review-" + "a" * 20,
+                "--candidate",
+                "candidate01",
+                "--json",
+            ),
+        ),
+    )
+
+    for arguments, golden in argument_sets:
+        assert _normalized_agent_command(config, parser.parse_args(arguments)) == golden
+
+
+def test_explicit_v1_selector_preserves_default_v1_payload(
+    tmp_path: Path,
+    capsys,
+) -> None:
+    tool = write_fake_tool(tmp_path)
+    library = tmp_path / "cells.lib"
+    library.write_bytes(b"abc")
+    (tmp_path / "LICENSE").write_text("test license\n", encoding="utf-8")
+    config_path = write_test_config(
+        tmp_path,
+        liberty_sha256=(
+            "ba7816bf8f01cfea414140de5dae2223"
+            "b00361a396177a9cb410ff61f20015ad"
+        ),
+        tool=tool,
+    )
+
+    default_exit = main(("--config", str(config_path), "agent", "capabilities"))
+    default_payload = json.loads(capsys.readouterr().out)
+    explicit_exit = main(
+        (
+            "--config",
+            str(config_path),
+            "agent",
+            "capabilities",
+            "--schema-version",
+            "1",
+        )
+    )
+    explicit_payload = json.loads(capsys.readouterr().out)
+
+    assert default_exit == explicit_exit == 0
+    assert explicit_payload == default_payload
+    assert explicit_payload["flow_version"] == "rtl-advisor-agent-v1"
+    assert "--schema-version" not in explicit_payload["command"]
+
+
+def test_agent_v2_rejects_v1_model_controls(tmp_path: Path, capsys) -> None:
+    tool = write_fake_tool(tmp_path)
+    library = tmp_path / "cells.lib"
+    library.write_bytes(b"abc")
+    (tmp_path / "LICENSE").write_text("test license\n", encoding="utf-8")
+    config_path = write_test_config(
+        tmp_path,
+        liberty_sha256=(
+            "ba7816bf8f01cfea414140de5dae2223"
+            "b00361a396177a9cb410ff61f20015ad"
+        ),
+        tool=tool,
+    )
+    source = tmp_path / "top.sv"
+    source.write_text("module top; endmodule\n", encoding="utf-8")
+
+    exit_code = main(
+        (
+            "--config",
+            str(config_path),
+            "agent",
+            "review",
+            str(source),
+            "--top",
+            "top",
+            "--gate-model",
+            "model.json",
+            "--schema-version",
+            "2",
+            "--json",
+        )
+    )
+    payload = json.loads(capsys.readouterr().out)
+
+    assert exit_code == 2
+    assert payload["error"]["code"] == "unsupported_v2_option"
+    assert payload["flow_version"] == "rtl-advisor-agent-v2"

@@ -48,11 +48,19 @@ def _fake_cli(tmp_path: Path, payload: dict, *, exit_code: int) -> Path:
 
 def test_runner_validates_and_returns_capabilities(tmp_path: Path) -> None:
     payload = {
-        "schema_version": 1,
-        "document_type": "rtl-advisor.agent.capabilities",
-        "flow_version": "rtl-advisor-agent-v1",
+        "schema_version": 2,
+        "run_schema": "rtl-advisor-run-v1",
+        "document_type": "rtl-advisor.agent.v2.capabilities",
+        "flow_version": "rtl-advisor-agent-v2",
         "status": "ok",
-        "command": ["rtl-advisor", "agent", "capabilities", "--json"],
+        "command": [
+            "rtl-advisor",
+            "agent",
+            "capabilities",
+            "--schema-version",
+            "2",
+            "--json",
+        ],
     }
     executable = _fake_cli(tmp_path, payload, exit_code=0)
     completed = subprocess.run(
@@ -66,30 +74,41 @@ def test_runner_validates_and_returns_capabilities(tmp_path: Path) -> None:
     result = json.loads(completed.stdout)
 
     assert completed.returncode == 0
-    assert result["document_type"] == "rtl-advisor.agent.capabilities"
+    assert result["document_type"] == "rtl-advisor.agent.v2.capabilities"
     assert result["semantic_hash"] == _semantic_hash(
         {key: value for key, value in result.items() if key != "semantic_hash"}
     )
 
 
-def test_runner_preserves_blocked_review_exit_code(tmp_path: Path) -> None:
+def test_runner_preserves_failed_formal_exit_code(tmp_path: Path) -> None:
     payload = {
-        "schema_version": 1,
-        "document_type": "rtl-advisor.agent.review",
-        "flow_version": "rtl-advisor-agent-v1",
-        "status": "blocked",
-        "decision": "failed",
-        "command": ["rtl-advisor", "agent", "review", "--json"],
+        "schema_version": 2,
+        "run_schema": "rtl-advisor-run-v1",
+        "document_type": "rtl-advisor.agent.v2.verification",
+        "flow_version": "rtl-advisor-agent-v2",
+        "status": "formal_failed",
+        "decision": "formal_failed",
+        "command": [
+            "rtl-advisor",
+            "agent",
+            "verify",
+            "mvp-00000000000000000000",
+            "--candidate",
+            "cand-1",
+            "--schema-version",
+            "2",
+            "--json",
+        ],
     }
-    executable = _fake_cli(tmp_path, payload, exit_code=3)
+    executable = _fake_cli(tmp_path, payload, exit_code=4)
     completed = subprocess.run(
         [
             sys.executable,
             str(RUNNER_PATH),
-            "review",
-            "top.sv",
-            "--top",
-            "top",
+            "verify",
+            "mvp-00000000000000000000",
+            "--candidate",
+            "cand-1",
         ],
         cwd=ROOT,
         env={**os.environ, "RTL_ADVISOR_BIN": str(executable)},
@@ -99,16 +118,18 @@ def test_runner_preserves_blocked_review_exit_code(tmp_path: Path) -> None:
     )
     result = json.loads(completed.stdout)
 
-    assert completed.returncode == 3
-    assert result["status"] == "blocked"
-    assert result["decision"] == "failed"
+    assert completed.returncode == 4
+    assert result["status"] == "formal_failed"
+    assert result["decision"] == "formal_failed"
 
 
 def test_runner_rejects_semantic_hash_mismatch() -> None:
     runner = _load_runner()
     payload = {
-        "schema_version": 1,
-        "document_type": "rtl-advisor.agent.capabilities",
+        "schema_version": 2,
+        "run_schema": "rtl-advisor-run-v1",
+        "document_type": "rtl-advisor.agent.v2.capabilities",
+        "flow_version": "rtl-advisor-agent-v2",
         "status": "ok",
         "command": [],
         "semantic_hash": "wrong",
@@ -120,3 +141,57 @@ def test_runner_rejects_semantic_hash_mismatch() -> None:
         assert exc.code == "semantic_hash_mismatch"
     else:
         raise AssertionError("semantic hash mismatch was accepted")
+
+
+def test_runner_supports_installed_cli_outside_source_checkout(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    runner = _load_runner()
+    payload = {
+        "schema_version": 2,
+        "run_schema": "rtl-advisor-run-v1",
+        "document_type": "rtl-advisor.agent.v2.capabilities",
+        "flow_version": "rtl-advisor-agent-v2",
+        "status": "ok",
+        "command": [
+            "rtl-advisor",
+            "agent",
+            "capabilities",
+            "--schema-version",
+            "2",
+            "--json",
+        ],
+    }
+    executable = _fake_cli(tmp_path, payload, exit_code=0)
+    config = tmp_path / "rtl-advisor.toml"
+    config.write_text("[project]\n", encoding="utf-8")
+    workspace = tmp_path / "engineer-workspace"
+    workspace.mkdir()
+    monkeypatch.chdir(workspace)
+    monkeypatch.setattr(runner, "_find_repo_root", lambda: None)
+    monkeypatch.setenv("RTL_ADVISOR_BIN", str(executable))
+
+    args = runner.build_parser().parse_args(
+        ("--config", str(config), "capabilities")
+    )
+    result, exit_code = runner.run(args)
+
+    assert exit_code == 0
+    assert result["flow_version"] == "rtl-advisor-agent-v2"
+
+
+def test_runner_requires_explicit_config_outside_source_checkout(
+    monkeypatch,
+) -> None:
+    runner = _load_runner()
+    monkeypatch.setattr(runner, "_find_repo_root", lambda: None)
+    monkeypatch.delenv("RTL_ADVISOR_CONFIG", raising=False)
+    args = runner.build_parser().parse_args(("capabilities",))
+
+    try:
+        runner.run(args)
+    except runner.RunnerError as exc:
+        assert exc.code == "config_not_found"
+    else:
+        raise AssertionError("runner accepted an implicit config outside a checkout")

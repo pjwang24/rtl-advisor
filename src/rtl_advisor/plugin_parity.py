@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import shlex
 import subprocess
 import sys
@@ -13,12 +14,14 @@ from typing import Any, Sequence
 
 from rtl_advisor.config import ProjectConfig, load_config
 from rtl_advisor.corpus import load_manifest
+from rtl_advisor.mvp_schema import normalized_result_projection
 
 
-PARITY_SCHEMA_VERSION = 1
+PARITY_SCHEMA_VERSION = 2
 DEFAULT_RUNNER = Path(
     "plugins/rtl-advisor/skills/analyze-rtl/scripts/run_rtl_advisor.py"
 )
+_MODULE_DECLARATION = re.compile(r"\bmodule\s+([A-Za-z_][A-Za-z0-9_$]*)")
 
 
 @dataclass(frozen=True)
@@ -159,6 +162,8 @@ def compare_scenario(
         "agent",
         scenario.operation,
         *scenario.arguments,
+        "--schema-version",
+        "2",
         "--json",
     )
     plugin_command = (
@@ -203,8 +208,18 @@ def compare_scenario(
         )
     if terminal.exit_code != plugin.exit_code:
         errors.append("terminal and plugin runner exit codes differ")
-    if terminal.payload != plugin.payload:
-        errors.append("terminal and plugin runner JSON payloads differ")
+    terminal_projection = (
+        normalized_result_projection(terminal.payload)
+        if isinstance(terminal.payload, dict)
+        else None
+    )
+    plugin_projection = (
+        normalized_result_projection(plugin.payload)
+        if isinstance(plugin.payload, dict)
+        else None
+    )
+    if terminal_projection != plugin_projection:
+        errors.append("terminal and plugin runner normalized evidence differs")
     if not _semantic_hash_valid(terminal.payload):
         errors.append("terminal semantic hash is invalid")
     if not _semantic_hash_valid(plugin.payload):
@@ -268,6 +283,7 @@ def compare_scenario(
         "comparison": {
             "exit_code_equal": terminal.exit_code == plugin.exit_code,
             "payload_equal": terminal.payload == plugin.payload,
+            "normalized_evidence_equal": terminal_projection == plugin_projection,
             "semantic_hash_equal": (
                 isinstance(terminal.payload, dict)
                 and isinstance(plugin.payload, dict)
@@ -348,6 +364,31 @@ def _review_source_paths(review_input: Path) -> tuple[Path, ...]:
     return (resolved,)
 
 
+def _review_top(review_input: Path) -> str | None:
+    resolved = review_input.resolve()
+    if resolved.is_dir() or resolved.name == "manifest.json":
+        try:
+            manifest = load_manifest(resolved)
+        except Exception:
+            manifest = None
+        if manifest is not None:
+            return manifest.baseline.wrapper_top
+    if resolved.suffix.lower() == ".json":
+        try:
+            payload = json.loads(resolved.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            payload = None
+        if isinstance(payload, dict) and isinstance(payload.get("top"), str):
+            return str(payload["top"])
+    if resolved.suffix.lower() in {".sv", ".v"}:
+        try:
+            match = _MODULE_DECLARATION.search(resolved.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError):
+            return None
+        return match.group(1) if match else None
+    return None
+
+
 def build_scenarios(
     *,
     config: ProjectConfig,
@@ -369,11 +410,11 @@ def build_scenarios(
             arguments=(),
             config_path=config.config_path,
             expected_exit_code=0,
-            expected_document_type="rtl-advisor.agent.capabilities",
+            expected_document_type="rtl-advisor.agent.v2.capabilities",
             expected_values=(
                 ExpectedValue("status", "ok"),
-                ExpectedValue("analysis.live_recommendation_ready", False),
-                ExpectedValue("operations.source_mutation.available", False),
+                ExpectedValue("model.affects_mvp_decision", False),
+                ExpectedValue("operations.review.available", True),
             ),
         ),
         ParityScenario(
@@ -383,12 +424,13 @@ def build_scenarios(
             arguments=(),
             config_path=missing_tools_config,
             expected_exit_code=0,
-            expected_document_type="rtl-advisor.agent.capabilities",
+            expected_document_type="rtl-advisor.agent.v2.capabilities",
             expected_values=(
                 ExpectedValue("tools.yosys.status", "missing"),
                 ExpectedValue("tools.verilator.status", "missing"),
-                ExpectedValue("operations.review.available", False),
-                ExpectedValue("operations.formal_verification.available", False),
+                ExpectedValue("operations.candidate.available", True),
+                ExpectedValue("operations.verify.available", False),
+                ExpectedValue("operations.measure.available", False),
             ),
         ),
         ParityScenario(
@@ -398,7 +440,7 @@ def build_scenarios(
             arguments=(str(missing_input), "--objective", "timing"),
             config_path=config.config_path,
             expected_exit_code=2,
-            expected_document_type="rtl-advisor.agent.error",
+            expected_document_type="rtl-advisor.agent.v2.error",
             expected_values=(ExpectedValue("error.code", "input_not_found"),),
         ),
         ParityScenario(
@@ -408,8 +450,32 @@ def build_scenarios(
             arguments=(str(fixture), "--objective", "balanced"),
             config_path=config.config_path,
             expected_exit_code=2,
-            expected_document_type="rtl-advisor.agent.error",
+            expected_document_type="rtl-advisor.agent.v2.error",
             expected_values=(ExpectedValue("error.code", "top_required"),),
+            source_paths=(fixture,),
+        ),
+        ParityScenario(
+            scenario_id="rules_review",
+            description="Rules-only Agent V2 review succeeds through both transports",
+            operation="review",
+            arguments=(
+                str(fixture),
+                "--top",
+                "parity_minimal",
+                "--objective",
+                "balanced",
+            ),
+            config_path=config.config_path,
+            expected_exit_code=0,
+            expected_document_type="rtl-advisor.agent.v2.review",
+            expected_values=(
+                ExpectedValue("status", "completed"),
+                ExpectedValue("decision", "unsupported"),
+                ExpectedValue("candidate_generation_allowed", False),
+                ExpectedValue("evidence.rules_only", True),
+                ExpectedValue("evidence.model_used", False),
+                ExpectedValue("input.source_integrity.ok", True),
+            ),
             source_paths=(fixture,),
         ),
         ParityScenario(
@@ -419,7 +485,7 @@ def build_scenarios(
             arguments=("not-a-review-id", "--finding", "finding01"),
             config_path=config.config_path,
             expected_exit_code=2,
-            expected_document_type="rtl-advisor.agent.error",
+            expected_document_type="rtl-advisor.agent.v2.error",
             expected_values=(ExpectedValue("error.code", "invalid_run_id"),),
         ),
         ParityScenario(
@@ -427,31 +493,42 @@ def build_scenarios(
             description="Verification rejects a review with no stored artifacts",
             operation="verify",
             arguments=(
-                "review-00000000000000000000",
+                "mvp-00000000000000000000",
                 "--candidate",
                 "candidate01",
             ),
             config_path=config.config_path,
             expected_exit_code=2,
-            expected_document_type="rtl-advisor.agent.error",
-            expected_values=(ExpectedValue("error.code", "invalid_artifact"),),
+            expected_document_type="rtl-advisor.agent.v2.error",
+            expected_values=(ExpectedValue("error.code", "invalid_mvp_artifact"),),
         ),
     ]
     if review_input is not None:
+        review_top = _review_top(review_input)
+        if review_top is None:
+            raise ParityError(
+                "could not determine a top module for --review-input; use an RTL file "
+                "with an unambiguous module declaration or a manifest/input JSON with a top"
+            )
         scenarios.append(
             ParityScenario(
-                scenario_id="diagnostic_only_review",
-                description="Diagnostic model remains unavailable for live advice",
+                scenario_id="v2_rules_review",
+                description="Agent V2 rules-only review through both transports",
                 operation="review",
-                arguments=(str(review_input), "--objective", "timing"),
+                arguments=(
+                    str(review_input),
+                    "--top",
+                    review_top,
+                    "--objective",
+                    "timing",
+                ),
                 config_path=config.config_path,
-                expected_exit_code=3,
-                expected_document_type="rtl-advisor.agent.review",
+                expected_exit_code=0,
+                expected_document_type="rtl-advisor.agent.v2.review",
                 expected_values=(
-                    ExpectedValue("status", "blocked"),
-                    ExpectedValue("decision", "failed"),
-                    ExpectedValue("candidate_generation_allowed", False),
-                    ExpectedValue("evidence.model_release_status", "diagnostic_only"),
+                    ExpectedValue("status", "completed"),
+                    ExpectedValue("evidence.rules_only", True),
+                    ExpectedValue("evidence.model_used", False),
                     ExpectedValue("input.source_integrity.ok", True),
                 ),
                 source_paths=_review_source_paths(review_input),
@@ -464,7 +541,7 @@ def _scenario_summary(result: dict[str, Any]) -> str:
     payload = result.get("terminal", {}).get("payload")
     if not isinstance(payload, dict):
         return "malformed result"
-    if payload.get("document_type") == "rtl-advisor.agent.error":
+    if payload.get("document_type") == "rtl-advisor.agent.v2.error":
         return str(payload.get("error", {}).get("code", "agent error"))
     decision = payload.get("decision")
     if decision:

@@ -16,6 +16,18 @@ from rtl_advisor.agent_api import (
     agent_review,
     agent_verify,
 )
+from rtl_advisor.mvp_agent import (
+    MVPAgentError,
+    agent_v2_candidate,
+    agent_v2_capabilities,
+    agent_v2_error_payload,
+    agent_v2_exit_code,
+    agent_v2_measure,
+    agent_v2_report,
+    agent_v2_review,
+    agent_v2_verify,
+)
+from rtl_advisor.mvp_schema import MVPSchemaError
 from rtl_advisor.advisor_v2 import (
     AdvisorV2Error,
     PROFILES,
@@ -422,7 +434,7 @@ def build_parser() -> argparse.ArgumentParser:
     frontend.add_argument(
         "--host",
         default="127.0.0.1",
-        help="bind address (default: 127.0.0.1)",
+        help="loopback bind address (default: 127.0.0.1)",
     )
     frontend.add_argument(
         "--port",
@@ -442,6 +454,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
     agent_capabilities_parser.add_argument(
         "--json", action="store_true", dest="json_output"
+    )
+    agent_capabilities_parser.add_argument(
+        "--schema-version", type=int, choices=(1, 2), default=1
     )
     agent_review_parser = agent_subparsers.add_parser(
         "review",
@@ -470,6 +485,9 @@ def build_parser() -> argparse.ArgumentParser:
     agent_review_parser.add_argument(
         "--json", action="store_true", dest="json_output"
     )
+    agent_review_parser.add_argument(
+        "--schema-version", type=int, choices=(1, 2), default=1
+    )
     agent_candidate_parser = agent_subparsers.add_parser(
         "candidate",
         help="prepare an isolated candidate from an eligible review",
@@ -479,6 +497,9 @@ def build_parser() -> argparse.ArgumentParser:
     agent_candidate_parser.add_argument(
         "--json", action="store_true", dest="json_output"
     )
+    agent_candidate_parser.add_argument(
+        "--schema-version", type=int, choices=(1, 2), default=1
+    )
     agent_verify_parser = agent_subparsers.add_parser(
         "verify",
         help="run current hash-matched lint and formal equivalence",
@@ -486,6 +507,32 @@ def build_parser() -> argparse.ArgumentParser:
     agent_verify_parser.add_argument("run_id")
     agent_verify_parser.add_argument("--candidate", required=True)
     agent_verify_parser.add_argument(
+        "--json", action="store_true", dest="json_output"
+    )
+    agent_verify_parser.add_argument(
+        "--schema-version", type=int, choices=(1, 2), default=1
+    )
+    agent_measure_parser = agent_subparsers.add_parser(
+        "measure",
+        help="measure a formally proven candidate with both pinned synthesis recipes",
+    )
+    agent_measure_parser.add_argument("run_id")
+    agent_measure_parser.add_argument("--candidate", required=True)
+    agent_measure_parser.add_argument(
+        "--schema-version", type=int, choices=(2,), default=2
+    )
+    agent_measure_parser.add_argument(
+        "--json", action="store_true", dest="json_output"
+    )
+    agent_report_parser = agent_subparsers.add_parser(
+        "report",
+        help="derive immutable JSON and HTML reports from stored run artifacts",
+    )
+    agent_report_parser.add_argument("run_id")
+    agent_report_parser.add_argument(
+        "--schema-version", type=int, choices=(2,), default=2
+    )
+    agent_report_parser.add_argument(
         "--json", action="store_true", dest="json_output"
     )
 
@@ -940,6 +987,14 @@ def _normalized_agent_command(
         command.extend((args.run_id, "--finding", args.finding))
     elif args.agent_command == "verify":
         command.extend((args.run_id, "--candidate", args.candidate))
+    elif args.agent_command == "measure":
+        command.extend((args.run_id, "--candidate", args.candidate))
+    elif args.agent_command == "report":
+        command.append(args.run_id)
+    # Agent V1 predates the explicit schema selector.  Keep its normalized
+    # command byte-for-byte compatible; only V2 clients opt into the new flag.
+    if args.schema_version == 2:
+        command.extend(("--schema-version", "2"))
     command.append("--json")
     return tuple(command)
 
@@ -964,6 +1019,66 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         if args.command == "agent":
             normalized_command = _normalized_agent_command(config, args)
+            if args.schema_version == 2:
+                try:
+                    if args.agent_command == "review" and (
+                        args.gate_model is not None or args.force
+                    ):
+                        raise MVPAgentError(
+                            "--gate-model and --force are Agent V1-only; "
+                            "Agent V2 uses deterministic MVP rules",
+                            code="unsupported_v2_option",
+                        )
+                    if args.agent_command == "capabilities":
+                        payload = agent_v2_capabilities(
+                            config,
+                            normalized_command=normalized_command,
+                        )
+                    elif args.agent_command == "review":
+                        payload = agent_v2_review(
+                            config,
+                            args.input,
+                            objective=args.objective,
+                            top=args.top,
+                            include_dirs=tuple(args.include_dirs),
+                            defines=tuple(args.defines),
+                            normalized_command=normalized_command,
+                        )
+                    elif args.agent_command == "candidate":
+                        payload = agent_v2_candidate(
+                            config,
+                            args.run_id,
+                            finding_id=args.finding,
+                            normalized_command=normalized_command,
+                        )
+                    elif args.agent_command == "verify":
+                        payload = agent_v2_verify(
+                            config,
+                            args.run_id,
+                            candidate_id=args.candidate,
+                            normalized_command=normalized_command,
+                        )
+                    elif args.agent_command == "measure":
+                        payload = agent_v2_measure(
+                            config,
+                            args.run_id,
+                            candidate_id=args.candidate,
+                            normalized_command=normalized_command,
+                        )
+                    else:
+                        payload = agent_v2_report(
+                            config,
+                            args.run_id,
+                            normalized_command=normalized_command,
+                        )
+                except (MVPAgentError, MVPSchemaError) as exc:
+                    payload = agent_v2_error_payload(
+                        args.agent_command,
+                        exc,
+                        normalized_command=normalized_command,
+                    )
+                print(json.dumps(payload, indent=2, sort_keys=True))
+                return agent_v2_exit_code(payload)
             try:
                 if args.agent_command == "capabilities":
                     payload = agent_capabilities(

@@ -1,6 +1,6 @@
 {
   "name": "rtl-advisor",
-  "version": "0.1.0+codex.20260719175839",
+  "version": "0.2.0-alpha.1+codex.20260719225829",
   "description": "Evidence-backed pre-synthesis RTL review through the local RTL Advisor CLI.",
   "author": {
     "name": "RTL Advisor contributors",
@@ -18,19 +18,21 @@
   "interface": {
     "displayName": "RTL Advisor",
     "shortDescription": "Review RTL before synthesis with traceable evidence.",
-    "longDescription": "Review approved RTL for pre-synthesis opportunities, explain whether a change is supported, and verify isolated candidates with formal equivalence.",
+    "longDescription": "Review approved combinational RTL, prepare a supported isolated adder rewrite, prove RTL equivalence, and explain measured Yosys/ABC evidence without changing the source.",
     "developerName": "RTL Advisor contributors",
     "category": "Productivity",
     "capabilities": [
       "Read",
       "Local analysis",
-      "Formal verification"
+      "Formal verification",
+      "Synthesis measurement"
     ],
     "websiteURL": "https://github.com/pjwang24/rtl-advisor",
     "defaultPrompt": [
       "Review approved RTL for timing opportunities.",
       "Explain whether synthesis likely handles this RTL rewrite.",
-      "Show the evidence behind this RTL finding."
+      "Show the evidence behind this RTL finding.",
+      "Measure a formally proven candidate in both pinned synthesis recipes."
     ]
   }
 }

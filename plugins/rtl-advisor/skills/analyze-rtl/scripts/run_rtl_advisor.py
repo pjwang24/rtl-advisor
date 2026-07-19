@@ -13,12 +13,16 @@ import sys
 from typing import Any, Sequence
 
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
+RUN_SCHEMA = "rtl-advisor-run-v1"
+FLOW_VERSION = "rtl-advisor-agent-v2"
 EXPECTED_DOCUMENTS = {
-    "capabilities": "rtl-advisor.agent.capabilities",
-    "review": "rtl-advisor.agent.review",
-    "candidate": "rtl-advisor.agent.candidate",
-    "verify": "rtl-advisor.agent.verification",
+    "capabilities": "rtl-advisor.agent.v2.capabilities",
+    "review": "rtl-advisor.agent.v2.review",
+    "candidate": "rtl-advisor.agent.v2.candidate",
+    "verify": "rtl-advisor.agent.v2.verification",
+    "measure": "rtl-advisor.agent.v2.measurement",
+    "report": "rtl-advisor.agent.v2.report",
 }
 
 
@@ -45,7 +49,7 @@ def _error_payload(error: RunnerError) -> dict[str, Any]:
     return payload
 
 
-def _find_repo_root() -> Path:
+def _find_repo_root() -> Path | None:
     starts = [Path.cwd().resolve(), Path(__file__).resolve().parent]
     visited: set[Path] = set()
     for start in starts:
@@ -59,10 +63,7 @@ def _find_repo_root() -> Path:
                 and (candidate / "rtl-advisor.toml").is_file()
             ):
                 return candidate
-    raise RunnerError(
-        "could not locate the RTL Advisor repository; run inside its checkout",
-        code="repository_not_found",
-    )
+    return None
 
 
 def _split_explicit_command(value: str) -> list[str]:
@@ -77,18 +78,14 @@ def _split_explicit_command(value: str) -> list[str]:
     return command
 
 
-def _resolve_cli(repo_root: Path) -> tuple[list[str], dict[str, str]]:
+def _resolve_cli(repo_root: Path | None) -> tuple[list[str], dict[str, str]]:
     environment = dict(os.environ)
     explicit = environment.get("RTL_ADVISOR_BIN")
     if explicit:
         return _split_explicit_command(explicit), environment
 
-    installed = shutil.which("rtl-advisor")
-    if installed:
-        return [installed], environment
-
-    venv_python = repo_root / ".venv/bin/python"
-    if venv_python.is_file():
+    venv_python = repo_root / ".venv/bin/python" if repo_root is not None else None
+    if venv_python is not None and venv_python.is_file():
         source_path = str(repo_root / "src")
         current = environment.get("PYTHONPATH")
         environment["PYTHONPATH"] = (
@@ -96,8 +93,12 @@ def _resolve_cli(repo_root: Path) -> tuple[list[str], dict[str, str]]:
         )
         return [str(venv_python), "-m", "rtl_advisor"], environment
 
+    installed = shutil.which("rtl-advisor")
+    if installed:
+        return [installed], environment
+
     uv = shutil.which("uv")
-    if uv:
+    if uv and repo_root is not None:
         return [uv, "run", "--no-editable", "rtl-advisor"], environment
 
     raise RunnerError(
@@ -106,11 +107,20 @@ def _resolve_cli(repo_root: Path) -> tuple[list[str], dict[str, str]]:
     )
 
 
-def _resolve_config(repo_root: Path, value: str | None) -> Path:
+def _resolve_config(repo_root: Path | None, value: str | None) -> Path:
     configured = value or os.environ.get("RTL_ADVISOR_CONFIG")
-    path = Path(configured).expanduser() if configured else repo_root / "rtl-advisor.toml"
+    if configured:
+        path = Path(configured).expanduser()
+    elif repo_root is not None:
+        path = repo_root / "rtl-advisor.toml"
+    else:
+        raise RunnerError(
+            "RTL Advisor configuration is required outside its source checkout; "
+            "pass --config or set RTL_ADVISOR_CONFIG",
+            code="config_not_found",
+        )
     if not path.is_absolute():
-        path = repo_root / path
+        path = (repo_root or Path.cwd()) / path
     path = path.resolve()
     if not path.is_file():
         raise RunnerError(
@@ -159,8 +169,6 @@ def build_parser() -> argparse.ArgumentParser:
     review.add_argument("--top")
     review.add_argument("-I", action="append", default=[], dest="include_dirs")
     review.add_argument("-D", action="append", default=[], dest="defines")
-    review.add_argument("--gate-model")
-    review.add_argument("--force", action="store_true")
 
     candidate = subparsers.add_parser(
         "candidate", help="prepare an isolated candidate"
@@ -171,6 +179,15 @@ def build_parser() -> argparse.ArgumentParser:
     verify = subparsers.add_parser("verify", help="formally verify a candidate")
     verify.add_argument("run_id")
     verify.add_argument("--candidate", required=True)
+    measure = subparsers.add_parser(
+        "measure", help="measure a formally proven candidate with both recipes"
+    )
+    measure.add_argument("run_id")
+    measure.add_argument("--candidate", required=True)
+    report = subparsers.add_parser(
+        "report", help="derive the immutable JSON and HTML run report"
+    )
+    report.add_argument("run_id")
     return parser
 
 
@@ -185,14 +202,12 @@ def _operation_arguments(args: argparse.Namespace) -> list[str]:
             result.extend(("-I", include_dir))
         for definition in args.defines:
             result.extend(("-D", definition))
-        if args.gate_model:
-            result.extend(("--gate-model", args.gate_model))
-        if args.force:
-            result.append("--force")
         return result
     if args.operation == "candidate":
         return [args.run_id, "--finding", args.finding]
-    return [args.run_id, "--candidate", args.candidate]
+    if args.operation in {"verify", "measure"}:
+        return [args.run_id, "--candidate", args.candidate]
+    return [args.run_id]
 
 
 def _validate_payload(payload: Any, operation: str) -> dict[str, Any]:
@@ -203,9 +218,19 @@ def _validate_payload(payload: Any, operation: str) -> dict[str, Any]:
             f"unsupported agent schema: {payload.get('schema_version')!r}",
             code="unsupported_schema",
         )
+    if payload.get("run_schema") != RUN_SCHEMA:
+        raise RunnerError(
+            f"unsupported run artifact schema: {payload.get('run_schema')!r}",
+            code="unsupported_run_schema",
+        )
+    if payload.get("flow_version") != FLOW_VERSION:
+        raise RunnerError(
+            f"unsupported agent flow: {payload.get('flow_version')!r}",
+            code="unsupported_flow",
+        )
     document_type = payload.get("document_type")
     expected_type = EXPECTED_DOCUMENTS[operation]
-    if document_type not in {expected_type, "rtl-advisor.agent.error"}:
+    if document_type not in {expected_type, "rtl-advisor.agent.v2.error"}:
         raise RunnerError(
             f"unexpected document type {document_type!r} for {operation}",
             code="unexpected_document",
@@ -222,13 +247,38 @@ def _validate_payload(payload: Any, operation: str) -> dict[str, Any]:
             "agent result does not include its normalized command",
             code="missing_command",
         )
+    if document_type == EXPECTED_DOCUMENTS["verify"]:
+        status = payload.get("status")
+        if payload.get("decision") != status or (payload.get("safe") is True) != (
+            status == "formal_passed"
+        ):
+            raise RunnerError(
+                "verification status, decision, and safety flag disagree",
+                code="invalid_verification_result",
+            )
     return payload
+
+
+def _expected_exit_code(payload: dict[str, Any], operation: str) -> int:
+    if payload.get("document_type") == "rtl-advisor.agent.v2.error":
+        return 2
+    status = str(payload.get("status", ""))
+    if operation in {"capabilities", "review"}:
+        return 0
+    if operation == "candidate":
+        return 0 if status == "candidate_prepared" else 4
+    if operation == "verify":
+        return 0 if status == "formal_passed" else 4
+    if operation in {"measure", "report"}:
+        return 0 if status == "completed" else 4
+    raise RunnerError(f"unsupported operation: {operation}", code="unsupported_operation")
 
 
 def run(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
     repo_root = _find_repo_root()
     config_path = _resolve_config(repo_root, args.config)
     executable, environment = _resolve_cli(repo_root)
+    working_directory = repo_root or config_path.parent
     command = [
         *executable,
         "--config",
@@ -236,12 +286,14 @@ def run(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
         "agent",
         args.operation,
         *_operation_arguments(args),
+        "--schema-version",
+        str(SCHEMA_VERSION),
         "--json",
     ]
     try:
         completed = subprocess.run(
             command,
-            cwd=repo_root,
+            cwd=working_directory,
             env=environment,
             text=True,
             capture_output=True,
@@ -270,6 +322,13 @@ def run(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
             code="invalid_json",
         ) from exc
     payload = _validate_payload(raw, args.operation)
+    expected_exit_code = _expected_exit_code(payload, args.operation)
+    if completed.returncode != expected_exit_code:
+        raise RunnerError(
+            f"CLI exit code {completed.returncode} disagrees with the {args.operation} result "
+            f"(expected {expected_exit_code})",
+            code="exit_code_mismatch",
+        )
     return payload, completed.returncode
 
 

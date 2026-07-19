@@ -2,11 +2,12 @@ from __future__ import annotations
 
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import ipaddress
 import json
 import mimetypes
 from pathlib import Path
 from typing import Any
-from urllib.parse import parse_qs, unquote, urlparse
+from urllib.parse import parse_qs, unquote, urlparse, urlsplit
 
 from rtl_advisor.config import ProjectConfig
 from rtl_advisor.frontend_api import FrontendAPIError, FrontendDataStore
@@ -17,6 +18,28 @@ FRONTEND_ASSET_ROOT = Path(__file__).with_name("frontend")
 
 class FrontendServerError(RuntimeError):
     """Raised when the local frontend cannot be served safely."""
+
+
+def _is_loopback_host(host: str) -> bool:
+    candidate = host.strip().lower()
+    if candidate == "localhost":
+        return True
+    if "%" in candidate:
+        candidate = candidate.split("%", 1)[0]
+    try:
+        return ipaddress.ip_address(candidate).is_loopback
+    except ValueError:
+        return False
+
+
+def _is_loopback_host_header(value: str | None) -> bool:
+    if not value:
+        return False
+    try:
+        hostname = urlsplit(f"//{value}").hostname
+    except ValueError:
+        return False
+    return bool(hostname and _is_loopback_host(hostname))
 
 
 class FrontendHTTPServer(ThreadingHTTPServer):
@@ -89,6 +112,24 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
         path = parsed.path.rstrip("/") or "/"
         store = self.server.data_store
         try:
+            if path == "/api/runs/v1":
+                self._send_json(HTTPStatus.OK, store.runs())
+                return
+            runs_prefix = "/api/runs/v1/"
+            if path.startswith(runs_prefix):
+                remainder = unquote(path[len(runs_prefix) :])
+                parts = remainder.split("/")
+                if len(parts) == 1:
+                    self._send_json(HTTPStatus.OK, store.run_detail(parts[0]))
+                    return
+                if len(parts) == 2 and parts[1] == "diff":
+                    self._send_json(HTTPStatus.OK, store.run_diff(parts[0]))
+                    return
+                if len(parts) == 2 and parts[1] == "artifacts":
+                    self._send_json(HTTPStatus.OK, store.run_artifacts(parts[0]))
+                    return
+                self._error(HTTPStatus.NOT_FOUND, "API route not found")
+                return
             if path == "/api/v1/health":
                 self._send_json(HTTPStatus.OK, store.health())
                 return
@@ -123,10 +164,16 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
         except FrontendAPIError as exc:
             status = (
                 HTTPStatus.NOT_FOUND
-                if str(exc).startswith("unknown diagnostic case")
+                if str(exc).startswith(("unknown diagnostic case", "unknown MVP run"))
                 else HTTPStatus.BAD_REQUEST
             )
             self._error(status, str(exc))
+
+    def _request_is_local(self) -> bool:
+        if _is_loopback_host_header(self.headers.get("Host")):
+            return True
+        self._error(HTTPStatus.BAD_REQUEST, "dashboard requests require a loopback Host header")
+        return False
 
     def _static_get(self, path: str) -> None:
         route = path if path != "/" else "/index.html"
@@ -157,6 +204,8 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
         )
 
     def do_GET(self) -> None:
+        if not self._request_is_local():
+            return
         parsed = urlparse(self.path)
         if parsed.path.startswith("/api/"):
             self._api_get(parsed)
@@ -164,12 +213,16 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
             self._static_get(parsed.path)
 
     def do_HEAD(self) -> None:
+        if not self._request_is_local():
+            return
         self._error(HTTPStatus.METHOD_NOT_ALLOWED, "HEAD is not supported")
 
     def do_POST(self) -> None:
+        if not self._request_is_local():
+            return
         self._error(
             HTTPStatus.METHOD_NOT_ALLOWED,
-            "The V2.2 frontend is read-only; live analysis unlocks after V2.3 passes.",
+            "The RTL Advisor dashboard is read-only; use the CLI or Codex to run analysis.",
         )
 
 
@@ -181,6 +234,10 @@ def create_frontend_server(
 ) -> FrontendHTTPServer:
     if not 0 <= port <= 65535:
         raise FrontendServerError("frontend port must be between 0 and 65535")
+    if not _is_loopback_host(host):
+        raise FrontendServerError(
+            "frontend host must be a loopback address (localhost, 127.0.0.0/8, or ::1)"
+        )
     if not FRONTEND_ASSET_ROOT.is_dir():
         raise FrontendServerError(f"frontend assets missing: {FRONTEND_ASSET_ROOT}")
     try:
@@ -189,11 +246,6 @@ def create_frontend_server(
         raise FrontendServerError(
             f"could not bind frontend to {host}:{port}: {exc}"
         ) from exc
-    try:
-        server.data_store.health()
-    except FrontendAPIError:
-        server.server_close()
-        raise
     return server
 
 
@@ -206,7 +258,7 @@ def serve_frontend(
     server = create_frontend_server(config, host=host, port=port)
     actual_host, actual_port = server.server_address[:2]
     print(f"RTL Advisor frontend: http://{actual_host}:{actual_port}")
-    print("  mode              read-only V2.2 calibration evidence")
+    print("  mode              read-only MVP runs and V2.2 research evidence")
     print("  stop              Ctrl-C")
     try:
         server.serve_forever(poll_interval=0.2)

@@ -4,12 +4,17 @@ Lead with one of these engineer-facing states and retain the CLI reason.
 
 | CLI state | Engineer-facing wording | Required action |
 | --- | --- | --- |
-| `recommended` | Recommended | Review the proposed isolated change and its evidence. |
-| `synthesis_likely_handles` | Synthesis likely handles this | Do not promise implementation benefit; source cleanup is optional. |
-| `target_flow_confirmation` | Target-flow confirmation needed | Confirm with the approved synthesis flow and constraints. |
-| `no_change` | No change recommended | Leave the RTL unchanged for this finding. |
-| `unsupported` | Analysis unavailable | Explain the unsupported input, construct, or tool condition. |
-| `failed`, blocked status, or agent error | Analysis unavailable | Explain the exact model, tool, hash, or artifact problem. |
+| `candidate_available` | Candidate available | Explain the source-linked structure; do not call it a recommendation. |
+| `candidate_prepared` | Candidate prepared | Review the isolated diff; formal proof is still required. |
+| `formal_passed` | Formally equivalent | The candidate may proceed to the two fixed synthesis recipes. |
+| `formal_failed` | Formal proof failed | Reject the candidate and keep the original RTL. |
+| `formal_inconclusive` | Formal proof inconclusive | Treat the candidate as unverified; do not measure or recommend it. |
+| `measured_improvement` | Measured improvement in both Yosys recipes | Review the candidate while retaining the stated target-flow limitation. |
+| `synthesis_handles` | Synthesis handles this in the tested recipes | Keep the original RTL unless readability alone justifies a change. |
+| `flow_dependent` | Results depend on the recipe | Keep the original RTL and confirm separately in the target flow. |
+| `regression` | Regression measured | Reject the candidate. |
+| `incomplete` | Evidence incomplete | State which eligible sites or stages are missing; do not present a measured improvement or no-change conclusion. |
+| `unsupported` or agent error | Analysis unavailable | Explain the exact unsupported input, tool, hash, or artifact condition. |
 
 ## Findings
 
@@ -26,18 +31,18 @@ Use “predicted” for model values and “measured” only for synthesis or ph
 results actually present in the evidence. Do not convert a prediction into a
 target-flow claim.
 
-## Diagnostic-only models
+## Rules and diagnostic-only models
 
-When `model_release_status` is `diagnostic_only`, do not present its eligibility,
-ranking, or predicted PPA as a recommendation. It is acceptable to explain that
-the structural observation was found during evaluation, followed by the reason
-live advice is unavailable.
+MVP findings come from the released deterministic rule, not from ML. The V2.2
+model remains diagnostic-only and cannot select a site, unlock a candidate, or
+change a formal or synthesis result. Never present its ranking or predicted PPA
+as an MVP recommendation.
 
 ## Candidate states
 
-- `prepared`: an isolated diff exists; it is unproven.
-- `rejected`: preparation, lint, integrity, or formal work did not pass.
-- `passed` plus `safe: true`: current hash-matched formal equivalence passed.
+- `candidate_prepared`: an isolated diff exists; it is unproven.
+- `formal_failed` or `formal_inconclusive`: the candidate cannot proceed.
+- `formal_passed` plus `safe: true`: current hash-matched formal equivalence passed.
 
 Formal equivalence proves behavior for the checked baseline and candidate. It
 does not prove PPA benefit, synthesis robustness, or production readiness.

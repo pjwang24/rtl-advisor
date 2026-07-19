@@ -9,9 +9,12 @@ from rtl_advisor.plugin_parity import (
     ParityScenario,
     _json_hash,
     _review_source_paths,
+    build_scenarios,
     compare_scenario,
     render_markdown,
+    run_parity,
 )
+from rtl_advisor.config import load_config
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,7 +39,7 @@ def test_error_result_is_identical_through_cli_and_plugin_runner() -> None:
         arguments=(str(missing), "--objective", "timing"),
         config_path=CONFIG,
         expected_exit_code=2,
-        expected_document_type="rtl-advisor.agent.error",
+        expected_document_type="rtl-advisor.agent.v2.error",
         expected_values=(ExpectedValue("error.code", "input_not_found"),),
     )
 
@@ -49,6 +52,7 @@ def test_error_result_is_identical_through_cli_and_plugin_runner() -> None:
 
     assert result["status"] == "passed"
     assert result["comparison"]["payload_equal"] is True
+    assert result["comparison"]["normalized_evidence_equal"] is True
     assert result["comparison"]["semantic_hash_equal"] is True
 
 
@@ -61,7 +65,7 @@ def test_source_hash_is_preserved_through_both_paths() -> None:
         arguments=(str(FIXTURE), "--objective", "balanced"),
         config_path=CONFIG,
         expected_exit_code=2,
-        expected_document_type="rtl-advisor.agent.error",
+        expected_document_type="rtl-advisor.agent.v2.error",
         expected_values=(ExpectedValue("error.code", "top_required"),),
         source_paths=(FIXTURE,),
     )
@@ -86,8 +90,8 @@ def test_comparison_fails_when_expected_field_differs() -> None:
         arguments=(),
         config_path=CONFIG,
         expected_exit_code=0,
-        expected_document_type="rtl-advisor.agent.capabilities",
-        expected_values=(ExpectedValue("analysis.live_recommendation_ready", True),),
+        expected_document_type="rtl-advisor.agent.v2.capabilities",
+        expected_values=(ExpectedValue("model.affects_mvp_decision", True),),
     )
 
     result = compare_scenario(
@@ -99,7 +103,7 @@ def test_comparison_fails_when_expected_field_differs() -> None:
 
     assert result["status"] == "failed"
     assert result["comparison"]["payload_equal"] is True
-    assert any("live_recommendation_ready" in item for item in result["errors"])
+    assert any("affects_mvp_decision" in item for item in result["errors"])
 
 
 def test_markdown_summary_carries_report_status_and_evidence_path() -> None:
@@ -112,7 +116,7 @@ def test_markdown_summary_carries_report_status_and_evidence_path() -> None:
                 "terminal": {
                     "exit_code": 2,
                     "payload": {
-                        "document_type": "rtl-advisor.agent.error",
+                        "document_type": "rtl-advisor.agent.v2.error",
                         "error": {"code": "input_not_found"},
                     },
                 },
@@ -177,3 +181,39 @@ def test_generated_manifest_tracks_manifest_and_baseline_sources(
 
     assert paths[0] == manifest.resolve()
     assert paths[1] == source.resolve()
+
+
+def test_v2_parity_scenarios_match_tool_independent_candidate_contract(
+    tmp_path: Path,
+) -> None:
+    scenarios = build_scenarios(
+        config=load_config(CONFIG),
+        repo_root=ROOT,
+        runtime_dir=tmp_path / "runtime",
+        review_input=FIXTURE,
+    )
+    by_id = {scenario.scenario_id: scenario for scenario in scenarios}
+
+    missing_tools = by_id["missing_tools"]
+    assert ExpectedValue("operations.candidate.available", True) in missing_tools.expected_values
+    review = by_id["v2_rules_review"]
+    assert review.expected_document_type == "rtl-advisor.agent.v2.review"
+    assert review.expected_exit_code == 0
+    assert "--top" in review.arguments
+
+
+def test_complete_v2_plugin_transport_parity_passes(tmp_path: Path) -> None:
+    report = run_parity(
+        config_path=CONFIG,
+        runner_path=RUNNER,
+        review_input=FIXTURE,
+        output_json=tmp_path / "parity.json",
+        output_markdown=tmp_path / "parity.md",
+        timeout_seconds=60,
+    )
+
+    assert report["status"] == "passed"
+    assert all(
+        scenario["comparison"]["normalized_evidence_equal"]
+        for scenario in report["scenarios"]
+    )

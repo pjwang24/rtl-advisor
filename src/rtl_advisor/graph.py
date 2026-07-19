@@ -37,7 +37,10 @@ def _json_hash(payload: Any) -> str:
 
 
 def _yosys_quote(value: str | Path) -> str:
-    return '"' + str(value).replace("\\", "\\\\").replace('"', '\\"') + '"'
+    raw = str(value)
+    if any(character in raw for character in ("\x00", "\r", "\n")):
+        raise GraphError("Yosys arguments may not contain control characters")
+    return '"' + raw.replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
 def _source(raw: str | None) -> dict[str, Any] | None:

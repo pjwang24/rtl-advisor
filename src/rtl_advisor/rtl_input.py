@@ -23,7 +23,14 @@ from rtl_advisor.tools import ToolExecutionError, first_output_line, run_command
 DESIGN_INPUT_SCHEMA_VERSION = 2
 LIVE_GRAPH_SCHEMA_VERSION = 2
 LIVE_GRAPH_FLOW_VERSION = "yosys-premap-live-v2"
-_DEFINE_PATTERN = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*(?:=.*)?$")
+# Keep command-line defines inside a deliberately small, whitespace-free token
+# language.  These values are later passed to Verilator as argv elements and to
+# Yosys scripts; accepting arbitrary text after ``=`` would allow a manifest or
+# filelist to inject additional Yosys commands.
+_DEFINE_PATTERN = re.compile(
+    r"^[A-Za-z_][A-Za-z0-9_]*"
+    r"(?:=[A-Za-z0-9_$'.()+*/%?:<>=!&|~^,\[\]{}-]+)?$"
+)
 
 
 class RTLInputError(ValueError):
@@ -290,7 +297,10 @@ def lint_with_pyslang(design: DesignInputV2) -> SlangLintResult:
 
 
 def _yosys_quote(value: str | Path) -> str:
-    return '"' + str(value).replace("\\", "\\\\").replace('"', '\\"') + '"'
+    raw = str(value)
+    if any(character in raw for character in ("\x00", "\r", "\n")):
+        raise RTLInputError("Yosys arguments may not contain control characters")
+    return '"' + raw.replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
 def _normalize_live_graph(
@@ -400,7 +410,7 @@ def build_live_graph(
     output_dir.mkdir(parents=True, exist_ok=True)
     read_parts = ["read_verilog", "-sv"]
     read_parts.extend(f"-I{_yosys_quote(path)}" for path in design.include_dirs)
-    read_parts.extend(f"-D{definition}" for definition in design.defines)
+    read_parts.extend(f"-D{_yosys_quote(definition)}" for definition in design.defines)
     read_parts.extend(_yosys_quote(source.path) for source in design.files)
     script = "\n".join(
         (
