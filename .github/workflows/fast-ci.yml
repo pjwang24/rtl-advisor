@@ -1,0 +1,98 @@
+name: Fast CI
+
+on:
+  pull_request:
+  push:
+    branches: [main, "codex/**"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fast-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-and-package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Set up pinned uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          version: "0.11.5"
+          enable-cache: true
+
+      - name: Install locked development dependencies
+        run: |
+          uv lock --check
+          uv sync --frozen --extra v2 --group dev
+
+      - name: Run fast tests
+        run: uv run --frozen pytest
+
+      - name: Build wheel and source distribution
+        run: uv build --offline --out-dir dist-ci
+
+      - name: Check release archive boundaries
+        shell: bash
+        run: |
+          uv run --frozen python - <<'PY'
+          from pathlib import Path
+          import tarfile
+          import zipfile
+
+          wheel = next(Path("dist-ci").glob("*.whl"))
+          sdist = next(Path("dist-ci").glob("*.tar.gz"))
+          with zipfile.ZipFile(wheel) as archive:
+              wheel_names = tuple(archive.namelist())
+          with tarfile.open(sdist, "r:gz") as archive:
+              sdist_names = tuple(member.name for member in archive.getmembers())
+
+          forbidden_parts = {"artifacts", "corpus", "third_party", "__pycache__"}
+          for archive, names in ((wheel, wheel_names), (sdist, sdist_names)):
+              leaked = [
+                  name
+                  for name in names
+                  if forbidden_parts.intersection(Path(name).parts)
+                  or name.endswith((".pyc", ".lib"))
+              ]
+              assert not leaked, f"{archive} contains excluded content: {leaked}"
+
+          assert any(name.endswith("rtl_advisor/mvp_agent.py") for name in wheel_names)
+          assert any(name.endswith("rtl_advisor/frontend/index.html") for name in wheel_names)
+          PY
+
+      - name: Verify wheel and source distribution outside the repository
+        shell: bash
+        run: |
+          wheel="$(find dist-ci -type f -name '*.whl' -print -quit)"
+          sdist="$(find dist-ci -type f -name '*.tar.gz' -print -quit)"
+          test -n "$wheel"
+          test -n "$sdist"
+          uv venv --python 3.13 /tmp/rtl-advisor-wheel
+          uv pip install --offline --python /tmp/rtl-advisor-wheel/bin/python "$wheel"
+          uv venv --python 3.13 /tmp/rtl-advisor-sdist
+          uv pip install --offline --python /tmp/rtl-advisor-sdist/bin/python "$sdist"
+          cd /tmp
+          /tmp/rtl-advisor-wheel/bin/rtl-advisor \
+            --config "$GITHUB_WORKSPACE/rtl-advisor.toml" \
+            agent capabilities --schema-version 2 --json \
+            > /tmp/rtl-advisor-capabilities.json
+          /tmp/rtl-advisor-wheel/bin/python -c \
+            'import json; p=json.load(open("/tmp/rtl-advisor-capabilities.json")); assert p["flow_version"] == "rtl-advisor-agent-v2"'
+          /tmp/rtl-advisor-sdist/bin/rtl-advisor \
+            --config "$GITHUB_WORKSPACE/rtl-advisor.toml" \
+            agent capabilities --json \
+            > /tmp/rtl-advisor-capabilities-v1.json
+          /tmp/rtl-advisor-sdist/bin/python -c \
+            'import json; p=json.load(open("/tmp/rtl-advisor-capabilities-v1.json")); assert p["flow_version"] == "rtl-advisor-agent-v1" and "--schema-version" not in p["command"]'
