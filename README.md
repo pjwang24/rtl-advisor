@@ -1,374 +1,252 @@
 # RTL Advisor
 
-RTL Advisor is an experimental pre-synthesis review tool for SystemVerilog. It
-tries to identify RTL changes that could improve timing or area, explain the
-reason at the source-code level, and verify that a proposed rewrite preserves
-the design's behavior.
+**RTL Advisor helps engineers find, verify, and measure promising RTL
+optimizations before committing to expensive synthesis iterations.**
 
-> **Current status:** research prototype for generated and approved open RTL.
-> The evaluation and formal-verification harness is working, but the
-> recommendation engine is not yet ready for production RTL decisions.
+I am building RTL Advisor as an evidence-backed, pre-synthesis assistant for
+SystemVerilog. It connects source-level findings to isolated candidate rewrites,
+formal equivalence, and synthesis measurements instead of treating an ML or
+language-model suggestion as proof.
 
-## The problem
+> **Current status:** research prototype for generated and explicitly approved
+> open RTL. The evaluation, formal, synthesis, CLI, and Codex workflows operate,
+> but no recommendation model is approved for production use.
 
-RTL engineers make structural choices that can influence timing, area, and cell
-count. The effect is often discovered only after synthesis or physical design,
-when changing the RTL is slower and more disruptive.
+## Why this project exists
 
-Existing tools each solve part of the problem:
+RTL structure can affect timing, area, and cell count, but engineers often learn
+which choices mattered only after synthesis or physical design. Synthesis may
+optimize many coding differences away, while reports rarely explain the result
+as a clear source-level action.
 
-- Lint finds syntax, safety, and coding problems, but usually does not predict
-  implementation value.
-- Synthesis performs many optimizations automatically, but it does not always
-  explain which source-level choice mattered.
-- Timing analysis identifies critical paths after implementation work has
-  already started.
-- Formal equivalence proves that two designs behave the same, but it does not
-  say whether one implementation is faster or smaller.
-- A language model can explain RTL and suggest changes, but a suggestion alone
-  is not correctness or PPA evidence.
+The difficult problem is not generating another rewrite. It is determining:
 
-The main bottleneck is therefore not generating another rewrite. It is deciding
-which rewrite is safe, useful, and likely to remain useful after a strong
-synthesis tool has optimized both versions.
+- whether the rewrite preserves behavior;
+- whether synthesis already performs the optimization;
+- whether the benefit survives different synthesis settings; and
+- whether evidence from previous designs applies to the current RTL.
 
-## A simple example
+RTL Advisor is intended to answer those questions before presenting a change as
+useful.
 
-Consider an addition written as a serial expression:
-
-```systemverilog
-assign y = a + b + c + d;
-```
-
-A tool might suggest a balanced form:
-
-```systemverilog
-assign y = (a + b) + (c + d);
-```
-
-The balanced form may reduce logic depth, but the real answer depends on widths,
-signedness, constraints, technology, and synthesis settings. RTL Advisor is
-being built to do more than show the second code sample:
-
-1. Locate the source pattern.
-2. Explain the possible timing and area tradeoff.
-3. Generate the alternative in an isolated workspace.
-4. Prove the candidate equivalent to the baseline.
-5. Compare implementation evidence when synthesis is available.
-6. State whether the change is recommended, unnecessary, or target-dependent.
-
-The original RTL is never modified automatically.
-
-## Our approach
+## Intended workflow
 
 ```text
-Generated or approved RTL
-          │
-          ▼
- Parse, lint, and structural analysis
-          │
-          ▼
- Rules and calibrated prediction
-          │
-          ▼
- Source-linked finding and explanation
-          │
-          ├── no change recommended
-          ├── synthesis likely handles it
-          ├── target-flow confirmation needed
-          └── candidate created in isolation
-                         │
-                         ▼
-                  Formal equivalence
-                         │
-                         ▼
-                Optional synthesis evidence
+Generated or approved open RTL
+              |
+              v
+     Parse, lint, and analyze
+              |
+              v
+  Rules and calibrated ML model
+              |
+              v
+ Source-linked engineering result
+       |                 |
+       |                 +--> No change / synthesis likely handles it
+       v
+Isolated candidate rewrite
+              |
+              v
+      Formal equivalence
+              |
+              v
+ Same-flow synthesis comparison
 ```
 
-The CLI is the single execution and evidence engine. Codex may translate an
-engineer's request into CLI operations and explain the result, but it cannot
-override the deterministic decision, formal proof, or measured evidence.
+The original source is never modified automatically. The CLI is the authority
+for decisions, hashes, proofs, and measurements; Codex explains the CLI result
+but cannot override it.
 
-Normal user-facing outcomes are intended to be:
+The intended engineer-facing outcomes are:
 
 - **Recommended** — evidence supports reviewing the proposed change.
-- **Synthesis likely handles this** — the rewrite may improve readability, but
-  implementation benefit is not expected.
-- **Target-flow confirmation needed** — the result depends on synthesis settings
-  or technology.
-- **No change recommended** — no safe and useful candidate cleared the release
-  checks.
-- **Analysis unavailable** — the input, tools, or model are not ready for a
-  trustworthy result.
+- **Synthesis likely handles this** — a source rewrite is unlikely to improve
+  the implementation.
+- **Target-flow confirmation needed** — the result depends on technology,
+  constraints, or synthesis settings.
+- **No change recommended** — no supported candidate cleared the checks.
+- **Analysis unavailable** — the design, tools, or model are outside the
+  evidence currently available.
 
-## How engineers will use it
+## What works now
 
-RTL Advisor is designed around several interfaces backed by the same CLI:
+The repository currently provides:
 
-- **Terminal:** reproducible commands for analysis, formal verification,
-  synthesis comparison, and automation.
-- **Codex plugin:** conversational requests such as “analyze this module for
-  timing risks” or “generate the candidate and run equivalence.”
-- **Editor and code review:** future source annotations and non-blocking review
-  comments.
-- **Internal dashboard:** model readiness, evaluation evidence, and team-level
-  review status.
+- deterministic generation of nine RTL transformation families;
+- PySlang and Verilator linting;
+- Yosys-based RTL-to-RTL formal equivalence;
+- intentionally incorrect variants that must fail equivalence;
+- Yosys/ABC synthesis against a pinned Nangate45 library;
+- delay, area, and cell-count comparisons with recorded provenance;
+- stronger synthesis recipes and OpenROAD physical cross-checks;
+- isolated candidate workspaces and source-integrity checks;
+- a versioned JSON CLI for terminal and automation clients;
+- a Codex plugin backed by the same CLI results; and
+- a local read-only dashboard for frozen evaluation evidence.
 
-The local dashboard currently presents frozen evaluation results only. Live RTL
-recommendations remain disabled while the model release checks are failing.
+The complete regression currently contains **179 passing tests**.
 
-The repository-owned plugin design is documented in
-[`implementation plan/codex plugin v1.md`](implementation%20plan/codex%20plugin%20v1.md).
+### Current evidence
 
-## What works today
+All current model evidence comes from generated RTL. It demonstrates the
+evaluation system; it does not establish accuracy on arbitrary engineer RTL.
 
-- Deterministic generation of nine RTL transformation families.
-- Verilator and PySlang linting.
-- Yosys-based RTL-to-RTL formal equivalence checks.
-- Intentional incorrect controls that must fail equivalence.
-- Yosys/ABC synthesis against a pinned Nangate45 library.
-- Delay, area, and cell-count comparison with immutable provenance.
-- Isolated candidate generation that leaves the original RTL unchanged.
-- OpenROAD placement-and-routing cross-checks on generated designs.
-- Rules, calibrated models, and audited Codex explanations.
-- A locally installable Codex plugin backed by the same versioned CLI results.
-- A repeatable CLI-versus-plugin transport parity harness.
-- A local, read-only evaluation dashboard.
-- Reproducible benchmark plans, hashes, caches, and reports.
+| Evidence | Result |
+|---|---:|
+| Generated calibration cases | 936 |
+| Equivalent candidates proven in the full robustness sweep | 2,808/2,808 |
+| Stronger-synthesis runs completed | 3,744/3,744 |
+| Standard-flow benefits retained under the stronger flow | 314/391 (80.3%) |
+| Cases containing a flow-robust opportunity | 199/936 |
+| OpenROAD cases completed | 26/27 |
+| Yosys/OpenROAD candidate-action agreement | 80.8% |
+| V2.2 release score | 68.4%, below the frozen 70% requirement |
 
-The complete repository regression currently contains **179 passing tests**.
+V2, V2.1, and V2.2 remain diagnostic-only. Live recommendations and candidate
+generation stay disabled because no model has passed its release checks.
 
-## Current evidence
+## Why more RTL data is required
 
-All results below use generated RTL. They demonstrate the evaluation system and
-identify the remaining research gap; they do not establish production accuracy.
+The ML model does not memorize complete files. It learns relationships between
+pre-synthesis structural features and measured changes in delay, area, and cell
+count. Exact source text may be new, but the model can only be trusted when the
+relevant structure is represented by sufficiently similar, independently
+validated examples.
 
-| Evidence | Current result | What it means |
-|---|---:|---|
-| Full synthesis-robustness formal checks | 2,808/2,808 passed | Every candidate in the complete calibration sweep was proven equivalent to its baseline. |
-| Stronger-synthesis runs | 3,744/3,744 passed | The complete 936-case calibration population was evaluated successfully. |
-| Standard-flow benefits retained as flow-robust | 314/391 (80.3%) | Most standard-flow benefits survived, but 77 candidates were removed or conflicted. |
-| Benefits removed by stronger synthesis | 67 | Advice based on one synthesis recipe can still be misleading. |
-| Candidates useful only under the stronger recipe | 180 | Many conclusions depend on synthesis settings and require target-flow confirmation. |
-| Cases with a flow-robust opportunity | 199/936 | Six of nine RTL families have enough positive and negative support for the next model. |
-| OpenROAD complete cases | 26/27 | The generated physical-design cross-check is operational. |
-| Yosys/OpenROAD candidate-action agreement | 80.8% | The cheaper synthesis labels often, but not always, preserve the physical conclusion. |
-| V1 best high-level decision result | 17/36 (47.2%) | The original rules-plus-Codex advisor was not accurate enough. |
-| V2.2 useful changes found | 86/230 (37.4%) | The safer model misses too many real opportunities. |
-| V2.2 incorrect recommendations | 4/90 (4.4%) | Recommendation safety is promising on calibration data. |
-| V2.2 overall release score | 68.4%, below the 70% requirement | V2.2 correctly remains locked and diagnostic-only. |
+Raw RTL volume alone is not enough. I need a broader evidence set containing:
 
-The full synthesis-robustness sweep used all 936 generated calibration cases,
-2,808 formally equivalent candidates, and 3,744 stronger-synthesis runs. Of 391
-candidates that looked useful under the standard recipe, 314 remained useful
-with compatible delay and area direction. Sixty-seven were optimized away, ten
-had conflicting directions, and 180 different candidates became useful only
-under the stronger recipe.
+1. Diverse open RTL blocks with different architectures, sizes, coding styles,
+   parameters, memories, state machines, clocks, and resets.
+2. Multiple useful, neutral, and harmful candidate variants for supported
+   transformation families. Variants may be generated; they do not all need to
+   be authored manually.
+3. Formal-equivalence results for every candidate used as equivalent PPA
+   training data.
+4. Baseline and candidate synthesis measurements using identical libraries,
+   constraints, and tool settings.
+5. Results from more than one synthesis recipe so the model can learn when a
+   synthesis tool already handles a rewrite.
+6. Entire designs and design families reserved for final testing and never used
+   to tune the same model.
 
-Six families have enough flow-robust opportunity and no-change examples for the
-next model: adder association, decode factoring, mux placement, popcount,
-priority selection, and width/signedness. Arithmetic resource sharing has only
-two robust opportunity cases; comparator selection and variable shifting have
-none in the current population.
+Yosys performs the current equivalence checks. EQY is planned for more scalable
+sequential and block-level proofs; a commercial LEC flow can provide additional
+validation later. Equivalence proves that a candidate matches its baseline for
+the modeled behavior—it does not prove that the baseline meets its specification.
 
-The 80.3% retention result measures the available calibration labels. It does
-not mean the current advisor issues 80.3% correct recommendations.
+No finite training set can cover every possible RTL structure. A production
+advisor must detect unfamiliar inputs and return **Analysis unavailable** rather
+than force a prediction.
 
-The OpenROAD cross-check passed its registered evidence gate: 26 of 27 cases
-completed, candidate-action agreement was 80.8%, and delay/area/cell-count
-direction agreement ranged from 79.5% to 83.3%. This supports using Yosys as an
-experimental label source; it is not a replacement for a target implementation
-flow.
+## What remains for the MVP
 
-## Is it production-ready?
+I consider the MVP complete only when one supported workflow operates from end
+to end on realistic open RTL:
 
-No—not as a trusted recommendation engine.
+1. Pin diverse open-source designs, licenses, revisions, compile context, and
+   source hashes without modifying upstream checkouts.
+2. Run a blind review before exposing synthesis outcomes to the advisor.
+3. Generate candidate variants in isolated workspaces.
+4. Prove RTL-to-RTL equivalence and add RTL-to-netlist equivalence where the
+   design and cell models permit it.
+5. Synthesize baseline and candidate under at least two reproducible recipes.
+6. Train a new model using design-separated calibration and test populations.
+7. Reject unsupported transformation families and unfamiliar RTL structures.
+8. Promote the model only after frozen accuracy, safety, physical-evidence, and
+   formal-proof requirements pass.
+9. Expose the complete review, candidate, proof, and synthesis-confirmation flow
+   consistently through the terminal and Codex plugin.
 
-The project is ready for:
+Testing should begin with manageable open blocks before moving to larger
+sequential IP. Generated RTL remains useful for controlled experiments, but it
+cannot be the only evidence supporting the MVP.
 
-- Generated-RTL research and benchmarking.
-- Demonstrating formal candidate validation.
-- An opt-in, non-blocking internal evaluation using approved open RTL.
-- Developing the CLI, Codex plugin, and dashboard around honest readiness
-  states.
+## How engineers can interact with it
 
-The project is not ready for:
+### Terminal and automation
 
-- Production recommendations on proprietary block or SoC RTL.
-- Automatically changing source RTL.
-- Blocking a code review or release based on predicted PPA.
-- Replacing signoff synthesis, timing analysis, formal tools, or engineering
-  judgment.
-
-Formal equivalence is an important safety gate, but it only proves behavioral
-agreement for the checked candidate. It does not prove that the advisor chose a
-useful candidate, that the result generalizes, or that the target synthesis flow
-will preserve the benefit.
-
-Before a production pilot, the project needs:
-
-1. A new recommendation model trained and calibrated against the completed
-   flow-robust labels.
-2. Better coverage of useful changes without increasing incorrect advice.
-3. A newly generated, sealed blind evaluation that is not used during tuning.
-4. Replication with an approved commercial synthesis flow such as Genus, using
-   generated RTL first.
-5. Block-scale testing on diverse approved open designs, including realistic
-   filelists, parameters, packages, macros, clocks, and constraints.
-6. Engineer review studies measuring whether findings are understandable and
-   useful in practice.
-7. Internal deployment, security, runtime, and failure-handling validation.
-
-Proposed production-pilot targets include:
-
-- At least 80% of issued recommendations remain useful across the supported
-  synthesis configurations.
-- At least 50% of robust useful opportunities are found.
-- No more than 5% of issued recommendations are harmful.
-- At least 75% PPA-direction accuracy where a direction is shown.
-- 100% current, hash-matched formal-equivalence success for candidates presented
-  as behavior-preserving.
-
-These are targets, not current claims.
-
-## Quick demonstration
-
-Prerequisites include Python 3.13, `uv`, Yosys/ABC, and Verilator. PySlang and
-the training dependencies are installed through the project environment.
-
-```bash
-uv sync --no-editable
-uv run --no-editable rtl-advisor setup
-```
-
-Generate and evaluate one adder-association example:
-
-```bash
-uv run --no-editable rtl-advisor corpus generate \
-  --family adder_reduction_association \
-  --suite development
-
-uv run --no-editable rtl-advisor lint \
-  corpus/development/dev_aa_0001
-
-uv run --no-editable rtl-advisor equivalence \
-  corpus/development/dev_aa_0001
-
-uv run --no-editable rtl-advisor synth \
-  corpus/development/dev_aa_0001
-
-uv run --no-editable rtl-advisor analyze \
-  corpus/development/dev_aa_0001 \
-  --variant v0 \
-  --mode rules
-```
-
-The equivalence command proves `v1`-`v3` equivalent to `v0` and confirms that
-the intentionally incorrect `n0` control is not equivalent. Synthesis is allowed
-only after the required proof exists.
-
-Launch the local evaluation dashboard:
-
-```bash
-uv run --no-editable rtl-advisor frontend
-```
-
-Then open `http://127.0.0.1:8765`. The dashboard is local, read-only, and backed
-by frozen V2.2 calibration evidence.
-
-Generated corpora, model artifacts, synthesis outputs, the Liberty file, and the
-OpenROAD checkout are intentionally not stored in Git. The CLI creates or
-downloads them through the registered workflows.
-
-For terminal automation and the Codex plugin, use the versioned JSON
-interface:
+The stable agent interface currently supports capability discovery, read-only
+review, isolated candidate preparation, and formal verification:
 
 ```bash
 rtl-advisor agent capabilities --json
-rtl-advisor agent review path/to/manifest.json --objective timing --json
+rtl-advisor agent review /absolute/path/to/design.sv \
+  --top design_top \
+  --objective timing \
+  --json
 rtl-advisor agent candidate <run-id> --finding <finding-id> --json
 rtl-advisor agent verify <run-id> --candidate <candidate-id> --json
 ```
 
-The capabilities result currently reports that no recommendation model is ready
-for live use. Reviews can expose diagnostic findings, but candidate generation
-stays disabled unless a future model clears the documented release gates. The
-interface never modifies the input RTL, and only `agent verify` can mark an
-isolated candidate safe after current hash-matched formal equivalence.
+The current capability result reports that live recommendations are unavailable,
+so the candidate command remains locked unless a future model passes the release
+requirements.
 
-To install the current repository plugin for local evaluation, run these
-commands from the checkout root:
+### Codex plugin
+
+The plugin translates an engineer's request into the same versioned CLI
+operations and explains the unchanged result in plain language. It contains a
+skill, not an MCP server, and does not independently generate a recommendation.
 
 ```bash
 codex plugin marketplace add .
 codex plugin add rtl-advisor@personal
 ```
 
-Start a new Codex conversation after installation, then ask, for example,
-"Use RTL Advisor to review this generated manifest for timing opportunities."
-The plugin first checks the installed CLI, tools, and model readiness. With the
-current diagnostic-only model, it can explain diagnostic findings but correctly
-returns **Analysis unavailable** instead of issuing a live recommendation.
+After installation, an engineer can ask:
 
-Developers can reproduce the current terminal-versus-plugin transport check on
-generated RTL:
+> Use RTL Advisor to review this approved open RTL module for timing and explain
+> whether synthesis likely handles the finding.
+
+The plugin checks tool and model readiness first. It preserves unavailable,
+unsupported, failed, and stale results instead of replacing them with Codex's
+opinion.
+
+### Generated demonstration
+
+Prerequisites include Python 3.13, `uv`, Yosys/ABC, and Verilator.
 
 ```bash
-env PYTHONPATH=src .venv/bin/python -m rtl_advisor.plugin_parity \
-  --review-input corpus/development/dev_ws_0001/manifest.json
+uv sync --no-editable
+uv run --no-editable rtl-advisor setup
+
+uv run --no-editable rtl-advisor corpus generate \
+  --family adder_reduction_association \
+  --suite development
+
+uv run --no-editable rtl-advisor lint \
+  corpus/development/dev_aa_0001
+uv run --no-editable rtl-advisor equivalence \
+  corpus/development/dev_aa_0001
+uv run --no-editable rtl-advisor synth \
+  corpus/development/dev_aa_0001
 ```
 
-The harness compares exit codes, complete JSON payloads, semantic hashes, and
-source hashes. Its JSON and Markdown evidence is written under
-`artifacts/plugin-parity/`.
+Synthesis is allowed only after the required, hash-matched equivalence proof
+exists. Generated corpora, model artifacts, synthesis outputs, the Liberty file,
+and the OpenROAD checkout are intentionally excluded from Git.
 
-## Next steps
+## Current boundaries
 
-The evidence track remains the production bottleneck:
+I do not consider the project ready for:
 
-1. Design the next versioned model around the 2,808 flow-robust labels and the
-   six supported families. Do not modify the frozen V2.3 plan after observing
-   this new evidence.
-2. Keep arithmetic resource sharing, comparator selection, and variable shifting
-   research-only until they have sufficient robust opportunity support.
-3. Run a fresh sealed blind benchmark only after calibration and physical checks
-   pass.
-4. Prepare a portable generated-RTL Genus handoff for the separate machine.
-5. Evaluate diverse approved open blocks before considering proprietary RTL.
+- recommendations on proprietary production RTL;
+- automatic in-place RTL changes;
+- blocking code reviews or releases based on predicted PPA;
+- replacing signoff synthesis, timing analysis, formal verification, or
+  engineering judgment; or
+- claiming a PPA improvement before measuring it under a stated flow.
 
-The interface track can proceed in parallel without claiming production
-readiness:
+Development uses generated or explicitly approved open RTL. Measured evidence
+remains separate from predictions, and a candidate is called behavior-preserving
+only after a current, hash-matched formal proof.
 
-1. The stable machine-readable CLI contract is implemented and tested.
-2. The repository-owned `rtl-advisor` Codex plugin and `analyze-rtl` skill are
-   implemented, validated, installed locally, and forward-tested.
-3. Seven transport-parity scenarios, in-place-edit refusal, and missing-tool
-   conversational handling pass. Live recommendation, no-change, synthesis-
-   handled, and target-flow states remain untestable until a model is approved.
-4. The next model milestone is V2.3 Phase 1; candidate/formal plugin testing
-   resumes when a review is legitimately eligible.
-5. Reuse the same contract later for VS Code, CI, and the dashboard.
-
-## Project documentation
+## Documentation
 
 - [V1 implementation plan](implementation%20plan/v1.md)
 - [V2 implementation plan](implementation%20plan/v2.md)
-- [V2.1 recovery plan](implementation%20plan/v2.1.md)
-- [V2.2 family-risk plan](implementation%20plan/v2.2.md)
-- [V2.3 recovery plan](implementation%20plan/v2.3.md)
-- [Synthesis-redundancy plan](implementation%20plan/synthesis%20redundancy%20v1.md)
-- [Full-calibration synthesis-robustness plan](implementation%20plan/synthesis%20robustness%20full%20calibration%20v1.md)
-- [Frontend plan](implementation%20plan/frontend%20v1.md)
+- [V2.3 model plan](implementation%20plan/v2.3.md)
+- [Full synthesis-robustness plan](implementation%20plan/synthesis%20robustness%20full%20calibration%20v1.md)
 - [Codex plugin plan](implementation%20plan/codex%20plugin%20v1.md)
 - [Progress updates](progress%20updates/)
-
-## Operating principles
-
-- Use generated or explicitly approved open RTL during development.
-- Never modify source RTL in place.
-- Keep measured evidence separate from predictions and explanations.
-- Require formal equivalence before describing a candidate as safe.
-- Never use held-out labels to tune the same version being evaluated.
-- Fail closed when tools, models, hashes, or evidence are missing or stale.
-- Treat commercial synthesis and signoff tools as external validation, not as
-  assumptions.
