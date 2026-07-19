@@ -132,10 +132,11 @@ The repository-owned plugin design is documented in
 - OpenROAD placement-and-routing cross-checks on generated designs.
 - Rules, calibrated models, and audited Codex explanations.
 - A locally installable Codex plugin backed by the same versioned CLI results.
+- A repeatable CLI-versus-plugin transport parity harness.
 - A local, read-only evaluation dashboard.
 - Reproducible benchmark plans, hashes, caches, and reports.
 
-The complete repository regression currently contains **173 passing tests**.
+The complete repository regression currently contains **179 passing tests**.
 
 ## Current evidence
 
@@ -309,6 +310,18 @@ The plugin first checks the installed CLI, tools, and model readiness. With the
 current diagnostic-only model, it can explain diagnostic findings but correctly
 returns **Analysis unavailable** instead of issuing a live recommendation.
 
+Developers can reproduce the current terminal-versus-plugin transport check on
+generated RTL:
+
+```bash
+env PYTHONPATH=src .venv/bin/python -m rtl_advisor.plugin_parity \
+  --review-input corpus/development/dev_ws_0001/manifest.json
+```
+
+The harness compares exit codes, complete JSON payloads, semantic hashes, and
+source hashes. Its JSON and Markdown evidence is written under
+`artifacts/plugin-parity/`.
+
 ## Next steps
 
 The evidence track remains the production bottleneck:
@@ -329,10 +342,12 @@ readiness:
 1. The stable machine-readable CLI contract is implemented and tested.
 2. The repository-owned `rtl-advisor` Codex plugin and `analyze-rtl` skill are
    implemented, validated, installed locally, and forward-tested.
-3. Next, expand terminal-versus-Codex parity tests across every result and
-   failure state, then exercise the explicit candidate/formal workflow when an
-   eligible model is available.
-4. Reuse the same contract later for VS Code, CI, and the dashboard.
+3. Seven transport-parity scenarios, in-place-edit refusal, and missing-tool
+   conversational handling pass. Live recommendation, no-change, synthesis-
+   handled, and target-flow states remain untestable until a model is approved.
+4. The next model milestone is V2.3 Phase 1; candidate/formal plugin testing
+   resumes when a review is legitimately eligible.
+5. Reuse the same contract later for VS Code, CI, and the dashboard.
 
 ## Project documentation
 

@@ -592,11 +592,65 @@ Validation result:
   and evidence artifacts, verified source integrity, and made no source change.
 - The complete repository regression passes: 173 tests.
 
-### Phase 3 — In progress
+### Phase 3A — Reachable-state parity complete
 
-The first read-only conversational scenario is complete. Next, build the
-terminal-versus-plugin parity matrix for every reference decision and failure
-state. Each scenario must compare run IDs, semantic hashes, findings, decisions,
-evidence, source hashes, and unsupported-claim behavior. Keep candidate and
-formal exercise separate until a review is legitimately eligible; do not bypass
-the current diagnostic-only model gate.
+Added `rtl_advisor.plugin_parity`, a deterministic harness that invokes both the
+direct `rtl-advisor agent` interface and the plugin's command runner against the
+same scenario. It requires identical exit codes, complete JSON payloads,
+semantic hashes, expected state fields, and unchanged tracked source hashes.
+It writes machine-readable JSON and a compact Markdown matrix under
+`artifacts/plugin-parity/`.
+
+Current transport matrix:
+
+| Scenario | Expected state | Result |
+| --- | --- | --- |
+| Current capabilities | No live recommendation model and no source mutation | Passed |
+| Missing Yosys and Verilator | Review and formal operations unavailable | Passed |
+| Missing RTL input | Structured `input_not_found` error | Passed |
+| Standalone RTL without a top | Structured `top_required` error | Passed |
+| Invalid review ID | Structured `invalid_run_id` error | Passed |
+| Missing candidate record | Structured `invalid_artifact` error | Passed |
+| Generated diagnostic review | Blocked, no candidate, source integrity valid | Passed |
+
+All seven scenarios produced identical terminal and plugin-runner payloads and
+semantic hashes. The generated diagnostic case also preserved both the manifest
+and baseline RTL hashes. Report semantic hash:
+`308ab6d3bdd1b9b8c05a5a82320eed6af933320bf0f91a44e47c0270b6adc827`.
+
+Fresh-session conversational checks:
+
+- An explicit request to edit generated RTL in place was refused. Codex ran only
+  read-only analysis, made no candidate, preserved the diagnostic block, and the
+  source remained at SHA-256
+  `9314cf894cb117e5d6dda28e3c763be407d0f7e92109afb7dfaa7db70a202025`.
+- A controlled missing-tools test initially reached the correct conclusion but
+  attempted an unnecessary review and resolved a relative input against the
+  alternate configuration root. The skill was tightened to stop when an
+  operation is unavailable and to use absolute workspace paths.
+- After cache-busting and reinstalling the plugin, a fresh test performed only
+  capability discovery, reported **Analysis unavailable**, made no RTL claim,
+  and did not invoke review. Installed development version:
+  `0.1.0+codex.20260719175839`.
+
+The complete repository regression passes: 179 tests.
+
+### Phase 3B — Waiting on legitimate decision producers
+
+The following user-facing states cannot be exercised honestly through the live
+plugin yet:
+
+| State | Current blocker |
+| --- | --- |
+| Recommended | No release-approved live model |
+| Synthesis likely handles this | The current live decision path does not emit this state |
+| Target-flow confirmation needed | The current live decision path does not emit this state |
+| No change recommended | Diagnostic-only model results cannot be promoted to live advice |
+| Candidate prepared and formally verified | No review is currently eligible for candidate generation |
+| Formal failure presented safely | Requires an eligible isolated candidate workflow |
+
+These are coverage gaps, not passing claims and not reasons to bypass the model
+gate. The next substantive dependency is V2.3 Phase 1 and its generated,
+flow-robust evidence track. Resume the remaining Phase 3 decision coverage and
+Phase 4 candidate/formal plugin workflow only after a model is legitimately
+eligible.

@@ -39,7 +39,13 @@ Document type: `rtl-advisor.agent.capabilities`.
 
 Check `analysis.live_recommendation_ready`, `tools`, `models`, `input_forms`, and
 `operations` before review or candidate work. `implemented: true` does not mean
-`available: true`.
+`available: true`. Do not call an operation whose capability reports
+`available: false`.
+
+Resolve workspace RTL, manifest, filelist, include-directory, configuration,
+and artifact paths to absolute paths before invoking the runner. Relative CLI
+inputs are resolved against the selected configuration root, which may differ
+from the active workspace when testing or using an alternate tool setup.
 
 ## Review
 

@@ -30,9 +30,14 @@ PPA evidence from the source.
    operation. Do not guess shell commands or scrape human-formatted output.
 2. Run `capabilities` before selecting a workflow.
 3. Check schema version, tool availability, supported input form, model release
-   state, and operation availability.
+   state, and operation availability. If the requested operation reports
+   `available: false`, stop before calling it and explain the reported missing
+   prerequisite. Do not run a review merely to rediscover a missing tool.
 4. Confirm that the input is generated or explicitly approved and that its top
-   module or manifest is known.
+   module or manifest is known. Resolve every user-supplied RTL, manifest,
+   filelist, include-directory, configuration, and artifact path to an absolute
+   workspace path before passing it to the runner. A nondefault configuration
+   can have a different root, so do not rely on its relative-path resolution.
 5. Use timing, area, or balanced from the engineer's request. Default to
    balanced only when the choice does not materially change the requested task.
 6. Run a read-only review and retain its JSON result, run ID, semantic hash,
@@ -122,7 +127,9 @@ diagnostic observations.
   be trusted.
 - If source hashes changed after review, require a new review rather than
   reusing the run ID.
-- If a tool or model is missing, do not substitute Codex analysis.
+- If capabilities report that the requested operation is unavailable, stop at
+  capability discovery. If a later command reports a missing tool or model,
+  stop that workflow. Never substitute Codex analysis.
 
 Always include the normalized CLI command and the relevant artifact paths so an
 engineer can reproduce the result directly in a terminal.
