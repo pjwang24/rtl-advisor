@@ -1,0 +1,214 @@
+{
+  "semantic_hash": "2cb65b2a534f7f77fb1d5414d16f8ac2ca83f0960ef8da35b80eed53aa699bc8",
+  "schema_version": 1,
+  "schema": "rtl-advisor-behavior-plan-v1",
+  "document_type": "rtl-advisor.behavior-plan",
+  "plan_id": "wave2-tier-a-behavior-v1",
+  "tranche_id": "wave2-tier-a-12-v1",
+  "tranche_semantic_hash": "ac85240050ea6045e033a7d2fdcf1ce125efa1e19cd6527688a1eb0571c6b475",
+  "baseline_summary": {
+    "path": "artifacts/corpus-baseline/wave2-tier-a-12-v1/1a4f73385c3978b0738b6cc4227afabe65fc7a1f8abe3e949be1e50531e8987f/summary.json",
+    "semantic_hash": "c24adb7194a8714edce87d2b8f67ddba187dfea9a2d1fc703aa7cd194d085871"
+  },
+  "tool_contract": {
+    "sby_version": "SBY v0.63",
+    "yosys_version": "Yosys 0.63+49",
+    "iverilog_version": "Icarus Verilog version 14.0",
+    "cocotb_version": "1.7.2"
+  },
+  "shared_inputs": [
+    {"path": "examples/formal/reference/pulp_reference_behavior.sby", "sha256": "23478f2daa8841f272e5b1221351b788d38ef8583892d9544e17e1d83d46e6bc"},
+    {"path": "examples/formal/reference/pulp_reference_behavior_miter.sv", "sha256": "3fd018819019b1f5633510b024d936e9c38a85837691c0d93d6f3ff7ecb62038"},
+    {"path": "corpus/upstream/common_cells/include/common_cells/assertions.svh", "sha256": "d39c7afa893656e235b0019233c1bcf12491cd421639791c827cc53236bd4841"},
+    {"path": "corpus/upstream/common_cells/include/common_cells/registers.svh", "sha256": "532dfd1723d2936421b921235abdafcc8ca407990224992ca13575fdb620053a"},
+    {"path": "corpus/upstream/common_cells/src/spill_register_flushable.sv", "sha256": "3285eb2e557f6377de88df91751b0bccdad07b16be9d926314a52a23e964f02c"},
+    {"path": "corpus/upstream/common_cells/src/spill_register.sv", "sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec"},
+    {"path": "corpus/upstream/common_cells/src/stream_register.sv", "sha256": "2e0e5b6d09ce4ade0881938ee042dcbc78438638fa2592338a374f88a3c27304"},
+    {"path": "corpus/upstream/common_cells/src/fifo_v3.sv", "sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc"},
+    {"path": "corpus/upstream/common_cells/src/cf_math_pkg.sv", "sha256": "bbf0614771ceb9526356bb8e5234787324ef215884bc11b4aa27e91fc3cc8910"},
+    {"path": "corpus/upstream/common_cells/src/lzc.sv", "sha256": "f31989be4369ea7c4809c0c3d61df28581e9ac7666005fde6e476a975d1acd07"},
+    {"path": "corpus/upstream/common_cells/src/rr_arb_tree.sv", "sha256": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e"}
+  ],
+  "references": [
+    {
+      "reference_id": "opentitan-prim-arbiter-ppc",
+      "disposition": "qualify",
+      "reason": null,
+      "checks": [
+        {
+          "type": "proof_artifact",
+          "basis_kind": "documented_pair",
+          "description": "Hash-matched P2 proof establishes same-cycle equivalence to OpenTitan prim_arbiter_tree under the declared contract.",
+          "path": "artifacts/formal/p2/opentitan-arbiter-ppc-tree-p2-v1/91c5545fddc1dce5f8ec04e1860731b5605209b8dcae0850ad5d0f4e3eb74e27/result.json",
+          "assertions": {"status": "formal_passed", "expectation_met": true, "safe": true, "parent_reference_id": "opentitan-prim-arbiter-ppc"},
+          "inputs": [
+            {"path": "artifacts/formal/p2/opentitan-arbiter-ppc-tree-p2-v1/91c5545fddc1dce5f8ec04e1860731b5605209b8dcae0850ad5d0f4e3eb74e27/result.json", "sha256": "8713209e1531998a4897793ae934822a7fa6dbcaed5ef8f11bb8c22259163a03"}
+          ]
+        }
+      ]
+    },
+    {
+      "reference_id": "opentitan-prim-fifo-sync",
+      "disposition": "blocked",
+      "reason": "The pinned source builds and synthesizes, but its upstream FPV dependency graph was not reproduced in the Wave 2 container.",
+      "checks": []
+    },
+    {
+      "reference_id": "opentitan-prim-count",
+      "disposition": "blocked",
+      "reason": "The pinned source builds and synthesizes, but its upstream FPV dependency graph was not reproduced in the Wave 2 container.",
+      "checks": []
+    },
+    {
+      "reference_id": "opentitan-prim-packer-fifo",
+      "disposition": "blocked",
+      "reason": "The pinned source builds and synthesizes, but its upstream FPV dependency graph was not reproduced in the Wave 2 container.",
+      "checks": []
+    },
+    {
+      "reference_id": "pulp-common-cells-spill-register",
+      "disposition": "qualify",
+      "reason": null,
+      "checks": [
+        {
+          "type": "formal_task",
+          "basis_kind": "assertions",
+          "description": "Bounded ready-valid property proof checks three ordered transfers, no extra outputs, and completion under bounded backpressure.",
+          "config": "examples/formal/reference/pulp_reference_behavior.sby",
+          "task": "spill",
+          "inputs": [
+            {"path": "corpus/upstream/common_cells/src/spill_register.sv", "sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec"}
+          ]
+        }
+      ]
+    },
+    {
+      "reference_id": "pulp-common-cells-stream-register",
+      "disposition": "qualify",
+      "reason": null,
+      "checks": [
+        {
+          "type": "formal_task",
+          "basis_kind": "assertions",
+          "description": "Bounded ready-valid property proof checks three ordered transfers, no extra outputs, and completion under bounded backpressure.",
+          "config": "examples/formal/reference/pulp_reference_behavior.sby",
+          "task": "stream",
+          "inputs": [
+            {"path": "corpus/upstream/common_cells/src/stream_register.sv", "sha256": "2e0e5b6d09ce4ade0881938ee042dcbc78438638fa2592338a374f88a3c27304"}
+          ]
+        }
+      ]
+    },
+    {
+      "reference_id": "pulp-common-cells-fifo-v3",
+      "disposition": "qualify",
+      "reason": null,
+      "checks": [
+        {
+          "type": "formal_task",
+          "basis_kind": "assertions",
+          "description": "Bounded FIFO property proof checks ordered payload delivery, occupancy safety, no extra outputs, and bounded drain.",
+          "config": "examples/formal/reference/pulp_reference_behavior.sby",
+          "task": "fifo",
+          "inputs": [
+            {"path": "corpus/upstream/common_cells/src/fifo_v3.sv", "sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc"}
+          ]
+        }
+      ]
+    },
+    {
+      "reference_id": "pulp-common-cells-rr-arb-tree",
+      "disposition": "qualify",
+      "reason": null,
+      "checks": [
+        {
+          "type": "formal_task",
+          "basis_kind": "assertions",
+          "description": "Unbounded safety proof checks request propagation, one-hot grants, grant legality, selected index, and selected payload across arbitrary traffic.",
+          "config": "examples/formal/reference/pulp_reference_behavior.sby",
+          "task": "arbiter",
+          "inputs": [
+            {"path": "corpus/upstream/common_cells/src/rr_arb_tree.sv", "sha256": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e"}
+          ]
+        }
+      ]
+    },
+    {
+      "reference_id": "pulp-common-cells-stream-mux",
+      "disposition": "blocked",
+      "reason": "The pinned source builds and synthesizes, but no independent behavioral test or property set was reproduced in Wave 2.",
+      "checks": []
+    },
+    {
+      "reference_id": "verilog-axis-axis-register",
+      "disposition": "qualify",
+      "reason": null,
+      "checks": [
+        {
+          "type": "cocotb_make",
+          "basis_kind": "upstream_tests",
+          "description": "Pinned upstream cocotb regression covers register modes, backpressure, reset behavior, and sideband handling.",
+          "cwd": "corpus/upstream/verilog-axis/tb/axis_register",
+          "results_xml": "results.xml",
+          "make_variables": ["SIM=icarus", "COCOTB_LOG_LEVEL=WARNING"],
+          "inputs": [
+            {"path": "corpus/upstream/verilog-axis/tb/axis_register/Makefile", "sha256": "ed2e29db173d706d68d9bc822f4ce9993d574645eac00c9ef5ea3d90b6978965"},
+            {"path": "corpus/upstream/verilog-axis/tb/axis_register/test_axis_register.py", "sha256": "46fd1f60b14f9057694251aa2fc31ea155d54a970adb57197ecf179380e8d0cb"},
+            {"path": "corpus/upstream/verilog-axis/rtl/axis_register.v", "sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39"}
+          ]
+        }
+      ]
+    },
+    {
+      "reference_id": "verilog-axis-axis-pipeline-register",
+      "disposition": "qualify",
+      "reason": null,
+      "checks": [
+        {
+          "type": "cocotb_make",
+          "basis_kind": "upstream_tests",
+          "description": "Pinned upstream cocotb regression covers pipeline traffic, backpressure, reset behavior, and sideband handling.",
+          "cwd": "corpus/upstream/verilog-axis/tb/axis_pipeline_register",
+          "results_xml": "results.xml",
+          "make_variables": ["SIM=icarus", "COCOTB_LOG_LEVEL=WARNING"],
+          "inputs": [
+            {"path": "corpus/upstream/verilog-axis/tb/axis_pipeline_register/Makefile", "sha256": "1b110a449c5a82612bfc68fc469384ea49f79750476052b83229db8fff7ecca3"},
+            {"path": "corpus/upstream/verilog-axis/tb/axis_pipeline_register/test_axis_pipeline_register.py", "sha256": "4afa6d75c56df41e322080c0ad5f04b17c76ffcafc75cc2708cd6b89032795c4"},
+            {"path": "corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v", "sha256": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc"},
+            {"path": "corpus/upstream/verilog-axis/rtl/axis_register.v", "sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39"}
+          ]
+        },
+        {
+          "type": "proof_artifact",
+          "basis_kind": "documented_pair",
+          "description": "Hash-matched P3 proof establishes ordered-transaction equivalence between one-stage simple and two-stage skid configurations under bounded backpressure.",
+          "path": "artifacts/formal/p3/verilog-axis-pipeline-one-vs-two-stage-p3-v1/3023d27d81eb19477a23a3f7bfd26cde25a841b4699feec54bbd163e6c89ef01/result.json",
+          "assertions": {"status": "formal_passed", "expectation_met": true, "safe": true, "parent_reference_id": "verilog-axis-axis-pipeline-register"},
+          "inputs": [
+            {"path": "artifacts/formal/p3/verilog-axis-pipeline-one-vs-two-stage-p3-v1/3023d27d81eb19477a23a3f7bfd26cde25a841b4699feec54bbd163e6c89ef01/result.json", "sha256": "2ad2de1b2b47aeae5405b5a6b8741057690de00b0e1bf685c4dc9b770b3e0db2"}
+          ]
+        }
+      ]
+    },
+    {
+      "reference_id": "verilog-axis-axis-pipeline-fifo",
+      "disposition": "qualify",
+      "reason": null,
+      "checks": [
+        {
+          "type": "cocotb_make",
+          "basis_kind": "upstream_tests",
+          "description": "Pinned upstream cocotb regression covers FIFO pipeline traffic, stress, reset behavior, and sideband handling.",
+          "cwd": "corpus/upstream/verilog-axis/tb/axis_pipeline_fifo",
+          "results_xml": "results.xml",
+          "make_variables": ["SIM=icarus", "COCOTB_LOG_LEVEL=WARNING"],
+          "inputs": [
+            {"path": "corpus/upstream/verilog-axis/tb/axis_pipeline_fifo/Makefile", "sha256": "5ddb8a73eb8c527ea9457668bde85fac12c8be730329f724484d294cf34cedbe"},
+            {"path": "corpus/upstream/verilog-axis/tb/axis_pipeline_fifo/test_axis_pipeline_fifo.py", "sha256": "9381b5efa54f79e88a07391298769263e5f798de4e5fc22314e9c1dd8868624a"},
+            {"path": "corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v", "sha256": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02"}
+          ]
+        }
+      ]
+    }
+  ]
+}

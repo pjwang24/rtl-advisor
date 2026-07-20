@@ -1,0 +1,47 @@
+{
+  "artifact_hashes": {
+    "counterexample": "dc90b15accf3eeca1919afc3de634e1fd1a002d1c99544e59a9f2dbba365b651",
+    "formal_config": "01addb00783ab0a5b70d925ff88b3acc587c5d443f4bd449be3fad94c391a967",
+    "formal_miter": "cb2453026623d5754b888ea4acb2e535ed982a42bd93254cf20a5fd5b83a60e9",
+    "proof_plan": "144369fb72c5b16edb8ed91263c1103eb7c3f0deb0a431f26d15dc15411ec223",
+    "proof_result": "b4a057105b813311e90f26c2a6bf34cf867dad2d8c3ddee67820be810c1795fb",
+    "proof_transcript": "519a94dd180c0596c4b2d5568721d7a43ed7c6c0c338a2ceb779f6a91eb71a5f"
+  },
+  "display_name": "verilog-axis reordered-transaction negative control",
+  "document_type": "rtl-advisor.variant-manifest",
+  "expected_relation": "inequivalent_control",
+  "origin": {
+    "description": "Deliberately substitutes the second transaction tag at the first output to verify ordering checks.",
+    "generator": null,
+    "generator_version": null,
+    "kind": "negative_control"
+  },
+  "parent_reference_id": "verilog-axis-axis-pipeline-register",
+  "proof_contract": {
+    "assumptions": [
+      "both implementations receive the same three arbitrary tagged transactions",
+      "each implementation holds a transaction until its own input handshake completes",
+      "the shared output sink stalls for no more than two consecutive cycles",
+      "disabled AXI sideband outputs are outside the comparison"
+    ],
+    "kind": "bounded ready-valid transaction equivalence",
+    "latency_relation": "transaction_ordered",
+    "level": "P3",
+    "observables": [
+      "accepted output transaction count",
+      "accepted output data sequence",
+      "bounded completion after the final input"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "schema": "rtl-advisor-variant-v1",
+  "schema_version": 1,
+  "semantic_hash": "8d5e8fd819896bb0fbe22c2d2465d0cbe21bfc6bdb01aa77cf87e9401c3c2a7a",
+  "source_changes": [],
+  "source_locations": [
+    "examples/formal/p3/verilog_axis_pipeline_p3_miter.sv"
+  ],
+  "state": "proof_failed",
+  "variant_id": "verilog-axis-pipeline-bad-order",
+  "variant_lineage_id": "verilog-axis-pipeline-bad-order-v1"
+}

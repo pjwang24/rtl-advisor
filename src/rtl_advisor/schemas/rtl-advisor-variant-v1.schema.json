@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-variant-v1.schema.json",
+  "title": "RTL Advisor Corpus Variant Manifest V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "schema",
+    "document_type",
+    "variant_id",
+    "parent_reference_id",
+    "variant_lineage_id",
+    "display_name",
+    "state",
+    "origin",
+    "source_locations",
+    "source_changes",
+    "expected_relation",
+    "proof_contract",
+    "artifact_hashes"
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "not": {"pattern": "(^/|(^|/)\\.\\.(/|$))"}
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-variant-v1"},
+    "document_type": {"const": "rtl-advisor.variant-manifest"},
+    "variant_id": {"$ref": "#/$defs/id"},
+    "parent_reference_id": {"$ref": "#/$defs/id"},
+    "variant_lineage_id": {"$ref": "#/$defs/id"},
+    "display_name": {"type": "string", "minLength": 1},
+    "state": {
+      "enum": [
+        "declared",
+        "prepared",
+        "proof_passed",
+        "proof_failed",
+        "proof_inconclusive",
+        "measured"
+      ]
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "description", "generator", "generator_version"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "deterministic_rewrite",
+            "upstream_alternative",
+            "upstream_parameter",
+            "independent_implementation",
+            "reviewed_codex_candidate",
+            "negative_control"
+          ]
+        },
+        "description": {"type": "string", "minLength": 1},
+        "generator": {"type": ["string", "null"], "minLength": 1},
+        "generator_version": {"type": ["string", "null"], "minLength": 1}
+      }
+    },
+    "source_locations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/relativePath"},
+      "uniqueItems": true
+    },
+    "source_changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "before_sha256", "after_sha256"],
+        "properties": {
+          "path": {"$ref": "#/$defs/relativePath"},
+          "before_sha256": {"$ref": "#/$defs/sha256"},
+          "after_sha256": {"$ref": "#/$defs/sha256"}
+        }
+      }
+    },
+    "expected_relation": {"enum": ["equivalent", "inequivalent_control", "unknown"]},
+    "proof_contract": {
+      "$ref": "rtl-advisor-proof-v1.schema.json"
+    },
+    "artifact_hashes": {
+      "type": "object",
+      "propertyNames": {"$ref": "#/$defs/id"},
+      "additionalProperties": {"$ref": "#/$defs/sha256"}
+    },
+    "semantic_hash": {"$ref": "#/$defs/sha256"}
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "artifact_hashes": {},
+  "display_name": "OpenTitan arbiter grant negative control",
+  "document_type": "rtl-advisor.variant-manifest",
+  "expected_relation": "inequivalent_control",
+  "origin": {
+    "description": "Deliberately removes a grant to verify that the P2 checker rejects it.",
+    "generator": null,
+    "generator_version": null,
+    "kind": "negative_control"
+  },
+  "parent_reference_id": "opentitan-prim-arbiter-ppc",
+  "proof_contract": {
+    "assumptions": [
+      "N=4, DW=8, EnDataPort=1, and SYNTHESIS dummy assertion macros",
+      "request and payload vectors are sampled once after reset and then remain stable",
+      "ready_i is unconstrained on every cycle",
+      "req_chk_i is non-functional in the synthesized DUT configuration"
+    ],
+    "kind": "same-latency sequential equivalence miter",
+    "latency_relation": "same_cycle",
+    "level": "P2",
+    "observables": [
+      "valid_o every cycle",
+      "gnt_o every cycle",
+      "idx_o while valid_o is asserted",
+      "data_o while valid_o is asserted"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "schema": "rtl-advisor-variant-v1",
+  "schema_version": 1,
+  "semantic_hash": "f2fe68a4cba5abe0e42a19745e9b33026bbd96fdfe7ca843aec4ffde4bbbf3c5",
+  "source_changes": [],
+  "source_locations": [
+    "examples/formal/p2/opentitan_arbiter_p2_miter.sv"
+  ],
+  "state": "declared",
+  "variant_id": "opentitan-prim-arbiter-bad-grant",
+  "variant_lineage_id": "opentitan-prim-arbiter-bad-grant-v1"
+}

@@ -1,8 +1,9 @@
 # RTL Advisor
 
-**RTL Advisor tells an engineer whether a narrowly supported RTL rewrite is
-behavior-preserving and whether two pinned Yosys/ABC recipes actually benefit—or
-synthesis already handles it—before target-flow iteration.**
+**RTL Advisor is an evidence-backed RTL engineering platform that compares
+behavior-preserving implementation alternatives across modules, IPs,
+subsystems, and SoCs, then reports whether a measured flow benefits or already
+handles the change.**
 
 I am building this as an evidence tool, not an RTL generator that asks engineers
 to trust a suggestion. It links a finding to source, prepares a change in an
@@ -11,8 +12,18 @@ candidate under identical synthesis settings.
 
 > **Status:** `0.2.0a1` developer preview. The generated end-to-end example
 > formally passes and returns `synthesis_handles`: both pinned Yosys/ABC recipes
-> found no useful improvement. The frozen open-RTL pilot gate is blocked at
-> **0/2 qualifying modules**, before candidate synthesis or PPA inspection.
+> found no useful improvement. The first project-scale open tranche now has
+> **8 qualified Tier A references out of 12 frozen candidates**; four remain
+> explicitly blocked. Candidate variants for this broader corpus have not yet
+> been measured, so this is a reference/proof foundation—not an optimization
+> success claim.
+
+The current preview supports one narrow combinational transformation. The
+long-range program is intentionally larger: a curated Tier A–D corpus of 50–100
+standalone modules, 15–30 complete IP blocks, 5–10 processor or accelerator
+subsystems, and 2–4 complete SoCs. Variants do not count toward those totals;
+every reference must have pinned provenance, compile context, behavioral basis,
+proof scope, and reproducible measurements.
 
 ## What problem this addresses
 
@@ -166,7 +177,7 @@ An engineer can ask:
 > prepare the supported candidate, prove it, measure it, and explain whether the
 > synthesis recipes already handle the change.
 
-## Current evidence and open-pilot gate
+## Current evidence
 
 The complete generated workflow has produced a hash-matched formal pass and a
 `synthesis_handles` result under the standard and stronger pinned recipes.
@@ -180,6 +191,21 @@ seeing an outcome. This avoids selecting only favorable examples.
 That gate remains blocked until a new corpus is pre-registered or a separately
 reviewed scope adds combinational-cone extraction. The generated result proves
 the pipeline works; it does not establish value on arbitrary engineer RTL.
+
+The broader corpus program has separately completed its first frozen Tier A
+tranche. Twelve references from OpenTitan, PULP `common_cells`, and
+verilog-axis were selected before candidate PPA was visible. All 12 reproduce
+build/lint and both baseline-only Yosys/ABC recipes; eight qualify and four are
+retained as explicit blockers.
+
+The qualifying evidence includes seven stateful modules, 30/30 upstream
+cocotb tests across three AXI-stream references, four passing PULP property
+proofs, a P2 same-cycle OpenTitan arbiter-pair proof, and a bounded P3
+transaction-order proof for one-stage versus two-stage AXI-stream pipelines.
+Reset, state, grant, dropped-transaction, duplicated-transaction, and reordered-
+transaction controls fail as required. This establishes trustworthy reference
+and proof infrastructure; it still does not show that the advisor can improve
+unseen RTL.
 
 ## Why engineers can trust the result
 
@@ -195,22 +221,55 @@ the pipeline works; it does not establish value on arbitrary engineer RTL.
 Formal equivalence proves equality between the modeled baseline and candidate;
 it does not prove that the baseline implements its specification.
 
+## Corpus Registry V1
+
+The registry provides strict reference, variant, and proof manifests;
+qualification states; semantic hashes; append-only records; lineage and split
+checks; and coverage summaries. It currently records 12 frozen Tier A
+references, eight qualified references, four explicit blockers, and eight
+positive or negative P2/P3 variants without counting variants as references.
+
+```bash
+uv run --frozen rtl-advisor corpus validate \
+  examples/corpus/opentitan_arbiter_pair/reference.json --json
+
+uv run --frozen rtl-advisor corpus add <reference-or-variant.json> --json
+uv run --frozen rtl-advisor corpus list --json
+uv run --frozen rtl-advisor corpus summary --json
+uv run --frozen rtl-advisor corpus validate --json
+```
+
+The frozen Wave 2 evidence is driven by
+[`tranche.lock.json`](examples/corpus/wave2_tier_a/tranche.lock.json),
+[`qualification.plan.json`](examples/corpus/wave2_tier_a/qualification.plan.json),
+and [`behavior.plan.json`](examples/corpus/wave2_tier_a/behavior.plan.json).
+Third-party source trees and large run artifacts remain outside the repository.
+
 ## What is needed next
 
-The immediate release gate needs two frozen open-source pilots that meet the
-same rules. Broader recommendations later need more independent RTL structures,
-multiple equivalent variants per supported family, formal results for every
-training candidate, identical-flow synthesis labels, and repository-separated
-training and test sets.
+The next engineering step is Wave 3: freeze the Tier A expansion and
+transformation portfolio before candidate PPA is visible, then grow from eight
+to 50–100 qualified standalone modules across at least eight categories and
+five independent upstream lineages. Each meaningful variant must use its
+declared P2 or P3 contract before identical-flow candidate measurement.
+
+Broader recommendations need more independent RTL structures, multiple
+equivalent variants per supported family, the correct formal contract for every
+candidate, identical-flow synthesis labels, and repository-, lineage-,
+topology-, and hierarchy-separated evaluation sets.
 
 ML can enter a future decision path only after enough independent evidence is
-collected and a frozen release test passes. Sequential modules, EQY, commercial
-LEC, target-flow synthesis, OpenROAD gating, proprietary RTL, and SoC-scale
-operation remain later tracks.
+collected and a frozen release test passes. EQY, commercial LEC, target-flow
+synthesis, OpenROAD gating, proprietary RTL, and SoC-scale operation remain
+later tracks. The dashboard remains unchanged until category-first corpus
+records are available.
 
 ## Documentation
 
 - [MVP V1 implementation plan](implementation%20plan/MVP%20V1.md)
+- [Project Roadmap V1](implementation%20plan/project%20roadmap%20v1.md)
+- [Corpus Strategy V1](implementation%20plan/corpus%20strategy%20v1.md)
+- [Project Checklist V1](implementation%20plan/project%20checklist%20v1.md)
 - [Frozen open-RTL feasibility result](docs/evidence/mvp-v1-feasibility.md)
 - [Known limitations](docs/known-limitations.md)
 - [Pilot manifest example](examples/mvp/pilot-manifest.example.md)

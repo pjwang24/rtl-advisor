@@ -254,3 +254,137 @@ shopping for a favorable replacement.
   The generated result proves the mechanism, not usefulness on unseen RTL.
 - Owner confirmation is still required before adding the proposed Apache-2.0
   license or creating tag `v0.2.0-alpha.1`. No license or tag was added.
+
+## Project-scale roadmap reset
+
+The completed MVP is now explicitly treated as one vertical mechanism test,
+not the definition of the full RTL Advisor project. Added two controlling
+documents:
+
+- `implementation plan/project roadmap v1.md` defines the long-range evidence
+  platform, product workstreams, architecture, sequential Waves 0–8, interface
+  roles, and promotion gates.
+- `implementation plan/corpus strategy v1.md` defines the Tier A–D target:
+  50–100 standalone modules, 15–30 complete IP blocks, 5–10 processor or
+  accelerator subsystems, and 2–4 complete SoCs.
+
+The corpus contract counts qualified design units rather than files or
+variants. Every reference requires pinned provenance, license disposition,
+complete compile context, a behavioral basis, an appropriate proof contract,
+and reproducible synthesis evidence. It separates combinational, same-latency
+sequential, latency-changing transaction, and structural-integration variants
+so that a same-cycle equivalence check is not misapplied to pipeline or
+buffering changes.
+
+The existing MVP, V2.3, frontend, and plugin plans now point to the project
+roadmap for future work without rewriting their historical acceptance results.
+The README reflects the larger project while preserving the developer-preview
+limitations and neutral generated result.
+
+At the roadmap reset, the next executable wave was Corpus Registry V1: reference
+and variant manifests, qualification states, semantic hashes, coverage
+summaries, and protections against duplicate-lineage leakage and file-count
+inflation before any source repositories were downloaded. Its completed result
+is recorded below.
+
+Added `implementation plan/project checklist v1.md` as the live completion
+record. It captures the current 0/50–100, 0/15–30, 0/5–10, and 0/2–4 qualified
+reference counts; completed MVP capabilities; Wave 1–8 tasks; the P0–P6 proof
+and M0–M4 measurement status; external decisions; and the exact next action.
+Future implementation increments must update the checklist alongside their
+tests and evidence rather than relying on conversation history.
+
+## Corpus Registry V1 complete
+
+Implemented the first project-scale corpus increment without downloading or
+modifying third-party RTL:
+
+- Added strict `rtl-advisor-reference-v1`, `rtl-advisor-variant-v1`, and
+  `rtl-advisor-proof-v1` contracts and JSON schemas.
+- Added stage-aware qualification from discovery through variant eligibility.
+  Pinned or later records require exact revisions, reviewed license evidence,
+  source hashes, filelist/include/generated-input hashes, and a normalized
+  compile-context hash.
+- Added append-only, semantic-hashed reference and variant storage.
+- Added `corpus add`, `corpus validate`, `corpus list`, and `corpus summary`.
+- Summary records count design references—not files or variants—and report
+  tiers, categories, upstream projects, licenses, proof levels, splits, and
+  qualification states.
+- Added duplicate ID/design-lineage/variant-lineage rejection and prevented
+  repository or containing-design lineages from crossing assigned data splits.
+- Added a metadata-only OpenTitan `prim_arbiter_ppc` reference and
+  `prim_arbiter_tree` upstream variant. Both remain discovery/declared records;
+  no revision, source hash, build result, formal pass, or qualification is
+  claimed.
+- Added 16 focused registry, schema-resource, and CLI tests. The final complete
+  repository regression passes **320 tests in 66.02 seconds**, preserving the
+  prior 304.
+- Built the `0.2.0a1` wheel and source distribution and verified in a clean
+  external virtual environment that the registry module and all three packaged
+  JSON schemas import successfully.
+
+Wave 1 is complete. The next move is to pre-register the exact 12-candidate
+Tier A tranche, freeze revisions and license dispositions, obtain download
+approval, and then begin build reproduction plus P2 sequential proof.
+
+## Corpus program Wave 2 complete
+
+Completed the first project-scale Tier A tranche without selecting references
+or transformation families after seeing candidate PPA:
+
+- Froze 12 references from three upstream lineages—OpenTitan, PULP
+  `common_cells`, and verilog-axis—across six engineering categories. The
+  tranche semantic hash is
+  `ac85240050ea6045e033a7d2fdcf1ce125efa1e19cd6527688a1eb0571c6b475`.
+- Acquired only the pinned archives, verified archive/license/source hashes,
+  and kept third-party RTL under ignored `corpus/upstream/` paths.
+- Reproduced normalized compile and lint for all 12 references with the pinned
+  Yosys Slang and Verilator environment.
+- Ran both baseline-only Yosys/ABC recipes for all 12. Candidate synthesis
+  remained disabled; the immutable baseline summary hash is
+  `c24adb7194a8714edce87d2b8f67ddba187dfea9a2d1fc703aa7cd194d085871`.
+- Added a hash-bound P2 same-cycle sequential proof for OpenTitan
+  `prim_arbiter_ppc` versus `prim_arbiter_tree`. The positive pair passes, and
+  reset, state, and grant mutations fail.
+- Added a bounded P3 transaction-order proof for one-stage simple-buffer versus
+  two-stage skid-buffer verilog-axis pipelines. The positive pair passes, and
+  drop, duplicate, and ordering mutations fail.
+- Added four PULP reference-property proofs. `spill_register`,
+  `stream_register`, and `fifo_v3` preserve three ordered transfers and drain
+  under bounded backpressure; `rr_arb_tree` satisfies request, one-hot grant,
+  index, and payload safety across arbitrary traffic.
+- Installed the exact upstream verilog-axis test dependencies in the pinned
+  tool image. `axis_register` and `axis_pipeline_register` each pass 9/9 tests;
+  `axis_pipeline_fifo` passes 12/12, for 30/30 total.
+- Added `corpus behavior-tranche`, which validates frozen inputs and exact tool
+  identities, reruns checks, emits immutable results, and advances registry
+  state only after evidence passes. The behavior summary hash is
+  `bd4660df32e1f6488565e92f7a58d86fcf8e740d378e57a1c87781a4a2b6e2da`.
+
+The final gate is **8 qualified references and four explicit blockers**. Seven
+qualified references are stateful, and the tranche contains two independently
+documented equivalent pairs. The three remaining OpenTitan references are
+blocked because their FPV dependency graphs were not reproduced; PULP
+`stream_mux` is blocked because no independent behavioral test/property set was
+reproduced. None was silently replaced.
+
+Corpus Registry V1 validates with 12 references, eight variants, 104 append-
+only history records, eight `reference_qualified` states, and four
+`build_reproduced/blocked` states. The dashboard was intentionally left
+unchanged; category-first corpus navigation remains a Wave 3 task after richer
+variant evidence exists.
+
+Wave 2 proves that the project can curate and qualify open sequential RTL with
+honest evidence boundaries. It does not yet prove optimization value: Wave 3
+must add a meaningful variant portfolio, prove every candidate under the right
+P2/P3 contract, and measure every proof-passing result without hiding neutral
+or regressed cases.
+
+Final validation collected and passed **353 repository tests**. The
+`0.2.0a1` wheel and source distribution built successfully, and the wheel
+imported the corpus registry and behavior-gate modules in a clean external
+environment. The final pinned integration image was rebuilt as manifest
+`sha256:5ed5c421cc617bd82f5440ca0201074d8b89039dd1079e747fe5d3350539c76e`
+and passed its offline tool smoke with Yosys `0.63+49`, Verilator `5.047`, ABC
+`1.01`, Python `3.13.14`, and uv `0.11.5`. A cached behavior-gate rerun produced
+zero registry events, confirming idempotent append-only progression.

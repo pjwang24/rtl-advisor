@@ -1,0 +1,47 @@
+{
+  "artifact_hashes": {
+    "counterexample": "04dc47a2f0d2f44003295290a1af5e207559ce69c58b3eeaba0206ec94a9cb96",
+    "formal_config": "01addb00783ab0a5b70d925ff88b3acc587c5d443f4bd449be3fad94c391a967",
+    "formal_miter": "cb2453026623d5754b888ea4acb2e535ed982a42bd93254cf20a5fd5b83a60e9",
+    "proof_plan": "008fca1fe0c531ef2ca1be5e0e7bd8758452157ea863c61d93ad4cb5c9bcc089",
+    "proof_result": "08110dcdbe8689fb98388a641bf0593ece8d2c1db023d62808b320570cb75a93",
+    "proof_transcript": "1b83dee0b2d18a7f202cd457b0761174e81f2e029720b3415538b2d783ad7b29"
+  },
+  "display_name": "verilog-axis dropped-transaction negative control",
+  "document_type": "rtl-advisor.variant-manifest",
+  "expected_relation": "inequivalent_control",
+  "origin": {
+    "description": "Deliberately hides one accepted output to verify that bounded completion detects a dropped transaction.",
+    "generator": null,
+    "generator_version": null,
+    "kind": "negative_control"
+  },
+  "parent_reference_id": "verilog-axis-axis-pipeline-register",
+  "proof_contract": {
+    "assumptions": [
+      "both implementations receive the same three arbitrary tagged transactions",
+      "each implementation holds a transaction until its own input handshake completes",
+      "the shared output sink stalls for no more than two consecutive cycles",
+      "disabled AXI sideband outputs are outside the comparison"
+    ],
+    "kind": "bounded ready-valid transaction equivalence",
+    "latency_relation": "transaction_ordered",
+    "level": "P3",
+    "observables": [
+      "accepted output transaction count",
+      "accepted output data sequence",
+      "bounded completion after the final input"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "schema": "rtl-advisor-variant-v1",
+  "schema_version": 1,
+  "semantic_hash": "46525424b974fb3f5a98c33639e17b785e1b6b244b35b3bed7280d0daead304d",
+  "source_changes": [],
+  "source_locations": [
+    "examples/formal/p3/verilog_axis_pipeline_p3_miter.sv"
+  ],
+  "state": "proof_failed",
+  "variant_id": "verilog-axis-pipeline-bad-drop",
+  "variant_lineage_id": "verilog-axis-pipeline-bad-drop-v1"
+}

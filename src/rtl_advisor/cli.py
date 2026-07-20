@@ -100,6 +100,13 @@ from rtl_advisor.corpus import (
     generate_case,
     load_manifest,
 )
+from rtl_advisor.corpus_registry import CorpusRegistryError, CorpusRegistryV1
+from rtl_advisor.corpus_baseline import CorpusBaselineError, characterize_tranche_baselines
+from rtl_advisor.corpus_behavior import CorpusBehaviorError, qualify_tranche_behavior
+from rtl_advisor.corpus_qualification import (
+    CorpusQualificationError,
+    qualify_tranche,
+)
 from rtl_advisor.graph import GraphError, build_graph
 from rtl_advisor.models import CheckResult, SetupReport
 from rtl_advisor.openroad_v2 import (
@@ -125,6 +132,16 @@ from rtl_advisor.synthesis_robustness_full import (
     SynthesisRobustnessFullError,
     run_full_sweep,
 )
+from rtl_advisor.sequential_equivalence import (
+    SequentialEquivalenceError,
+    record_p2_proof,
+    run_p2_proof,
+)
+from rtl_advisor.transaction_equivalence import (
+    TransactionEquivalenceError,
+    record_p3_proof,
+    run_p3_proof,
+)
 from rtl_advisor.suite import (
     SuiteError,
     generate_suite,
@@ -138,6 +155,13 @@ from rtl_advisor.tools import (
     first_output_line,
     run_command,
     sha256_file,
+)
+from rtl_advisor.tranche_lock import (
+    TrancheLockError,
+    load_tranche_lock,
+    materialize_tranche_references,
+    tranche_summary,
+    verify_tranche_sources,
 )
 from rtl_advisor.verification import (
     VerificationError,
@@ -182,8 +206,175 @@ def build_parser() -> argparse.ArgumentParser:
         help="report a missing Liberty file instead of downloading it",
     )
 
-    corpus = subparsers.add_parser("corpus", help="manage generated RTL cases")
+    corpus = subparsers.add_parser(
+        "corpus",
+        help="manage generated RTL cases and the qualified source registry",
+    )
     corpus_subparsers = corpus.add_subparsers(dest="corpus_command", required=True)
+    registry_add = corpus_subparsers.add_parser(
+        "add",
+        help="validate and append a reference or variant manifest to Corpus Registry V1",
+    )
+    registry_add.add_argument("manifest", help="reference or variant manifest JSON")
+    registry_add.add_argument(
+        "--registry-dir",
+        help="registry directory (default: corpus/registry-v1)",
+    )
+    registry_add.add_argument("--json", action="store_true", dest="json_output")
+    registry_advance = corpus_subparsers.add_parser(
+        "advance",
+        help="append a qualification or variant-state successor to an existing record",
+    )
+    registry_advance.add_argument("manifest", help="successor manifest JSON")
+    registry_advance.add_argument(
+        "--registry-dir",
+        help="registry directory (default: corpus/registry-v1)",
+    )
+    registry_advance.add_argument("--json", action="store_true", dest="json_output")
+    registry_validate = corpus_subparsers.add_parser(
+        "validate",
+        help="validate Corpus Registry V1 or one manifest against its records",
+    )
+    registry_validate.add_argument(
+        "manifest",
+        nargs="?",
+        help="optional manifest to validate without adding it",
+    )
+    registry_validate.add_argument(
+        "--registry-dir",
+        help="registry directory (default: corpus/registry-v1)",
+    )
+    registry_validate.add_argument("--json", action="store_true", dest="json_output")
+    registry_list = corpus_subparsers.add_parser(
+        "list",
+        help="list registered references and variants",
+    )
+    registry_list.add_argument(
+        "--kind",
+        choices=("all", "references", "variants"),
+        default="all",
+    )
+    registry_list.add_argument(
+        "--registry-dir",
+        help="registry directory (default: corpus/registry-v1)",
+    )
+    registry_list.add_argument("--json", action="store_true", dest="json_output")
+    registry_summary = corpus_subparsers.add_parser(
+        "summary",
+        help="summarize references by tier, category, lineage, and qualification state",
+    )
+    registry_summary.add_argument(
+        "--registry-dir",
+        help="registry directory (default: corpus/registry-v1)",
+    )
+    registry_summary.add_argument("--json", action="store_true", dest="json_output")
+    validate_tranche = corpus_subparsers.add_parser(
+        "validate-tranche",
+        help="validate a frozen corpus tranche lock without running synthesis",
+    )
+    validate_tranche.add_argument("lock", help="frozen tranche lock JSON")
+    validate_tranche.add_argument("--json", action="store_true", dest="json_output")
+    register_tranche = corpus_subparsers.add_parser(
+        "register-tranche",
+        help="append every frozen reference in a tranche to Corpus Registry V1",
+    )
+    register_tranche.add_argument("lock", help="frozen tranche lock JSON")
+    register_tranche.add_argument(
+        "--registry-dir",
+        help="registry directory (default: corpus/registry-v1)",
+    )
+    register_tranche.add_argument("--json", action="store_true", dest="json_output")
+    verify_tranche = corpus_subparsers.add_parser(
+        "verify-tranche-sources",
+        help="verify frozen archives, licenses, and selected RTL source hashes",
+    )
+    verify_tranche.add_argument("lock", help="frozen tranche lock JSON")
+    verify_tranche.add_argument(
+        "--source-root",
+        action="append",
+        default=[],
+        metavar="UPSTREAM_ID=PATH",
+        help="acquired upstream root; repeat once per upstream project",
+    )
+    verify_tranche.add_argument("--json", action="store_true", dest="json_output")
+    qualify_tranche_parser = corpus_subparsers.add_parser(
+        "qualify-tranche",
+        help="pin compile contexts and reproduce lint/build without candidate synthesis",
+    )
+    qualify_tranche_parser.add_argument("lock", help="frozen tranche lock JSON")
+    qualify_tranche_parser.add_argument("plan", help="frozen qualification plan JSON")
+    qualify_tranche_parser.add_argument(
+        "--registry-dir",
+        help="registry directory (default: corpus/registry-v1)",
+    )
+    qualify_tranche_parser.add_argument("--json", action="store_true", dest="json_output")
+    baseline_tranche_parser = corpus_subparsers.add_parser(
+        "baseline-tranche",
+        help="run the two pinned baseline-only synthesis recipes for a frozen tranche",
+    )
+    baseline_tranche_parser.add_argument("lock", help="frozen tranche lock JSON")
+    baseline_tranche_parser.add_argument("plan", help="frozen qualification plan JSON")
+    baseline_tranche_parser.add_argument(
+        "--registry-dir",
+        help="registry directory (default: corpus/registry-v1)",
+    )
+    baseline_tranche_parser.add_argument("--json", action="store_true", dest="json_output")
+    behavior_tranche_parser = corpus_subparsers.add_parser(
+        "behavior-tranche",
+        help="run frozen behavioral checks and qualify or block every tranche reference",
+    )
+    behavior_tranche_parser.add_argument("lock", help="frozen tranche lock JSON")
+    behavior_tranche_parser.add_argument("plan", help="frozen behavior plan JSON")
+    behavior_tranche_parser.add_argument(
+        "--record-registry",
+        action="store_true",
+        help="append behavior, qualified, and blocked states to the corpus registry",
+    )
+    behavior_tranche_parser.add_argument(
+        "--registry-dir",
+        help="registry directory (default: corpus/registry-v1)",
+    )
+    behavior_tranche_parser.add_argument("--json", action="store_true", dest="json_output")
+    prove_p2_parser = corpus_subparsers.add_parser(
+        "prove-p2",
+        help="run a hash-bound same-cycle sequential equivalence miter",
+    )
+    prove_p2_parser.add_argument("plan", help="frozen P2 proof plan JSON")
+    prove_p2_parser.add_argument(
+        "--formal-command",
+        default="sby",
+        help="formal runner executable (default: sby)",
+    )
+    prove_p2_parser.add_argument(
+        "--record-registry",
+        action="store_true",
+        help="append declared, prepared, and proof states to the corpus registry",
+    )
+    prove_p2_parser.add_argument(
+        "--registry-dir",
+        help="registry directory (default: corpus/registry-v1)",
+    )
+    prove_p2_parser.add_argument("--json", action="store_true", dest="json_output")
+    prove_p3_parser = corpus_subparsers.add_parser(
+        "prove-p3",
+        help="run a hash-bound transaction-ordered sequential proof",
+    )
+    prove_p3_parser.add_argument("plan", help="frozen P3 proof plan JSON")
+    prove_p3_parser.add_argument(
+        "--formal-command",
+        default="sby",
+        help="formal runner executable (default: sby)",
+    )
+    prove_p3_parser.add_argument(
+        "--record-registry",
+        action="store_true",
+        help="append declared, prepared, and proof states to the corpus registry",
+    )
+    prove_p3_parser.add_argument(
+        "--registry-dir",
+        help="registry directory (default: corpus/registry-v1)",
+    )
+    prove_p3_parser.add_argument("--json", action="store_true", dest="json_output")
     generate = corpus_subparsers.add_parser(
         "generate",
         help="generate a deterministic RTL case from a registered family",
@@ -999,6 +1190,50 @@ def _normalized_agent_command(
     return tuple(command)
 
 
+def _corpus_registry(config: ProjectConfig, registry_dir: str | None) -> CorpusRegistryV1:
+    root = (
+        Path(registry_dir).expanduser()
+        if registry_dir is not None
+        else config.corpus_dir / "registry-v1"
+    )
+    if not root.is_absolute():
+        root = config.root / root
+    return CorpusRegistryV1(root.resolve())
+
+
+def _print_registry_listing(payload: dict[str, object]) -> None:
+    print(f"Corpus Registry V1: {payload['count']} {payload['kind']}")
+    for record in payload["records"]:
+        assert isinstance(record, dict)
+        if record["kind"] == "reference":
+            print(
+                f"  {record['record_id']:<36} reference  "
+                f"tier={record['tier']}  state={record['qualification_state']}"
+            )
+        else:
+            print(
+                f"  {record['record_id']:<36} variant    "
+                f"parent={record['parent_reference_id']}  state={record['state']}"
+            )
+    print(f"  registry          {payload['registry_root']}")
+
+
+def _print_registry_summary(payload: dict[str, object]) -> None:
+    print(
+        "Corpus Registry V1: "
+        f"references={payload['reference_count']}  variants={payload['variant_count']}"
+    )
+    tier_counts = payload["tier_reference_counts"]
+    qualified_counts = payload["tier_qualified_counts"]
+    assert isinstance(tier_counts, dict) and isinstance(qualified_counts, dict)
+    for tier in ("A", "B", "C", "D"):
+        print(
+            f"  Tier {tier}            references={tier_counts[tier]}  "
+            f"qualified={qualified_counts[tier]}"
+        )
+    print(f"  registry          {payload['registry_root']}")
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
@@ -1123,6 +1358,248 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "frontend":
             serve_frontend(config, host=args.host, port=args.port)
             return 0
+
+        if args.command == "corpus" and args.corpus_command == "add":
+            registry = _corpus_registry(config, args.registry_dir)
+            result = registry.add(args.manifest)
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                print(
+                    f"Corpus record added: {result['kind']} "
+                    f"{result['record_id']}"
+                )
+                print(f"  hash              {result['semantic_hash']}")
+                print(f"  record            {result['record_path']}")
+            return 0
+
+        if args.command == "corpus" and args.corpus_command == "advance":
+            registry = _corpus_registry(config, args.registry_dir)
+            result = registry.advance(args.manifest)
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                print(
+                    f"Corpus record advanced: {result['kind']} "
+                    f"{result['record_id']}"
+                )
+                print(f"  sequence          {result['sequence']}")
+                print(f"  predecessor       {result['predecessor_hash']}")
+                print(f"  hash              {result['semantic_hash']}")
+                print(f"  record            {result['record_path']}")
+            return 0
+
+        if args.command == "corpus" and args.corpus_command == "validate":
+            registry = _corpus_registry(config, args.registry_dir)
+            if args.manifest is not None:
+                manifest = registry.validate_manifest(args.manifest)
+                record_id = (
+                    manifest.reference_id
+                    if hasattr(manifest, "reference_id")
+                    else manifest.variant_id
+                )
+                result = {
+                    "status": "passed",
+                    "registry_schema": "rtl-advisor-corpus-v1",
+                    "record_id": record_id,
+                    "document_type": manifest.document_type,
+                    "manifest_path": str(Path(args.manifest).expanduser().resolve()),
+                }
+            else:
+                result = registry.validate()
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                print(f"Corpus registry validation: {result['status']}")
+                if "record_id" in result:
+                    print(f"  record            {result['record_id']}")
+                else:
+                    print(
+                        f"  records           {result['record_count']}  "
+                        f"references={result['reference_count']}  "
+                        f"variants={result['variant_count']}"
+                    )
+            return 0
+
+        if args.command == "corpus" and args.corpus_command == "list":
+            result = _corpus_registry(config, args.registry_dir).listing(args.kind)
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                _print_registry_listing(result)
+            return 0
+
+        if args.command == "corpus" and args.corpus_command == "summary":
+            result = _corpus_registry(config, args.registry_dir).summary()
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                _print_registry_summary(result)
+            return 0
+
+        if args.command == "corpus" and args.corpus_command == "validate-tranche":
+            result = tranche_summary(load_tranche_lock(args.lock), path=args.lock)
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                print(f"Corpus tranche validation: {result['status']}")
+                print(f"  tranche           {result['tranche_id']}")
+                print(f"  references        {result['reference_count']}")
+                print(f"  upstreams         {result['upstream_project_count']}")
+                print(f"  categories        {result['category_count']}")
+                print(f"  hash              {result['semantic_hash']}")
+            return 0
+
+        if args.command == "corpus" and args.corpus_command == "register-tranche":
+            lock = load_tranche_lock(args.lock)
+            registry = _corpus_registry(config, args.registry_dir)
+            records = registry.add_many(materialize_tranche_references(lock))
+            result = {
+                **tranche_summary(lock, path=args.lock),
+                "status": "registered",
+                "registry_root": str(registry.root),
+                "registered_count": len(records),
+                "records": list(records),
+            }
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                print(f"Corpus tranche registered: {result['tranche_id']}")
+                print(f"  references        {result['registered_count']}")
+                print(f"  registry          {result['registry_root']}")
+            return 0
+
+        if args.command == "corpus" and args.corpus_command == "verify-tranche-sources":
+            source_roots: dict[str, str] = {}
+            for assignment in args.source_root:
+                upstream_id, separator, source_root = assignment.partition("=")
+                if not separator or not upstream_id or not source_root:
+                    raise TrancheLockError(
+                        "--source-root must use UPSTREAM_ID=PATH"
+                    )
+                if upstream_id in source_roots:
+                    raise TrancheLockError(
+                        f"duplicate --source-root for {upstream_id!r}"
+                    )
+                source_roots[upstream_id] = source_root
+            result = verify_tranche_sources(
+                load_tranche_lock(args.lock),
+                source_roots,
+            )
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                print(f"Corpus source integrity: {result['status']}")
+                print(f"  tranche           {result['tranche_id']}")
+                print(f"  verified files    {result['verified_file_count']}")
+                print(f"  failed files      {result['failed_file_count']}")
+            return 0 if result["status"] == "passed" else 1
+
+        if args.command == "corpus" and args.corpus_command == "qualify-tranche":
+            result = qualify_tranche(
+                config,
+                tranche_lock_path=args.lock,
+                qualification_plan_path=args.plan,
+                registry=_corpus_registry(config, args.registry_dir),
+            )
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                print(f"Corpus qualification: {result['status']}")
+                print(f"  references        {result['reference_count']}")
+                print(f"  reproduced        {result['build_reproduced_count']}")
+                print(f"  blocked           {result['blocked_count']}")
+            return 0 if result["status"] == "passed" else 1
+
+        if args.command == "corpus" and args.corpus_command == "prove-p2":
+            result = run_p2_proof(
+                config,
+                plan_path=args.plan,
+                formal_command=args.formal_command,
+            )
+            if args.record_registry:
+                result = {
+                    **result,
+                    "registry": record_p2_proof(
+                        config,
+                        registry=_corpus_registry(config, args.registry_dir),
+                        plan_path=args.plan,
+                        result=result,
+                    ),
+                }
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                print(f"P2 sequential equivalence: {result['status']}")
+                print(f"  proof             {result['proof_id']}")
+                print(f"  expected          {result['expected_relation']}")
+                print(f"  observed          {result['observed_relation']}")
+                print(f"  expectation met   {result['expectation_met']}")
+                print(f"  safe              {result['safe']}")
+                print(f"  hash              {result['semantic_hash']}")
+            return 0 if result["expectation_met"] else 1
+
+        if args.command == "corpus" and args.corpus_command == "baseline-tranche":
+            result = characterize_tranche_baselines(
+                config,
+                tranche_lock_path=args.lock,
+                qualification_plan_path=args.plan,
+                registry=_corpus_registry(config, args.registry_dir),
+            )
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                print(f"Corpus baseline synthesis: {result['status']}")
+                print(f"  references        {result['reference_count']}")
+                print(f"  candidate runs    {result['candidate_synthesis_enabled']}")
+                print(f"  run hash          {result['run_hash']}")
+            return 0 if result["status"] == "passed" else 1
+
+        if args.command == "corpus" and args.corpus_command == "behavior-tranche":
+            result = qualify_tranche_behavior(
+                config,
+                tranche_lock_path=args.lock,
+                behavior_plan_path=args.plan,
+                registry=_corpus_registry(config, args.registry_dir),
+                record_registry=args.record_registry,
+            )
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                print(f"Corpus behavior gate: {result['status']}")
+                print(f"  references        {result['reference_count']}")
+                print(f"  qualified         {result['qualified_count']}")
+                print(f"  blocked           {result['blocked_count']}")
+                print(f"  run hash          {result['run_hash']}")
+            return 0 if result["status"] == "passed" else 1
+
+        if args.command == "corpus" and args.corpus_command == "prove-p3":
+            result = run_p3_proof(
+                config,
+                plan_path=args.plan,
+                formal_command=args.formal_command,
+            )
+            if args.record_registry:
+                result = {
+                    **result,
+                    "registry": record_p3_proof(
+                        config,
+                        registry=_corpus_registry(config, args.registry_dir),
+                        plan_path=args.plan,
+                        result=result,
+                    ),
+                }
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                print(f"P3 transaction equivalence: {result['status']}")
+                print(f"  proof             {result['proof_id']}")
+                print(f"  expected          {result['expected_relation']}")
+                print(f"  observed          {result['observed_relation']}")
+                print(f"  expectation met   {result['expectation_met']}")
+                print(f"  safe              {result['safe']}")
+                print(f"  hash              {result['semantic_hash']}")
+            return 0 if result["expectation_met"] else 1
 
         if args.command == "corpus" and args.corpus_command == "generate":
             default_width, default_seed = default_suite_parameters(args.suite)
@@ -1842,6 +2319,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0 if gate["passed"] else 1
     except (
         CorpusError,
+        CorpusRegistryError,
+        CorpusBaselineError,
+        CorpusBehaviorError,
+        CorpusQualificationError,
+        SequentialEquivalenceError,
+        TransactionEquivalenceError,
+        TrancheLockError,
         VerificationError,
         SynthesisError,
         GraphError,

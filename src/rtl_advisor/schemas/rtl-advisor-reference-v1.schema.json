@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-reference-v1.schema.json",
+  "title": "RTL Advisor Corpus Reference Manifest V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "schema",
+    "document_type",
+    "reference_id",
+    "display_name",
+    "tier",
+    "categories",
+    "qualification",
+    "provenance",
+    "lineage",
+    "compile_context",
+    "compile_context_hashes",
+    "behavioral_basis",
+    "proof_contract",
+    "source_hashes",
+    "synthesis_profiles",
+    "split"
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "not": {"pattern": "(^/|(^|/)\\.\\.(/|$))"}
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-reference-v1"},
+    "document_type": {"const": "rtl-advisor.reference-manifest"},
+    "reference_id": {"$ref": "#/$defs/id"},
+    "display_name": {"type": "string", "minLength": 1},
+    "tier": {"enum": ["A", "B", "C", "D"]},
+    "categories": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "arithmetic_datapath",
+          "selection_arbitration",
+          "buffering_flow_control",
+          "decode_address_routing",
+          "bus_adapter_interconnect",
+          "pipeline_register_placement",
+          "state_control_queue",
+          "memory_request_tracking",
+          "processor_accelerator_stage",
+          "generated_hierarchy_cdc"
+        ]
+      }
+    },
+    "qualification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "status", "reason"],
+      "properties": {
+        "state": {
+          "enum": [
+            "discovered",
+            "license_reviewed",
+            "source_pinned",
+            "build_reproduced",
+            "behavior_baselined",
+            "reference_qualified",
+            "variant_eligible"
+          ]
+        },
+        "status": {"enum": ["active", "blocked", "rejected"]},
+        "reason": {"type": ["string", "null"], "minLength": 1}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["project", "canonical_url", "revision", "revision_kind", "license"],
+      "properties": {
+        "project": {"type": "string", "minLength": 1},
+        "canonical_url": {"type": "string", "pattern": "^https://"},
+        "revision": {"type": ["string", "null"], "minLength": 1},
+        "revision_kind": {"enum": ["unresolved", "commit", "tag", "release"]},
+        "license": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["expression", "url", "sha256", "disposition"],
+          "properties": {
+            "expression": {"type": "string", "minLength": 1},
+            "url": {"type": "string", "pattern": "^https://"},
+            "sha256": {"anyOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+            "disposition": {"enum": ["pending", "approved", "conditional", "restricted"]}
+          }
+        }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "upstream_project_id",
+        "repository_lineage_id",
+        "design_lineage_id",
+        "containing_design_ids"
+      ],
+      "properties": {
+        "upstream_project_id": {"$ref": "#/$defs/id"},
+        "repository_lineage_id": {"$ref": "#/$defs/id"},
+        "design_lineage_id": {"$ref": "#/$defs/id"},
+        "containing_design_ids": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/id"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "compile_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "top",
+        "sources",
+        "filelist",
+        "include_dirs",
+        "defines",
+        "parameters",
+        "generated_inputs",
+        "clocks",
+        "resets",
+        "memories",
+        "black_boxes",
+        "frontend",
+        "frontend_version",
+        "build_commands",
+        "lint_commands",
+        "test_commands"
+      ],
+      "properties": {
+        "top": {"type": "string", "minLength": 1},
+        "sources": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/relativePath"},
+          "uniqueItems": true
+        },
+        "filelist": {"anyOf": [{"$ref": "#/$defs/relativePath"}, {"type": "null"}]},
+        "include_dirs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/relativePath"},
+          "uniqueItems": true
+        },
+        "defines": {"$ref": "#/$defs/stringArray"},
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {"type": ["boolean", "integer", "number", "string"]}
+        },
+        "generated_inputs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/relativePath"},
+          "uniqueItems": true
+        },
+        "clocks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "edge", "period_ns"],
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "edge": {"enum": ["rising", "falling"]},
+              "period_ns": {"type": ["number", "null"], "exclusiveMinimum": 0}
+            }
+          }
+        },
+        "resets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "polarity", "synchronous"],
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "polarity": {"enum": ["active_high", "active_low"]},
+              "synchronous": {"type": "boolean"}
+            }
+          }
+        },
+        "memories": {"$ref": "#/$defs/stringArray"},
+        "black_boxes": {"$ref": "#/$defs/stringArray"},
+        "frontend": {"type": ["string", "null"], "minLength": 1},
+        "frontend_version": {"type": ["string", "null"], "minLength": 1},
+        "build_commands": {"$ref": "#/$defs/stringArray"},
+        "lint_commands": {"$ref": "#/$defs/stringArray"},
+        "test_commands": {"$ref": "#/$defs/stringArray"}
+      }
+    },
+    "compile_context_hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "filelist_sha256",
+        "include_tree_hashes",
+        "generated_input_hashes",
+        "compile_context_hash"
+      ],
+      "properties": {
+        "filelist_sha256": {
+          "anyOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]
+        },
+        "include_tree_hashes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "sha256"],
+            "properties": {
+              "path": {"$ref": "#/$defs/relativePath"},
+              "sha256": {"$ref": "#/$defs/sha256"}
+            }
+          }
+        },
+        "generated_input_hashes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "sha256"],
+            "properties": {
+              "path": {"$ref": "#/$defs/relativePath"},
+              "sha256": {"$ref": "#/$defs/sha256"}
+            }
+          }
+        },
+        "compile_context_hash": {
+          "anyOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]
+        }
+      }
+    },
+    "behavioral_basis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "location", "description"],
+        "properties": {
+          "kind": {
+            "enum": [
+              "upstream_tests",
+              "reference_model",
+              "assertions",
+              "specification",
+              "documented_pair"
+            ]
+          },
+          "location": {"type": "string", "minLength": 1},
+          "description": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "proof_contract": {
+      "$ref": "rtl-advisor-proof-v1.schema.json"
+    },
+    "source_hashes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"$ref": "#/$defs/relativePath"},
+          "sha256": {"$ref": "#/$defs/sha256"}
+        }
+      }
+    },
+    "synthesis_profiles": {"$ref": "#/$defs/stringArray"},
+    "split": {
+      "enum": ["unassigned", "development", "calibration", "evaluation", "release_holdout"]
+    },
+    "semantic_hash": {"$ref": "#/$defs/sha256"}
+  }
+}

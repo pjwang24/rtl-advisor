@@ -1,0 +1,124 @@
+{
+  "behavioral_basis": [
+    {
+      "description": "Pre-registered upstream evidence location; reproduction is pending.",
+      "kind": "specification",
+      "location": "Bender.yml"
+    }
+  ],
+  "categories": [
+    "buffering_flow_control",
+    "pipeline_register_placement"
+  ],
+  "compile_context": {
+    "black_boxes": [],
+    "build_commands": [
+      "yosys -m /opt/oss-cad-suite/share/yosys/plugins/slang.so -Q -p 'read_slang --top spill_register -D SYNTHESIS -I corpus/upstream/common_cells/include corpus/upstream/common_cells/src/spill_register_flushable.sv corpus/upstream/common_cells/src/spill_register.sv; hierarchy -check -top spill_register; proc; check'"
+    ],
+    "clocks": [
+      {
+        "edge": "rising",
+        "name": "clk_i",
+        "period_ns": null
+      }
+    ],
+    "defines": [
+      "SYNTHESIS"
+    ],
+    "filelist": null,
+    "frontend": "verilator+yosys-slang",
+    "frontend_version": "Verilator 5.047 devel rev v5.046-58-gb89d29cab (mod); Yosys 0.63+49 (git sha1 95d738edc, clang++ 18.1.8 -fPIC -O3)",
+    "generated_inputs": [],
+    "include_dirs": [
+      "include"
+    ],
+    "lint_commands": [
+      "verilator --lint-only --language 1800-2017 --Wall --Wno-fatal -DSYNTHESIS -Icorpus/upstream/common_cells/include --top-module spill_register corpus/upstream/common_cells/src/spill_register_flushable.sv corpus/upstream/common_cells/src/spill_register.sv"
+    ],
+    "memories": [],
+    "parameters": {},
+    "resets": [
+      {
+        "name": "rst_ni",
+        "polarity": "active_low",
+        "synchronous": false
+      }
+    ],
+    "sources": [
+      "src/spill_register_flushable.sv",
+      "src/spill_register.sv"
+    ],
+    "test_commands": [],
+    "top": "spill_register"
+  },
+  "compile_context_hashes": {
+    "compile_context_hash": "87eaa80e7472b3a900ef3df663dfdce100ff6a6766dff0f489d9f6f4c9a5547c",
+    "filelist_sha256": null,
+    "generated_input_hashes": [],
+    "include_tree_hashes": [
+      {
+        "path": "include",
+        "sha256": "ff612d5da4c2ed1d69a99729d3ffb78939bd609c9a600e64306dce3f817e5cc5"
+      }
+    ]
+  },
+  "display_name": "PULP common_cells spill_register",
+  "document_type": "rtl-advisor.reference-manifest",
+  "lineage": {
+    "containing_design_ids": [
+      "pulp-common-cells"
+    ],
+    "design_lineage_id": "pulp-common-cells-spill-register",
+    "repository_lineage_id": "pulp-common-cells",
+    "upstream_project_id": "pulp-common-cells"
+  },
+  "proof_contract": {
+    "assumptions": [
+      "Reset and protocol assumptions will be frozen before proof."
+    ],
+    "kind": "cycle_aligned_sequential_equivalence",
+    "latency_relation": "same_cycle",
+    "level": "P2",
+    "observables": [
+      "all top-level outputs"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "provenance": {
+    "canonical_url": "https://github.com/pulp-platform/common_cells",
+    "license": {
+      "disposition": "conditional",
+      "expression": "SHL-0.51 OR Apache-2.0",
+      "sha256": "6527a46225891b976fa94f634f6ee0cd22e1c7129d6f11c5c98c997627625fc7",
+      "url": "https://github.com/pulp-platform/common_cells/blob/1281545696eb3fcba50ec5b4275993476a3c710e/LICENSE"
+    },
+    "project": "pulp-common-cells",
+    "revision": "1281545696eb3fcba50ec5b4275993476a3c710e",
+    "revision_kind": "commit"
+  },
+  "qualification": {
+    "reason": null,
+    "state": "build_reproduced",
+    "status": "active"
+  },
+  "reference_id": "pulp-common-cells-spill-register",
+  "schema": "rtl-advisor-reference-v1",
+  "schema_version": 1,
+  "semantic_hash": "06d81d6413b6cc5fc0f4ee380fc31469970bc78608b30751e60b33a396a9bbcb",
+  "source_hashes": [
+    {
+      "path": "src/spill_register_flushable.sv",
+      "sha256": "3285eb2e557f6377de88df91751b0bccdad07b16be9d926314a52a23e964f02c"
+    },
+    {
+      "path": "src/spill_register.sv",
+      "sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec"
+    }
+  ],
+  "split": "development",
+  "synthesis_profiles": [
+    "standard",
+    "stronger"
+  ],
+  "tier": "A"
+}

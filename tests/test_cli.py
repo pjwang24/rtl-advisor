@@ -116,6 +116,24 @@ def test_corpus_suite_parser_requires_explicit_suite() -> None:
     assert validate_args.json_output is True
 
 
+def test_corpus_registry_parser_supports_metadata_operations() -> None:
+    parser = build_parser()
+    add_args = parser.parse_args(
+        ("corpus", "add", "reference.json", "--registry-dir", "registry", "--json")
+    )
+    validate_args = parser.parse_args(("corpus", "validate", "--json"))
+    list_args = parser.parse_args(
+        ("corpus", "list", "--kind", "variants", "--json")
+    )
+    summary_args = parser.parse_args(("corpus", "summary", "--json"))
+
+    assert add_args.manifest == "reference.json"
+    assert add_args.registry_dir == "registry"
+    assert validate_args.manifest is None
+    assert list_args.kind == "variants"
+    assert summary_args.corpus_command == "summary"
+
+
 def test_benchmark_parser_supports_smoke_pilot_and_arm_filters() -> None:
     parser = build_parser()
     run_args = parser.parse_args(

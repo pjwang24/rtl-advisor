@@ -1,0 +1,131 @@
+{
+  "behavioral_basis": [
+    {
+      "description": "Unbounded safety proof checks request propagation, one-hot grants, grant legality, selected index, and selected payload across arbitrary traffic. Evidence hash: 88c5aa3b09e3f7da556969e83d14c8a7da180a096b0ba593c6540ea6aa561f0b.",
+      "kind": "assertions",
+      "location": "artifacts/corpus-behavior/wave2-tier-a-12-v1/2a8ffc172c406c0e9482feef28372204409041e2fe3532475a778a6ae400a4b7/pulp-common-cells-rr-arb-tree/result.json"
+    }
+  ],
+  "categories": [
+    "selection_arbitration",
+    "state_control_queue"
+  ],
+  "compile_context": {
+    "black_boxes": [],
+    "build_commands": [
+      "yosys -m /opt/oss-cad-suite/share/yosys/plugins/slang.so -Q -p 'read_slang --top rr_arb_tree -G NumIn=4 -D SYNTHESIS -I corpus/upstream/common_cells/include corpus/upstream/common_cells/src/cf_math_pkg.sv corpus/upstream/common_cells/src/lzc.sv corpus/upstream/common_cells/src/rr_arb_tree.sv; hierarchy -check -top rr_arb_tree; proc; check'"
+    ],
+    "clocks": [
+      {
+        "edge": "rising",
+        "name": "clk_i",
+        "period_ns": null
+      }
+    ],
+    "defines": [
+      "SYNTHESIS"
+    ],
+    "filelist": null,
+    "frontend": "verilator+yosys-slang",
+    "frontend_version": "Verilator 5.047 devel rev v5.046-58-gb89d29cab (mod); Yosys 0.63+49 (git sha1 95d738edc, clang++ 18.1.8 -fPIC -O3)",
+    "generated_inputs": [],
+    "include_dirs": [
+      "include"
+    ],
+    "lint_commands": [
+      "verilator --lint-only --language 1800-2017 --Wall --Wno-fatal -DSYNTHESIS -Icorpus/upstream/common_cells/include -GNumIn=4 --top-module rr_arb_tree corpus/upstream/common_cells/src/cf_math_pkg.sv corpus/upstream/common_cells/src/lzc.sv corpus/upstream/common_cells/src/rr_arb_tree.sv"
+    ],
+    "memories": [],
+    "parameters": {
+      "NumIn": 4
+    },
+    "resets": [
+      {
+        "name": "rst_ni",
+        "polarity": "active_low",
+        "synchronous": false
+      }
+    ],
+    "sources": [
+      "src/cf_math_pkg.sv",
+      "src/lzc.sv",
+      "src/rr_arb_tree.sv"
+    ],
+    "test_commands": [],
+    "top": "rr_arb_tree"
+  },
+  "compile_context_hashes": {
+    "compile_context_hash": "26f0e83e1a8891ecd96e1f9407ccc16b330e03f7b33f262021cd800ed2fba434",
+    "filelist_sha256": null,
+    "generated_input_hashes": [],
+    "include_tree_hashes": [
+      {
+        "path": "include",
+        "sha256": "ff612d5da4c2ed1d69a99729d3ffb78939bd609c9a600e64306dce3f817e5cc5"
+      }
+    ]
+  },
+  "display_name": "PULP common_cells rr_arb_tree",
+  "document_type": "rtl-advisor.reference-manifest",
+  "lineage": {
+    "containing_design_ids": [
+      "pulp-common-cells"
+    ],
+    "design_lineage_id": "pulp-common-cells-rr-arb-tree",
+    "repository_lineage_id": "pulp-common-cells",
+    "upstream_project_id": "pulp-common-cells"
+  },
+  "proof_contract": {
+    "assumptions": [
+      "Reset and protocol assumptions will be frozen before proof."
+    ],
+    "kind": "cycle_aligned_sequential_equivalence",
+    "latency_relation": "same_cycle",
+    "level": "P2",
+    "observables": [
+      "all top-level outputs"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "provenance": {
+    "canonical_url": "https://github.com/pulp-platform/common_cells",
+    "license": {
+      "disposition": "conditional",
+      "expression": "SHL-0.51 OR Apache-2.0",
+      "sha256": "6527a46225891b976fa94f634f6ee0cd22e1c7129d6f11c5c98c997627625fc7",
+      "url": "https://github.com/pulp-platform/common_cells/blob/1281545696eb3fcba50ec5b4275993476a3c710e/LICENSE"
+    },
+    "project": "pulp-common-cells",
+    "revision": "1281545696eb3fcba50ec5b4275993476a3c710e",
+    "revision_kind": "commit"
+  },
+  "qualification": {
+    "reason": null,
+    "state": "reference_qualified",
+    "status": "active"
+  },
+  "reference_id": "pulp-common-cells-rr-arb-tree",
+  "schema": "rtl-advisor-reference-v1",
+  "schema_version": 1,
+  "semantic_hash": "8f6a572d112fa1f56fc9bbd502c16c7a5b5972d5108f4dfd91aac9c3f0ade0ef",
+  "source_hashes": [
+    {
+      "path": "src/cf_math_pkg.sv",
+      "sha256": "bbf0614771ceb9526356bb8e5234787324ef215884bc11b4aa27e91fc3cc8910"
+    },
+    {
+      "path": "src/lzc.sv",
+      "sha256": "f31989be4369ea7c4809c0c3d61df28581e9ac7666005fde6e476a975d1acd07"
+    },
+    {
+      "path": "src/rr_arb_tree.sv",
+      "sha256": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e"
+    }
+  ],
+  "split": "development",
+  "synthesis_profiles": [
+    "standard",
+    "stronger"
+  ],
+  "tier": "A"
+}

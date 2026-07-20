@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "schema": "rtl-advisor-variant-v1",
+  "document_type": "rtl-advisor.variant-manifest",
+  "variant_id": "opentitan-prim-arbiter-tree",
+  "parent_reference_id": "opentitan-prim-arbiter-ppc",
+  "variant_lineage_id": "lowrisc-opentitan-prim-arbiter-tree",
+  "display_name": "OpenTitan prim_arbiter_tree upstream alternative",
+  "state": "declared",
+  "origin": {
+    "kind": "upstream_alternative",
+    "description": "Existing upstream tree implementation paired with prim_arbiter_ppc; no local RTL has been downloaded or modified.",
+    "generator": null,
+    "generator_version": null
+  },
+  "source_locations": [
+    "hw/ip/prim/rtl/prim_arbiter_tree.sv"
+  ],
+  "source_changes": [],
+  "expected_relation": "equivalent",
+  "proof_contract": {
+    "schema": "rtl-advisor-proof-v1",
+    "level": "P2",
+    "kind": "cycle_aligned_sequential_equivalence",
+    "latency_relation": "same_cycle",
+    "assumptions": [
+      "Requests obey the upstream locking and stability contract",
+      "Both implementations use identical parameters and reset semantics"
+    ],
+    "observables": [
+      "grant outputs",
+      "lock-visible arbitration state"
+    ]
+  },
+  "artifact_hashes": {}
+}

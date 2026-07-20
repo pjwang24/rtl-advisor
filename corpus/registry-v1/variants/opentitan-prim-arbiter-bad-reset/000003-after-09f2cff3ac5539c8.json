@@ -1,0 +1,48 @@
+{
+  "artifact_hashes": {
+    "counterexample": "f30404eef89ad541aad89ad6634d42e13a40a18526b760ff7d0f25c9cb379548",
+    "formal_config": "4d4c3fd966bcf18f4224a5c6a3deee6e0145fcf0ef7b05c9d31995cf14b1a282",
+    "formal_miter": "25c1ca420e130991de5d7940afce37d2f141762d570cc552e531855539954d49",
+    "proof_plan": "c5a827d5cc3add23a83865958802092b53b1ced0539f80ec004a56f5154eda4d",
+    "proof_result": "05c2b89f865e3a42df875462c00d18e1451bc137eb999f0bb92150ec36f75a00",
+    "proof_transcript": "9a7ae4a33290c41fb7a6c4169537e77b21e2b078a9fc57cd0a6c26627d9ef95f"
+  },
+  "display_name": "OpenTitan arbiter reset negative control",
+  "document_type": "rtl-advisor.variant-manifest",
+  "expected_relation": "inequivalent_control",
+  "origin": {
+    "description": "Deliberately corrupts reset behavior to verify that the P2 checker rejects it.",
+    "generator": null,
+    "generator_version": null,
+    "kind": "negative_control"
+  },
+  "parent_reference_id": "opentitan-prim-arbiter-ppc",
+  "proof_contract": {
+    "assumptions": [
+      "N=4, DW=8, EnDataPort=1, and SYNTHESIS dummy assertion macros",
+      "request and payload vectors are sampled once after reset and then remain stable",
+      "ready_i is unconstrained on every cycle",
+      "req_chk_i is non-functional in the synthesized DUT configuration"
+    ],
+    "kind": "same-latency sequential equivalence miter",
+    "latency_relation": "same_cycle",
+    "level": "P2",
+    "observables": [
+      "valid_o every cycle",
+      "gnt_o every cycle",
+      "idx_o while valid_o is asserted",
+      "data_o while valid_o is asserted"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "schema": "rtl-advisor-variant-v1",
+  "schema_version": 1,
+  "semantic_hash": "2e36324dc761ea50d58fbd59cfc1340188aba0b3ab44379b2685b5a72183e01f",
+  "source_changes": [],
+  "source_locations": [
+    "examples/formal/p2/opentitan_arbiter_p2_miter.sv"
+  ],
+  "state": "proof_failed",
+  "variant_id": "opentitan-prim-arbiter-bad-reset",
+  "variant_lineage_id": "opentitan-prim-arbiter-bad-reset-v1"
+}

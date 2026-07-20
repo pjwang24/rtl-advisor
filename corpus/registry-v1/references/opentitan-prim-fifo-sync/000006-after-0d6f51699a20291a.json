@@ -1,0 +1,144 @@
+{
+  "behavioral_basis": [
+    {
+      "description": "Pre-registered upstream evidence location; reproduction is pending.",
+      "kind": "upstream_tests",
+      "location": "hw/ip/prim/fpv/prim_fifo_sync_fpv.core"
+    }
+  ],
+  "categories": [
+    "buffering_flow_control",
+    "state_control_queue"
+  ],
+  "compile_context": {
+    "black_boxes": [],
+    "build_commands": [
+      "yosys -m /opt/oss-cad-suite/share/yosys/plugins/slang.so -Q -p 'read_slang --top prim_fifo_sync -D SYNTHESIS -I corpus/upstream/opentitan/hw/ip/prim/rtl corpus/upstream/opentitan/hw/ip/prim/rtl/prim_util_pkg.sv corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count_pkg.sv corpus/upstream/opentitan/hw/ip/prim_generic/rtl/prim_flop.sv corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync_cnt.sv corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv; hierarchy -check -top prim_fifo_sync; proc; check'"
+    ],
+    "clocks": [
+      {
+        "edge": "rising",
+        "name": "clk_i",
+        "period_ns": null
+      }
+    ],
+    "defines": [
+      "SYNTHESIS"
+    ],
+    "filelist": null,
+    "frontend": "verilator+yosys-slang",
+    "frontend_version": "Verilator 5.047 devel rev v5.046-58-gb89d29cab (mod); Yosys 0.63+49 (git sha1 95d738edc, clang++ 18.1.8 -fPIC -O3)",
+    "generated_inputs": [],
+    "include_dirs": [
+      "hw/ip/prim/rtl"
+    ],
+    "lint_commands": [
+      "verilator --lint-only --language 1800-2017 --Wall --Wno-fatal -DSYNTHESIS -Icorpus/upstream/opentitan/hw/ip/prim/rtl --top-module prim_fifo_sync corpus/upstream/opentitan/hw/ip/prim/rtl/prim_util_pkg.sv corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count_pkg.sv corpus/upstream/opentitan/hw/ip/prim_generic/rtl/prim_flop.sv corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync_cnt.sv corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv"
+    ],
+    "memories": [],
+    "parameters": {},
+    "resets": [
+      {
+        "name": "rst_ni",
+        "polarity": "active_low",
+        "synchronous": false
+      }
+    ],
+    "sources": [
+      "hw/ip/prim/rtl/prim_util_pkg.sv",
+      "hw/ip/prim/rtl/prim_count_pkg.sv",
+      "hw/ip/prim_generic/rtl/prim_flop.sv",
+      "hw/ip/prim/rtl/prim_count.sv",
+      "hw/ip/prim/rtl/prim_fifo_sync_cnt.sv",
+      "hw/ip/prim/rtl/prim_fifo_sync.sv"
+    ],
+    "test_commands": [],
+    "top": "prim_fifo_sync"
+  },
+  "compile_context_hashes": {
+    "compile_context_hash": "f790f91d4d482805bfe034ea0c72da56514109ed7c605bec43355608fcf0107c",
+    "filelist_sha256": null,
+    "generated_input_hashes": [],
+    "include_tree_hashes": [
+      {
+        "path": "hw/ip/prim/rtl",
+        "sha256": "8da7012ae4918319b3156552e22a5eea7c199dc7c5e203067d67fc93226d3bff"
+      }
+    ]
+  },
+  "display_name": "OpenTitan prim_fifo_sync",
+  "document_type": "rtl-advisor.reference-manifest",
+  "lineage": {
+    "containing_design_ids": [
+      "lowrisc-opentitan"
+    ],
+    "design_lineage_id": "opentitan-prim-fifo-sync",
+    "repository_lineage_id": "lowrisc-opentitan",
+    "upstream_project_id": "lowrisc-opentitan"
+  },
+  "proof_contract": {
+    "assumptions": [
+      "Reset and protocol assumptions will be frozen before proof."
+    ],
+    "kind": "cycle_aligned_sequential_equivalence",
+    "latency_relation": "same_cycle",
+    "level": "P2",
+    "observables": [
+      "all top-level outputs"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "provenance": {
+    "canonical_url": "https://github.com/lowRISC/opentitan",
+    "license": {
+      "disposition": "conditional",
+      "expression": "Apache-2.0",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://github.com/lowRISC/opentitan/blob/99fb7bd3b2330a1bda61b1d3382198d0c7fee8d7/LICENSE"
+    },
+    "project": "lowrisc-opentitan",
+    "revision": "99fb7bd3b2330a1bda61b1d3382198d0c7fee8d7",
+    "revision_kind": "commit"
+  },
+  "qualification": {
+    "reason": "The pinned source builds and synthesizes, but its upstream FPV dependency graph was not reproduced in the Wave 2 container.",
+    "state": "build_reproduced",
+    "status": "blocked"
+  },
+  "reference_id": "opentitan-prim-fifo-sync",
+  "schema": "rtl-advisor-reference-v1",
+  "schema_version": 1,
+  "semantic_hash": "0ac4b15ff65a5c93695abe9ae1dc48803986a2888129bbcb4b4199dc826da18d",
+  "source_hashes": [
+    {
+      "path": "hw/ip/prim/rtl/prim_util_pkg.sv",
+      "sha256": "f71235ef5b92eaa3d2ed5c676f76108082df93b8aae8f9baa816584d1d285208"
+    },
+    {
+      "path": "hw/ip/prim/rtl/prim_count_pkg.sv",
+      "sha256": "8e465ed25b7d59f29faf0f315243a774cf0e50d178ec2068d8c71983cb2f18df"
+    },
+    {
+      "path": "hw/ip/prim_generic/rtl/prim_flop.sv",
+      "sha256": "6645d657b107b024f9211d3a0134890d1e20146f68ba1772bf62575f7b4e5549"
+    },
+    {
+      "path": "hw/ip/prim/rtl/prim_count.sv",
+      "sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb"
+    },
+    {
+      "path": "hw/ip/prim/rtl/prim_fifo_sync_cnt.sv",
+      "sha256": "33b87939c31a6d71ccd2fe005e5a5dcaaeb343990f9425568cb8686def9f4fb7"
+    },
+    {
+      "path": "hw/ip/prim/rtl/prim_fifo_sync.sv",
+      "sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630"
+    }
+  ],
+  "split": "development",
+  "synthesis_profiles": [
+    "standard",
+    "stronger"
+  ],
+  "tier": "A"
+}

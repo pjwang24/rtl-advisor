@@ -9,6 +9,10 @@ dist/
 artifacts/
 corpus/*
 !corpus/.gitkeep
+!corpus/registry-v1/
+!corpus/registry-v1/**
+examples/formal/reference/pulp_reference_behavior/
+examples/formal/reference/pulp_reference_behavior_*/
 third_party/OpenROAD-flow-scripts/
 third_party/picorv32/
 third_party/nangate45/*.lib

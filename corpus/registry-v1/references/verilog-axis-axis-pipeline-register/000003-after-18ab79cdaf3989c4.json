@@ -1,0 +1,111 @@
+{
+  "behavioral_basis": [
+    {
+      "description": "Pre-registered upstream evidence location; reproduction is pending.",
+      "kind": "upstream_tests",
+      "location": "tb/axis_pipeline_register/test_axis_pipeline_register.py"
+    }
+  ],
+  "categories": [
+    "buffering_flow_control",
+    "pipeline_register_placement"
+  ],
+  "compile_context": {
+    "black_boxes": [],
+    "build_commands": [],
+    "clocks": [
+      {
+        "edge": "rising",
+        "name": "clk",
+        "period_ns": null
+      }
+    ],
+    "defines": [],
+    "filelist": null,
+    "frontend": null,
+    "frontend_version": null,
+    "generated_inputs": [],
+    "include_dirs": [],
+    "lint_commands": [],
+    "memories": [],
+    "parameters": {},
+    "resets": [
+      {
+        "name": "rst",
+        "polarity": "active_high",
+        "synchronous": true
+      }
+    ],
+    "sources": [
+      "rtl/axis_pipeline_register.v",
+      "rtl/axis_register.v"
+    ],
+    "test_commands": [],
+    "top": "axis_pipeline_register"
+  },
+  "compile_context_hashes": {
+    "compile_context_hash": "f0a2a0374a4dc2d981112dbb9fa77f3ca5ac5c164a90076a79a6a2ac8a11a03a",
+    "filelist_sha256": null,
+    "generated_input_hashes": [],
+    "include_tree_hashes": []
+  },
+  "display_name": "verilog-axis axis_pipeline_register",
+  "document_type": "rtl-advisor.reference-manifest",
+  "lineage": {
+    "containing_design_ids": [
+      "alexforencich-verilog-axis"
+    ],
+    "design_lineage_id": "verilog-axis-axis-pipeline-register",
+    "repository_lineage_id": "alexforencich-verilog-axis",
+    "upstream_project_id": "alexforencich-verilog-axis"
+  },
+  "proof_contract": {
+    "assumptions": [
+      "Reset and protocol assumptions will be frozen before proof."
+    ],
+    "kind": "cycle_aligned_sequential_equivalence",
+    "latency_relation": "same_cycle",
+    "level": "P2",
+    "observables": [
+      "all top-level outputs"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "provenance": {
+    "canonical_url": "https://github.com/alexforencich/verilog-axis",
+    "license": {
+      "disposition": "conditional",
+      "expression": "MIT",
+      "sha256": "8ea57f95365e9b16a5b516f422b71269183a1ae53bab5878ae6d69039e58fe77",
+      "url": "https://github.com/alexforencich/verilog-axis/blob/48ff7a7e2ef782cf778d47910cf85835c64b1bce/COPYING"
+    },
+    "project": "alexforencich-verilog-axis",
+    "revision": "48ff7a7e2ef782cf778d47910cf85835c64b1bce",
+    "revision_kind": "commit"
+  },
+  "qualification": {
+    "reason": "Compile-context reproduction failed at: build",
+    "state": "source_pinned",
+    "status": "blocked"
+  },
+  "reference_id": "verilog-axis-axis-pipeline-register",
+  "schema": "rtl-advisor-reference-v1",
+  "schema_version": 1,
+  "semantic_hash": "5ca34f56cc772a555e37cce9a68615fe3d3aa6cb7453477089a035552ce3c466",
+  "source_hashes": [
+    {
+      "path": "rtl/axis_pipeline_register.v",
+      "sha256": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc"
+    },
+    {
+      "path": "rtl/axis_register.v",
+      "sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39"
+    }
+  ],
+  "split": "development",
+  "synthesis_profiles": [
+    "standard",
+    "stronger"
+  ],
+  "tier": "A"
+}

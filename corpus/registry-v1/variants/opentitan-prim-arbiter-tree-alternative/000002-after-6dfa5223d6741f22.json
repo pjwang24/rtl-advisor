@@ -1,0 +1,52 @@
+{
+  "artifact_hashes": {
+    "formal_config": "4d4c3fd966bcf18f4224a5c6a3deee6e0145fcf0ef7b05c9d31995cf14b1a282",
+    "formal_miter": "25c1ca420e130991de5d7940afce37d2f141762d570cc552e531855539954d49",
+    "proof_plan": "e4ab9cf88d0eb5aa95c30abfc8adf02723e2dea1935730a6b6cd62823710e802"
+  },
+  "display_name": "OpenTitan prim_arbiter_tree alternative",
+  "document_type": "rtl-advisor.variant-manifest",
+  "expected_relation": "equivalent",
+  "origin": {
+    "description": "Pinned upstream tree implementation compared with the PPC reference under an explicit same-cycle contract.",
+    "generator": null,
+    "generator_version": null,
+    "kind": "upstream_alternative"
+  },
+  "parent_reference_id": "opentitan-prim-arbiter-ppc",
+  "proof_contract": {
+    "assumptions": [
+      "N=4, DW=8, EnDataPort=1, and SYNTHESIS dummy assertion macros",
+      "request and payload vectors are sampled once after reset and then remain stable",
+      "ready_i is unconstrained on every cycle",
+      "req_chk_i is non-functional in the synthesized DUT configuration"
+    ],
+    "kind": "same-latency sequential equivalence miter",
+    "latency_relation": "same_cycle",
+    "level": "P2",
+    "observables": [
+      "valid_o every cycle",
+      "gnt_o every cycle",
+      "idx_o while valid_o is asserted",
+      "data_o while valid_o is asserted"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "schema": "rtl-advisor-variant-v1",
+  "schema_version": 1,
+  "semantic_hash": "c4387ffa09117a22866b599ec72064ebe68fd7648542e9d4d257c682b21274fc",
+  "source_changes": [
+    {
+      "after_sha256": "cad891e0479a377896ecbcddaf6dd7d5b9aa6e5b18ba23654b61795fcf3083e1",
+      "before_sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99",
+      "path": "hw/ip/prim/rtl/prim_arbiter_ppc.sv"
+    }
+  ],
+  "source_locations": [
+    "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv",
+    "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_tree.sv"
+  ],
+  "state": "prepared",
+  "variant_id": "opentitan-prim-arbiter-tree-alternative",
+  "variant_lineage_id": "opentitan-prim-arbiter-tree-alternative-v1"
+}

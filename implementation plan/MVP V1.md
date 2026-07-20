@@ -1,8 +1,10 @@
 # RTL Advisor MVP V1 — Reviewed and Corrected Plan
 
-> **Authority:** This is the controlling MVP plan. Where the older V2.3,
-> Frontend V1, or Codex Plugin V1 plans conflict with it, this plan takes
-> precedence. Execution results are recorded in
+> **Authority:** This is the frozen plan for the completed MVP vertical slice.
+> Where the older V2.3, Frontend V1, or Codex Plugin V1 plans conflict with its
+> MVP acceptance rules, this plan takes precedence. The long-range project is
+> now governed by [Project Roadmap V1](project%20roadmap%20v1.md) and
+> [Corpus Strategy V1](corpus%20strategy%20v1.md). Execution results are recorded in
 > `progress updates/july 19th.md` rather than changing the frozen acceptance
 > rules below.
 

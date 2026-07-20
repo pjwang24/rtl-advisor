@@ -5,6 +5,12 @@ FROM python:3.13-slim-bookworm@sha256:dd86541a59b252667f4c12f8b2ee17216de37dd65a
 LABEL org.opencontainers.image.source="https://github.com/pjwang24/rtl-advisor"
 LABEL org.opencontainers.image.description="Pinned RTL Advisor formal and synthesis integration environment"
 
+# EQY materializes partition strategies as Makefiles. Keep this runtime
+# dependency explicit instead of relying on the base image to provide it.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends make=4.3-4.1 \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY --from=uv /uv /uvx /bin/
 
 # Official YosysHQ OSS CAD Suite release 2026-03-06, linux-x64 asset. This is
@@ -36,5 +42,16 @@ ADD --checksum=sha256:8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113d
     /workspace/third_party/nangate45/NangateOpenCellLibrary_typical.lib
 
 RUN uv sync --frozen --extra v2 --group dev
+
+# The frozen verilog-axis references declare these exact upstream test
+# dependencies. Install them into the OSS CAD Suite Python used by cocotb so
+# behavioral qualification does not depend on the host Python environment.
+RUN /opt/oss-cad-suite/bin/tabbypy3 -m pip install --no-cache-dir wheel==0.45.1
+RUN /opt/oss-cad-suite/bin/tabbypy3 -m pip install --no-cache-dir --no-build-isolation \
+    cocotb==1.7.2 \
+    cocotb-bus==0.2.1 \
+    cocotb-test==0.2.4 \
+    cocotbext-axi==0.1.20 \
+    pytest==7.2.1
 
 CMD ["sh", ".github/scripts/run-mvp-tool-smoke.sh"]

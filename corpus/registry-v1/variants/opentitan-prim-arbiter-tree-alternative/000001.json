@@ -1,0 +1,42 @@
+{
+  "artifact_hashes": {},
+  "display_name": "OpenTitan prim_arbiter_tree alternative",
+  "document_type": "rtl-advisor.variant-manifest",
+  "expected_relation": "equivalent",
+  "origin": {
+    "description": "Pinned upstream tree implementation compared with the PPC reference under an explicit same-cycle contract.",
+    "generator": null,
+    "generator_version": null,
+    "kind": "upstream_alternative"
+  },
+  "parent_reference_id": "opentitan-prim-arbiter-ppc",
+  "proof_contract": {
+    "assumptions": [
+      "N=4, DW=8, EnDataPort=1, and SYNTHESIS dummy assertion macros",
+      "request and payload vectors are sampled once after reset and then remain stable",
+      "ready_i is unconstrained on every cycle",
+      "req_chk_i is non-functional in the synthesized DUT configuration"
+    ],
+    "kind": "same-latency sequential equivalence miter",
+    "latency_relation": "same_cycle",
+    "level": "P2",
+    "observables": [
+      "valid_o every cycle",
+      "gnt_o every cycle",
+      "idx_o while valid_o is asserted",
+      "data_o while valid_o is asserted"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "schema": "rtl-advisor-variant-v1",
+  "schema_version": 1,
+  "semantic_hash": "6dfa5223d6741f22cba2215cbed2a5ab1d6cbb1fb9e4a029a5b4bce460b8222b",
+  "source_changes": [],
+  "source_locations": [
+    "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv",
+    "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_tree.sv"
+  ],
+  "state": "declared",
+  "variant_id": "opentitan-prim-arbiter-tree-alternative",
+  "variant_lineage_id": "opentitan-prim-arbiter-tree-alternative-v1"
+}

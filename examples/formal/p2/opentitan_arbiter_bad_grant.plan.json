@@ -1,0 +1,62 @@
+{
+  "semantic_hash": "1b5c8d34b1fe218d82a90bae06615e8491348fb56ab494dea3e66f6975542aa1",
+  "schema_version": 1,
+  "schema": "rtl-advisor-p2-proof-plan-v1",
+  "document_type": "rtl-advisor.p2-proof-plan",
+  "proof_id": "opentitan-arbiter-bad-grant-p2-v1",
+  "variant_id": "opentitan-prim-arbiter-bad-grant",
+  "parent_reference_id": "opentitan-prim-arbiter-ppc",
+  "tranche_id": "wave2-tier-a-12-v1",
+  "tranche_semantic_hash": "ac85240050ea6045e033a7d2fdcf1ce125efa1e19cd6527688a1eb0571c6b475",
+  "expected_relation": "inequivalent_control",
+  "registration": {
+    "variant_lineage_id": "opentitan-prim-arbiter-bad-grant-v1",
+    "display_name": "OpenTitan arbiter grant negative control",
+    "origin": {
+      "kind": "negative_control",
+      "description": "Deliberately removes a grant to verify that the P2 checker rejects it.",
+      "generator": null,
+      "generator_version": null
+    },
+    "source_locations": ["examples/formal/p2/opentitan_arbiter_p2_miter.sv"],
+    "source_changes": []
+  },
+  "backend": "sby_miter",
+  "formal_config": "examples/formal/p2/opentitan_arbiter_p2.sby",
+  "task": "bad_grant",
+  "contract": {
+    "level": "P2",
+    "kind": "same-latency sequential equivalence miter",
+    "latency_relation": "same_cycle",
+    "reset": {
+      "clock": "clk_i",
+      "signal": "formal_rst_ni",
+      "sequence": "active-low at formal time zero; released on every later step"
+    },
+    "assumptions": [
+      "N=4, DW=8, EnDataPort=1, and SYNTHESIS dummy assertion macros",
+      "request and payload vectors are sampled once after reset and then remain stable",
+      "ready_i is unconstrained on every cycle",
+      "req_chk_i is non-functional in the synthesized DUT configuration"
+    ],
+    "observables": [
+      "valid_o every cycle",
+      "gnt_o every cycle",
+      "idx_o while valid_o is asserted",
+      "data_o while valid_o is asserted"
+    ]
+  },
+  "tools": {"yosys_version": "0.63+49", "sby_version": "SBY v0.63", "make_version": "GNU Make 4.3"},
+  "inputs": [
+    {"path": "examples/formal/p2/opentitan_arbiter_p2.sby", "sha256": "4d4c3fd966bcf18f4224a5c6a3deee6e0145fcf0ef7b05c9d31995cf14b1a282"},
+    {"path": "examples/formal/p2/opentitan_arbiter_p2_miter.sv", "sha256": "25c1ca420e130991de5d7940afce37d2f141762d570cc552e531855539954d49"},
+    {"path": "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_assert.sv", "sha256": "d717d5dbcba3b5aa8a731ef9f8af18b036b49edef282f0a43a51f5ad2dd9bb40"},
+    {"path": "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_assert_dummy_macros.svh", "sha256": "cac4a930105da662547de873f0b80246074fb22df9a398663e1c8ac3e7998218"},
+    {"path": "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_assert_sec_cm.svh", "sha256": "25db89fe5f250c1bcbd808d0b4808206b9e85ac337b26e4ebb23f2ad569e1a13"},
+    {"path": "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_flop_macros.sv", "sha256": "2e8e6c2ee484899ae5d0020eaf0c9732c31537c60c30cb2a0a0acd2e92baee03"},
+    {"path": "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_util_pkg.sv", "sha256": "f71235ef5b92eaa3d2ed5c676f76108082df93b8aae8f9baa816584d1d285208"},
+    {"path": "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_leading_one_ppc.sv", "sha256": "5fd9c8bc227da9d599e6f7cdf7acf75214c7e0e776e0e30892be6fc9d71106c9"},
+    {"path": "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv", "sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99"},
+    {"path": "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_tree.sv", "sha256": "cad891e0479a377896ecbcddaf6dd7d5b9aa6e5b18ba23654b61795fcf3083e1"}
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "semantic_hash": "3023d27d81eb19477a23a3f7bfd26cde25a841b4699feec54bbd163e6c89ef01",
+  "schema_version": 1,
+  "schema": "rtl-advisor-p3-proof-plan-v1",
+  "document_type": "rtl-advisor.p3-proof-plan",
+  "proof_id": "verilog-axis-pipeline-one-vs-two-stage-p3-v1",
+  "variant_id": "verilog-axis-pipeline-two-stage-skid",
+  "parent_reference_id": "verilog-axis-axis-pipeline-register",
+  "tranche_id": "wave2-tier-a-12-v1",
+  "tranche_semantic_hash": "ac85240050ea6045e033a7d2fdcf1ce125efa1e19cd6527688a1eb0571c6b475",
+  "expected_relation": "equivalent",
+  "registration": {
+    "variant_lineage_id": "verilog-axis-pipeline-two-stage-skid-v1",
+    "display_name": "verilog-axis two-stage skid pipeline alternative",
+    "origin": {
+      "kind": "upstream_parameter",
+      "description": "Compares the pinned upstream one-stage simple-buffer configuration with its two-stage skid-buffer configuration.",
+      "generator": null,
+      "generator_version": null
+    },
+    "source_locations": [
+      "corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v",
+      "corpus/upstream/verilog-axis/rtl/axis_register.v"
+    ],
+    "source_changes": []
+  },
+  "backend": "sby_miter",
+  "formal_config": "examples/formal/p3/verilog_axis_pipeline_p3.sby",
+  "task": "positive",
+  "contract": {
+    "level": "P3",
+    "kind": "bounded ready-valid transaction equivalence",
+    "latency_relation": "transaction_ordered",
+    "reset": {
+      "clock": "clk",
+      "signal": "formal_rst",
+      "sequence": "active-high at formal time zero; inactive on every later step"
+    },
+    "bounds": {
+      "transaction_count": 3,
+      "max_stall_cycles": 2,
+      "drain_cycles": 15
+    },
+    "assumptions": [
+      "both implementations receive the same three arbitrary tagged transactions",
+      "each implementation holds a transaction until its own input handshake completes",
+      "the shared output sink stalls for no more than two consecutive cycles",
+      "disabled AXI sideband outputs are outside the comparison"
+    ],
+    "observables": [
+      "accepted output transaction count",
+      "accepted output data sequence",
+      "bounded completion after the final input"
+    ]
+  },
+  "tools": {
+    "yosys_version": "0.63+49",
+    "sby_version": "SBY v0.63",
+    "make_version": "GNU Make 4.3"
+  },
+  "inputs": [
+    {
+      "path": "examples/formal/p3/verilog_axis_pipeline_p3.sby",
+      "sha256": "01addb00783ab0a5b70d925ff88b3acc587c5d443f4bd449be3fad94c391a967"
+    },
+    {
+      "path": "examples/formal/p3/verilog_axis_pipeline_p3_miter.sv",
+      "sha256": "cb2453026623d5754b888ea4acb2e535ed982a42bd93254cf20a5fd5b83a60e9"
+    },
+    {
+      "path": "corpus/upstream/verilog-axis/rtl/axis_register.v",
+      "sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39"
+    },
+    {
+      "path": "corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v",
+      "sha256": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc"
+    }
+  ]
+}

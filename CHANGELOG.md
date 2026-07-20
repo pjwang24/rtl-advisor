@@ -10,6 +10,28 @@ Plugin counterpart: `0.2.0-alpha.1`. Agent protocol:
 
 ### Added
 
+- A frozen 12-reference Tier A tranche spanning OpenTitan, PULP common_cells,
+  and verilog-axis, with exact source/archive/license hashes and no
+  candidate-PPA-driven replacement.
+- `corpus validate-tranche`, source verification, build/lint qualification,
+  baseline-only synthesis, P2 proof, P3 proof, and behavior-gate operations.
+- An independently reviewed Yosys/SBY same-cycle P2 arbiter-pair proof and a
+  bounded transaction-ordered P3 ready/valid pipeline proof.
+- Reset, state, grant, drop, duplicate, and ordering negative controls.
+- Four PULP reference-property tasks plus exact upstream cocotb dependencies
+  for three verilog-axis regressions.
+- An immutable behavior plan and result store that qualified 8/12 references,
+  retained four explicit blockers, and advanced the append-only registry only
+  after evidence passed.
+
+- Corpus Registry V1 reference, variant, and P0–P6 proof contracts with strict
+  JSON schemas, qualification-state gates, complete compile-context metadata,
+  deterministic semantic hashes, and append-only storage.
+- `corpus add`, `corpus validate`, `corpus list`, and `corpus summary` commands
+  with tier/category/upstream/license/proof/status coverage and protections
+  against file-count inflation, duplicate declared lineages, and split leakage.
+- A metadata-only OpenTitan arbiter reference/variant fixture that downloads no
+  RTL and correctly counts the upstream alternative as a variant.
 - A deterministic rule for unbalanced unsigned, equal-width, fixed-width
   combinational addition chains.
 - Source-linked findings, stable site IDs, isolated candidate workspaces, and
@@ -44,6 +66,15 @@ Plugin counterpart: `0.2.0-alpha.1`. Agent protocol:
 
 ### Evidence
 
+- The first corpus tranche qualifies 8/12 Tier A references, including seven
+  stateful modules and two documented equivalent pairs; the other four remain
+  explicit blockers.
+- All 12 references pass normalized compile/lint and both pinned baseline-only
+  Yosys/ABC recipes. Three upstream suites pass 30/30 tests, and four PULP
+  property-proof tasks pass in the pinned container.
+- P2 positive equivalence and P3 ordered-transaction equivalence pass; all
+  seven deliberately incorrect sequential/transaction controls fail.
+
 - The generated end-to-end fixture formally passes and returns
   `synthesis_handles` under both synthesis recipes.
 - The pre-registered open-RTL screen found 0 of 2 required qualifying modules.
@@ -54,6 +85,6 @@ Plugin counterpart: `0.2.0-alpha.1`. Agent protocol:
 
 - A release tag and project license, pending owner confirmation.
 - Two qualifying frozen open-source pilot modules.
-- EQY and sequential/block-level proof, technology-netlist equivalence,
-  target-flow validation, live ML decisions, OpenROAD gating, MCP, proprietary
-  RTL, and SoC-scale use.
+- EQY, block/subsystem proof, technology-netlist equivalence, target-flow
+  validation, live ML decisions, OpenROAD gating, MCP, proprietary RTL, and
+  SoC-scale use.

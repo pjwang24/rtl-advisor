@@ -1,0 +1,125 @@
+{
+  "behavioral_basis": [
+    {
+      "description": "Pre-registered upstream evidence location; reproduction is pending.",
+      "kind": "upstream_tests",
+      "location": "hw/ip/prim/fpv/prim_count_fpv.core"
+    }
+  ],
+  "categories": [
+    "arithmetic_datapath",
+    "state_control_queue"
+  ],
+  "compile_context": {
+    "black_boxes": [],
+    "build_commands": [],
+    "clocks": [
+      {
+        "edge": "rising",
+        "name": "clk_i",
+        "period_ns": null
+      }
+    ],
+    "defines": [
+      "SYNTHESIS"
+    ],
+    "filelist": null,
+    "frontend": null,
+    "frontend_version": null,
+    "generated_inputs": [],
+    "include_dirs": [
+      "hw/ip/prim/rtl"
+    ],
+    "lint_commands": [],
+    "memories": [],
+    "parameters": {},
+    "resets": [
+      {
+        "name": "rst_ni",
+        "polarity": "active_low",
+        "synchronous": false
+      }
+    ],
+    "sources": [
+      "hw/ip/prim/rtl/prim_count_pkg.sv",
+      "hw/ip/prim_generic/rtl/prim_flop.sv",
+      "hw/ip/prim/rtl/prim_count.sv"
+    ],
+    "test_commands": [],
+    "top": "prim_count"
+  },
+  "compile_context_hashes": {
+    "compile_context_hash": "60a17d08057c40bfef2741aa71c389bb5b2d2da7290dfb8de74eb09da9b82f5b",
+    "filelist_sha256": null,
+    "generated_input_hashes": [],
+    "include_tree_hashes": [
+      {
+        "path": "hw/ip/prim/rtl",
+        "sha256": "8da7012ae4918319b3156552e22a5eea7c199dc7c5e203067d67fc93226d3bff"
+      }
+    ]
+  },
+  "display_name": "OpenTitan prim_count",
+  "document_type": "rtl-advisor.reference-manifest",
+  "lineage": {
+    "containing_design_ids": [
+      "lowrisc-opentitan"
+    ],
+    "design_lineage_id": "opentitan-prim-count",
+    "repository_lineage_id": "lowrisc-opentitan",
+    "upstream_project_id": "lowrisc-opentitan"
+  },
+  "proof_contract": {
+    "assumptions": [
+      "Reset and protocol assumptions will be frozen before proof."
+    ],
+    "kind": "cycle_aligned_sequential_equivalence",
+    "latency_relation": "same_cycle",
+    "level": "P2",
+    "observables": [
+      "all top-level outputs"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "provenance": {
+    "canonical_url": "https://github.com/lowRISC/opentitan",
+    "license": {
+      "disposition": "conditional",
+      "expression": "Apache-2.0",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://github.com/lowRISC/opentitan/blob/99fb7bd3b2330a1bda61b1d3382198d0c7fee8d7/LICENSE"
+    },
+    "project": "lowrisc-opentitan",
+    "revision": "99fb7bd3b2330a1bda61b1d3382198d0c7fee8d7",
+    "revision_kind": "commit"
+  },
+  "qualification": {
+    "reason": "Compile-context reproduction failed at: build",
+    "state": "source_pinned",
+    "status": "blocked"
+  },
+  "reference_id": "opentitan-prim-count",
+  "schema": "rtl-advisor-reference-v1",
+  "schema_version": 1,
+  "semantic_hash": "9a4b2cd69e6598d6c6e75e888e782c1002e3f1b7204abc532e84e3c0b6778e1a",
+  "source_hashes": [
+    {
+      "path": "hw/ip/prim/rtl/prim_count_pkg.sv",
+      "sha256": "8e465ed25b7d59f29faf0f315243a774cf0e50d178ec2068d8c71983cb2f18df"
+    },
+    {
+      "path": "hw/ip/prim_generic/rtl/prim_flop.sv",
+      "sha256": "6645d657b107b024f9211d3a0134890d1e20146f68ba1772bf62575f7b4e5549"
+    },
+    {
+      "path": "hw/ip/prim/rtl/prim_count.sv",
+      "sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb"
+    }
+  ],
+  "split": "development",
+  "synthesis_profiles": [
+    "standard",
+    "stronger"
+  ],
+  "tier": "A"
+}
