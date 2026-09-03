@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path, PurePosixPath
 import shutil
+import tempfile
 from typing import Any, Mapping
 
 from rtl_advisor.config import ProjectConfig
@@ -403,12 +404,21 @@ def _tool_identity(executable: str, args: tuple[str, ...]) -> dict[str, str]:
 
 
 def collect_p2_tool_identity(formal_command: str = "sby") -> dict[str, Any]:
-    tools = {
-        "sby": _tool_identity(formal_command, ("--version",)),
-        "yosys": _tool_identity("yosys", ("-V",)),
-        "make": _tool_identity("make", ("--version",)),
-        "abc": _tool_identity("yosys-abc", ("-c", "version")),
-    }
+    if Path(formal_command).name == "run_pinned_sby.py":
+        tools = {
+            name: _tool_identity(
+                formal_command,
+                ("--rtl-advisor-tool-version", name),
+            )
+            for name in ("sby", "yosys", "make", "abc")
+        }
+    else:
+        tools = {
+            "sby": _tool_identity(formal_command, ("--version",)),
+            "yosys": _tool_identity("yosys", ("-V",)),
+            "make": _tool_identity("make", ("--version",)),
+            "abc": _tool_identity("yosys-abc", ("-c", "version")),
+        }
     return {**tools, "identity_hash": stable_hash(tools)}
 
 
@@ -481,27 +491,36 @@ def run_p2_proof(
     artifact_root.mkdir(parents=True, exist_ok=True)
     formal_output = artifact_root / "formal"
     formal_config = (config.root / str(plan["formal_config"])).resolve()
-    command = (
-        formal_command,
-        "-f",
-        "-d",
-        str(formal_output),
-        str(formal_config),
-        str(plan["task"]),
-    )
-    try:
-        result = run_command(
-            command,
-            timeout_seconds=config.tools.timeout_seconds,
-            cwd=config.root,
+    # SymbiYosys-generated shell snippets do not quote their internal ``cd``
+    # path consistently. Execute in a short no-space temporary directory, then
+    # copy the complete proof workspace into the hash-bound artifact location.
+    with tempfile.TemporaryDirectory(prefix="rtl-advisor-p2-") as temporary:
+        execution_output = Path(temporary) / "formal"
+        command = (
+            formal_command,
+            "-f",
+            "-d",
+            str(execution_output),
+            str(formal_config),
+            str(plan["task"]),
         )
-        transcript = "\n".join(
-            part for part in (result.stdout, result.stderr) if part
-        )
-        returncode: int | None = result.returncode
-    except ToolExecutionError as exc:
-        transcript = str(exc)
-        returncode = None
+        try:
+            result = run_command(
+                command,
+                timeout_seconds=config.tools.timeout_seconds,
+                cwd=config.root,
+            )
+            transcript = "\n".join(
+                part for part in (result.stdout, result.stderr) if part
+            )
+            returncode: int | None = result.returncode
+        except ToolExecutionError as exc:
+            transcript = str(exc)
+            returncode = None
+        if execution_output.is_dir():
+            if formal_output.is_dir():
+                shutil.rmtree(formal_output)
+            shutil.copytree(execution_output, formal_output)
     transcript_path = artifact_root / "transcript.log"
     transcript_path.write_text(transcript + ("\n" if transcript else ""), encoding="utf-8")
     relation = _classify_sby_result(

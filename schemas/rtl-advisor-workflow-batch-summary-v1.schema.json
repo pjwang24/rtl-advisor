@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-workflow-batch-summary-v1.schema.json",
+  "title": "RTL Advisor Workflow Batch Summary V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "schema", "document_type", "batch_id", "status", "request_semantic_hash", "authorization_semantic_hash", "capabilities_semantic_hash", "jobs", "counts", "items", "artifacts", "command", "semantic_hash"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-workflow-batch-summary-v1"},
+    "document_type": {"const": "rtl-advisor.workflow.batch-summary"},
+    "batch_id": {"type": "string", "pattern": "^batch-[0-9a-f]{20}$"},
+    "status": {"enum": ["completed", "partial"]},
+    "request_semantic_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "authorization_semantic_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "capabilities_semantic_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "jobs": {"type": "integer", "minimum": 1, "maximum": 4},
+    "counts": {"type": "object"},
+    "items": {"type": "array", "items": {"type": "object"}},
+    "artifacts": {"type": "object", "additionalProperties": {"type": "string", "minLength": 1}},
+    "command": {"type": "array", "items": {"type": "string"}},
+    "semantic_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

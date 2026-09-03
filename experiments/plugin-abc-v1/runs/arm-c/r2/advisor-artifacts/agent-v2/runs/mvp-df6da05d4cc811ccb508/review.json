@@ -1,0 +1,85 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-df6da05d4cc811ccb508/input.json",
+    "review": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-df6da05d4cc811ccb508/review.json",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-df6da05d4cc811ccb508"
+  },
+  "candidate_generation_allowed": false,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv",
+    "--objective",
+    "balanced",
+    "--top",
+    "g05_mux_common_logic",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 0,
+    "excluded_site_count": 1
+  },
+  "decision": "unsupported",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "2e540ac1e797c1c5570a97f1315bad93915256bc44b16f168f8fe6e14e9a0887",
+    "model_used": false,
+    "rules_only": true
+  },
+  "exclusions": [
+    {
+      "detail": "this direct assignment contains addition but could not be parsed as a pure, side-effect-free addition expression",
+      "exclusion_id": "addexclude_da902f3d5fa90a8c",
+      "reason_code": "unsupported_assignment_expression",
+      "source": {
+        "end_offset": 150,
+        "file": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv",
+        "sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+        "start_offset": 116
+      },
+      "status": "excluded",
+      "target": "y",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "findings": [],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "870e06a3a6b9fe5d93194afc3f94a5c9957879281fb084bd4db7bfb1634f2336",
+    "defines": [],
+    "design_hash": "41f62314930ecbc108e992611db0b3c71f4733b06011c18feaf7e670e262053d",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv",
+        "sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "g05_mux_common_logic"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-df6da05d4cc811ccb508",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "802bf83509370d46961bc803b73d064e2a8a1217a306a259b6ca331080bd466c",
+  "status": "completed"
+}

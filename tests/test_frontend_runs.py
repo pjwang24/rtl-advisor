@@ -12,7 +12,11 @@ from rtl_advisor.config import (
     SynthesisConfig,
     ToolConfig,
 )
-from rtl_advisor.frontend_api import FrontendAPIError, FrontendDataStore
+from rtl_advisor.frontend_api import (
+    FrontendAPIError,
+    FrontendDataStore,
+    _classification_context,
+)
 import rtl_advisor.frontend_server as frontend_server
 import rtl_advisor.mvp_agent as mvp_agent
 from rtl_advisor.mvp_schema import compile_context_snapshot, write_hashed_json
@@ -428,6 +432,170 @@ def test_runs_api_reads_complete_hash_linked_run(tmp_path: Path) -> None:
     assert {item["stage"] for item in artifacts["commands"]} >= {
         "review", "candidate", "verify", "measure", "report"
     }
+
+
+def test_analytics_api_flattens_verified_measurements_for_plots(
+    tmp_path: Path,
+) -> None:
+    config = _config(tmp_path)
+    _make_completed_run(config)
+
+    payload = FrontendDataStore(config).analytics()
+
+    assert payload["api_version"] == "v1"
+    assert payload["read_only"] is True
+    assert payload["summary"] == {
+        "run_count": 1,
+        "measured_candidate_count": 1,
+        "measurement_row_count": 2,
+        "invalid_run_count": 0,
+        "outcome_counts": {"synthesis_handles": 1},
+    }
+    assert payload["filters"] == {
+        "profiles": ["standard", "stronger"],
+        "objectives": ["timing"],
+        "decisions": ["synthesis_handles"],
+        "classifications": ["neutral"],
+        "transformations": ["adder_reduction_association"],
+    }
+    assert payload["reproducibility"] == []
+    assert len(payload["measurements"]) == 2
+    standard = next(
+        row for row in payload["measurements"] if row["profile"] == "standard"
+    )
+    assert standard["run_id"] == RUN_ID
+    assert standard["candidate_id"] == CANDIDATE_ID
+    assert standard["transformation_id"] == "adder_reduction_association"
+    assert standard["formal_status"] == "formal_passed"
+    assert standard["safe"] is True
+    assert standard["delay_improvement_percent"] == 1.0
+    assert standard["area_improvement_percent"] == 0.0
+    assert standard["cell_count_improvement_percent"] == 0.0
+    assert standard["classification"] == "neutral"
+    assert "regression limits" in standard["classification_reason"]
+    assert standard["candidate_decision_reason"].startswith("Synthesis handles")
+    assert standard["regression_triggers"] == []
+    assert standard["measurement_semantic_hash"]
+    assert standard["artifact_path"].endswith("/measurement.json")
+    assert "critical delay" in payload["metric_definitions"][
+        "delay_improvement_percent"
+    ]
+
+
+def test_analytics_prefers_hash_linked_family_aggregate(tmp_path: Path) -> None:
+    config = _config(tmp_path)
+    _make_completed_run(config)
+    study = config.artifacts_dir / "family-studies" / "family-v1"
+    preppa = write_hashed_json(
+        study / "preppa-v1.json",
+        {
+            "schema_version": 1,
+            "document_type": "rtl-advisor.arbiter-family-preppa-evidence",
+            "results": [
+                {
+                    "reference_id": "reference-a",
+                    "configuration_id": "width08",
+                    "candidate_id": "family-candidate-a",
+                    "formal_status": "formal_passed",
+                    "safe": True,
+                }
+            ],
+        },
+    )
+    profile = {
+        "classification": "improved",
+        "recipe_hash": "1" * 64,
+        "baseline": {
+            "metrics": {
+                "critical_delay_ps": 100.0,
+                "area_total": 50.0,
+                "cell_count": 20,
+            }
+        },
+        "candidate": {
+            "metrics": {
+                "critical_delay_ps": 90.0,
+                "area_total": 45.0,
+                "cell_count": 18,
+            }
+        },
+        "comparison": {
+            "critical_delay_ps": {"improvement_percent": 10.0},
+            "area_total": {"improvement_percent": 10.0},
+            "cell_count": {"improvement_percent": 10.0},
+        },
+    }
+    evidence = write_hashed_json(
+        study / "measurements" / "repeat-1" / "evidence.json",
+        {
+            "schema_version": 1,
+            "document_type": "rtl-advisor.arbiter-family-m0-m1-evidence",
+            "study_id": "family-v1",
+            "repeat_id": "repeat-1",
+            "preppa_semantic_hash": preppa["semantic_hash"],
+            "results": [
+                {
+                    "reference_id": "reference-a",
+                    "configuration_id": "width08",
+                    "candidate_id": "family-candidate-a",
+                    "decision": "measured_improvement",
+                    "measurement_semantic_hash": "2" * 64,
+                    "profiles": {"M0": profile, "M1": profile},
+                }
+            ],
+        },
+    )
+
+    payload = FrontendDataStore(config).analytics()
+
+    assert payload["summary"]["run_count"] == 1
+    assert payload["summary"]["measured_candidate_count"] == 1
+    assert payload["summary"]["measurement_row_count"] == 2
+    assert payload["summary"]["outcome_counts"] == {"measured_improvement": 1}
+    assert payload["filters"]["profiles"] == ["M0", "M1"]
+    row = payload["measurements"][0]
+    assert row["source_kind"] == "family_study"
+    assert row["configuration_id"] == "width08"
+    assert row["safe"] is True
+    assert row["drill_available"] is False
+    assert row["delay_improvement_percent"] == 10.0
+    assert row["objective"] == "timing"
+    assert row["classification"] == "improved"
+    assert row["classification_reason"] == payload["classification_policies"][
+        "timing"
+    ]["improved"]
+    assert row["artifact_path"].endswith("repeat-1/evidence.json")
+    assert evidence["semantic_hash"]
+
+
+def test_timing_regression_explanation_preserves_frozen_boundaries() -> None:
+    delay = _classification_context(
+        objective="timing",
+        classification="regressed",
+        delay_improvement_percent=-3.0,
+        area_improvement_percent=9.0,
+    )
+    assert delay["classification_reason"] == (
+        "Delay worsened 3.00%, meeting the 3.00% regression limit."
+    )
+    assert delay["regression_triggers"] == [
+        {
+            "metric": "delay_improvement_percent",
+            "axis": "y",
+            "operator": "<=",
+            "value": -3.0,
+            "label": "Delay regression limit",
+            "actual": -3.0,
+        }
+    ]
+
+    exact_area_guardrail = _classification_context(
+        objective="timing",
+        classification="neutral",
+        delay_improvement_percent=0.0,
+        area_improvement_percent=-10.0,
+    )
+    assert exact_area_guardrail["regression_triggers"] == []
 
 
 def test_runs_api_presents_hash_linked_synthesis_failure_reason(

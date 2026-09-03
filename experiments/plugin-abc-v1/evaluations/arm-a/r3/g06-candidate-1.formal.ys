@@ -1,0 +1,14 @@
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv"
+prep -top g06_priority_decode
+flatten
+design -stash gold
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r3/candidates/g06_priority_decode_candidate.sv"
+prep -top g06_priority_decode_candidate
+flatten
+design -stash gate
+design -copy-from gold -as gold g06_priority_decode
+design -copy-from gate -as gate g06_priority_decode_candidate
+equiv_make gold gate equiv
+prep -top equiv
+equiv_simple -seq 1
+equiv_status -assert

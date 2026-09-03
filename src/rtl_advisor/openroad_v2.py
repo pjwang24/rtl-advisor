@@ -518,7 +518,10 @@ def _run_one(
     retry_failed: bool,
     timeout_seconds: int,
 ) -> dict[str, Any]:
-    root = config.artifacts_dir / "openroad/v2"
+    artifact_subdir = Path(str(lock.get("artifact_subdir", "openroad/v2")))
+    if artifact_subdir.is_absolute() or ".." in artifact_subdir.parts:
+        raise OpenROADV2Error("invalid OpenROAD artifact subdirectory")
+    root = config.artifacts_dir / artifact_subdir
     result_path = root / "results" / f"{run['run_id']}.json"
     if result_path.is_file():
         previous = _load_json(result_path)
@@ -606,7 +609,7 @@ def _run_one(
     usable = returncode == 0 and route_finished and required_metrics and drc_clean
     result = {
         "schema_version": OPENROAD_RESULT_SCHEMA_VERSION,
-        "flow_version": OPENROAD_FLOW_VERSION,
+        "flow_version": lock.get("flow_version", OPENROAD_FLOW_VERSION),
         "lock_hash": lock["lock_hash"],
         "run_id": run["run_id"],
         "case_id": run["case_id"],

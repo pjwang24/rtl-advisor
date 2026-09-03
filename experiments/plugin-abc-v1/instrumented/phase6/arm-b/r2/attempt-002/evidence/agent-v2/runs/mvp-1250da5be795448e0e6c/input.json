@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "f7a5b89ee0c3e3cbeb37b4eff26a032e2d4b4989ad457fc17f4053f9de94b90d",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:prim_packer_fifo.sv",
+        "sha256": "99aeb7564474111dc6662488c9f4ca6b788723e449b128d08ac54f8fc2da5cd2"
+      }
+    ],
+    "top": "prim_packer_fifo"
+  },
+  "defines": [],
+  "design_hash": "b86913069e131794206a2e350f3af8e95c700c74a50e26e34eb051258d9308c6",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv",
+      "sha256": "99aeb7564474111dc6662488c9f4ca6b788723e449b128d08ac54f8fc2da5cd2"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "8b45e94e94482fd8428856ab940c428745daeea8b336ce205e2fb79b0a23a712",
+  "top": "prim_packer_fifo"
+}

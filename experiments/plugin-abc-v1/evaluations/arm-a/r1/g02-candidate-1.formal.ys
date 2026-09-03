@@ -1,0 +1,14 @@
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv"
+prep -top g02_add32_five
+flatten
+design -stash gold
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g02_c1.sv"
+prep -top g02_add32_five
+flatten
+design -stash gate
+design -copy-from gold -as gold g02_add32_five
+design -copy-from gate -as gate g02_add32_five
+equiv_make gold gate equiv
+prep -top equiv
+equiv_simple -seq 1
+equiv_status -assert

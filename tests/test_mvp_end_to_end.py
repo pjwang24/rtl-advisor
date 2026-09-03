@@ -89,9 +89,19 @@ def test_agent_v2_cli_plugin_and_dashboard_artifacts_match(tmp_path: Path) -> No
     source.write_text(
         """module adder_chain(
   input logic [15:0] a,b,c,d,
-  output logic [15:0] y
+  input logic select,
+  output logic [15:0] y,
+  output logic flag
 );
-  assign y = a + b + c + d;
+  logic [15:0] term0, term1, term2, term3;
+  assign term0 = a;
+  assign term1 = b;
+  assign term2 = c;
+  assign term3 = d;
+  assign y = term0 + term1 + term2 + term3;
+  always_comb begin
+    flag = select;
+  end
 endmodule
 """,
         encoding="utf-8",
@@ -144,6 +154,11 @@ endmodule
         [str(source), "--top", "adder_chain", "--objective", "balanced"],
     )
     assert review["decision"] == "candidate_available"
+    assert review["coverage"] == {
+        "eligible_site_count": 1,
+        "excluded_site_count": 1,
+    }
+    assert review["exclusions"][0]["reason_code"] == "procedural_or_generated_rtl"
     run_id = review["run_id"]
     finding_id = review["findings"][0]["finding_id"]
 

@@ -52,6 +52,14 @@ def test_frontend_case_filters_and_detail_use_generated_rtl() -> None:
     assert "module" in detail["rtl"]["source"]
     assert len(detail["candidates"]) == 3
     assert all(candidate["stages"]["formal"] == "passed" for candidate in detail["candidates"])
+    candidate = detail["candidates"][0]
+    assert candidate["rtl"]["variant_id"] == candidate["template_id"]
+    assert "module" in candidate["rtl"]["source"]
+    assert candidate["formal"]["status"] == "equivalent"
+    assert candidate["formal"]["backend"] == "Yosys/ABC CEC"
+    assert candidate["synthesis"]["status"] == "passed"
+    assert candidate["synthesis"]["baseline"]["critical_delay_ps"] > 0
+    assert candidate["synthesis"]["candidate"]["area_total"] > 0
 
 
 def test_frontend_contract_is_read_only_and_versioned() -> None:

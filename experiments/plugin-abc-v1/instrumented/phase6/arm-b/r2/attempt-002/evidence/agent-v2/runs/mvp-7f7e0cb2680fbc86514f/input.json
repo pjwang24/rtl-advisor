@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "f3277d0937d41283ec32977c760f774a68c863819ff3288d2665ced130873ccb",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:prim_arbiter_ppc.sv",
+        "sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99"
+      }
+    ],
+    "top": "prim_arbiter_ppc"
+  },
+  "defines": [],
+  "design_hash": "b49d46a65bcf70de6ad65740bebca38d5571fdf482037dcf8321694c48814d9a",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv",
+      "sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "faf2fcc109dafbdc938c8f5cd47e6d105186b14bd96fa9481433375e94f94c66",
+  "top": "prim_arbiter_ppc"
+}

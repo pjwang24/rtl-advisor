@@ -1,0 +1,348 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v corpus/upstream/verilog-axis/rtl/axis_register.v; hierarchy -check -top axis_pipeline_register; proc; check -assert' --
+
+1. Executing Verilog-2005 frontend: corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v
+Parsing Verilog input from `corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v' to AST representation.
+Generating RTLIL representation for module `\axis_pipeline_register'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: corpus/upstream/verilog-axis/rtl/axis_register.v
+Parsing Verilog input from `corpus/upstream/verilog-axis/rtl/axis_register.v' to AST representation.
+Generating RTLIL representation for module `\axis_register'.
+Successfully finished Verilog frontend.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \axis_pipeline_register
+Used module:     \axis_register
+Parameter \DATA_WIDTH = 8
+Parameter \KEEP_ENABLE = 1'0
+Parameter \KEEP_WIDTH = 1
+Parameter \LAST_ENABLE = 1
+Parameter \ID_ENABLE = 0
+Parameter \ID_WIDTH = 8
+Parameter \DEST_ENABLE = 0
+Parameter \DEST_WIDTH = 8
+Parameter \USER_ENABLE = 1
+Parameter \USER_WIDTH = 1
+Parameter \REG_TYPE = 2
+
+3.2. Executing AST frontend in derive mode using pre-parsed AST for module `\axis_register'.
+Parameter \DATA_WIDTH = 8
+Parameter \KEEP_ENABLE = 1'0
+Parameter \KEEP_WIDTH = 1
+Parameter \LAST_ENABLE = 1
+Parameter \ID_ENABLE = 0
+Parameter \ID_WIDTH = 8
+Parameter \DEST_ENABLE = 0
+Parameter \DEST_WIDTH = 8
+Parameter \USER_ENABLE = 1
+Parameter \USER_WIDTH = 1
+Parameter \REG_TYPE = 2
+Generating RTLIL representation for module `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register'.
+Parameter \DATA_WIDTH = 8
+Parameter \KEEP_ENABLE = 1'0
+Parameter \KEEP_WIDTH = 1
+Parameter \LAST_ENABLE = 1
+Parameter \ID_ENABLE = 0
+Parameter \ID_WIDTH = 8
+Parameter \DEST_ENABLE = 0
+Parameter \DEST_WIDTH = 8
+Parameter \USER_ENABLE = 1
+Parameter \USER_WIDTH = 1
+Parameter \REG_TYPE = 2
+Found cached RTLIL representation for module `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register'.
+Reprocessing module axis_pipeline_register because instantiated module axis_register has become available.
+Generating RTLIL representation for module `\axis_pipeline_register'.
+
+3.3. Analyzing design hierarchy..
+Top module:  \axis_pipeline_register
+Used module:     \axis_register
+Parameter \DATA_WIDTH = 8
+Parameter \KEEP_ENABLE = 1'0
+Parameter \KEEP_WIDTH = 1
+Parameter \LAST_ENABLE = 1
+Parameter \ID_ENABLE = 0
+Parameter \ID_WIDTH = 8
+Parameter \DEST_ENABLE = 0
+Parameter \DEST_WIDTH = 8
+Parameter \USER_ENABLE = 1
+Parameter \USER_WIDTH = 1
+Parameter \REG_TYPE = 2
+Found cached RTLIL representation for module `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register'.
+Parameter \DATA_WIDTH = 8
+Parameter \KEEP_ENABLE = 1'0
+Parameter \KEEP_WIDTH = 1
+Parameter \LAST_ENABLE = 1
+Parameter \ID_ENABLE = 0
+Parameter \ID_WIDTH = 8
+Parameter \DEST_ENABLE = 0
+Parameter \DEST_WIDTH = 8
+Parameter \USER_ENABLE = 1
+Parameter \USER_WIDTH = 1
+Parameter \REG_TYPE = 2
+Found cached RTLIL representation for module `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register'.
+
+3.4. Analyzing design hierarchy..
+Top module:  \axis_pipeline_register
+Used module:     $paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register
+
+3.5. Analyzing design hierarchy..
+Top module:  \axis_pipeline_register
+Used module:     $paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register
+Removing unused module `\axis_register'.
+Removed 1 unused modules.
+
+4. Executing PROC pass (convert processes to netlists).
+
+4.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43 in module $paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.
+Marked 3 switch rules as full_case in process $proc$corpus/upstream/verilog-axis/rtl/axis_register.v:131$40 in module $paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.
+Removed a total of 0 dead cases.
+
+4.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 44 assignments to connections.
+
+4.4. Executing PROC_INIT pass (extract init attributes).
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:111$58'.
+  Set init value: \genblk1.temp_m_axis_tuser_reg = 1'0
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:110$57'.
+  Set init value: \genblk1.temp_m_axis_tdest_reg = 8'00000000
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:109$56'.
+  Set init value: \genblk1.temp_m_axis_tid_reg = 8'00000000
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:108$55'.
+  Set init value: \genblk1.temp_m_axis_tlast_reg = 1'0
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:107$54'.
+  Set init value: \genblk1.temp_m_axis_tvalid_reg = 1'0
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:106$53'.
+  Set init value: \genblk1.temp_m_axis_tkeep_reg = 1'0
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:105$52'.
+  Set init value: \genblk1.temp_m_axis_tdata_reg = 8'00000000
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:103$51'.
+  Set init value: \genblk1.m_axis_tuser_reg = 1'0
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:102$50'.
+  Set init value: \genblk1.m_axis_tdest_reg = 8'00000000
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:101$49'.
+  Set init value: \genblk1.m_axis_tid_reg = 8'00000000
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:100$48'.
+  Set init value: \genblk1.m_axis_tlast_reg = 1'0
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:99$47'.
+  Set init value: \genblk1.m_axis_tvalid_reg = 1'0
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:98$46'.
+  Set init value: \genblk1.m_axis_tkeep_reg = 1'0
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:97$45'.
+  Set init value: \genblk1.m_axis_tdata_reg = 8'00000000
+Found init rule in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:95$44'.
+  Set init value: \genblk1.s_axis_tready_reg = 1'0
+
+4.5. Executing PROC_ARST pass (detect async resets in processes).
+
+4.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~7 debug messages>
+
+4.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:154$114'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:153$113'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:152$112'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:151$111'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:149$110'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:148$109'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:146$108'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:141$107'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:154$106'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:153$105'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:152$104'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:151$103'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:149$102'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:148$101'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:146$100'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:141$99'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:112$98'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:107$97'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:106$96'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:105$95'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:104$94'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:102$93'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:101$92'.
+Creating decoders for process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:100$91'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:111$58'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:110$57'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:109$56'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:108$55'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:107$54'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:106$53'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:105$52'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:103$51'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:102$50'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:101$49'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:100$48'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:99$47'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:98$46'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:97$45'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:95$44'.
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+     1/15: $0\genblk1.temp_m_axis_tvalid_reg[0:0]
+     2/15: $0\genblk1.m_axis_tvalid_reg[0:0]
+     3/15: $0\genblk1.s_axis_tready_reg[0:0]
+     4/15: $0\genblk1.temp_m_axis_tuser_reg[0:0]
+     5/15: $0\genblk1.temp_m_axis_tdest_reg[7:0]
+     6/15: $0\genblk1.temp_m_axis_tid_reg[7:0]
+     7/15: $0\genblk1.temp_m_axis_tlast_reg[0:0]
+     8/15: $0\genblk1.temp_m_axis_tkeep_reg[0:0]
+     9/15: $0\genblk1.temp_m_axis_tdata_reg[7:0]
+    10/15: $0\genblk1.m_axis_tuser_reg[0:0]
+    11/15: $0\genblk1.m_axis_tdest_reg[7:0]
+    12/15: $0\genblk1.m_axis_tid_reg[7:0]
+    13/15: $0\genblk1.m_axis_tlast_reg[0:0]
+    14/15: $0\genblk1.m_axis_tkeep_reg[0:0]
+    15/15: $0\genblk1.m_axis_tdata_reg[7:0]
+Creating decoders for process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:131$40'.
+     1/12: $2\genblk1.store_axis_temp_to_output[0:0]
+     2/12: $3\genblk1.temp_m_axis_tvalid_next[0:0]
+     3/12: $3\genblk1.m_axis_tvalid_next[0:0]
+     4/12: $2\genblk1.store_axis_input_to_output[0:0]
+     5/12: $2\genblk1.m_axis_tvalid_next[0:0]
+     6/12: $2\genblk1.store_axis_input_to_temp[0:0]
+     7/12: $2\genblk1.temp_m_axis_tvalid_next[0:0]
+     8/12: $1\genblk1.store_axis_input_to_temp[0:0]
+     9/12: $1\genblk1.store_axis_input_to_output[0:0]
+    10/12: $1\genblk1.temp_m_axis_tvalid_next[0:0]
+    11/12: $1\genblk1.m_axis_tvalid_next[0:0]
+    12/12: $1\genblk1.store_axis_temp_to_output[0:0]
+
+4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\axis_pipeline_register.\axis_tuser[2]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:154$114'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tdest[2]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:153$113'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tid[2]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:152$112'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tlast[2]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:151$111'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tvalid[2]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:149$110'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tkeep[2]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:148$109'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tdata[2]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:146$108'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tready[1]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:141$107'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tuser[1]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:154$106'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tdest[1]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:153$105'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tid[1]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:152$104'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tlast[1]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:151$103'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tvalid[1]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:149$102'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tkeep[1]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:148$101'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tdata[1]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:146$100'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tready[0]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:141$99'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tready[2]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:112$98'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tuser[0]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:107$97'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tdest[0]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:106$96'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tid[0]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:105$95'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tlast[0]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:104$94'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tvalid[0]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:102$93'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tkeep[0]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:101$92'.
+No latch inferred for signal `\axis_pipeline_register.\axis_tdata[0]' from process `\axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:100$91'.
+No latch inferred for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.m_axis_tvalid_next' from process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:131$40'.
+No latch inferred for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.temp_m_axis_tvalid_next' from process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:131$40'.
+No latch inferred for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.store_axis_input_to_output' from process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:131$40'.
+No latch inferred for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.store_axis_input_to_temp' from process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:131$40'.
+No latch inferred for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.store_axis_temp_to_output' from process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:131$40'.
+
+4.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.s_axis_tready_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$220' with positive edge clock.
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.m_axis_tdata_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$221' with positive edge clock.
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.m_axis_tkeep_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$222' with positive edge clock.
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.m_axis_tvalid_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$223' with positive edge clock.
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.m_axis_tlast_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$224' with positive edge clock.
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.m_axis_tid_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$225' with positive edge clock.
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.m_axis_tdest_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$226' with positive edge clock.
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.m_axis_tuser_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$227' with positive edge clock.
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.temp_m_axis_tdata_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$228' with positive edge clock.
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.temp_m_axis_tkeep_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$229' with positive edge clock.
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.temp_m_axis_tvalid_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$230' with positive edge clock.
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.temp_m_axis_tlast_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$231' with positive edge clock.
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.temp_m_axis_tid_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$232' with positive edge clock.
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.temp_m_axis_tdest_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$233' with positive edge clock.
+Creating register for signal `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.\genblk1.temp_m_axis_tuser_reg' using process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+  created $dff cell `$procdff$234' with positive edge clock.
+
+4.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:154$114'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:153$113'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:152$112'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:151$111'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:149$110'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:148$109'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:146$108'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:141$107'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:154$106'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:153$105'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:152$104'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:151$103'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:149$102'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:148$101'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:146$100'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:141$99'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:112$98'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:107$97'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:106$96'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:105$95'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:104$94'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:102$93'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:101$92'.
+Removing empty process `axis_pipeline_register.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:100$91'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:111$58'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:110$57'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:109$56'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:108$55'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:107$54'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:106$53'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:105$52'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:103$51'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:102$50'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:101$49'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:100$48'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:99$47'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:98$46'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:97$45'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:95$44'.
+Found and cleaned up 4 empty switches in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:159$43'.
+Found and cleaned up 3 empty switches in `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:131$40'.
+Removing empty process `$paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.$proc$corpus/upstream/verilog-axis/rtl/axis_register.v:131$40'.
+Cleaned up 7 empty switches.
+
+4.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_register.
+Optimizing module $paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register.
+
+5. Executing CHECK pass (checking for obvious problems).
+Checking module axis_pipeline_register...
+Checking module $paramod$ca4db2e9a5f43992a08a9d13325ac5c0ec417847\axis_register...
+Found and reported 0 problems.
+
+End of script. Logfile hash: a2b4bd8f02, CPU: user 0.03s system 0.01s, MEM: 13.94 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 46% 3x read_verilog (0 sec), 33% 1x hierarchy (0 sec), ...

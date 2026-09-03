@@ -1,0 +1,68 @@
+{
+  "schema": "rtl-advisor-plugin-abc-evidence-audit-v1",
+  "experiment_id": "plugin-abc-v1",
+  "arm": "C",
+  "repetition": 3,
+  "result_path": "experiments/plugin-abc-v1/runs/arm-c/r3/result.json",
+  "result_sha256": "20d3ea05f15fd19f0f5765aaac2aa4298ca77b55e18df8bc09afb7c12c3df42e",
+  "all_baselines_unchanged": true,
+  "all_candidate_claims_supported": true,
+  "cases": [
+    {
+      "case_id": "g05",
+      "baseline_sha256_expected": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+      "baseline_sha256_actual": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "g06",
+      "baseline_sha256_expected": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+      "baseline_sha256_actual": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "g07",
+      "baseline_sha256_expected": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2",
+      "baseline_sha256_actual": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "g10",
+      "baseline_sha256_expected": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+      "baseline_sha256_actual": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "g11",
+      "baseline_sha256_expected": "1c7e7a24c9db1fca9787798b355b2d9fca354646df1e056c229c658a3a8d36c6",
+      "baseline_sha256_actual": "1c7e7a24c9db1fca9787798b355b2d9fca354646df1e056c229c658a3a8d36c6",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "g12",
+      "baseline_sha256_expected": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+      "baseline_sha256_actual": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "o09",
+      "baseline_sha256_expected": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+      "baseline_sha256_actual": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    }
+  ]
+}

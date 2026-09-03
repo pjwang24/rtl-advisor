@@ -1,0 +1,709 @@
+{
+  "schema": "rtl-advisor-plugin-abc-tiebreak-resolution-v1",
+  "experiment_id": "plugin-abc-v1",
+  "arms": [
+    {
+      "arm": "A",
+      "case_count": 24,
+      "tie_break_case_count": 13,
+      "unresolved_cases": [
+        "o02",
+        "o03",
+        "o07"
+      ],
+      "all_decisions_resolved": false,
+      "cases": [
+        {
+          "case_id": "g01",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g02",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g03",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g04",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g05",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g06",
+          "decisions": [
+            "no_change",
+            "inconclusive",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g07",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g08",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g09",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g10",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g11",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g12",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "o01",
+          "decisions": [
+            "unsupported",
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "o02",
+          "decisions": [
+            "unsupported",
+            "inconclusive",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": null
+        },
+        {
+          "case_id": "o03",
+          "decisions": [
+            "unsupported",
+            "inconclusive",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": null
+        },
+        {
+          "case_id": "o04",
+          "decisions": [
+            "no_change",
+            "inconclusive",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "o05",
+          "decisions": [
+            "unsupported",
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "o06",
+          "decisions": [
+            "unsupported",
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "o07",
+          "decisions": [
+            "unsupported",
+            "inconclusive",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": null
+        },
+        {
+          "case_id": "o08",
+          "decisions": [
+            "unsupported",
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "o09",
+          "decisions": [
+            "unsupported",
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "o10",
+          "decisions": [
+            "no_change",
+            "inconclusive",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "o11",
+          "decisions": [
+            "unsupported",
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "o12",
+          "decisions": [
+            "no_change",
+            "inconclusive",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": "no_change"
+        }
+      ]
+    },
+    {
+      "arm": "B",
+      "case_count": 24,
+      "tie_break_case_count": 0,
+      "unresolved_cases": [],
+      "all_decisions_resolved": true,
+      "cases": [
+        {
+          "case_id": "g01",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g02",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g03",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g04",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "g05",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "g06",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "g07",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "g08",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "g09",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "g10",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "g11",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "g12",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o01",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o02",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o03",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o04",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o05",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o06",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o07",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o08",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o09",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o10",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o11",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o12",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        }
+      ]
+    },
+    {
+      "arm": "C",
+      "case_count": 24,
+      "tie_break_case_count": 7,
+      "unresolved_cases": [
+        "g06",
+        "g10",
+        "o09"
+      ],
+      "all_decisions_resolved": false,
+      "cases": [
+        {
+          "case_id": "g01",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g02",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g03",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g04",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "g05",
+          "decisions": [
+            "inconclusive",
+            "unsupported",
+            "inconclusive"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": "inconclusive"
+        },
+        {
+          "case_id": "g06",
+          "decisions": [
+            "inconclusive",
+            "unsupported",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": null
+        },
+        {
+          "case_id": "g07",
+          "decisions": [
+            "no_change",
+            "unsupported",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g08",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "g09",
+          "decisions": [
+            "no_change",
+            "no_change"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g10",
+          "decisions": [
+            "no_change",
+            "unsupported",
+            "inconclusive"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": null
+        },
+        {
+          "case_id": "g11",
+          "decisions": [
+            "no_change",
+            "unsupported",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "g12",
+          "decisions": [
+            "no_change",
+            "unsupported",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": "no_change"
+        },
+        {
+          "case_id": "o01",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o02",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o03",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o04",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o05",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o06",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o07",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o08",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o09",
+          "decisions": [
+            "inconclusive",
+            "unsupported",
+            "no_change"
+          ],
+          "tie_break_used": true,
+          "resolved_decision": null
+        },
+        {
+          "case_id": "o10",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o11",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        },
+        {
+          "case_id": "o12",
+          "decisions": [
+            "unsupported",
+            "unsupported"
+          ],
+          "tie_break_used": false,
+          "resolved_decision": "unsupported"
+        }
+      ]
+    }
+  ]
+}

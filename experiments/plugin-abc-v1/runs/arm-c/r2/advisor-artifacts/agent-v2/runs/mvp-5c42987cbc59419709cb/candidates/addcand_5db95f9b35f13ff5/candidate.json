@@ -1,0 +1,296 @@
+{
+  "artifacts": {
+    "candidate_record": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/candidate.json",
+    "diff": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/candidate.diff",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5"
+  },
+  "candidate": {
+    "artifact_dir": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5",
+    "baseline_compile_context": {
+      "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+      "defines": [],
+      "filelists": [],
+      "include_trees": [],
+      "schema_version": 1,
+      "sources": [
+        {
+          "logical_id": "source:0000:g01_add8_left.sv",
+          "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+        }
+      ],
+      "top": "g01_add8_left"
+    },
+    "baseline_design": {
+      "defines": [],
+      "design_hash": "1e49c90b185383b61191990bca48e0e214b7915eb5e5d2dfd228021f95f02ac5",
+      "filelists": [],
+      "files": [
+        {
+          "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+          "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+        }
+      ],
+      "include_dirs": [],
+      "schema_version": 2,
+      "top": "g01_add8_left"
+    },
+    "baseline_design_hash": "1e49c90b185383b61191990bca48e0e214b7915eb5e5d2dfd228021f95f02ac5",
+    "candidate_compile_context": {
+      "compile_context_hash": "2de30f999a4b45a464f998a3e3d3686061f37881c68151893752b26c39cd60e6",
+      "defines": [],
+      "filelists": [],
+      "include_trees": [],
+      "schema_version": 1,
+      "sources": [
+        {
+          "logical_id": "source:0000:g01_add8_left.sv",
+          "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+        }
+      ],
+      "top": "g01_add8_left"
+    },
+    "candidate_design": {
+      "defines": [],
+      "design_hash": "f761a9d3afdec7d0585a160dd0a03a5800b01da81c8d006a2155fcf40bc1ac92",
+      "filelists": [],
+      "files": [
+        {
+          "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/design/sources/0000/g01_add8_left.sv",
+          "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+        }
+      ],
+      "include_dirs": [],
+      "schema_version": 2,
+      "top": "g01_add8_left"
+    },
+    "candidate_design_hash": "f761a9d3afdec7d0585a160dd0a03a5800b01da81c8d006a2155fcf40bc1ac92",
+    "candidate_id": "addcand_5db95f9b35f13ff5",
+    "diff_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/candidate.diff",
+    "diff_sha256": "4a78d5a83ad86f66dc2f8e97d016330a78c376b839f6b673e8f4ac6465e52413",
+    "document_type": "rtl-advisor.candidate",
+    "finding": {
+      "finding_id": "addsite_9067dfe8e174e103",
+      "limitations": [
+        "candidate is unproven until current Yosys formal verification passes",
+        "only two-state bit-vector equivalence is supported in this MVP"
+      ],
+      "operands": [
+        {
+          "name": "a",
+          "signed": false,
+          "width": 8
+        },
+        {
+          "name": "b",
+          "signed": false,
+          "width": 8
+        },
+        {
+          "name": "c",
+          "signed": false,
+          "width": 8
+        },
+        {
+          "name": "d",
+          "signed": false,
+          "width": 8
+        }
+      ],
+      "original_expression": "((a + b) + c) + d",
+      "reason": "unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree",
+      "replacement_expression": "((a + b) + (c + d))",
+      "source": {
+        "column": 14,
+        "end_column": 31,
+        "end_line": 5,
+        "end_offset": 111,
+        "file": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+        "line": 5,
+        "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+        "start_offset": 94
+      },
+      "status": "candidate_available",
+      "target": {
+        "name": "y",
+        "width": 8
+      },
+      "top": "g01_add8_left",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    },
+    "finding_id": "addsite_9067dfe8e174e103",
+    "formal": {
+      "safe": false,
+      "status": "not_run"
+    },
+    "limitations": [
+      "candidate is isolated but unproven",
+      "Yosys two-state bit-vector RTL equivalence for a self-contained combinational top; X/Z behavior is not proved"
+    ],
+    "lint": {
+      "status": "not_run"
+    },
+    "record_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/candidate-core.json",
+    "run_schema": "rtl-advisor-run-v1",
+    "schema_version": 1,
+    "semantic_hash": "d78583d2685c46746d9d041a87fce0a89fb043d7f7246f3d9d755edc70602c5a",
+    "source_integrity": {
+      "candidate": {
+        "compile_context": {
+          "compile_context_hash": "2de30f999a4b45a464f998a3e3d3686061f37881c68151893752b26c39cd60e6",
+          "defines": [],
+          "filelists": [],
+          "include_trees": [],
+          "schema_version": 1,
+          "sources": [
+            {
+              "logical_id": "source:0000:g01_add8_left.sv",
+              "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+            }
+          ],
+          "top": "g01_add8_left"
+        },
+        "mismatches": [],
+        "ok": true
+      },
+      "original": {
+        "compile_context": {
+          "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+          "defines": [],
+          "filelists": [],
+          "include_trees": [],
+          "schema_version": 1,
+          "sources": [
+            {
+              "logical_id": "source:0000:g01_add8_left.sv",
+              "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+            }
+          ],
+          "top": "g01_add8_left"
+        },
+        "mismatches": [],
+        "ok": true
+      }
+    },
+    "status": "candidate_prepared",
+    "transformation_id": "adder_reduction_association",
+    "transformation_version": "balanced-unsigned-add-chain-v2"
+  },
+  "candidate_id": "addcand_5db95f9b35f13ff5",
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "candidate",
+    "mvp-5c42987cbc59419709cb",
+    "--finding",
+    "addsite_9067dfe8e174e103",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "decision": "candidate_prepared",
+  "document_type": "rtl-advisor.agent.v2.candidate",
+  "finding": {
+    "finding_id": "addsite_9067dfe8e174e103",
+    "limitations": [
+      "candidate is unproven until current Yosys formal verification passes",
+      "only two-state bit-vector equivalence is supported in this MVP"
+    ],
+    "operands": [
+      {
+        "name": "a",
+        "signed": false,
+        "width": 8
+      },
+      {
+        "name": "b",
+        "signed": false,
+        "width": 8
+      },
+      {
+        "name": "c",
+        "signed": false,
+        "width": 8
+      },
+      {
+        "name": "d",
+        "signed": false,
+        "width": 8
+      }
+    ],
+    "original_expression": "((a + b) + c) + d",
+    "reason": "unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree",
+    "replacement_expression": "((a + b) + (c + d))",
+    "source": {
+      "column": 14,
+      "end_column": 31,
+      "end_line": 5,
+      "end_offset": 111,
+      "file": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+      "line": 5,
+      "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+      "start_offset": 94
+    },
+    "status": "candidate_available",
+    "target": {
+      "name": "y",
+      "width": 8
+    },
+    "top": "g01_add8_left",
+    "transformation_id": "adder_reduction_association",
+    "transformation_version": "balanced-unsigned-add-chain-v2"
+  },
+  "flow_version": "rtl-advisor-agent-v2",
+  "limitations": [
+    "The isolated candidate is unproven until formal verification passes."
+  ],
+  "objective": "balanced",
+  "parents": {
+    "review_semantic_hash": "cff2a06600bd822460b3570aa4330bf8d70050cbaf61a12a7df8121e3f0d29b8"
+  },
+  "run_id": "mvp-5c42987cbc59419709cb",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "8c294c66b89bb64df5871f7e3ee73ba167a104037c1bee0c0a45f141e3a849fb",
+  "source_integrity": {
+    "candidate": {
+      "compile_context": {
+        "compile_context_hash": "2de30f999a4b45a464f998a3e3d3686061f37881c68151893752b26c39cd60e6",
+        "defines": [],
+        "filelists": [],
+        "include_trees": [],
+        "schema_version": 1,
+        "sources": [
+          {
+            "logical_id": "source:0000:g01_add8_left.sv",
+            "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+          }
+        ],
+        "top": "g01_add8_left"
+      },
+      "mismatches": [],
+      "ok": true
+    },
+    "original": {
+      "compile_context": {
+        "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+        "defines": [],
+        "filelists": [],
+        "include_trees": [],
+        "schema_version": 1,
+        "sources": [
+          {
+            "logical_id": "source:0000:g01_add8_left.sv",
+            "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+          }
+        ],
+        "top": "g01_add8_left"
+      },
+      "mismatches": [],
+      "ok": true
+    }
+  },
+  "status": "candidate_prepared"
+}

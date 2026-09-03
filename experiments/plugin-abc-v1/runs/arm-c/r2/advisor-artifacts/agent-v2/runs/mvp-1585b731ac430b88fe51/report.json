@@ -1,0 +1,1298 @@
+{
+  "artifacts": {
+    "html": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/report.html",
+    "html_sha256": "908201884493a5172dffd80558e3051ba40542930d65b8a5a5eff2d4150560ef",
+    "report": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/report.json",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51",
+    "snapshots": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/reports"
+  },
+  "candidates": [
+    {
+      "candidate": {
+        "artifacts": {
+          "candidate_record": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/candidate.json",
+          "diff": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/candidate.diff",
+          "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793"
+        },
+        "candidate": {
+          "artifact_dir": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793",
+          "baseline_compile_context": {
+            "compile_context_hash": "1222d838bf37f21c9ef1d8a17a503f87af830b79310abe8fb45c5fcf0111744e",
+            "defines": [],
+            "filelists": [],
+            "include_trees": [],
+            "schema_version": 1,
+            "sources": [
+              {
+                "logical_id": "source:0000:g02_add32_five.sv",
+                "sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c"
+              }
+            ],
+            "top": "g02_add32_five"
+          },
+          "baseline_design": {
+            "defines": [],
+            "design_hash": "7f894470df4cb0c8d40c5c4b995536873d671bfce2b70f154b3647c23d238331",
+            "filelists": [],
+            "files": [
+              {
+                "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv",
+                "sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c"
+              }
+            ],
+            "include_dirs": [],
+            "schema_version": 2,
+            "top": "g02_add32_five"
+          },
+          "baseline_design_hash": "7f894470df4cb0c8d40c5c4b995536873d671bfce2b70f154b3647c23d238331",
+          "candidate_compile_context": {
+            "compile_context_hash": "eed5a890da07982d2a2a5828717bd69ae04da83e4d581eb7f1164f293f8d1d3e",
+            "defines": [],
+            "filelists": [],
+            "include_trees": [],
+            "schema_version": 1,
+            "sources": [
+              {
+                "logical_id": "source:0000:g02_add32_five.sv",
+                "sha256": "7e97a589d59a68a6ec9e0d884fcff2fea36e1188a91044604859b2fe22c45064"
+              }
+            ],
+            "top": "g02_add32_five"
+          },
+          "candidate_design": {
+            "defines": [],
+            "design_hash": "17a5b0866439cd486664ecde30c6ea13b373d199d57019c8c7b985c5fb965dc9",
+            "filelists": [],
+            "files": [
+              {
+                "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/design/sources/0000/g02_add32_five.sv",
+                "sha256": "7e97a589d59a68a6ec9e0d884fcff2fea36e1188a91044604859b2fe22c45064"
+              }
+            ],
+            "include_dirs": [],
+            "schema_version": 2,
+            "top": "g02_add32_five"
+          },
+          "candidate_design_hash": "17a5b0866439cd486664ecde30c6ea13b373d199d57019c8c7b985c5fb965dc9",
+          "candidate_id": "addcand_914a742bebb72793",
+          "diff_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/candidate.diff",
+          "diff_sha256": "45ffb6262e946b37ca367db93a3607b6dc7e6d4e84c85ae0aee560a706565de1",
+          "document_type": "rtl-advisor.candidate",
+          "finding": {
+            "finding_id": "addsite_b9900755544bac17",
+            "limitations": [
+              "candidate is unproven until current Yosys formal verification passes",
+              "only two-state bit-vector equivalence is supported in this MVP"
+            ],
+            "operands": [
+              {
+                "name": "a",
+                "signed": false,
+                "width": 32
+              },
+              {
+                "name": "b",
+                "signed": false,
+                "width": 32
+              },
+              {
+                "name": "c",
+                "signed": false,
+                "width": 32
+              },
+              {
+                "name": "d",
+                "signed": false,
+                "width": 32
+              },
+              {
+                "name": "e",
+                "signed": false,
+                "width": 32
+              }
+            ],
+            "original_expression": "(((a + b) + c) + d) + e",
+            "reason": "unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree",
+            "replacement_expression": "((a + b) + (c + (d + e)))",
+            "source": {
+              "column": 14,
+              "end_column": 37,
+              "end_line": 5,
+              "end_offset": 123,
+              "file": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv",
+              "line": 5,
+              "sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c",
+              "start_offset": 100
+            },
+            "status": "candidate_available",
+            "target": {
+              "name": "y",
+              "width": 32
+            },
+            "top": "g02_add32_five",
+            "transformation_id": "adder_reduction_association",
+            "transformation_version": "balanced-unsigned-add-chain-v2"
+          },
+          "finding_id": "addsite_b9900755544bac17",
+          "formal": {
+            "safe": false,
+            "status": "not_run"
+          },
+          "limitations": [
+            "candidate is isolated but unproven",
+            "Yosys two-state bit-vector RTL equivalence for a self-contained combinational top; X/Z behavior is not proved"
+          ],
+          "lint": {
+            "status": "not_run"
+          },
+          "record_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/candidate-core.json",
+          "run_schema": "rtl-advisor-run-v1",
+          "schema_version": 1,
+          "semantic_hash": "e3de015b587e510cb206bf7719f863c98498ce1df5fe5d7605eef436be001f5b",
+          "source_integrity": {
+            "candidate": {
+              "compile_context": {
+                "compile_context_hash": "eed5a890da07982d2a2a5828717bd69ae04da83e4d581eb7f1164f293f8d1d3e",
+                "defines": [],
+                "filelists": [],
+                "include_trees": [],
+                "schema_version": 1,
+                "sources": [
+                  {
+                    "logical_id": "source:0000:g02_add32_five.sv",
+                    "sha256": "7e97a589d59a68a6ec9e0d884fcff2fea36e1188a91044604859b2fe22c45064"
+                  }
+                ],
+                "top": "g02_add32_five"
+              },
+              "mismatches": [],
+              "ok": true
+            },
+            "original": {
+              "compile_context": {
+                "compile_context_hash": "1222d838bf37f21c9ef1d8a17a503f87af830b79310abe8fb45c5fcf0111744e",
+                "defines": [],
+                "filelists": [],
+                "include_trees": [],
+                "schema_version": 1,
+                "sources": [
+                  {
+                    "logical_id": "source:0000:g02_add32_five.sv",
+                    "sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c"
+                  }
+                ],
+                "top": "g02_add32_five"
+              },
+              "mismatches": [],
+              "ok": true
+            }
+          },
+          "status": "candidate_prepared",
+          "transformation_id": "adder_reduction_association",
+          "transformation_version": "balanced-unsigned-add-chain-v2"
+        },
+        "candidate_id": "addcand_914a742bebb72793",
+        "command": [
+          "rtl-advisor",
+          "--config",
+          "/private/tmp/arm-c-r2-rtl-advisor.toml",
+          "agent",
+          "candidate",
+          "mvp-1585b731ac430b88fe51",
+          "--finding",
+          "addsite_b9900755544bac17",
+          "--schema-version",
+          "2",
+          "--json"
+        ],
+        "decision": "candidate_prepared",
+        "document_type": "rtl-advisor.agent.v2.candidate",
+        "finding": {
+          "finding_id": "addsite_b9900755544bac17",
+          "limitations": [
+            "candidate is unproven until current Yosys formal verification passes",
+            "only two-state bit-vector equivalence is supported in this MVP"
+          ],
+          "operands": [
+            {
+              "name": "a",
+              "signed": false,
+              "width": 32
+            },
+            {
+              "name": "b",
+              "signed": false,
+              "width": 32
+            },
+            {
+              "name": "c",
+              "signed": false,
+              "width": 32
+            },
+            {
+              "name": "d",
+              "signed": false,
+              "width": 32
+            },
+            {
+              "name": "e",
+              "signed": false,
+              "width": 32
+            }
+          ],
+          "original_expression": "(((a + b) + c) + d) + e",
+          "reason": "unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree",
+          "replacement_expression": "((a + b) + (c + (d + e)))",
+          "source": {
+            "column": 14,
+            "end_column": 37,
+            "end_line": 5,
+            "end_offset": 123,
+            "file": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv",
+            "line": 5,
+            "sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c",
+            "start_offset": 100
+          },
+          "status": "candidate_available",
+          "target": {
+            "name": "y",
+            "width": 32
+          },
+          "top": "g02_add32_five",
+          "transformation_id": "adder_reduction_association",
+          "transformation_version": "balanced-unsigned-add-chain-v2"
+        },
+        "flow_version": "rtl-advisor-agent-v2",
+        "limitations": [
+          "The isolated candidate is unproven until formal verification passes."
+        ],
+        "objective": "balanced",
+        "parents": {
+          "review_semantic_hash": "813f81f4ce80244b2f36cc19e66b8f4e4bf3078ecba0038dc234e48748ceb730"
+        },
+        "run_id": "mvp-1585b731ac430b88fe51",
+        "run_schema": "rtl-advisor-run-v1",
+        "schema_version": 2,
+        "semantic_hash": "be04bbd2c86cedbb88865e0779b86da2968493bccecebd15f121451193feea3e",
+        "source_integrity": {
+          "candidate": {
+            "compile_context": {
+              "compile_context_hash": "eed5a890da07982d2a2a5828717bd69ae04da83e4d581eb7f1164f293f8d1d3e",
+              "defines": [],
+              "filelists": [],
+              "include_trees": [],
+              "schema_version": 1,
+              "sources": [
+                {
+                  "logical_id": "source:0000:g02_add32_five.sv",
+                  "sha256": "7e97a589d59a68a6ec9e0d884fcff2fea36e1188a91044604859b2fe22c45064"
+                }
+              ],
+              "top": "g02_add32_five"
+            },
+            "mismatches": [],
+            "ok": true
+          },
+          "original": {
+            "compile_context": {
+              "compile_context_hash": "1222d838bf37f21c9ef1d8a17a503f87af830b79310abe8fb45c5fcf0111744e",
+              "defines": [],
+              "filelists": [],
+              "include_trees": [],
+              "schema_version": 1,
+              "sources": [
+                {
+                  "logical_id": "source:0000:g02_add32_five.sv",
+                  "sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c"
+                }
+              ],
+              "top": "g02_add32_five"
+            },
+            "mismatches": [],
+            "ok": true
+          }
+        },
+        "status": "candidate_prepared"
+      },
+      "candidate_id": "addcand_914a742bebb72793",
+      "measurement": {
+        "artifacts": {
+          "evidence_record": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/measurement.json",
+          "evidence_semantic_hash": "b14e9a2faa1f68b0a163b4bd1336c142dfe8c7c0324c9077a7ca386a779375dc",
+          "measurement": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement.json",
+          "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb"
+        },
+        "candidate_id": "addcand_914a742bebb72793",
+        "command": [
+          "rtl-advisor",
+          "--config",
+          "/private/tmp/arm-c-r2-rtl-advisor.toml",
+          "agent",
+          "measure",
+          "mvp-1585b731ac430b88fe51",
+          "--candidate",
+          "addcand_914a742bebb72793",
+          "--schema-version",
+          "2",
+          "--json"
+        ],
+        "decision": "synthesis_handles",
+        "document_type": "rtl-advisor.agent.v2.measurement",
+        "flow_version": "rtl-advisor-agent-v2",
+        "formal": {
+          "semantic_hash": "feb3df90a85d5375745b12b5c7a617bbc262ecfcad8f0384b62b64bbfa759243",
+          "status": "passed"
+        },
+        "limitations": [
+          "This decision describes two pinned Yosys/ABC recipes and is not target-flow PPA."
+        ],
+        "measurements": {
+          "standard": {
+            "baseline": {
+              "constraints": {
+                "driving_cell": "BUF_X1",
+                "output_load_ff": 10.0,
+                "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+              },
+              "design_hash": "7f894470df4cb0c8d40c5c4b995536873d671bfce2b70f154b3647c23d238331",
+              "metrics": {
+                "abc_area_combinational": 703.84,
+                "abc_gate_count": 575,
+                "area_combinational": 703.836,
+                "area_sequential": 0.0,
+                "area_total": 703.836,
+                "cell_count": 575,
+                "cells_by_type": {
+                  "AND2_X1": 44,
+                  "AND3_X1": 28,
+                  "AOI211_X1": 1,
+                  "AOI21_X1": 80,
+                  "AOI21_X2": 1,
+                  "INV_X1": 24,
+                  "NAND2_X1": 55,
+                  "NAND3_X1": 7,
+                  "NOR2_X1": 68,
+                  "NOR2_X2": 1,
+                  "NOR3_X1": 1,
+                  "NOR3_X4": 1,
+                  "OAI211_X1": 5,
+                  "OAI21_X1": 20,
+                  "OAI21_X2": 2,
+                  "OAI33_X1": 6,
+                  "OR2_X1": 14,
+                  "OR3_X1": 14,
+                  "XNOR2_X1": 101,
+                  "XNOR2_X2": 4,
+                  "XOR2_X1": 95,
+                  "XOR2_X2": 3
+                },
+                "critical_delay_ps": 1719.54,
+                "raw_cell_count": 575
+              },
+              "netlist": {
+                "cell_signature": "cef6114021ca35dad3a77f065b2127108623bd0393f0616505a073ee7ae8b0bc",
+                "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/standard/baseline/mapped.v",
+                "sha256": "1cae38ffdfa8d28b657532c64f2d8dea0b2569b3a4f37e95345a864164f1ab4d"
+              },
+              "provenance": {
+                "abc": {
+                  "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+                  "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                  "provider": "Yosys abc pass with explicit -exe",
+                  "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                  "transcript_sha256": "91c064cd675cbe1e727cb85d94fd120687fbd005dee8eba03cb0adc1ff012c40",
+                  "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+                },
+                "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+                "command": [
+                  "yosys",
+                  "-Q",
+                  "-s",
+                  "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/standard/baseline/synthesis.ys"
+                ],
+                "constraints_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/standard/abc.constr",
+                "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+                "liberty_name": "Nangate45 typical",
+                "liberty_path": "/Users/peter/Desktop/CAD Stuff/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+                "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+                "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+                "log_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/standard/baseline/synthesis.log",
+                "log_sha256": "7bacf663577ab82363fdf7966c5a6f9351aac5c5937229d09a1514f21603e2a8",
+                "profile": "standard",
+                "recipe_hash": "e7192dfb75b823d311bf6026a12a038687e99d8cd28522a4aef0115ede74d3ac",
+                "script_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/standard/baseline/synthesis.ys",
+                "script_sha256": "54f0982a1c1b3672571304144b10c8ce2a6e211060f7d157ad4b28fca7ef6b4c",
+                "stat_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/standard/baseline/stat.json",
+                "stat_sha256": "97341f686d99fef9c29983a3781923e2c3704e019ed9a42ed23a36d58a08d631",
+                "warnings": {
+                  "count": 2,
+                  "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+                },
+                "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+                "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+                "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+              },
+              "role": "baseline",
+              "source_hashes": {
+                "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c"
+              },
+              "status": "passed",
+              "top": "g02_add32_five"
+            },
+            "candidate": {
+              "constraints": {
+                "driving_cell": "BUF_X1",
+                "output_load_ff": 10.0,
+                "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+              },
+              "design_hash": "17a5b0866439cd486664ecde30c6ea13b373d199d57019c8c7b985c5fb965dc9",
+              "metrics": {
+                "abc_area_combinational": 703.84,
+                "abc_gate_count": 575,
+                "area_combinational": 703.836,
+                "area_sequential": 0.0,
+                "area_total": 703.836,
+                "cell_count": 575,
+                "cells_by_type": {
+                  "AND2_X1": 44,
+                  "AND3_X1": 28,
+                  "AOI211_X1": 1,
+                  "AOI21_X1": 80,
+                  "AOI21_X2": 1,
+                  "INV_X1": 24,
+                  "NAND2_X1": 55,
+                  "NAND3_X1": 7,
+                  "NOR2_X1": 68,
+                  "NOR2_X2": 1,
+                  "NOR3_X1": 1,
+                  "NOR3_X4": 1,
+                  "OAI211_X1": 5,
+                  "OAI21_X1": 20,
+                  "OAI21_X2": 2,
+                  "OAI33_X1": 6,
+                  "OR2_X1": 14,
+                  "OR3_X1": 14,
+                  "XNOR2_X1": 101,
+                  "XNOR2_X2": 4,
+                  "XOR2_X1": 95,
+                  "XOR2_X2": 3
+                },
+                "critical_delay_ps": 1719.54,
+                "raw_cell_count": 575
+              },
+              "netlist": {
+                "cell_signature": "cef6114021ca35dad3a77f065b2127108623bd0393f0616505a073ee7ae8b0bc",
+                "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/standard/candidate/mapped.v",
+                "sha256": "1cae38ffdfa8d28b657532c64f2d8dea0b2569b3a4f37e95345a864164f1ab4d"
+              },
+              "provenance": {
+                "abc": {
+                  "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+                  "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                  "provider": "Yosys abc pass with explicit -exe",
+                  "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                  "transcript_sha256": "91c064cd675cbe1e727cb85d94fd120687fbd005dee8eba03cb0adc1ff012c40",
+                  "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+                },
+                "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+                "command": [
+                  "yosys",
+                  "-Q",
+                  "-s",
+                  "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/standard/candidate/synthesis.ys"
+                ],
+                "constraints_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/standard/abc.constr",
+                "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+                "liberty_name": "Nangate45 typical",
+                "liberty_path": "/Users/peter/Desktop/CAD Stuff/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+                "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+                "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+                "log_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/standard/candidate/synthesis.log",
+                "log_sha256": "0b96c21368cb56b3cb71e75dba2bcf2a6a3f603b25618ff049ffda0ba00e132a",
+                "profile": "standard",
+                "recipe_hash": "e7192dfb75b823d311bf6026a12a038687e99d8cd28522a4aef0115ede74d3ac",
+                "script_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/standard/candidate/synthesis.ys",
+                "script_sha256": "9b036c806aff259a1d3eaa36bfd2ad1384454a9d5d4630be1159397a4d1b0024",
+                "stat_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/standard/candidate/stat.json",
+                "stat_sha256": "97341f686d99fef9c29983a3781923e2c3704e019ed9a42ed23a36d58a08d631",
+                "warnings": {
+                  "count": 2,
+                  "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+                },
+                "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+                "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+                "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+              },
+              "role": "candidate",
+              "source_hashes": {
+                "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/design/sources/0000/g02_add32_five.sv": "7e97a589d59a68a6ec9e0d884fcff2fea36e1188a91044604859b2fe22c45064"
+              },
+              "status": "passed",
+              "top": "g02_add32_five"
+            },
+            "classification": "neutral",
+            "comparison": {
+              "area_total": {
+                "baseline": 703.836,
+                "candidate": 703.836,
+                "delta": 0.0,
+                "improvement_percent": 0.0
+              },
+              "cell_count": {
+                "baseline": 575.0,
+                "candidate": 575.0,
+                "delta": 0.0,
+                "improvement_percent": 0.0
+              },
+              "critical_delay_ps": {
+                "baseline": 1719.54,
+                "candidate": 1719.54,
+                "delta": 0.0,
+                "improvement_percent": 0.0
+              }
+            },
+            "recipe": {
+              "abc_provider": "explicit adjacent yosys-abc",
+              "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+              "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+              "driving_cell": "BUF_X1",
+              "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+              "frontend": "read_verilog -sv",
+              "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+              "output_load_ff": 10.0,
+              "passes": [
+                "hierarchy -check",
+                "synth -flatten -noabc",
+                "dfflibmap",
+                "abc -exe -liberty -constr",
+                "clean",
+                "check -assert"
+              ],
+              "profile": "standard",
+              "recipe_hash": "e7192dfb75b823d311bf6026a12a038687e99d8cd28522a4aef0115ede74d3ac",
+              "script_template": [
+                "read_liberty -lib <LIBERTY>",
+                "read_verilog -sv <INCLUDE_DIRS> <DEFINES> <SOURCES>",
+                "hierarchy -check -top g02_add32_five",
+                "synth -top g02_add32_five -flatten -noabc",
+                "dfflibmap -liberty <LIBERTY>",
+                "abc -exe <ABC> -liberty <LIBERTY> -constr <CONSTRAINTS>",
+                "clean",
+                "check -assert",
+                "stat -top g02_add32_five -liberty <LIBERTY> -json",
+                "write_verilog -noattr -noexpr <NETLIST>"
+              ],
+              "script_template_sha256": "6dc69b26c47642bb9b6b2ca3742571a117496ab2983ada105cc338fd97cbb82d",
+              "top": "g02_add32_five",
+              "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+              "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+            }
+          },
+          "stronger": {
+            "baseline": {
+              "constraints": {
+                "driving_cell": "BUF_X1",
+                "output_load_ff": 10.0,
+                "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+              },
+              "design_hash": "7f894470df4cb0c8d40c5c4b995536873d671bfce2b70f154b3647c23d238331",
+              "metrics": {
+                "abc_area_combinational": 703.84,
+                "abc_gate_count": 575,
+                "area_combinational": 703.836,
+                "area_sequential": 0.0,
+                "area_total": 703.836,
+                "cell_count": 575,
+                "cells_by_type": {
+                  "AND2_X1": 44,
+                  "AND3_X1": 28,
+                  "AOI211_X1": 1,
+                  "AOI21_X1": 80,
+                  "AOI21_X2": 1,
+                  "INV_X1": 24,
+                  "NAND2_X1": 55,
+                  "NAND3_X1": 7,
+                  "NOR2_X1": 68,
+                  "NOR2_X2": 1,
+                  "NOR3_X1": 1,
+                  "NOR3_X4": 1,
+                  "OAI211_X1": 5,
+                  "OAI21_X1": 20,
+                  "OAI21_X2": 2,
+                  "OAI33_X1": 6,
+                  "OR2_X1": 14,
+                  "OR3_X1": 14,
+                  "XNOR2_X1": 101,
+                  "XNOR2_X2": 4,
+                  "XOR2_X1": 95,
+                  "XOR2_X2": 3
+                },
+                "critical_delay_ps": 1719.54,
+                "raw_cell_count": 575
+              },
+              "netlist": {
+                "cell_signature": "cef6114021ca35dad3a77f065b2127108623bd0393f0616505a073ee7ae8b0bc",
+                "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/stronger/baseline/mapped.v",
+                "sha256": "1cae38ffdfa8d28b657532c64f2d8dea0b2569b3a4f37e95345a864164f1ab4d"
+              },
+              "provenance": {
+                "abc": {
+                  "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+                  "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                  "provider": "Yosys abc pass with explicit -exe",
+                  "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                  "transcript_sha256": "af9a984a2be63c8942e2f8045fb5816cd3d705bcb940d7c20aa190dbb47ab191",
+                  "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+                },
+                "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+                "command": [
+                  "yosys",
+                  "-Q",
+                  "-s",
+                  "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/stronger/baseline/synthesis.ys"
+                ],
+                "constraints_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/stronger/abc.constr",
+                "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+                "liberty_name": "Nangate45 typical",
+                "liberty_path": "/Users/peter/Desktop/CAD Stuff/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+                "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+                "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+                "log_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/stronger/baseline/synthesis.log",
+                "log_sha256": "71be7287e7d7ed1f85f5ed406b0bc531ef1ff19e30b4f6b9dfc85cb40bc2523e",
+                "profile": "stronger",
+                "recipe_hash": "09bebdda646aa6d944db74b004f20fc559db521c5b11256fe343b07d4d801739",
+                "script_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/stronger/baseline/synthesis.ys",
+                "script_sha256": "8b2de5834bfa9f8c2465a711a7b9cd341bda358eaef100cc7e7ad4c2803c5b9c",
+                "stat_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/stronger/baseline/stat.json",
+                "stat_sha256": "97341f686d99fef9c29983a3781923e2c3704e019ed9a42ed23a36d58a08d631",
+                "warnings": {
+                  "count": 2,
+                  "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+                },
+                "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+                "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+                "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+              },
+              "role": "baseline",
+              "source_hashes": {
+                "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c"
+              },
+              "status": "passed",
+              "top": "g02_add32_five"
+            },
+            "candidate": {
+              "constraints": {
+                "driving_cell": "BUF_X1",
+                "output_load_ff": 10.0,
+                "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+              },
+              "design_hash": "17a5b0866439cd486664ecde30c6ea13b373d199d57019c8c7b985c5fb965dc9",
+              "metrics": {
+                "abc_area_combinational": 703.84,
+                "abc_gate_count": 575,
+                "area_combinational": 703.836,
+                "area_sequential": 0.0,
+                "area_total": 703.836,
+                "cell_count": 575,
+                "cells_by_type": {
+                  "AND2_X1": 44,
+                  "AND3_X1": 28,
+                  "AOI211_X1": 1,
+                  "AOI21_X1": 80,
+                  "AOI21_X2": 1,
+                  "INV_X1": 24,
+                  "NAND2_X1": 55,
+                  "NAND3_X1": 7,
+                  "NOR2_X1": 68,
+                  "NOR2_X2": 1,
+                  "NOR3_X1": 1,
+                  "NOR3_X4": 1,
+                  "OAI211_X1": 5,
+                  "OAI21_X1": 20,
+                  "OAI21_X2": 2,
+                  "OAI33_X1": 6,
+                  "OR2_X1": 14,
+                  "OR3_X1": 14,
+                  "XNOR2_X1": 101,
+                  "XNOR2_X2": 4,
+                  "XOR2_X1": 95,
+                  "XOR2_X2": 3
+                },
+                "critical_delay_ps": 1719.54,
+                "raw_cell_count": 575
+              },
+              "netlist": {
+                "cell_signature": "cef6114021ca35dad3a77f065b2127108623bd0393f0616505a073ee7ae8b0bc",
+                "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/stronger/candidate/mapped.v",
+                "sha256": "1cae38ffdfa8d28b657532c64f2d8dea0b2569b3a4f37e95345a864164f1ab4d"
+              },
+              "provenance": {
+                "abc": {
+                  "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+                  "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                  "provider": "Yosys abc pass with explicit -exe",
+                  "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                  "transcript_sha256": "af9a984a2be63c8942e2f8045fb5816cd3d705bcb940d7c20aa190dbb47ab191",
+                  "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+                },
+                "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+                "command": [
+                  "yosys",
+                  "-Q",
+                  "-s",
+                  "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/stronger/candidate/synthesis.ys"
+                ],
+                "constraints_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/stronger/abc.constr",
+                "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+                "liberty_name": "Nangate45 typical",
+                "liberty_path": "/Users/peter/Desktop/CAD Stuff/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+                "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+                "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+                "log_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/stronger/candidate/synthesis.log",
+                "log_sha256": "948d82c84d395247b75c87ed4f062fee66bc84d6402d64e3f1f17f05a9fc034c",
+                "profile": "stronger",
+                "recipe_hash": "09bebdda646aa6d944db74b004f20fc559db521c5b11256fe343b07d4d801739",
+                "script_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/stronger/candidate/synthesis.ys",
+                "script_sha256": "b251454214ec8f43c22d57bca6558a4b728f92d83436b7f2fbaf63e56f24c650",
+                "stat_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement/measurements/b9e03aaa24304a095c1a32bb/stronger/candidate/stat.json",
+                "stat_sha256": "97341f686d99fef9c29983a3781923e2c3704e019ed9a42ed23a36d58a08d631",
+                "warnings": {
+                  "count": 2,
+                  "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+                },
+                "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+                "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+                "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+              },
+              "role": "candidate",
+              "source_hashes": {
+                "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/design/sources/0000/g02_add32_five.sv": "7e97a589d59a68a6ec9e0d884fcff2fea36e1188a91044604859b2fe22c45064"
+              },
+              "status": "passed",
+              "top": "g02_add32_five"
+            },
+            "classification": "neutral",
+            "comparison": {
+              "area_total": {
+                "baseline": 703.836,
+                "candidate": 703.836,
+                "delta": 0.0,
+                "improvement_percent": 0.0
+              },
+              "cell_count": {
+                "baseline": 575.0,
+                "candidate": 575.0,
+                "delta": 0.0,
+                "improvement_percent": 0.0
+              },
+              "critical_delay_ps": {
+                "baseline": 1719.54,
+                "candidate": 1719.54,
+                "delta": 0.0,
+                "improvement_percent": 0.0
+              }
+            },
+            "recipe": {
+              "abc_provider": "explicit adjacent yosys-abc",
+              "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+              "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+              "driving_cell": "BUF_X1",
+              "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+              "frontend": "read_verilog -sv",
+              "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+              "output_load_ff": 10.0,
+              "passes": [
+                "hierarchy -check",
+                "synth -flatten -noabc -run begin:fine",
+                "share -aggressive",
+                "opt -full",
+                "clean",
+                "synth -flatten -noabc -run fine:check",
+                "dfflibmap",
+                "abc -exe -liberty -constr",
+                "clean",
+                "check -assert"
+              ],
+              "profile": "stronger",
+              "recipe_hash": "09bebdda646aa6d944db74b004f20fc559db521c5b11256fe343b07d4d801739",
+              "script_template": [
+                "read_liberty -lib <LIBERTY>",
+                "read_verilog -sv <INCLUDE_DIRS> <DEFINES> <SOURCES>",
+                "hierarchy -check -top g02_add32_five",
+                "synth -top g02_add32_five -flatten -noabc -run begin:fine",
+                "share -aggressive",
+                "opt -full",
+                "clean",
+                "synth -top g02_add32_five -flatten -noabc -run fine:check",
+                "dfflibmap -liberty <LIBERTY>",
+                "abc -exe <ABC> -liberty <LIBERTY> -constr <CONSTRAINTS>",
+                "clean",
+                "check -assert",
+                "stat -top g02_add32_five -liberty <LIBERTY> -json",
+                "write_verilog -noattr -noexpr <NETLIST>"
+              ],
+              "script_template_sha256": "ede9f523e55d7cc8a3410ad1e344e0c8e2eb59ed07511659f5c1a41ee7aee23d",
+              "top": "g02_add32_five",
+              "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+              "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+            }
+          }
+        },
+        "objective": "balanced",
+        "parents": {
+          "verification_semantic_hash": "feb3df90a85d5375745b12b5c7a617bbc262ecfcad8f0384b62b64bbfa759243"
+        },
+        "run_id": "mvp-1585b731ac430b88fe51",
+        "run_schema": "rtl-advisor-run-v1",
+        "schema_version": 2,
+        "semantic_hash": "6e0604df9c2c4129abf5b357c6754c84b2545cf9678cbb7ed7ab20878c175619",
+        "source_integrity": {
+          "baseline": {
+            "mismatches": [],
+            "ok": true
+          },
+          "candidate": {
+            "mismatches": [],
+            "ok": true
+          }
+        },
+        "status": "completed"
+      },
+      "verification": {
+        "artifacts": {
+          "evidence_record": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/formal/formal.json",
+          "evidence_semantic_hash": "96d7b0d0c5c1169727fa89f1c9218cb58a02f6e4494845fdabb9cc2035ced155",
+          "verification": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/verification.json"
+        },
+        "baseline_design_hash": "7f894470df4cb0c8d40c5c4b995536873d671bfce2b70f154b3647c23d238331",
+        "candidate_design_hash": "17a5b0866439cd486664ecde30c6ea13b373d199d57019c8c7b985c5fb965dc9",
+        "candidate_id": "addcand_914a742bebb72793",
+        "command": [
+          "rtl-advisor",
+          "--config",
+          "/private/tmp/arm-c-r2-rtl-advisor.toml",
+          "agent",
+          "verify",
+          "mvp-1585b731ac430b88fe51",
+          "--candidate",
+          "addcand_914a742bebb72793",
+          "--schema-version",
+          "2",
+          "--json"
+        ],
+        "compile_context": {
+          "baseline": {
+            "compile_context_hash": "1222d838bf37f21c9ef1d8a17a503f87af830b79310abe8fb45c5fcf0111744e",
+            "defines": [],
+            "filelists": [],
+            "include_trees": [],
+            "schema_version": 1,
+            "sources": [
+              {
+                "logical_id": "source:0000:g02_add32_five.sv",
+                "sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c"
+              }
+            ],
+            "top": "g02_add32_five"
+          },
+          "candidate": {
+            "compile_context_hash": "eed5a890da07982d2a2a5828717bd69ae04da83e4d581eb7f1164f293f8d1d3e",
+            "defines": [],
+            "filelists": [],
+            "include_trees": [],
+            "schema_version": 1,
+            "sources": [
+              {
+                "logical_id": "source:0000:g02_add32_five.sv",
+                "sha256": "7e97a589d59a68a6ec9e0d884fcff2fea36e1188a91044604859b2fe22c45064"
+              }
+            ],
+            "top": "g02_add32_five"
+          }
+        },
+        "decision": "formal_passed",
+        "document_type": "rtl-advisor.agent.v2.verification",
+        "flow_version": "rtl-advisor-agent-v2",
+        "formal": {
+          "backend": "yosys-combinational-equiv-v1",
+          "command": [
+            "yosys",
+            "-Q",
+            "-s",
+            "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/formal/equivalence.ys"
+          ],
+          "detail": null,
+          "log_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/formal/equivalence.log",
+          "log_sha256": "1a4e50cb632aa65f42d9c2a561f2646b1c9e042193d0328d5c07fdbc5ccf0607",
+          "returncode": 0,
+          "script_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/formal/equivalence.ys",
+          "script_sha256": "b5428fc699d6cba06c6446cddc191f862e015a4a7eb52c0c97e69e1378c40829",
+          "semantics": "Yosys two-state bit-vector RTL equivalence for a self-contained combinational top; X/Z behavior is not proved",
+          "status": "passed",
+          "success_marker_seen": true,
+          "tool_identity": {
+            "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+            "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+            "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+          },
+          "tool_identity_after": {
+            "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+            "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+            "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+          },
+          "tool_identity_before": {
+            "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+            "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+            "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+          },
+          "tool_identity_error": null,
+          "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+          "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+          "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+        },
+        "limitations": [
+          "The proof covers two-state combinational RTL semantics."
+        ],
+        "lint": {
+          "pyslang": {
+            "baseline": {
+              "diagnostics": [],
+              "ok": true,
+              "status": "passed",
+              "version": "9.1.0"
+            },
+            "candidate": {
+              "diagnostics": [],
+              "ok": true,
+              "status": "passed",
+              "version": "9.1.0"
+            }
+          },
+          "status": "passed",
+          "verilator": {
+            "baseline": {
+              "blocking_warnings": [],
+              "command": [
+                "verilator",
+                "--lint-only",
+                "--language",
+                "1800-2017",
+                "--Wall",
+                "--Wno-fatal",
+                "--Wno-DECLFILENAME",
+                "--top-module",
+                "g02_add32_five",
+                "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv"
+              ],
+              "detail": null,
+              "identity": {
+                "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+                "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+                "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+              },
+              "identity_after": {
+                "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+                "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+                "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+              },
+              "identity_before": {
+                "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+                "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+                "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+              },
+              "identity_error": null,
+              "log_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/formal/baseline-verilator.log",
+              "log_sha256": "accf70f4d942605d73f27e4d76c6822cf0d1e00740df75fdb7d561a01e7ee254",
+              "returncode": 0,
+              "status": "passed"
+            },
+            "candidate": {
+              "blocking_warnings": [],
+              "command": [
+                "verilator",
+                "--lint-only",
+                "--language",
+                "1800-2017",
+                "--Wall",
+                "--Wno-fatal",
+                "--Wno-DECLFILENAME",
+                "--top-module",
+                "g02_add32_five",
+                "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/design/sources/0000/g02_add32_five.sv"
+              ],
+              "detail": null,
+              "identity": {
+                "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+                "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+                "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+              },
+              "identity_after": {
+                "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+                "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+                "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+              },
+              "identity_before": {
+                "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+                "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+                "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+              },
+              "identity_error": null,
+              "log_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/formal/candidate-verilator.log",
+              "log_sha256": "d918c46af104df08e00dcf97be058d639db24fe6c332732a571ef169da0da663",
+              "returncode": 0,
+              "status": "passed"
+            },
+            "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+          }
+        },
+        "parents": {
+          "candidate_semantic_hash": "be04bbd2c86cedbb88865e0779b86da2968493bccecebd15f121451193feea3e"
+        },
+        "run_id": "mvp-1585b731ac430b88fe51",
+        "run_schema": "rtl-advisor-run-v1",
+        "safe": true,
+        "schema_version": 2,
+        "semantic_hash": "feb3df90a85d5375745b12b5c7a617bbc262ecfcad8f0384b62b64bbfa759243",
+        "source_integrity": {
+          "candidate": {
+            "compile_context": {
+              "compile_context_hash": "eed5a890da07982d2a2a5828717bd69ae04da83e4d581eb7f1164f293f8d1d3e",
+              "defines": [],
+              "filelists": [],
+              "include_trees": [],
+              "schema_version": 1,
+              "sources": [
+                {
+                  "logical_id": "source:0000:g02_add32_five.sv",
+                  "sha256": "7e97a589d59a68a6ec9e0d884fcff2fea36e1188a91044604859b2fe22c45064"
+                }
+              ],
+              "top": "g02_add32_five"
+            },
+            "mismatches": [],
+            "ok": true
+          },
+          "diff": {
+            "ok": true
+          },
+          "original": {
+            "compile_context": {
+              "compile_context_hash": "1222d838bf37f21c9ef1d8a17a503f87af830b79310abe8fb45c5fcf0111744e",
+              "defines": [],
+              "filelists": [],
+              "include_trees": [],
+              "schema_version": 1,
+              "sources": [
+                {
+                  "logical_id": "source:0000:g02_add32_five.sv",
+                  "sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c"
+                }
+              ],
+              "top": "g02_add32_five"
+            },
+            "mismatches": [],
+            "ok": true
+          }
+        },
+        "status": "formal_passed"
+      }
+    }
+  ],
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "report",
+    "mvp-1585b731ac430b88fe51",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "completion": {
+    "candidate_count": 1,
+    "complete": true,
+    "eligible_site_count": 1,
+    "formal_count": 1,
+    "formal_status_counts": {
+      "formal_passed": 1
+    },
+    "measurement_count": 1,
+    "measurement_decision_counts": {
+      "synthesis_handles": 1
+    },
+    "missing_candidate_finding_ids": [],
+    "missing_formal_candidate_ids": [],
+    "missing_measurement_candidate_ids": [],
+    "mixed_outcomes": false,
+    "terminal_candidate_count": 1
+  },
+  "decision": "synthesis_handles",
+  "document_type": "rtl-advisor.agent.v2.report",
+  "flow_version": "rtl-advisor-agent-v2",
+  "limitations": [
+    "A finding is not a recommendation until formal and both synthesis recipes support it.",
+    "Results apply only to the recorded Yosys/ABC recipes."
+  ],
+  "objective": "balanced",
+  "parents": {
+    "candidates": {
+      "addcand_914a742bebb72793": {
+        "candidate_semantic_hash": "be04bbd2c86cedbb88865e0779b86da2968493bccecebd15f121451193feea3e",
+        "measurement_semantic_hash": "6e0604df9c2c4129abf5b357c6754c84b2545cf9678cbb7ed7ab20878c175619",
+        "verification_semantic_hash": "feb3df90a85d5375745b12b5c7a617bbc262ecfcad8f0384b62b64bbfa759243"
+      }
+    },
+    "review_semantic_hash": "813f81f4ce80244b2f36cc19e66b8f4e4bf3078ecba0038dc234e48748ceb730"
+  },
+  "result_counts": {
+    "formal": {
+      "formal_passed": 1
+    },
+    "synthesis": {
+      "synthesis_handles": 1
+    }
+  },
+  "review": {
+    "artifacts": {
+      "input": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/input.json",
+      "review": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/review.json",
+      "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51"
+    },
+    "candidate_generation_allowed": true,
+    "command": [
+      "rtl-advisor",
+      "--config",
+      "/private/tmp/arm-c-r2-rtl-advisor.toml",
+      "agent",
+      "review",
+      "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv",
+      "--objective",
+      "balanced",
+      "--top",
+      "g02_add32_five",
+      "--schema-version",
+      "2",
+      "--json"
+    ],
+    "coverage": {
+      "eligible_site_count": 1,
+      "excluded_site_count": 0
+    },
+    "decision": "candidate_available",
+    "document_type": "rtl-advisor.agent.v2.review",
+    "evidence": {
+      "input_semantic_hash": "a12f44cff6f4c33fb281c152eb30403ee8c07239234acab891a8768abb449d68",
+      "model_used": false,
+      "rules_only": true
+    },
+    "exclusions": [],
+    "findings": [
+      {
+        "finding_id": "addsite_b9900755544bac17",
+        "limitations": [
+          "candidate is unproven until current Yosys formal verification passes",
+          "only two-state bit-vector equivalence is supported in this MVP"
+        ],
+        "operands": [
+          {
+            "name": "a",
+            "signed": false,
+            "width": 32
+          },
+          {
+            "name": "b",
+            "signed": false,
+            "width": 32
+          },
+          {
+            "name": "c",
+            "signed": false,
+            "width": 32
+          },
+          {
+            "name": "d",
+            "signed": false,
+            "width": 32
+          },
+          {
+            "name": "e",
+            "signed": false,
+            "width": 32
+          }
+        ],
+        "original_expression": "(((a + b) + c) + d) + e",
+        "reason": "unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree",
+        "replacement_expression": "((a + b) + (c + (d + e)))",
+        "source": {
+          "column": 14,
+          "end_column": 37,
+          "end_line": 5,
+          "end_offset": 123,
+          "file": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv",
+          "line": 5,
+          "sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c",
+          "start_offset": 100
+        },
+        "status": "candidate_available",
+        "target": {
+          "name": "y",
+          "width": 32
+        },
+        "top": "g02_add32_five",
+        "transformation_id": "adder_reduction_association",
+        "transformation_version": "balanced-unsigned-add-chain-v2"
+      }
+    ],
+    "flow_version": "rtl-advisor-agent-v2",
+    "input": {
+      "compile_context_hash": "1222d838bf37f21c9ef1d8a17a503f87af830b79310abe8fb45c5fcf0111744e",
+      "defines": [],
+      "design_hash": "7f894470df4cb0c8d40c5c4b995536873d671bfce2b70f154b3647c23d238331",
+      "files": [
+        {
+          "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv",
+          "sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c"
+        }
+      ],
+      "include_dirs": [],
+      "kind": "rtl_file",
+      "provenance": {
+        "scope": "explicitly_approved_open_or_generated"
+      },
+      "requested_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv",
+      "source_integrity": {
+        "mismatches": [],
+        "ok": true
+      },
+      "top": "g02_add32_five"
+    },
+    "limitations": [
+      "A finding is only a candidate to evaluate, not a recommendation.",
+      "The source is unchanged; any candidate must be requested explicitly."
+    ],
+    "objective": "balanced",
+    "run_id": "mvp-1585b731ac430b88fe51",
+    "run_schema": "rtl-advisor-run-v1",
+    "schema_version": 2,
+    "semantic_hash": "813f81f4ce80244b2f36cc19e66b8f4e4bf3078ecba0038dc234e48748ceb730",
+    "status": "completed"
+  },
+  "run_id": "mvp-1585b731ac430b88fe51",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "4d34f6290fd1b577cdc884282a574199ed364057be38e3690153d38fc53f29b2",
+  "source_integrity": {
+    "mismatches": [],
+    "ok": true
+  },
+  "status": "completed"
+}

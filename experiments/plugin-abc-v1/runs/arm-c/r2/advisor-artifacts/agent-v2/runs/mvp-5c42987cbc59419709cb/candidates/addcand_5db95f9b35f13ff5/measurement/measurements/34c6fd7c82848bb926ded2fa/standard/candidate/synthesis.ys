@@ -1,0 +1,10 @@
+read_liberty -lib "/Users/peter/Desktop/CAD Stuff/third_party/nangate45/NangateOpenCellLibrary_typical.lib"
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/design/sources/0000/g01_add8_left.sv"
+hierarchy -check -top g01_add8_left
+synth -top g01_add8_left -flatten -noabc
+dfflibmap -liberty "/Users/peter/Desktop/CAD Stuff/third_party/nangate45/NangateOpenCellLibrary_typical.lib"
+abc -exe "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc" -liberty "/Users/peter/Desktop/CAD Stuff/third_party/nangate45/NangateOpenCellLibrary_typical.lib" -constr "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/measurement/measurements/34c6fd7c82848bb926ded2fa/standard/abc.constr"
+clean
+check -assert
+tee -o "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/measurement/measurements/34c6fd7c82848bb926ded2fa/standard/candidate/stat.json" stat -top g01_add8_left -liberty "/Users/peter/Desktop/CAD Stuff/third_party/nangate45/NangateOpenCellLibrary_typical.lib" -json
+write_verilog -noattr -noexpr "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/measurement/measurements/34c6fd7c82848bb926ded2fa/standard/candidate/mapped.v"

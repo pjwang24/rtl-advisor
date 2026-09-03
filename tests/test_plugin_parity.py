@@ -202,6 +202,27 @@ def test_v2_parity_scenarios_match_tool_independent_candidate_contract(
     assert "--top" in review.arguments
 
 
+def test_phase6_parity_scenarios_cover_all_corpus_operations(
+    tmp_path: Path,
+) -> None:
+    scenarios = build_scenarios(
+        config=load_config(CONFIG),
+        repo_root=ROOT,
+        runtime_dir=tmp_path / "runtime",
+        review_input=None,
+    )
+    corpus = {
+        scenario.arguments[0]: scenario
+        for scenario in scenarios
+        if scenario.operation == "corpus"
+    }
+
+    assert set(corpus) == {"coverage", "qualify", "validate", "register"}
+    assert all(scenario.schema_version == 1 for scenario in corpus.values())
+    assert corpus["coverage"].expected_exit_code == 0
+    assert corpus["qualify"].expected_exit_code == 2
+
+
 def test_complete_v2_plugin_transport_parity_passes(tmp_path: Path) -> None:
     report = run_parity(
         config_path=CONFIG,

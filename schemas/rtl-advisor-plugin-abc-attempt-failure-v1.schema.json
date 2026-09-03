@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rtl-advisor-plugin-abc-attempt-failure-v1.schema.json",
+  "title": "RTL Advisor plugin A/B failed measurement attempt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "arm", "repetition", "attempt", "wall_time_seconds",
+    "exit_code", "thread_id", "usage_available", "parse_error",
+    "events_path", "stderr_path", "command_count", "command_wave_count",
+    "command_categories", "command_output_bytes", "agent_message_bytes",
+    "output_bytes"
+  ],
+  "properties": {
+    "schema": {"type": "string", "const": "rtl-advisor-plugin-abc-attempt-failure-v1"},
+    "arm": {"type": "string", "enum": ["A", "B"]},
+    "repetition": {"type": "integer", "minimum": 1},
+    "attempt": {"type": "integer", "minimum": 1},
+    "wall_time_seconds": {"type": "number", "minimum": 0},
+    "exit_code": {"type": "integer"},
+    "thread_id": {"type": ["string", "null"]},
+    "usage_available": {"type": "boolean", "const": false},
+    "parse_error": {"type": "string", "minLength": 1},
+    "events_path": {"type": "string", "minLength": 1},
+    "stderr_path": {"type": "string", "minLength": 1},
+    "command_count": {"type": "integer", "minimum": 0},
+    "command_wave_count": {"type": "integer", "minimum": 0},
+    "command_categories": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "command_output_bytes": {"type": "integer", "minimum": 0},
+    "agent_message_bytes": {"type": "integer", "minimum": 0},
+    "output_bytes": {"type": "integer", "minimum": 0},
+    "terminal_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_type", "message"],
+      "properties": {
+        "event_type": {"type": "string", "enum": ["error", "turn.failed"]},
+        "message": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

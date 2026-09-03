@@ -1,7 +1,7 @@
 {
   "name": "rtl-advisor",
-  "version": "0.2.0-alpha.1+codex.20260719225829",
-  "description": "Evidence-backed pre-synthesis RTL review through the local RTL Advisor CLI.",
+  "version": "0.2.0-alpha.1+codex.20260903154742",
+  "description": "Evidence-backed RTL alternatives, formal proof, and same-flow synthesis through the local RTL Advisor CLI.",
   "author": {
     "name": "RTL Advisor contributors",
     "url": "https://github.com/pjwang24/rtl-advisor"
@@ -18,21 +18,26 @@
   "interface": {
     "displayName": "RTL Advisor",
     "shortDescription": "Review RTL before synthesis with traceable evidence.",
-    "longDescription": "Review approved combinational RTL, prepare a supported isolated adder rewrite, prove RTL equivalence, and explain measured Yosys/ABC evidence without changing the source.",
+    "longDescription": "Review approved open RTL or qualified corpus references, prepare an isolated registered alternative, apply its P1 or P2 proof contract, and explain measured Yosys/ABC evidence without changing the source.",
     "developerName": "RTL Advisor contributors",
     "category": "Productivity",
     "capabilities": [
       "Read",
       "Local analysis",
       "Formal verification",
-      "Synthesis measurement"
+      "Synthesis measurement",
+      "Evidence visualization",
+      "Corpus qualification and coverage"
     ],
     "websiteURL": "https://github.com/pjwang24/rtl-advisor",
     "defaultPrompt": [
       "Review approved RTL for timing opportunities.",
+      "Compare a qualified open-RTL reference with its registered implementation alternative.",
       "Explain whether synthesis likely handles this RTL rewrite.",
       "Show the evidence behind this RTL finding.",
-      "Measure a formally proven candidate in both pinned synthesis recipes."
+      "Measure a formally proven candidate in both pinned synthesis recipes.",
+      "Visualize stored RTL Advisor regressions and recipe sensitivity.",
+      "Audit independent RTL design lineages and corpus qualification gaps."
     ]
   }
 }

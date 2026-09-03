@@ -1,9 +1,9 @@
 # RTL Advisor Project Checklist V1
 
-> **Last reviewed:** July 19, 2026
+> **Last reviewed:** August 31, 2026
 > **Controlling plans:** [Project Roadmap V1](project%20roadmap%20v1.md) and
 > [Corpus Strategy V1](corpus%20strategy%20v1.md)
-> **Current wave:** Wave 3 — Tier A completion and transformation portfolio
+> **Current wave:** Wave 3 — Arbiter Family Credibility Wave V1
 > **Current product status:** Developer preview; not ready for production RTL
 > recommendations
 
@@ -28,16 +28,16 @@
 
 | Item | Current state |
 | --- | --- |
-| Completed vertical slice | Generated combinational flow plus the first open sequential-reference tranche |
+| Completed vertical slice | Generated combinational flow plus one realistic P2/M0/M1/M2 OpenTitan arbiter study |
 | Generated result | Formal pass; both pinned Yosys/ABC recipes neutral (`synthesis_handles`) |
 | Qualified open references | Tier A: 8, Tier B: 0, Tier C: 0, Tier D: 0 |
 | First Tier A tranche | 12/12 terminal: 8 qualified and 4 explicitly blocked |
-| Live recommendation authority | Deterministic MVP rule only; ML remains diagnostic-only |
+| Live recommendation authority | Registered deterministic rules and curated alternatives only; ML remains diagnostic-only |
 | Formal capability | P1 combinational, P2 same-cycle sequential, and first bounded P3 transaction proof operational |
 | Next missing proof capability | P4 partitioned subsystem proof |
-| Immediate implementation | Freeze the Wave 3 Tier A expansion and variant portfolio before candidate PPA |
-| Source downloads | Three pinned upstream snapshots acquired and hash-verified; not redistributed |
-| Dashboard | Existing read-only run and research views; category-first corpus view not started |
+| Immediate implementation | Implement and formally qualify the frozen ten-pair arbiter family before exposing candidate PPA |
+| Source downloads | Four pinned upstream snapshots acquired and hash-verified; not redistributed |
+| Dashboard | Category-first generated-evidence library, read-only run viewer, family-study PPA explorer, and secondary research view complete; broader qualified-corpus landing adapter pending |
 
 ## 1. Direction and governance
 
@@ -189,6 +189,61 @@
 
 > **Status: current; tranche and transformation-family freeze is next**
 
+### Realistic RTL Evidence Slice V1
+
+- [x] Add a versioned transformation registry for deterministic rewrites,
+  curated upstream alternatives, and future reviewed Codex candidates.
+- [x] Preserve the legacy adder transformation and Agent V1/V2 compatibility.
+- [x] Register `same_cycle_arbiter_topology` for the frozen OpenTitan
+  `prim_arbiter_ppc`/`prim_arbiter_tree` pair.
+- [x] Freeze N=1, 4, 8, and 16 before candidate measurement.
+- [x] Strengthen P2 with initial reset, held requests, stable outstanding
+  payloads, unconstrained ready, and valid-qualified payload comparison.
+- [x] Pass all four valid P2 configurations twice.
+- [x] Require incorrect reset, mask-state, grant, and data-selection controls
+  to produce counterexamples.
+- [x] Run M0/M1 on every frozen configuration and reproduce normalized metrics
+  and netlist hashes exactly.
+- [x] Run M2 at N=8 and N=16 twice using the pinned Nangate45 OpenROAD flow,
+  10 ns clock, fixed die, and 35% target utilization.
+- [x] Reproduce M2 result direction with 0% area/delay drift.
+- [x] Publish N=1 neutral, N=4 rejected regression, N=8 confirmed
+  improvement, and N=16 cross-flow disagreement.
+- [x] Keep the family gate closed at one pair and one lineage.
+- [x] Keep ML and the dashboard decision path unchanged.
+- [x] Document the implementation and result in
+  [Realistic RTL Evidence Slice V1](Realistic%20RTL%20Evidence%20Slice%20V1.md).
+
+### Arbiter Family Credibility Wave V1
+
+- [x] Freeze ten distinct pairs across OpenTitan, PULP, verilog-axis, and
+  BaseJump before new candidate PPA.
+- [x] Pin BaseJump to
+  `b48037e28544425839dbd617d45b1a82631bc1a9` and record source/license hashes.
+- [x] Freeze four configurations per pair without counting configurations as
+  references.
+- [x] Freeze five M2 samples and an ordered pre-PPA fallback list.
+- [x] Add the generic executor contract and remove OpenTitan-specific dispatch
+  from the completed Agent V2 path.
+- [x] Add immutable family-study/evidence contracts, repeat comparison, and
+  separate research/product gates.
+- [x] Add `study validate`, `study run`, and `study report`.
+- [x] Implement isolated OpenTitan-fixed and BaseJump-fixed P1 candidates.
+- [x] Keep PPA locked when formal is inconclusive or a pair-specific miter is
+  not implemented.
+- [x] Complete the seven new P2 candidate implementations and miters.
+- [x] Pass all valid P1/P2 configurations in the pinned container.
+- [x] Require all applicable incorrect controls to produce counterexamples.
+- [x] Freeze all formally passing candidate sources before PPA.
+- [x] Run every passing configuration through M0/M1 twice.
+- [x] Run the five frozen M2 samples twice.
+- [x] Publish the complete evidence matrix and evaluate both promotion gates.
+- [x] Keep the dashboard and ML outside the decision path.
+- [x] Add a read-only, hash-linked M0/M1 family-study explorer with filters,
+  area-versus-delay plots, repeatability facts, exact rows, and CSV export.
+- [x] Document the wave in
+  [Arbiter Family Credibility Wave V1](Arbiter%20Family%20Credibility%20Wave%20V1.md).
+
 - [ ] Qualify 50–100 standalone modules.
 - [ ] Cover at least eight engineering categories.
 - [ ] Cover at least five independent upstream lineages.
@@ -202,9 +257,13 @@
 - [ ] Run M0/M1 on every proof-passing candidate.
 - [ ] Run a frozen M2 OpenROAD sample.
 - [ ] Publish positive, neutral, regressed, failed, and unsupported results.
-- [ ] Replace the dashboard landing view with category-first corpus navigation.
-- [ ] Add reference RTL → variant diff → proof → per-flow synthesis tables.
-- [ ] Keep model diagnostics in a secondary research view.
+- [ ] Connect the category-first dashboard landing view to qualified corpus
+  records. The generated-evidence UI and interaction contract are complete.
+- [ ] Populate reference RTL → variant diff → proof → per-flow synthesis tables
+  from qualified Wave 3 variants. The same view is complete for generated
+  calibration candidates.
+- [x] Keep model evaluation in a secondary Research status view and outside the
+  engineer result path.
 - [ ] Pass every Tier A completion gate in Corpus Strategy V1.
 
 ## 7. Wave 4 — Complete Tier B
@@ -287,16 +346,16 @@
 | Deterministic combinational finding | Complete for one family | MVP V1 |
 | Isolated source rewrite | Complete for one family | MVP V1 |
 | P1 combinational equivalence | Complete | Yosys positive and negative controls |
-| P2 sequential equivalence | Foundation complete | OpenTitan arbiter pair plus reset/state/grant negative controls |
+| P2 sequential equivalence | Complete for the strengthened arbiter contract | Two exact repeats plus reset/state/grant/data negative controls |
 | P3 latency-aware transaction proof | Prototype complete | verilog-axis one-stage/two-stage ordered-transaction proof plus drop/duplicate/order controls |
 | P4 subsystem partition proof | Not started | Wave 5 |
 | P5 SoC integration evidence | Not started | Wave 6 |
 | P6 commercial LEC | Deferred | Approved company machine |
-| M0/M1 Yosys/ABC | Baseline generalized to registry manifests | Candidate comparison remains Wave 3 |
-| M2 OpenROAD | Research evidence exists | Not integrated as a corpus release layer |
+| M0/M1 Yosys/ABC | Complete for the frozen arbiter matrix | Exact normalized reproduction at N=1/4/8/16 |
+| M2 OpenROAD | Complete for the frozen arbiter sample | Exact N=8/N=16 reproduction; only N=8 agrees with M0/M1 |
 | M3/M4 target flows | Deferred | Company tools, libraries, and authorization |
-| CLI Agent V2 | Complete for MVP | Must add corpus commands |
-| Codex plugin | Complete for MVP | Must adopt corpus operations after CLI stabilizes |
+| CLI Agent V2 | Registry and qualified-reference flow complete | Broader corpus-family dispatch remains Wave 3 |
+| Codex plugin | Updated for registered P1/P2 candidates | Reinstall/new-task pickup required for local testing |
 | Read-only run viewer | Complete for MVP | Category-first corpus view remains Wave 3 |
 | MCP | Not required locally | Optional Wave 8 integration |
 | Live ML recommendations | Disabled | Requires Wave 7 promotion |
@@ -318,16 +377,18 @@
 
 ## 14. Next action
 
-Start Wave 3 in this order:
+Continue Wave 3 in this order:
 
-1. Freeze the next Tier A references and transformation families before
-   inspecting candidate PPA.
-2. Expand from 8 to 50–100 qualified modules across at least eight categories
-   and five independent upstream lineages.
+1. Pre-register nine more qualified same-cycle arbiter pairs across at least
+   two additional upstream lineages before inspecting candidate PPA.
+2. Freeze the next Tier A references and transformation families, then expand
+   from 8 to 50–100 qualified modules across at least eight categories and five
+   independent upstream lineages.
 3. Add meaningful same-latency and latency-changing variants, then apply P2 or
    P3 according to each declared contract.
 4. Measure every proof-passing candidate under identical M0/M1 recipes and
    publish improvements, neutral results, regressions, and blockers.
 5. Populate the category-first dashboard only from those immutable records.
 
-Do not modify the dashboard until the first corpus evidence schema is populated.
+Keep the dashboard read-only until the qualified corpus evidence adapter is
+implemented.

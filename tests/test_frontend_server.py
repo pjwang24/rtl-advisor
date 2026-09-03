@@ -22,6 +22,7 @@ def test_frontend_assets_are_self_contained_and_use_v1_api() -> None:
     assert "/api/v1/overview" in application
     assert "/api/v1/cases" in application
     assert "/api/runs/v1" in application
+    assert "/api/analytics/v1" in application
     assert "Review" in index
     assert "Candidate" in index
     assert "Formal" in index
@@ -34,6 +35,13 @@ def test_frontend_assets_are_self_contained_and_use_v1_api() -> None:
     assert "USEFUL CHANGES FOUND" in index
     assert "CORRECT NO-CHANGE DECISIONS" in index
     assert "INCORRECT RECOMMENDATIONS" in index
+    assert "PPA exploration" in index
+    assert "Area vs. delay improvement" in index
+    assert "Profile classification" in index
+    assert "Why classified this way" in index
+    assert "threshold-lines" in application
+    assert "function ensureRuns()" in application
+    assert 'const overview = await getJSON("/api/v1/overview")' in application
     for jargon in (
         "OPPORTUNITY COVERAGE",
         "ABSTENTION SPECIFICITY",

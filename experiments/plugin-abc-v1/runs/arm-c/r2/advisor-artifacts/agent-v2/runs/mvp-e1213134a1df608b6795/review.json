@@ -1,0 +1,84 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-e1213134a1df608b6795/input.json",
+    "review": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-e1213134a1df608b6795/review.json",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-e1213134a1df608b6795"
+  },
+  "candidate_generation_allowed": false,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv",
+    "--objective",
+    "balanced",
+    "--top",
+    "g06_priority_decode",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 0,
+    "excluded_site_count": 1
+  },
+  "decision": "unsupported",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "a9c76d2a90019b82fb5f90fdbd9fe01a972b8f07f4ceb7b1a13210ba313a3d43",
+    "model_used": false,
+    "rules_only": true
+  },
+  "exclusions": [
+    {
+      "detail": "this procedural region is outside the MVP rewrite scope",
+      "exclusion_id": "addexclude_550f300142530404",
+      "reason_code": "procedural_or_generated_rtl",
+      "source": {
+        "end_offset": 528,
+        "file": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv",
+        "sha256": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+        "start_offset": 118
+      },
+      "status": "excluded",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "findings": [],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "9536d8b3a9f8737f060268a9a604060672d9451f171dce66fcdeb115f4515f3e",
+    "defines": [],
+    "design_hash": "d9a18a4077a3e7b876a0cb1d14d8dd838bb960a9da3118b636f026145332534c",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv",
+        "sha256": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "g06_priority_decode"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-e1213134a1df608b6795",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "80dbc728434c510f47d4cb768f604507c32b250a9adefbe7e7cef81654eeab91",
+  "status": "completed"
+}

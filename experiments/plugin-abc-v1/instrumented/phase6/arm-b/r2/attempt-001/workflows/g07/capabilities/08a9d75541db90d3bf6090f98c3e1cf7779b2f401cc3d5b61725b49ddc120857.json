@@ -1,0 +1,239 @@
+{
+  "cli_version": "0.2.0a1",
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-001/rtl-advisor.toml",
+    "agent",
+    "capabilities",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "document_type": "rtl-advisor.agent.v2.capabilities",
+  "executor_registry": {
+    "hash": "a600fdb1904a21f72853b3194a6996695c735d3af697a4bd8fe63578b21abc43",
+    "version": "rtl-advisor-executor-registry-v1"
+  },
+  "flow_version": "rtl-advisor-agent-v2",
+  "limitations": [
+    "Deterministic rewriting is limited to unsigned fixed-width addition chains.",
+    "The OpenTitan arbiter study uses a frozen upstream alternative, not an unseen-RTL rewrite.",
+    "P1 formal uses two-state combinational semantics; the arbiter alternative requires its P2 contract.",
+    "Measurements describe the pinned Yosys/ABC recipes, not a target flow.",
+    "EQY and technology-netlist LEC remain deferred."
+  ],
+  "model": {
+    "affects_mvp_decision": false,
+    "id": "v22",
+    "release_status": "diagnostic_only"
+  },
+  "objectives": [
+    "timing",
+    "area",
+    "balanced"
+  ],
+  "operations": {
+    "candidate": {
+      "available": true
+    },
+    "measure": {
+      "available": true
+    },
+    "report": {
+      "available": true
+    },
+    "review": {
+      "available": true
+    },
+    "verify": {
+      "available": true,
+      "required_before_measure": true
+    }
+  },
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "08a9d75541db90d3bf6090f98c3e1cf7779b2f401cc3d5b61725b49ddc120857",
+  "status": "ok",
+  "synthesis_profiles": [
+    "standard",
+    "stronger"
+  ],
+  "tools": {
+    "eqy": {
+      "path": null,
+      "status": "deferred"
+    },
+    "liberty": {
+      "expected_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+      "path": "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+      "sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+      "status": "available"
+    },
+    "pyslang": {
+      "path": "/Users/peter/Desktop/rtl-advisor/.venv/lib/python3.13/site-packages/pyslang.cpython-313-darwin.so",
+      "status": "available"
+    },
+    "sby": {
+      "configured_command": "sby",
+      "path": null,
+      "status": "missing"
+    },
+    "verilator": {
+      "configured_command": "verilator",
+      "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+      "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+      "status": "available",
+      "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+    },
+    "yosys": {
+      "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+      "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+      "abc_status": "available",
+      "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+      "configured_command": "yosys",
+      "path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+      "required_abc_version": "1.01",
+      "required_version": "0.63",
+      "sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+      "status": "available",
+      "version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)",
+      "version_status": "matched"
+    },
+    "yosys_slang": {
+      "path": "/opt/oss-cad-suite/share/yosys/plugins/slang.so",
+      "status": "pinned_container_required"
+    }
+  },
+  "transformation": {
+    "analysis_supported": true,
+    "id": "adder_reduction_association",
+    "rewriter_available": true,
+    "sequential_supported": false,
+    "version": "balanced-unsigned-add-chain-v2"
+  },
+  "transformation_registry": {
+    "hash": "ede9d27234c7c826bf115798b8df00774cc3e987a73be174c190ef6f99c28370",
+    "version": "rtl-advisor-transformation-registry-v1"
+  },
+  "transformations": [
+    {
+      "analysis_supported": true,
+      "candidate_origins": [
+        "deterministic_rewrite"
+      ],
+      "display_name": "Balanced unsigned addition chain",
+      "execution_environment": "local_or_pinned_container",
+      "executors": [],
+      "id": "adder_reduction_association",
+      "proof_levels": [
+        "P1"
+      ],
+      "reference_ids": [],
+      "rewriter_available": true,
+      "sequential_supported": false,
+      "version": "balanced-unsigned-add-chain-v2"
+    },
+    {
+      "analysis_supported": true,
+      "candidate_origins": [
+        "upstream_alternative",
+        "reviewed_codex_candidate"
+      ],
+      "display_name": "Same-cycle arbiter topology alternative",
+      "execution_environment": "pinned_container",
+      "executors": [
+        {
+          "id": "opentitan-ppc-tree",
+          "reference_ids": [
+            "opentitan-prim-arbiter-ppc"
+          ],
+          "version": "1"
+        },
+        {
+          "id": "opentitan-fixed-flat-prefix",
+          "reference_ids": [
+            "opentitan-prim-arbiter-fixed"
+          ],
+          "version": "1"
+        },
+        {
+          "id": "pulp-rr-tree-rotated-mask",
+          "reference_ids": [
+            "pulp-common-cells-rr-arb-tree"
+          ],
+          "version": "1"
+        },
+        {
+          "id": "pulp-stream-arbiter-alternative-cone",
+          "reference_ids": [
+            "pulp-common-cells-stream-arbiter-flushable"
+          ],
+          "version": "1"
+        },
+        {
+          "id": "verilog-axis-arbiter-hierarchical",
+          "reference_ids": [
+            "verilog-axis-arbiter"
+          ],
+          "version": "1"
+        },
+        {
+          "id": "verilog-axis-arb-mux-balanced",
+          "reference_ids": [
+            "verilog-axis-axis-arb-mux"
+          ],
+          "version": "1"
+        },
+        {
+          "id": "basejump-fixed-balanced-tree",
+          "reference_ids": [
+            "basejump-bsg-arb-fixed"
+          ],
+          "version": "1"
+        },
+        {
+          "id": "basejump-round-robin-rotated-mask",
+          "reference_ids": [
+            "basejump-bsg-arb-round-robin"
+          ],
+          "version": "1"
+        },
+        {
+          "id": "basejump-locking-fixed-alternative-cone",
+          "reference_ids": [
+            "basejump-bsg-locking-arb-fixed"
+          ],
+          "version": "1"
+        },
+        {
+          "id": "basejump-n-to-1-upstream-parameter",
+          "reference_ids": [
+            "basejump-bsg-round-robin-n-to-1"
+          ],
+          "version": "1"
+        }
+      ],
+      "id": "same_cycle_arbiter_topology",
+      "proof_levels": [
+        "P1",
+        "P2"
+      ],
+      "reference_ids": [
+        "opentitan-prim-arbiter-ppc",
+        "opentitan-prim-arbiter-fixed",
+        "pulp-common-cells-rr-arb-tree",
+        "pulp-common-cells-stream-arbiter-flushable",
+        "verilog-axis-arbiter",
+        "verilog-axis-axis-arb-mux",
+        "basejump-bsg-arb-fixed",
+        "basejump-bsg-arb-round-robin",
+        "basejump-bsg-locking-arb-fixed",
+        "basejump-bsg-round-robin-n-to-1"
+      ],
+      "rewriter_available": true,
+      "sequential_supported": true,
+      "version": "opentitan-ppc-tree-v5"
+    }
+  ]
+}

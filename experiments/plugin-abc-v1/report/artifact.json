@@ -1,0 +1,288 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "RTL Advisor A/B/C Validation Report",
+    "description": "A technical decision record comparing Codex alone, the released RTL Advisor plugin, and a hybrid workflow.",
+    "generatedAt": "2026-07-20T23:59:00-07:00",
+    "cards": [
+      {
+        "id": "validated_accuracy",
+        "description": "Mean validated decision accuracy across the two full repetitions.",
+        "dataset": "headline",
+        "sourceId": "scorecard",
+        "metrics": [
+          {"label": "Plugin accuracy", "field": "plugin_accuracy", "format": "number", "unit": "%"},
+          {"label": "Codex-only", "field": "control_accuracy", "format": "number", "unit": "%"}
+        ]
+      },
+      {
+        "id": "evidence_completion",
+        "description": "Actionable decisions backed by the frozen evidence contract.",
+        "dataset": "headline",
+        "sourceId": "scorecard",
+        "metrics": [
+          {"label": "Plugin evidence completion", "field": "plugin_evidence", "format": "number", "unit": "%"},
+          {"label": "Codex-only", "field": "control_evidence", "format": "number", "unit": "%"}
+        ]
+      },
+      {
+        "id": "measured_improvements",
+        "description": "Candidates that improved under both pinned synthesis recipes.",
+        "dataset": "headline",
+        "sourceId": "candidate_evidence",
+        "metrics": [
+          {"label": "Measured improvements", "field": "improvements", "format": "number"},
+          {"label": "Product-measured candidates", "field": "product_candidates", "format": "number"}
+        ]
+      },
+      {
+        "id": "harmful_recommendations",
+        "description": "Recommended candidates that failed formal or regressed.",
+        "dataset": "headline",
+        "sourceId": "scorecard",
+        "metrics": [
+          {"label": "Harmful recommendations", "field": "harmful", "format": "number"}
+        ]
+      },
+      {
+        "id": "plugin_reproducibility",
+        "description": "Case decisions that matched between the two full plugin repetitions.",
+        "dataset": "headline",
+        "sourceId": "repeat_comparison",
+        "metrics": [
+          {"label": "Plugin reproducibility", "field": "plugin_reproducibility", "format": "number", "unit": "%"},
+          {"label": "Hybrid reproducibility", "field": "hybrid_reproducibility", "format": "number", "unit": "%"}
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "reproducibility_chart",
+        "title": "Repeat reproducibility by arm",
+        "subtitle": "Percent of 24 cases with matching decisions or normalized evidence across the two full repetitions.",
+        "type": "bar",
+        "dataset": "reproducibility_chart",
+        "sourceId": "repeat_comparison",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {"field": "arm", "type": "nominal", "label": "Arm"},
+          "y": {"field": "value", "type": "quantitative", "label": "Reproducibility (%)", "format": "number"},
+          "color": {"field": "metric", "type": "nominal", "label": "Metric"},
+          "tooltip": [
+            {"field": "value", "type": "quantitative", "label": "Reproducibility", "format": "number"}
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "arm_scorecard",
+        "title": "Mean full-pass metrics by arm",
+        "subtitle": "Two independent 24-case repetitions; percentages use the frozen evaluator definitions.",
+        "dataset": "arm_metrics",
+        "sourceId": "scorecard",
+        "defaultSort": {"field": "arm", "direction": "asc"},
+        "columns": [
+          {"field": "arm", "label": "Arm", "type": "text"},
+          {"field": "validated_accuracy", "label": "Validated accuracy", "format": "number", "unit": "%"},
+          {"field": "target_evaluation", "label": "Pre-registered target evaluation", "format": "number", "unit": "%"},
+          {"field": "correct_no_change", "label": "Correct no-change", "format": "number", "unit": "%"},
+          {"field": "evidence_completion", "label": "Evidence completion", "format": "number", "unit": "%"},
+          {"field": "harmful", "label": "Harmful recommendations", "format": "number"}
+        ]
+      },
+      {
+        "id": "stability_table",
+        "title": "Repeat stability and tie-break result",
+        "subtitle": "A third pass was run only for decisions that differed between the first two repetitions.",
+        "dataset": "stability",
+        "sourceId": "repeat_comparison",
+        "defaultSort": {"field": "arm", "direction": "asc"},
+        "columns": [
+          {"field": "arm", "label": "Arm", "type": "text"},
+          {"field": "decision_reproducibility", "label": "Decision reproducibility", "format": "number", "unit": "%"},
+          {"field": "evidence_reproducibility", "label": "Evidence reproducibility", "format": "number", "unit": "%"},
+          {"field": "tie_break_cases", "label": "Tie-break cases", "format": "number"},
+          {"field": "unresolved_cases", "label": "Still unresolved", "format": "number"}
+        ]
+      },
+      {
+        "id": "candidate_table",
+        "title": "Candidate outcomes",
+        "subtitle": "Pinned-product evidence is separated from exploratory generic ABC evidence.",
+        "dataset": "candidate_outcomes",
+        "sourceId": "candidate_evidence",
+        "defaultSort": {"field": "case_id", "direction": "asc"},
+        "columns": [
+          {"field": "case_id", "label": "Case", "type": "text"},
+          {"field": "hypothesis", "label": "Hypothesis", "type": "text"},
+          {"field": "formal", "label": "Formal", "type": "text"},
+          {"field": "measurement_scope", "label": "Measurement scope", "type": "text"},
+          {"field": "result", "label": "Result", "type": "text"},
+          {"field": "decision", "label": "Decision", "type": "text"}
+        ]
+      }
+    ],
+    "sources": [
+      {"id": "scorecard", "label": "Frozen A/B/C scorecard", "path": "experiments/plugin-abc-v1/evaluations/scorecard.json"},
+      {"id": "repeat_comparison", "label": "Repeat comparison and tie-break resolution", "path": "experiments/plugin-abc-v1/evaluations/repeat-comparison.json"},
+      {"id": "candidate_evidence", "label": "Normalized candidate evidence", "path": "experiments/plugin-abc-v1/evaluations/candidate-evidence.json"},
+      {"id": "framework", "label": "Pre-registered testing framework", "path": "implementation plan/A-B-C Testing Framework V1.md"}
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# RTL Advisor A/B/C Validation Report"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "scorecard",
+        "body": "## The plugin improves evidence discipline, but the hybrid workflow is not ready to become the default\n\nAcross two full 24-case repetitions, the plugin-only and hybrid arms each reached **95.83% validated decision accuracy**, **100% correct no-change**, and **100% evidence completion** with **zero harmful recommendations**. The plugin prepared three supported candidates; all passed formal and both pinned Yosys/ABC recipes, but every result was neutral because synthesis produced identical mapped outcomes. Codex alone explored more transformation families, yet its one-recipe generic measurements did not satisfy the frozen product evidence contract.\n\n**Decision:** keep RTL Advisor as a bounded, optional evidence executor. Do not make the hybrid workflow the default yet: it added no validated coverage over plugin-only and its repeat decision reproducibility was **70.83%**, below the 95% gate."
+      },
+      {"id": "headline_metrics", "type": "metric-strip", "cardIds": ["validated_accuracy", "evidence_completion", "measured_improvements", "harmful_recommendations", "plugin_reproducibility"]},
+      {
+        "id": "finding_evidence",
+        "type": "markdown",
+        "sourceId": "scorecard",
+        "body": "## Plugin-backed decisions are more auditable than unaided analysis\n\nThe control arm's broader reasoning was useful for hypothesis generation, including mux factoring and priority-decode restructuring. However, its measurements used a single generic ABC mapping rather than the required standard and stronger recipes, so the independent auditor correctly withheld product-grade evidence credit. The result is a **36–47 percentage-point evidence-completion advantage** for plugin-backed workflows without increasing harmful recommendations."
+      },
+      {"id": "arm_scorecard_block", "type": "table", "tableId": "arm_scorecard"},
+      {
+        "id": "candidate_finding",
+        "type": "markdown",
+        "sourceId": "candidate_evidence",
+        "body": "## None of the tested rewrites improved the pinned synthesis flow\n\nThe three released-family candidates were formally equivalent and produced zero timing, area, or cell-count change in both recipes. The broader `g05` mux-factor candidate was also formally equivalent but only neutral under exploratory generic mapping. A direct Boolean priority encoder in `g06` passed formal but regressed generic area from 80 to 86 units and depth from 5 to 7; the arm retained the baseline. This is a negative optimization result, but a positive safety result: evidence prevented a regression from becoming a recommendation."
+      },
+      {"id": "candidate_table_block", "type": "table", "tableId": "candidate_table"},
+      {
+        "id": "stability_finding",
+        "type": "markdown",
+        "sourceId": "repeat_comparison",
+        "body": "## The plugin is deterministic; natural-language boundary labels are not\n\nPlugin-only reproduced **100%** of decisions and normalized evidence. Codex-only reproduced **45.83%** of decisions, while hybrid reproduced **70.83%**. Targeted third passes still left three cases unresolved in each of those arms because `no_change`, `unsupported`, and `inconclusive` were used inconsistently. The instability affects product semantics and user expectations even though no unsafe recommendation escaped."
+      },
+      {"id": "reproducibility_chart_block", "type": "chart", "chartId": "reproducibility_chart"},
+      {"id": "stability_table_block", "type": "table", "tableId": "stability_table"},
+      {
+        "id": "scope_and_metrics",
+        "type": "markdown",
+        "sourceId": "framework",
+        "body": "## What was tested and how metrics were defined\n\nThe corpus froze 12 new generated modules and 12 pinned Tier-A open-source modules from OpenTitan, PULP common_cells, and verilog-axis. Arm A used Codex and raw tools; Arm B used only the released RTL Advisor skill and CLI; Arm C combined broad reasoning with the plugin. All arms used GPT-5.6-sol at xhigh effort.\n\nValidated decision accuracy requires an action consistent with the evaluator oracle and independently audited evidence. Pre-registered target evaluation is the share of four declared transformation hypotheses that reached the evidence gate; it is **not optimization-win recall** because the experiment contained no measured improvements. Correct no-change is calculated over 20 neutral, trap, unsupported, or contract-boundary cases. Evidence completion requires hash-current formal plus both pinned recipes for measured candidates."
+      },
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "sourceId": "framework",
+        "body": "## The experiment was frozen before arm output\n\nSource hashes, open-source revisions, license metadata, packet access rules, model settings, candidate limits, metrics, and hard guardrails were locked before the first arm completed. The evaluator rechecked baseline hashes and independently reran P1 formal for generated candidates. A third pass was assigned only when first- and second-pass decisions disagreed. Exact tables are used instead of charts because there are only three arms and two full repetitions; a chart would imply a trend that this sample cannot support."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## The result validates workflow behavior, not general RTL optimization power\n\n- The released transformation remains one narrow combinational adder family.\n- Eleven of 12 open-source cases are stateful or require P2/P3 contracts beyond the MVP. No arm produced a new proof-qualified open-source candidate.\n- Every product-measured candidate was neutral; this experiment therefore cannot estimate recall on true positive PPA improvements.\n- Yosys/ABC evidence is not Genus, Design Compiler, physical timing, or target-flow PPA.\n- Runtime was not captured consistently, so the 2x latency gate cannot be evaluated.\n- The third pass exposed unresolved label semantics rather than resolving every natural-language decision."
+      },
+      {
+        "id": "recommendations",
+        "type": "markdown",
+        "body": "## Next: broaden evidence and make boundary decisions deterministic\n\n1. Replace free-form `no_change`, `unsupported`, and `inconclusive` selection with a deterministic decision table derived from tool state and proof availability.\n2. Add mux/common-expression and priority/decode candidate families only after freezing exact transforms, negative controls, and P1 evidence contracts.\n3. Integrate the existing P2/P3 proof infrastructure so qualified FIFO, arbiter, register, and pipeline cases can produce measured variants.\n4. Re-run A/B/C on a sealed corpus containing known measured wins, neutral cases, regressions, and sequential boundaries.\n5. Keep the plugin optional until hybrid reaches at least 95% reproducibility and adds validated coverage over plugin-only."
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## Questions the next benchmark must answer\n\n- Does a broader deterministic family find wins that a stronger synthesis recipe does not erase?\n- Does P2/P3 support add safe coverage on realistic open-source blocks without unacceptable runtime?\n- After identical evidence instructions are made explicit to every arm, does the plugin still improve completion or mainly reduce operator effort?\n- How well do Yosys/ABC decisions correlate with Genus or another target flow on the company-controlled machine?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-20T23:59:00-07:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {"plugin_accuracy": 95.83, "control_accuracy": 83.33, "plugin_evidence": 100.0, "control_evidence": 59.02, "improvements": 0, "product_candidates": 3, "harmful": 0, "plugin_reproducibility": 100.0, "hybrid_reproducibility": 70.83}
+      ],
+      "arm_metrics": [
+        {"arm_order": 1, "arm": "A — Codex only", "validated_accuracy": 83.33, "target_evaluation": 0.0, "correct_no_change": 100.0, "evidence_completion": 59.02, "harmful": 0},
+        {"arm_order": 2, "arm": "B — Plugin only", "validated_accuracy": 95.83, "target_evaluation": 75.0, "correct_no_change": 100.0, "evidence_completion": 100.0, "harmful": 0},
+        {"arm_order": 3, "arm": "C — Hybrid", "validated_accuracy": 95.83, "target_evaluation": 75.0, "correct_no_change": 100.0, "evidence_completion": 100.0, "harmful": 0}
+      ],
+      "stability": [
+        {"arm_order": 1, "arm": "A — Codex only", "decision_reproducibility": 45.83, "evidence_reproducibility": 33.33, "tie_break_cases": 13, "unresolved_cases": 3},
+        {"arm_order": 2, "arm": "B — Plugin only", "decision_reproducibility": 100.0, "evidence_reproducibility": 100.0, "tie_break_cases": 0, "unresolved_cases": 0},
+        {"arm_order": 3, "arm": "C — Hybrid", "decision_reproducibility": 70.83, "evidence_reproducibility": 87.5, "tie_break_cases": 7, "unresolved_cases": 3}
+      ],
+      "reproducibility_chart": [
+        {"arm": "A — Codex only", "metric": "Decision", "value": 45.83},
+        {"arm": "A — Codex only", "metric": "Normalized evidence", "value": 33.33},
+        {"arm": "B — Plugin only", "metric": "Decision", "value": 100.0},
+        {"arm": "B — Plugin only", "metric": "Normalized evidence", "value": 100.0},
+        {"arm": "C — Hybrid", "metric": "Decision", "value": 70.83},
+        {"arm": "C — Hybrid", "metric": "Normalized evidence", "value": 87.5}
+      ],
+      "candidate_outcomes": [
+        {"case_id": "g01", "hypothesis": "Balance four-term unsigned add", "formal": "passed", "measurement_scope": "standard + stronger", "result": "synthesis handles", "decision": "no change"},
+        {"case_id": "g02", "hypothesis": "Balance five-term unsigned add", "formal": "passed", "measurement_scope": "standard + stronger", "result": "synthesis handles", "decision": "no change"},
+        {"case_id": "g03", "hypothesis": "Balance continuous add in mixed module", "formal": "passed", "measurement_scope": "standard + stronger", "result": "synthesis handles", "decision": "no change"},
+        {"case_id": "g05", "hypothesis": "Factor common addend across mux", "formal": "passed", "measurement_scope": "generic ABC only", "result": "neutral; incomplete product evidence", "decision": "no change"},
+        {"case_id": "g06", "hypothesis": "Direct Boolean priority encoder", "formal": "passed", "measurement_scope": "generic ABC only", "result": "area and depth regression", "decision": "no change"}
+      ]
+    },
+    "accessIssues": []
+  },
+  "sources": [
+    {
+      "id": "scorecard",
+      "label": "Frozen A/B/C scorecard",
+      "path": "experiments/plugin-abc-v1/evaluations/scorecard.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_json_auto('experiments/plugin-abc-v1/evaluations/scorecard.json')",
+        "description": "Loads the independently audited arm scorecard.",
+        "tables_used": ["experiments/plugin-abc-v1/evaluations/scorecard.json"],
+        "executed_at": "2026-07-20T23:59:00-07:00",
+        "metric_definitions": {
+          "validated_decision_accuracy": "Correct independently supported decisions divided by 24 assigned cases.",
+          "evidence_completion": "Actionable decisions satisfying hash-current formal and required synthesis evidence divided by actionable decisions."
+        }
+      }
+    },
+    {
+      "id": "repeat_comparison",
+      "label": "Repeat comparison and tie-break resolution",
+      "path": "experiments/plugin-abc-v1/evaluations/repeat-comparison.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_json_auto('experiments/plugin-abc-v1/evaluations/repeat-comparison.json')",
+        "description": "Loads decision and normalized-evidence repeat comparisons.",
+        "tables_used": ["experiments/plugin-abc-v1/evaluations/repeat-comparison.json"],
+        "executed_at": "2026-07-20T23:59:00-07:00",
+        "metric_definitions": {
+          "decision_reproducibility": "Cases with the same decision label across repetitions one and two divided by 24.",
+          "normalized_evidence_reproducibility": "Cases with matching scope, evidence-complete state, and candidate evidence state divided by 24."
+        }
+      }
+    },
+    {
+      "id": "candidate_evidence",
+      "label": "Normalized candidate evidence",
+      "path": "experiments/plugin-abc-v1/evaluations/candidate-evidence.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_json_auto('experiments/plugin-abc-v1/evaluations/candidate-evidence.json')",
+        "description": "Loads normalized formal and synthesis outcomes for evaluated candidates.",
+        "tables_used": ["experiments/plugin-abc-v1/evaluations/candidate-evidence.json"],
+        "executed_at": "2026-07-20T23:59:00-07:00",
+        "metric_definitions": {
+          "measured_improvement": "Candidate improves under both pinned recipes after formal passes.",
+          "harmful_recommendation": "Recommended candidate that fails formal or has a regression outcome."
+        }
+      }
+    },
+    {"id": "framework", "label": "Pre-registered testing framework", "path": "implementation plan/A-B-C Testing Framework V1.md"}
+  ]
+}

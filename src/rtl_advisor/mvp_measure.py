@@ -182,12 +182,54 @@ def _yosys_quote(value: str | Path) -> str:
     return '"' + raw.replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
-def _read_command(design: DesignInputV2) -> str:
-    parts = ["read_verilog", "-sv"]
-    parts.extend(f"-I{_yosys_quote(path)}" for path in design.include_dirs)
-    parts.extend(f"-D{_yosys_quote(definition)}" for definition in design.defines)
-    parts.extend(_yosys_quote(source.path) for source in design.files)
-    return " ".join(parts)
+def _read_command(
+    design: DesignInputV2,
+    *,
+    frontend: str = "read_verilog",
+    path_base: Path | None = None,
+) -> str:
+    if frontend == "read_verilog":
+        parts = ["read_verilog", "-sv"]
+        parts.extend(f"-I{_yosys_quote(path)}" for path in design.include_dirs)
+        parts.extend(f"-D{_yosys_quote(definition)}" for definition in design.defines)
+        parts.extend(_yosys_quote(source.path) for source in design.files)
+        return " ".join(parts)
+    if frontend == "yosys-slang":
+        def slang_path(value: str) -> str:
+            path = Path(value).expanduser().resolve()
+            if path_base is not None:
+                try:
+                    rendered = path.relative_to(path_base.resolve()).as_posix()
+                except ValueError:
+                    rendered = str(path)
+            else:
+                rendered = str(path)
+            if any(character.isspace() for character in rendered) or any(
+                character in rendered for character in ("\x00", "\r", "\n")
+            ):
+                raise MVPMeasurementError(
+                    "yosys-slang inputs must be addressable without whitespace; "
+                    "place them under the project root",
+                    code="unsafe_compile_context",
+                )
+            return rendered
+
+        parts = ["read_slang", "--top", design.top]
+        for path in design.include_dirs:
+            parts.extend(("-I", slang_path(path)))
+        for definition in design.defines:
+            if any(character.isspace() for character in definition):
+                raise MVPMeasurementError(
+                    "yosys-slang macro definitions may not contain whitespace",
+                    code="unsafe_compile_context",
+                )
+            parts.extend(("-D", definition))
+        parts.extend(slang_path(source.path) for source in design.files)
+        return " ".join(parts)
+    raise MVPMeasurementError(
+        f"unsupported synthesis frontend: {frontend!r}",
+        code="unsupported_synthesis_frontend",
+    )
 
 
 def _recipe_definition(
@@ -200,6 +242,9 @@ def _recipe_definition(
     abc_version: str,
     abc_sha256: str,
     liberty_sha256: str,
+    frontend: str = "read_verilog",
+    frontend_plugin_path: str | None = None,
+    frontend_plugin_sha256: str | None = None,
 ) -> dict[str, Any]:
     if profile == "standard":
         passes = [
@@ -235,7 +280,11 @@ def _recipe_definition(
         raise MVPMeasurementError(f"unknown synthesis profile: {profile!r}")
     script_template = [
         "read_liberty -lib <LIBERTY>",
-        "read_verilog -sv <INCLUDE_DIRS> <DEFINES> <SOURCES>",
+        (
+            "read_verilog -sv <INCLUDE_DIRS> <DEFINES> <SOURCES>"
+            if frontend == "read_verilog"
+            else "read_slang --top <TOP> <INCLUDE_DIRS> <DEFINES> <SOURCES>"
+        ),
         f"hierarchy -check -top {top}",
         *optimization_template,
         "dfflibmap -liberty <LIBERTY>",
@@ -249,7 +298,9 @@ def _recipe_definition(
         "flow_version": MEASUREMENT_FLOW_VERSION,
         "profile": profile,
         "top": top,
-        "frontend": "read_verilog -sv",
+        "frontend": frontend,
+        "frontend_plugin_path": frontend_plugin_path,
+        "frontend_plugin_sha256": frontend_plugin_sha256,
         "passes": passes,
         "script_template": script_template,
         "script_template_sha256": stable_hash(script_template),
@@ -274,10 +325,18 @@ def _synthesis_script(
     constraints: Path,
     stat_json: Path,
     netlist: Path,
+    frontend: str = "read_verilog",
+    frontend_plugin_path: str | None = None,
+    path_base: Path | None = None,
 ) -> str:
     prefix = [
+        *(
+            [f"plugin -i {_yosys_quote(frontend_plugin_path)}"]
+            if frontend_plugin_path is not None
+            else []
+        ),
         f"read_liberty -lib {_yosys_quote(liberty)}",
-        _read_command(design),
+        _read_command(design, frontend=frontend, path_base=path_base),
         f"hierarchy -check -top {design.top}",
     ]
     if profile == "standard":
@@ -643,6 +702,13 @@ def _run_synthesis(
     environment: Mapping[str, Any],
     recipe: Mapping[str, Any],
 ) -> dict[str, Any]:
+    frontend = str(recipe.get("frontend", "read_verilog"))
+    raw_frontend_plugin_path = recipe.get("frontend_plugin_path")
+    frontend_plugin_path = (
+        str(raw_frontend_plugin_path)
+        if raw_frontend_plugin_path is not None
+        else None
+    )
     output_dir = profile_root / role
     output_dir.mkdir(parents=True, exist_ok=True)
     constraints_path = profile_root / "abc.constr"
@@ -658,6 +724,9 @@ def _run_synthesis(
         constraints=constraints_path,
         stat_json=stat_path,
         netlist=netlist_path,
+        frontend=frontend,
+        frontend_plugin_path=frontend_plugin_path,
+        path_base=config.root,
     )
     script_path.write_text(script, encoding="utf-8")
     command = (config.tools.yosys, "-Q", "-s", str(script_path))
@@ -734,6 +803,9 @@ def _run_synthesis(
         "provenance": {
             "flow_version": MEASUREMENT_FLOW_VERSION,
             "profile": profile,
+            "frontend": frontend,
+            "frontend_plugin_path": frontend_plugin_path,
+            "frontend_plugin_sha256": recipe.get("frontend_plugin_sha256"),
             "recipe_hash": recipe["recipe_hash"],
             "yosys_version": environment["yosys_version"],
             "yosys_path": environment.get("yosys_path"),
@@ -870,6 +942,22 @@ def _raise_flow_invalidated(
     )
 
 
+def _frontend_observation(
+    kind: str,
+    plugin_path: str | None,
+) -> dict[str, Any]:
+    plugin = Path(plugin_path) if plugin_path else None
+    return {
+        "kind": kind,
+        "plugin_path": plugin_path,
+        "plugin_sha256": (
+            sha256_file(plugin)
+            if plugin is not None and plugin.is_file()
+            else None
+        ),
+    }
+
+
 def measure_candidate(
     config: ProjectConfig,
     baseline_design: DesignInputV2,
@@ -878,6 +966,7 @@ def measure_candidate(
     artifact_root: str | Path,
     *,
     objective: str = "balanced",
+    frontend: Mapping[str, Any] | str | None = None,
 ) -> dict[str, Any]:
     """Measure a formally proven candidate with the two fixed MVP recipes.
 
@@ -888,6 +977,53 @@ def measure_candidate(
     and ``candidate`` records. All hashes are checked against the current design
     inputs before either synthesis recipe runs.
     """
+
+    if frontend is None:
+        frontend_kind = "read_verilog"
+        frontend_plugin_path = None
+    elif isinstance(frontend, str):
+        frontend_kind = frontend
+        frontend_plugin_path = None
+    elif isinstance(frontend, Mapping):
+        frontend_kind = str(frontend.get("kind", ""))
+        raw_plugin_path = frontend.get("plugin_path")
+        frontend_plugin_path = (
+            str(raw_plugin_path) if raw_plugin_path is not None else None
+        )
+    else:
+        raise MVPMeasurementError(
+            "synthesis frontend declaration must be an object or string",
+            code="unsupported_synthesis_frontend",
+        )
+    if frontend_kind not in {"read_verilog", "yosys-slang"}:
+        raise MVPMeasurementError(
+            f"unsupported synthesis frontend: {frontend_kind!r}",
+            code="unsupported_synthesis_frontend",
+        )
+    if frontend_kind == "yosys-slang":
+        if not frontend_plugin_path:
+            raise MVPMeasurementError(
+                "yosys-slang synthesis requires a pinned plugin path",
+                code="unsupported_synthesis_frontend",
+            )
+        if not Path(frontend_plugin_path).is_file():
+            raise MVPMeasurementError(
+                f"pinned Yosys Slang plugin is unavailable: {frontend_plugin_path}",
+                code="missing_synthesis_frontend",
+            )
+        frontend_plugin_sha256 = sha256_file(Path(frontend_plugin_path))
+    elif frontend_plugin_path is not None:
+        raise MVPMeasurementError(
+            "read_verilog synthesis must not declare a frontend plugin",
+            code="unsupported_synthesis_frontend",
+        )
+    else:
+        frontend_plugin_sha256 = None
+
+    frontend_identity = _frontend_observation(
+        frontend_kind,
+        frontend_plugin_path,
+    )
 
     baseline_context = _validate_design(baseline_design, "baseline")
     candidate_context = _validate_design(candidate_design, "candidate")
@@ -915,6 +1051,7 @@ def measure_candidate(
         "candidate_compile_context_hash": candidate_context["compile_context_hash"],
         "formal_proof_hash": proof_hash,
         "objective": objective,
+        "frontend": frontend_identity,
         "yosys_version": environment["yosys_version"],
         "yosys_sha256": environment.get("yosys_sha256"),
         "abc_version": environment["abc_version"],
@@ -982,6 +1119,9 @@ def measure_candidate(
             abc_version=str(environment["abc_version"]),
             abc_sha256=str(environment["abc_sha256"]),
             liberty_sha256=str(environment["liberty_sha256"]),
+            frontend=frontend_kind,
+            frontend_plugin_path=frontend_plugin_path,
+            frontend_plugin_sha256=frontend_plugin_sha256,
         )
         baseline_result = _run_synthesis(
             config,
@@ -1028,7 +1168,7 @@ def measure_candidate(
                     f"{profile} {role} result is not bound to its design",
                     code="recipe_parity_failed",
                 )
-            if any(
+            environment_mismatch = any(
                 provenance.get(field) != environment.get(field)
                 for field in (
                     "yosys_version",
@@ -1039,7 +1179,20 @@ def measure_candidate(
                     "abc_sha256",
                     "liberty_sha256",
                 )
-            ):
+            )
+            frontend_fields = (
+                ("frontend", "kind"),
+                ("frontend_plugin_path", "plugin_path"),
+                ("frontend_plugin_sha256", "plugin_sha256"),
+            )
+            frontend_mismatch = (
+                frontend_kind != "read_verilog"
+                or any(field in provenance for field, _ in frontend_fields)
+            ) and any(
+                provenance.get(field) != frontend_identity.get(expected_field)
+                for field, expected_field in frontend_fields
+            )
+            if environment_mismatch or frontend_mismatch:
                 raise MVPMeasurementError(
                     f"{profile} {role} result has mismatched tool provenance",
                     code="recipe_parity_failed",
@@ -1075,10 +1228,15 @@ def measure_candidate(
         for profile in SYNTHESIS_PROFILES
         for role in ("baseline", "candidate")
     }
+    final_frontend_identity = _frontend_observation(
+        frontend_kind,
+        frontend_plugin_path,
+    )
     flow_changed = (
         final_baseline_context != baseline_context
         or final_candidate_context != candidate_context
         or final_environment != environment
+        or final_frontend_identity != frontend_identity
         or any(not item["ok"] for item in artifact_observations.values())
     )
     if flow_changed:
@@ -1089,11 +1247,13 @@ def measure_candidate(
                 "baseline_compile_context": baseline_context,
                 "candidate_compile_context": candidate_context,
                 "environment": environment,
+                "frontend": frontend_identity,
             },
             after={
                 "baseline_compile_context": final_baseline_context,
                 "candidate_compile_context": final_candidate_context,
                 "environment": final_environment,
+                "frontend": final_frontend_identity,
                 "artifacts": artifact_observations,
             },
         )
@@ -1134,10 +1294,15 @@ def measure_candidate(
         for profile in SYNTHESIS_PROFILES
         for role in ("baseline", "candidate")
     }
+    decision_frontend_identity = _frontend_observation(
+        frontend_kind,
+        frontend_plugin_path,
+    )
     if (
         decision_baseline_context != baseline_context
         or decision_candidate_context != candidate_context
         or decision_environment != environment
+        or decision_frontend_identity != frontend_identity
         or any(not item["ok"] for item in decision_artifacts.values())
     ):
         _raise_flow_invalidated(
@@ -1147,11 +1312,13 @@ def measure_candidate(
                 "baseline_compile_context": baseline_context,
                 "candidate_compile_context": candidate_context,
                 "environment": environment,
+                "frontend": frontend_identity,
             },
             after={
                 "baseline_compile_context": decision_baseline_context,
                 "candidate_compile_context": decision_candidate_context,
                 "environment": decision_environment,
+                "frontend": decision_frontend_identity,
                 "artifacts": decision_artifacts,
             },
         )
@@ -1167,6 +1334,7 @@ def measure_candidate(
         "status": decision,
         "decision": decision,
         "objective": objective,
+        "frontend": frontend_identity,
         "baseline_design_hash": baseline_design.design_hash,
         "candidate_design_hash": candidate_design.design_hash,
         "compile_context": {

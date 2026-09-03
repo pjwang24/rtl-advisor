@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "a47d45097565c4b10fd810d0e86fa0ebf6d226d67ce3de745e4f3784076de54a",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:rr_arb_tree.sv",
+        "sha256": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e"
+      }
+    ],
+    "top": "rr_arb_tree"
+  },
+  "defines": [],
+  "design_hash": "3daeec835e1db0b66174d976448eb3f600a92652a4fd91b32dce97b05402aa77",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/rr_arb_tree.sv",
+      "sha256": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "f816e989921f089336457ac676f451e92af9cb3ca053f9fb87adedabd3984a09",
+  "top": "rr_arb_tree"
+}

@@ -28,6 +28,33 @@ from rtl_advisor.mvp_agent import (
     agent_v2_verify,
 )
 from rtl_advisor.mvp_schema import MVPSchemaError
+from rtl_advisor.evidence_explorer import (
+    EvidenceExplorerError,
+    evidence_error_payload,
+    evidence_exit_code,
+    explore_evidence,
+)
+from rtl_advisor.corpus_workflow import (
+    CorpusWorkflowError,
+    corpus_coverage,
+    corpus_error_payload,
+    corpus_exit_code,
+    qualify_corpus,
+    register_corpus_tranche,
+    validate_corpus_tranche,
+)
+from rtl_advisor.workflow_contract import WorkflowContractError
+from rtl_advisor.workflow_runner import (
+    WorkflowRunnerError,
+    workflow_batch,
+    workflow_error_payload,
+    workflow_exit_code,
+    workflow_prepare,
+    workflow_report as run_workflow_report,
+    workflow_resume,
+    workflow_start,
+    workflow_status,
+)
 from rtl_advisor.advisor_v2 import (
     AdvisorV2Error,
     PROFILES,
@@ -89,6 +116,12 @@ from rtl_advisor.frontend_server import (
     FrontendServerError,
     serve_frontend,
 )
+from rtl_advisor.family_study import (
+    FamilyStudyError,
+    read_family_study,
+    report_family_study,
+    run_family_study,
+)
 from rtl_advisor.codex_analysis import CodexAnalysisError, analyze_with_codex
 from rtl_advisor.corpus import (
     RESOURCE_SHARING_FAMILY,
@@ -100,7 +133,14 @@ from rtl_advisor.corpus import (
     generate_case,
     load_manifest,
 )
-from rtl_advisor.corpus_registry import CorpusRegistryError, CorpusRegistryV1
+from rtl_advisor.corpus_registry import (
+    CATEGORIES,
+    QUALIFICATION_STATES,
+    QUALIFICATION_STATUSES,
+    SPLIT_ROLES,
+    CorpusRegistryError,
+    CorpusRegistryV1,
+)
 from rtl_advisor.corpus_baseline import CorpusBaselineError, characterize_tranche_baselines
 from rtl_advisor.corpus_behavior import CorpusBehaviorError, qualify_tranche_behavior
 from rtl_advisor.corpus_qualification import (
@@ -726,6 +766,273 @@ def build_parser() -> argparse.ArgumentParser:
     agent_report_parser.add_argument(
         "--json", action="store_true", dest="json_output"
     )
+    agent_evidence_parser = agent_subparsers.add_parser(
+        "evidence",
+        help="explore immutable measurement evidence with compact chart specs",
+    )
+    evidence_subparsers = agent_evidence_parser.add_subparsers(
+        dest="evidence_command", required=True
+    )
+    evidence_explore_parser = evidence_subparsers.add_parser(
+        "explore", help="derive filtered read-only chart data and aggregates"
+    )
+    evidence_explore_parser.add_argument(
+        "--workflow-id", action="append", default=[], dest="workflow_ids"
+    )
+    evidence_explore_parser.add_argument(
+        "--run-id", action="append", default=[], dest="run_ids"
+    )
+    evidence_explore_parser.add_argument(
+        "--profile",
+        action="append",
+        choices=("standard", "stronger"),
+        default=[],
+        dest="profiles",
+    )
+    evidence_explore_parser.add_argument(
+        "--objective",
+        action="append",
+        choices=("timing", "area", "balanced"),
+        default=[],
+        dest="objectives",
+    )
+    evidence_explore_parser.add_argument(
+        "--classification",
+        action="append",
+        choices=("improved", "neutral", "regressed"),
+        default=[],
+        dest="classifications",
+    )
+    evidence_explore_parser.add_argument(
+        "--decision",
+        action="append",
+        choices=(
+            "measured_improvement",
+            "synthesis_handles",
+            "flow_dependent",
+            "regression",
+        ),
+        default=[],
+        dest="decisions",
+    )
+    evidence_explore_parser.add_argument(
+        "--transformation",
+        action="append",
+        default=[],
+        dest="transformations",
+    )
+    evidence_explore_parser.add_argument(
+        "--source-kind",
+        action="append",
+        choices=("agent_v2_run", "family_study"),
+        default=[],
+        dest="source_kinds",
+    )
+    evidence_explore_parser.add_argument("--output-dir")
+    evidence_explore_parser.add_argument(
+        "--schema-version", type=int, choices=(1,), default=1
+    )
+    evidence_explore_parser.add_argument(
+        "--json", action="store_true", dest="json_output"
+    )
+    agent_corpus_parser = agent_subparsers.add_parser(
+        "corpus",
+        help="qualify frozen open-RTL tranches and audit lineage-aware coverage",
+    )
+    agent_corpus_subparsers = agent_corpus_parser.add_subparsers(
+        dest="agent_corpus_command", required=True
+    )
+    corpus_coverage_parser = agent_corpus_subparsers.add_parser(
+        "coverage", help="derive a read-only independent-design coverage audit"
+    )
+    corpus_coverage_parser.add_argument(
+        "--tier", action="append", choices=("A", "B", "C", "D"), default=[], dest="tiers"
+    )
+    corpus_coverage_parser.add_argument(
+        "--category", action="append", choices=CATEGORIES, default=[], dest="categories"
+    )
+    corpus_coverage_parser.add_argument(
+        "--split", action="append", choices=SPLIT_ROLES, default=[], dest="splits"
+    )
+    corpus_coverage_parser.add_argument(
+        "--qualification-state",
+        action="append",
+        choices=QUALIFICATION_STATES,
+        default=[],
+        dest="qualification_states",
+    )
+    corpus_coverage_parser.add_argument(
+        "--qualification-status",
+        action="append",
+        choices=QUALIFICATION_STATUSES,
+        default=[],
+        dest="qualification_statuses",
+    )
+    corpus_qualify_parser = agent_corpus_subparsers.add_parser(
+        "qualify", help="run a frozen append-only corpus qualification plan"
+    )
+    corpus_qualify_parser.add_argument("lock", help="frozen tranche lock JSON")
+    corpus_qualify_parser.add_argument("plan", help="frozen qualification plan JSON")
+    corpus_validate_parser = agent_corpus_subparsers.add_parser(
+        "validate", help="validate an already-frozen corpus tranche lock"
+    )
+    corpus_validate_parser.add_argument("lock", help="frozen tranche lock JSON")
+    corpus_register_parser = agent_corpus_subparsers.add_parser(
+        "register", help="append a validated frozen tranche to Corpus Registry V1"
+    )
+    corpus_register_parser.add_argument("lock", help="frozen tranche lock JSON")
+    for corpus_parser in (
+        corpus_coverage_parser,
+        corpus_qualify_parser,
+        corpus_validate_parser,
+        corpus_register_parser,
+    ):
+        corpus_parser.add_argument(
+            "--registry-dir",
+            help="registry directory (default: corpus/registry-v1)",
+        )
+        corpus_parser.add_argument(
+            "--schema-version", type=int, choices=(1,), default=1
+        )
+        corpus_parser.add_argument("--json", action="store_true", dest="json_output")
+    agent_workflow_parser = agent_subparsers.add_parser(
+        "workflow",
+        help="run or inspect a deterministic multi-stage Agent V2 workflow",
+    )
+    workflow_subparsers = agent_workflow_parser.add_subparsers(
+        dest="workflow_command", required=True
+    )
+    workflow_prepare_parser = workflow_subparsers.add_parser(
+        "prepare",
+        help="normalize bounded intent into hashed request and authorization records",
+    )
+    workflow_prepare_parser.add_argument("input")
+    workflow_prepare_parser.add_argument(
+        "--input-kind",
+        choices=(
+            "generated_rtl",
+            "explicitly_approved_open_rtl",
+            "qualified_corpus_reference",
+        ),
+        required=True,
+    )
+    workflow_prepare_parser.add_argument(
+        "--objective", choices=("timing", "area", "balanced"), default="balanced"
+    )
+    workflow_prepare_parser.add_argument(
+        "--authorized-through",
+        choices=("review", "candidate", "verify", "measure"),
+        required=True,
+    )
+    workflow_prepare_parser.add_argument("--top")
+    workflow_prepare_parser.add_argument(
+        "-I", action="append", default=[], dest="include_dirs"
+    )
+    workflow_prepare_parser.add_argument(
+        "-D", action="append", default=[], dest="defines"
+    )
+    authorization_basis = workflow_prepare_parser.add_mutually_exclusive_group(
+        required=True
+    )
+    authorization_basis.add_argument("--prompt-file")
+    authorization_basis.add_argument("--proposal-file")
+    workflow_prepare_parser.add_argument("--confirmation-file")
+    candidate_selection = workflow_prepare_parser.add_mutually_exclusive_group()
+    candidate_selection.add_argument("--first-eligible", action="store_true")
+    candidate_selection.add_argument("--finding-id")
+    workflow_prepare_parser.add_argument("--output-dir")
+    workflow_prepare_parser.add_argument(
+        "--start",
+        action="store_true",
+        help="start the prepared workflow immediately",
+    )
+    workflow_start_parser = workflow_subparsers.add_parser(
+        "start", help="start from frozen request and authorization documents"
+    )
+    workflow_start_parser.add_argument("request")
+    workflow_start_parser.add_argument("--authorization", required=True)
+    workflow_status_parser = workflow_subparsers.add_parser(
+        "status", help="read the current compact workflow summary"
+    )
+    workflow_status_parser.add_argument("workflow_id")
+    workflow_resume_parser = workflow_subparsers.add_parser(
+        "resume", help="resume with a new explicit authorization document"
+    )
+    workflow_resume_parser.add_argument("workflow_id")
+    workflow_resume_parser.add_argument("--authorization", required=True)
+    workflow_report_parser = workflow_subparsers.add_parser(
+        "report", help="derive the compact summary and immutable Agent report"
+    )
+    workflow_report_parser.add_argument("workflow_id")
+    for workflow_parser in (
+        workflow_prepare_parser,
+        workflow_start_parser,
+        workflow_status_parser,
+        workflow_resume_parser,
+        workflow_report_parser,
+    ):
+        workflow_parser.add_argument(
+            "--schema-version", type=int, choices=(1,), default=1
+        )
+        workflow_parser.add_argument(
+            "--json", action="store_true", dest="json_output"
+        )
+        workflow_parser.add_argument(
+            "--compact",
+            action="store_true",
+            help="return the bounded workflow digest instead of the full summary",
+        )
+    workflow_batch_parser = workflow_subparsers.add_parser(
+        "batch", help="run an ordered manifest with one capability discovery"
+    )
+    workflow_batch_parser.add_argument("manifest")
+    workflow_batch_parser.add_argument(
+        "--authorized-through",
+        choices=("review", "candidate", "verify", "measure"),
+        required=True,
+    )
+    batch_basis = workflow_batch_parser.add_mutually_exclusive_group(required=True)
+    batch_basis.add_argument("--prompt-file")
+    batch_basis.add_argument("--proposal-file")
+    workflow_batch_parser.add_argument("--confirmation-file")
+    workflow_batch_parser.add_argument("--first-eligible", action="store_true")
+    workflow_batch_parser.add_argument("--output-dir")
+    workflow_batch_parser.add_argument("--jobs", type=int, choices=(1, 2, 3, 4), default=1)
+    workflow_batch_parser.add_argument(
+        "--schema-version", type=int, choices=(1,), default=1
+    )
+    workflow_batch_parser.add_argument(
+        "--json", action="store_true", dest="json_output"
+    )
+
+    study = subparsers.add_parser(
+        "study",
+        help="validate, execute, and report immutable family evidence studies",
+    )
+    study_subparsers = study.add_subparsers(dest="study_command", required=True)
+    study_validate = study_subparsers.add_parser(
+        "validate",
+        help="validate a frozen family-study manifest without running tools",
+    )
+    study_validate.add_argument("manifest")
+    study_validate.add_argument("--json", action="store_true", dest="json_output")
+    study_run = study_subparsers.add_parser(
+        "run",
+        help="run or resume one clean frozen family-study repeat",
+    )
+    study_run.add_argument("manifest")
+    study_run.add_argument(
+        "--repeat",
+        choices=("repeat-1", "repeat-2"),
+        required=True,
+    )
+    study_run.add_argument("--json", action="store_true", dest="json_output")
+    study_report = study_subparsers.add_parser(
+        "report",
+        help="derive family and product claim gates from stored repeats",
+    )
+    study_report.add_argument("study_id")
+    study_report.add_argument("--json", action="store_true", dest="json_output")
 
     model = subparsers.add_parser("model", help="train and inspect v2 gate models")
     model_subparsers = model.add_subparsers(dest="model_command", required=True)
@@ -1182,9 +1489,149 @@ def _normalized_agent_command(
         command.extend((args.run_id, "--candidate", args.candidate))
     elif args.agent_command == "report":
         command.append(args.run_id)
+    elif args.agent_command == "evidence":
+        command.append(args.evidence_command)
+        for option, values in (
+            ("--workflow-id", args.workflow_ids),
+            ("--run-id", args.run_ids),
+            ("--profile", args.profiles),
+            ("--objective", args.objectives),
+            ("--classification", args.classifications),
+            ("--decision", args.decisions),
+            ("--transformation", args.transformations),
+            ("--source-kind", args.source_kinds),
+        ):
+            for value in values:
+                command.extend((option, value))
+        if args.output_dir:
+            output_path = Path(args.output_dir).expanduser()
+            if not output_path.is_absolute():
+                output_path = config.root / output_path
+            command.extend(("--output-dir", str(output_path.resolve())))
+    elif args.agent_command == "corpus":
+        command.append(args.agent_corpus_command)
+        if args.agent_corpus_command == "coverage":
+            for option, values in (
+                ("--tier", args.tiers),
+                ("--category", args.categories),
+                ("--split", args.splits),
+                ("--qualification-state", args.qualification_states),
+                ("--qualification-status", args.qualification_statuses),
+            ):
+                for value in sorted(set(values)):
+                    command.extend((option, value))
+        elif args.agent_corpus_command == "qualify":
+            for value in (args.lock, args.plan):
+                path = Path(value).expanduser()
+                if not path.is_absolute():
+                    path = config.root / path
+                command.append(str(path.resolve()))
+        else:
+            path = Path(args.lock).expanduser()
+            if not path.is_absolute():
+                path = config.root / path
+            command.append(str(path.resolve()))
+        if args.registry_dir:
+            registry_path = Path(args.registry_dir).expanduser()
+            if not registry_path.is_absolute():
+                registry_path = config.root / registry_path
+            command.extend(("--registry-dir", str(registry_path.resolve())))
+    elif args.agent_command == "workflow":
+        command.append(args.workflow_command)
+        if args.workflow_command == "batch":
+            manifest_path = Path(args.manifest).expanduser()
+            if not manifest_path.is_absolute():
+                manifest_path = config.root / manifest_path
+            command.extend(
+                (
+                    str(manifest_path.resolve()),
+                    "--authorized-through",
+                    args.authorized_through,
+                )
+            )
+            for option, value in (
+                ("--prompt-file", args.prompt_file),
+                ("--proposal-file", args.proposal_file),
+                ("--confirmation-file", args.confirmation_file),
+                ("--output-dir", args.output_dir),
+            ):
+                if value:
+                    value_path = Path(value).expanduser()
+                    if not value_path.is_absolute():
+                        value_path = config.root / value_path
+                    command.extend((option, str(value_path.resolve())))
+            if args.first_eligible:
+                command.append("--first-eligible")
+            command.extend(("--jobs", str(args.jobs)))
+        elif args.workflow_command == "prepare":
+            input_path = Path(args.input).expanduser()
+            if not input_path.is_absolute():
+                input_path = config.root / input_path
+            command.extend(
+                (
+                    str(input_path.resolve()),
+                    "--input-kind",
+                    args.input_kind,
+                    "--objective",
+                    args.objective,
+                    "--authorized-through",
+                    args.authorized_through,
+                )
+            )
+            if args.top:
+                command.extend(("--top", args.top))
+            for include_dir in args.include_dirs:
+                include_path = Path(include_dir).expanduser()
+                if not include_path.is_absolute():
+                    include_path = config.root / include_path
+                command.extend(("-I", str(include_path.resolve())))
+            for definition in args.defines:
+                command.extend(("-D", definition))
+            for option, value in (
+                ("--prompt-file", args.prompt_file),
+                ("--proposal-file", args.proposal_file),
+                ("--confirmation-file", args.confirmation_file),
+                ("--output-dir", args.output_dir),
+            ):
+                if value:
+                    value_path = Path(value).expanduser()
+                    if not value_path.is_absolute():
+                        value_path = config.root / value_path
+                    command.extend((option, str(value_path.resolve())))
+            if args.first_eligible:
+                command.append("--first-eligible")
+            if args.finding_id:
+                command.extend(("--finding-id", args.finding_id))
+            if args.start:
+                command.append("--start")
+        elif args.workflow_command == "start":
+            request_path = Path(args.request).expanduser()
+            authorization_path = Path(args.authorization).expanduser()
+            command.extend(
+                (
+                    str(request_path.resolve()),
+                    "--authorization",
+                    str(authorization_path.resolve()),
+                )
+            )
+        elif args.workflow_command == "resume":
+            authorization_path = Path(args.authorization).expanduser()
+            command.extend(
+                (
+                    args.workflow_id,
+                    "--authorization",
+                    str(authorization_path.resolve()),
+                )
+            )
+        else:
+            command.append(args.workflow_id)
+        if getattr(args, "compact", False):
+            command.append("--compact")
     # Agent V1 predates the explicit schema selector.  Keep its normalized
     # command byte-for-byte compatible; only V2 clients opt into the new flag.
-    if args.schema_version == 2:
+    if args.agent_command in {"workflow", "evidence", "corpus"}:
+        command.extend(("--schema-version", "1"))
+    elif args.schema_version == 2:
         command.extend(("--schema-version", "2"))
     command.append("--json")
     return tuple(command)
@@ -1254,6 +1701,153 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         if args.command == "agent":
             normalized_command = _normalized_agent_command(config, args)
+            if args.agent_command == "corpus":
+                try:
+                    registry = _corpus_registry(config, args.registry_dir)
+                    if args.agent_corpus_command == "coverage":
+                        payload = corpus_coverage(
+                            config,
+                            registry=registry,
+                            tiers=tuple(args.tiers),
+                            categories=tuple(args.categories),
+                            splits=tuple(args.splits),
+                            qualification_states=tuple(args.qualification_states),
+                            qualification_statuses=tuple(args.qualification_statuses),
+                            normalized_command=normalized_command,
+                        )
+                    elif args.agent_corpus_command == "qualify":
+                        payload = qualify_corpus(
+                            config,
+                            tranche_lock_path=args.lock,
+                            qualification_plan_path=args.plan,
+                            registry=registry,
+                            normalized_command=normalized_command,
+                        )
+                    elif args.agent_corpus_command == "validate":
+                        payload = validate_corpus_tranche(
+                            config,
+                            tranche_lock_path=args.lock,
+                            normalized_command=normalized_command,
+                        )
+                    else:
+                        payload = register_corpus_tranche(
+                            config,
+                            tranche_lock_path=args.lock,
+                            registry=registry,
+                            normalized_command=normalized_command,
+                        )
+                except (
+                    CorpusWorkflowError,
+                    CorpusRegistryError,
+                    CorpusQualificationError,
+                    TrancheLockError,
+                    MVPSchemaError,
+                ) as exc:
+                    payload = corpus_error_payload(
+                        args.agent_corpus_command,
+                        exc,
+                        normalized_command=normalized_command,
+                    )
+                print(json.dumps(payload, indent=2, sort_keys=True))
+                return corpus_exit_code(payload)
+            if args.agent_command == "evidence":
+                try:
+                    payload = explore_evidence(
+                        config,
+                        workflow_ids=tuple(args.workflow_ids),
+                        run_ids=tuple(args.run_ids),
+                        profiles=tuple(args.profiles),
+                        objectives=tuple(args.objectives),
+                        classifications=tuple(args.classifications),
+                        decisions=tuple(args.decisions),
+                        transformations=tuple(args.transformations),
+                        source_kinds=tuple(args.source_kinds),
+                        output_dir=args.output_dir,
+                        normalized_command=normalized_command,
+                    )
+                except (EvidenceExplorerError, MVPSchemaError) as exc:
+                    payload = evidence_error_payload(
+                        exc, normalized_command=normalized_command
+                    )
+                print(json.dumps(payload, indent=2, sort_keys=True))
+                return evidence_exit_code(payload)
+            if args.agent_command == "workflow":
+                try:
+                    if args.workflow_command == "batch":
+                        payload = workflow_batch(
+                            config,
+                            args.manifest,
+                            authorized_through=args.authorized_through,
+                            prompt_file=args.prompt_file,
+                            proposal_file=args.proposal_file,
+                            confirmation_file=args.confirmation_file,
+                            first_eligible=args.first_eligible,
+                            output_dir=args.output_dir,
+                            jobs=args.jobs,
+                            normalized_command=normalized_command,
+                        )
+                    elif args.workflow_command == "prepare":
+                        if args.first_eligible:
+                            selection = {"mode": "first_eligible"}
+                        elif args.finding_id:
+                            selection = {
+                                "mode": "finding_id",
+                                "finding_id": args.finding_id,
+                            }
+                        else:
+                            selection = None
+                        payload = workflow_prepare(
+                            config,
+                            args.input,
+                            input_kind=args.input_kind,
+                            objective=args.objective,
+                            authorized_through=args.authorized_through,
+                            prompt_file=args.prompt_file,
+                            proposal_file=args.proposal_file,
+                            confirmation_file=args.confirmation_file,
+                            top=args.top,
+                            include_dirs=tuple(args.include_dirs),
+                            defines=tuple(args.defines),
+                            candidate_selection=selection,
+                            output_dir=args.output_dir,
+                            start=args.start,
+                            compact=args.compact,
+                            normalized_command=normalized_command,
+                        )
+                    elif args.workflow_command == "start":
+                        payload = workflow_start(
+                            config,
+                            args.request,
+                            args.authorization,
+                            compact=args.compact,
+                        )
+                    elif args.workflow_command == "resume":
+                        payload = workflow_resume(
+                            config,
+                            args.workflow_id,
+                            args.authorization,
+                            compact=args.compact,
+                        )
+                    elif args.workflow_command == "status":
+                        payload = workflow_status(
+                            config, args.workflow_id, compact=args.compact
+                        )
+                    else:
+                        payload = run_workflow_report(
+                            config, args.workflow_id, compact=args.compact
+                        )
+                except (
+                    WorkflowRunnerError,
+                    WorkflowContractError,
+                    MVPSchemaError,
+                ) as exc:
+                    payload = workflow_error_payload(
+                        args.workflow_command,
+                        exc,
+                        normalized_command=normalized_command,
+                    )
+                print(json.dumps(payload, indent=2, sort_keys=True))
+                return workflow_exit_code(payload)
             if args.schema_version == 2:
                 try:
                     if args.agent_command == "review" and (
@@ -1354,6 +1948,45 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
             print(json.dumps(payload, indent=2, sort_keys=True))
             return agent_exit_code(payload)
+
+        if args.command == "study":
+            if args.study_command == "validate":
+                payload = read_family_study(args.manifest)
+                result = {
+                    "status": "valid",
+                    "study_id": payload["study_id"],
+                    "family_id": payload["family_id"],
+                    "manifest_hash": payload["manifest_hash"],
+                    "pair_count": len(payload["primary_cohort"]),
+                    "reserve_count": len(payload["reserve_cohort"]),
+                    "m2_sample_count": len(
+                        payload["m2_selection"]["primary"]
+                    ),
+                }
+            elif args.study_command == "run":
+                result = run_family_study(
+                    config,
+                    args.manifest,
+                    repeat_id=args.repeat,
+                )
+            else:
+                result = report_family_study(config, args.study_id)
+            if args.json_output:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                print(
+                    f"Family study {result.get('study_id')}: "
+                    f"{result.get('status')}"
+                )
+                if "manifest_hash" in result:
+                    print(f"  manifest          {result['manifest_hash']}")
+                if "summary" in result:
+                    print(
+                        "  executor coverage "
+                        f"{result['summary']['executor_available_pair_count']}/"
+                        f"{result['summary']['frozen_pair_count']}"
+                    )
+            return 0
 
         if args.command == "frontend":
             serve_frontend(config, host=args.host, port=args.port)
@@ -2357,6 +2990,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         SynthesisRobustnessFullError,
         FrontendAPIError,
         FrontendServerError,
+        FamilyStudyError,
     ) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2

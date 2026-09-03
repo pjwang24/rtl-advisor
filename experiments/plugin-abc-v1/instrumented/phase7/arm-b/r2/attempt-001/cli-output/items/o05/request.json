@@ -1,0 +1,17 @@
+{
+  "document_type": "rtl-advisor.workflow.request",
+  "input": {
+    "compile_context_hash": "b44aabdf2d2efea77bbd07d687070731c8339bbdb56dfdba60654e7dd4344ae8",
+    "defines": [],
+    "include_dirs": [],
+    "kind": "explicitly_approved_open_rtl",
+    "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/common_cells/src/spill_register.sv",
+    "sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec",
+    "top": "spill_register"
+  },
+  "objective": "balanced",
+  "schema": "rtl-advisor-workflow-request-v1",
+  "schema_version": 1,
+  "semantic_hash": "3404054c115fbe63afc35e2f4170a64668555f0e94dab90a04031e852a932993",
+  "workflow_id": "workflow-b86da1b340c838d0ab14"
+}

@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "e16304b635095a62ed533ba5d8fbd74682a92a7df3a834a3588d386921eff771",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:stream_register.sv",
+        "sha256": "2e0e5b6d09ce4ade0881938ee042dcbc78438638fa2592338a374f88a3c27304"
+      }
+    ],
+    "top": "stream_register"
+  },
+  "defines": [],
+  "design_hash": "d60ebd4fdc78bce3bb462cb296a9866a5c991030f13105466e9c974a69260b42",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/common_cells/src/stream_register.sv",
+      "sha256": "2e0e5b6d09ce4ade0881938ee042dcbc78438638fa2592338a374f88a3c27304"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "33746a25e652da4c2bb92078b540597b8c3a96739ed09010ae1d298b14be7160",
+  "top": "stream_register"
+}

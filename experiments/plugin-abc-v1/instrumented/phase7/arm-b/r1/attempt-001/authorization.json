@@ -1,0 +1,17 @@
+{
+  "authorized_through": "measure",
+  "basis": {
+    "kind": "direct_prompt",
+    "prompt_sha256": "cf24fa70114734512d0d49938f4d4a40bf8a5f62a6be9c4eddee6cdd27c7d3c6"
+  },
+  "batch_id": "batch-f4765fe2929385b83b15",
+  "candidate_selection": {
+    "mode": "first_eligible"
+  },
+  "document_type": "rtl-advisor.workflow.batch-authorization",
+  "issued_at": "2026-09-03T02:51:09.125601Z",
+  "request_semantic_hash": "2d77f253b792fcd2affc3437618f207fa70bdc8415fe3a04635d167cf0d0147f",
+  "schema": "rtl-advisor-workflow-batch-authorization-v1",
+  "schema_version": 1,
+  "semantic_hash": "2e8e3d05b07c6438b18d9b2c887e6ed2236cd434517f80302064b15053bd5e17"
+}

@@ -1,0 +1,84 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-cb1348da7adf1be905f3/input.json",
+    "review": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-cb1348da7adf1be905f3/review.json",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-cb1348da7adf1be905f3"
+  },
+  "candidate_generation_allowed": false,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv",
+    "--objective",
+    "balanced",
+    "--top",
+    "prim_fifo_sync",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 0,
+    "excluded_site_count": 1
+  },
+  "decision": "unsupported",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "5aa030676b2d9f2fcbd2a4eb42b15cc8dd542505ea5c583b9be88b4a9b54f584",
+    "model_used": false,
+    "rules_only": true
+  },
+  "exclusions": [
+    {
+      "detail": "parameterized top modules are outside MVP scope",
+      "exclusion_id": "addexclude_2bb13bf41d686a6b",
+      "reason_code": "parameterized_top",
+      "source": {
+        "end_offset": 7836,
+        "file": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv",
+        "sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630",
+        "start_offset": 585
+      },
+      "status": "excluded",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "findings": [],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "6faffe2447a042d3fe1542de9d25cd868d952c7e98a97875dce177491e48e34d",
+    "defines": [],
+    "design_hash": "676464b4aa4139fa9e0fad091c823466109e768648afd81e55b4f15f23896841",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv",
+        "sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "prim_fifo_sync"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-cb1348da7adf1be905f3",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "84f46ea4f4b316f6775a86a816da0fdd8158a45b4d156172221c6fcb9beea3c7",
+  "status": "completed"
+}

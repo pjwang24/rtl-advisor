@@ -1,0 +1,181 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g05_c1.sv; prep -top g05_mux_common_logic; ltp; stat' --
+
+1. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g05_c1.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g05_c1.sv' to AST representation.
+Generating RTLIL representation for module `\g05_mux_common_logic'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \g05_mux_common_logic
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \g05_mux_common_logic
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+2.3. Executing FUTURE pass.
+
+2.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+2.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g05_mux_common_logic..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+2.6. Executing CHECK pass (checking for obvious problems).
+Checking module g05_mux_common_logic...
+Found and reported 0 problems.
+
+2.7. Executing OPT pass (performing simple optimizations).
+
+2.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+2.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g05_mux_common_logic'.
+Computing hashes of 2 cells of `\g05_mux_common_logic'.
+Finding duplicate cells in `\g05_mux_common_logic'.
+Removed a total of 0 cells.
+
+2.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g05_mux_common_logic..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+2.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g05_mux_common_logic.
+Performed a total of 0 changes.
+
+2.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g05_mux_common_logic'.
+Computing hashes of 2 cells of `\g05_mux_common_logic'.
+Finding duplicate cells in `\g05_mux_common_logic'.
+Removed a total of 0 cells.
+
+2.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g05_mux_common_logic..
+
+2.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+2.7.8. Finished fast OPT passes. (There is nothing left to do.)
+
+2.8. Executing WREDUCE pass (reducing word size of cells).
+
+2.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g05_mux_common_logic..
+
+2.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.11. Executing OPT pass (performing simple optimizations).
+
+2.11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+2.11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g05_mux_common_logic'.
+Computing hashes of 2 cells of `\g05_mux_common_logic'.
+Finding duplicate cells in `\g05_mux_common_logic'.
+Removed a total of 0 cells.
+
+2.11.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g05_mux_common_logic..
+
+2.11.4. Finished fast OPT passes.
+
+2.12. Executing SORT pass.
+
+2.13. Printing statistics.
+
+=== g05_mux_common_logic ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        6 wires
+       81 wire bits
+        5 public wires
+       65 public wire bits
+        5 ports
+       65 port bits
+        2 cells
+        1   $add
+        1   $mux
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module g05_mux_common_logic...
+Found and reported 0 problems.
+
+3. Executing LTP pass (find longest path).
+
+Longest topological path in g05_mux_common_logic (length=2):
+    0: \sel
+    1: $ternary$experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g05_c1.sv:6$1_Y [0] (via $ternary$experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g05_c1.sv:6$1)
+    2: \y [0] (via $add$experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g05_c1.sv:6$2)
+
+4. Printing statistics.
+
+=== g05_mux_common_logic ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        6 wires
+       81 wire bits
+        5 public wires
+       65 public wire bits
+        5 ports
+       65 port bits
+        2 cells
+        1   $add
+        1   $mux
+
+End of script. Logfile hash: 060f6597c6, CPU: user 0.03s system 0.01s, MEM: 12.73 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 33% 5x opt_expr (0 sec), 30% 4x opt_clean (0 sec), ...

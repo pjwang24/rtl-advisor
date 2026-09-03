@@ -1,0 +1,10 @@
+read_verilog -sv ../candidates/g06_priority_decode_candidate.sv
+hierarchy -top g06_priority_decode_candidate
+proc
+flatten
+opt
+techmap
+opt
+abc -g AND,OR,XOR,MUX -script "+strash;dc2;map;print_stats"
+clean
+stat

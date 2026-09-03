@@ -1,0 +1,56 @@
+{
+  "document_type": "rtl-advisor.plugin-phase6-evaluation",
+  "efficiency_gate": {
+    "arms": {
+      "A": {
+        "mean_command_count": 55.0,
+        "mean_command_output_bytes": 168018.5,
+        "mean_event_count": 119.5,
+        "mean_total_tokens": 1492047.0,
+        "mean_uncached_token_volume": 143887.0,
+        "mean_wall_time_seconds": 581.155,
+        "run_count": 2,
+        "task_completion_percent": 100.0
+      },
+      "B": {
+        "mean_command_count": 113.0,
+        "mean_command_output_bytes": 411754.5,
+        "mean_event_count": 237.0,
+        "mean_total_tokens": 2338730.0,
+        "mean_uncached_token_volume": 160810.0,
+        "mean_wall_time_seconds": 942.022,
+        "run_count": 2,
+        "task_completion_percent": 100.0
+      }
+    },
+    "decision_guardrails": {
+      "frozen_result_agreement_percent": 100.0,
+      "measured_repeat_agreement_percent": 100.0
+    },
+    "minimum_token_reduction_percent": 25.0,
+    "observed_latency_reduction_percent": -62.09,
+    "observed_token_reduction_percent": -56.75,
+    "observed_uncached_token_reduction_percent": -11.76,
+    "status": "failed",
+    "telemetry_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/telemetry.json"
+  },
+  "experiment_id": "plugin-abc-v1",
+  "quality_gate": {
+    "decision_reproducibility_percent": 100.0,
+    "evidence_completion_percent": 100.0,
+    "harmful_recommendations": 0,
+    "plugin_run_count": 2,
+    "status": "passed",
+    "unproven_recommendations": 0,
+    "validated_decision_accuracy_percent": 95.83
+  },
+  "release_ready": false,
+  "schema": "rtl-advisor-plugin-phase6-evaluation-v1",
+  "schema_version": 1,
+  "semantic_hash": "6a67de5a6b74b3f059b0a8a868d46100706b56e679b8717ed13980be2a651ab7",
+  "sources": {
+    "repeat_comparison": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/repeat-comparison.json",
+    "scorecard": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/scorecard.json"
+  },
+  "status": "failed"
+}

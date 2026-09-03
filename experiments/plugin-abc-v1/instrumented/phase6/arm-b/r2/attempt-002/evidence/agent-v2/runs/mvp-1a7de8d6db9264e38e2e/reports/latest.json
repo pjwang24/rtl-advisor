@@ -1,0 +1,10 @@
+{
+  "document_type": "rtl-advisor.run.report-latest",
+  "html_sha256": "68117573d3887d1458f812ba8b7eae88b7f9aafb5435fafa0fd0c10e76731405",
+  "html_snapshot": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-1a7de8d6db9264e38e2e/reports/a5f8249b79773606d49be196899b4b0039f2f2e18e03f82c294b7cec30f2b937.html",
+  "report_semantic_hash": "a5f8249b79773606d49be196899b4b0039f2f2e18e03f82c294b7cec30f2b937",
+  "report_snapshot": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-1a7de8d6db9264e38e2e/reports/a5f8249b79773606d49be196899b4b0039f2f2e18e03f82c294b7cec30f2b937.json",
+  "run_id": "mvp-1a7de8d6db9264e38e2e",
+  "schema_version": 1,
+  "semantic_hash": "fb1387f2900a9d8714a0701d5e1256eb7d816c57104b025dc26b67e788370e57"
+}

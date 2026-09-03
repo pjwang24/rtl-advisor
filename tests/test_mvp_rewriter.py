@@ -133,6 +133,89 @@ endmodule
     assert scan_addition_sites(design) == []
 
 
+def test_scan_isolates_safe_site_from_unrelated_procedural_region(
+    tmp_path: Path,
+) -> None:
+    design = _write_design(
+        tmp_path,
+        """\
+module top(
+  input logic [7:0] a, b, c, d,
+  input logic select,
+  output logic [7:0] y,
+  output logic flag
+);
+  logic [7:0] term0, term1, term2, term3;
+  assign term0 = a;
+  assign term1 = b;
+  assign term2 = c;
+  assign term3 = d;
+  assign y = term0 + term1 + term2 + term3;
+  always_comb begin
+    flag = select;
+  end
+endmodule
+""",
+    )
+
+    analysis = scan_addition_analysis(design)
+
+    assert len(analysis["findings"]) == 1
+    assert analysis["findings"][0]["target"]["name"] == "y"
+    assert [item["name"] for item in analysis["findings"][0]["operands"]] == [
+        "term0",
+        "term1",
+        "term2",
+        "term3",
+    ]
+    assert [item["reason_code"] for item in analysis["exclusions"]] == [
+        "procedural_or_generated_rtl"
+    ]
+
+    prepared = prepare_addition_candidate(
+        design,
+        analysis["findings"][0]["finding_id"],
+        tmp_path / "artifacts",
+    )
+    diff = Path(prepared["diff_path"]).read_text(encoding="utf-8")
+    assert "assign y = ((term0 + term1) + (term2 + term3));" in diff
+    changed_lines = [
+        line
+        for line in diff.splitlines()
+        if line.startswith(("+", "-")) and not line.startswith(("+++", "---"))
+    ]
+    assert all("flag = select;" not in line for line in changed_lines)
+
+
+def test_scan_blocks_site_whose_target_overlaps_procedural_region(
+    tmp_path: Path,
+) -> None:
+    design = _write_design(
+        tmp_path,
+        """\
+module top(
+  input logic [7:0] a, b, c,
+  input logic select,
+  output logic [7:0] y
+);
+  assign y = a + b + c;
+  always_comb begin
+    if (select)
+      y = a;
+  end
+endmodule
+""",
+    )
+
+    analysis = scan_addition_analysis(design)
+
+    assert analysis["findings"] == []
+    assert {item["reason_code"] for item in analysis["exclusions"]} == {
+        "procedural_or_generated_rtl",
+        "target_overlaps_unsupported_region",
+    }
+
+
 @pytest.mark.parametrize(
     "source",
     [

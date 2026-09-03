@@ -1,0 +1,121 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/input.json",
+    "review": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/review.json",
+    "root": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe"
+  },
+  "candidate_generation_allowed": true,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+    "--objective",
+    "balanced",
+    "--top",
+    "g01_add8_left",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 1,
+    "excluded_site_count": 0
+  },
+  "decision": "candidate_available",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "45cda69cc2e269e07c5747fad9ea23368c3025054ddd2b4154c53bba755b9929",
+    "model_used": false,
+    "rules_only": true,
+    "transformation_registry_hash": "ede9d27234c7c826bf115798b8df00774cc3e987a73be174c190ef6f99c28370"
+  },
+  "exclusions": [],
+  "findings": [
+    {
+      "finding_id": "addsite_9067dfe8e174e103",
+      "limitations": [
+        "candidate is unproven until current Yosys formal verification passes",
+        "only two-state bit-vector equivalence is supported in this MVP"
+      ],
+      "operands": [
+        {
+          "name": "a",
+          "signed": false,
+          "width": 8
+        },
+        {
+          "name": "b",
+          "signed": false,
+          "width": 8
+        },
+        {
+          "name": "c",
+          "signed": false,
+          "width": 8
+        },
+        {
+          "name": "d",
+          "signed": false,
+          "width": 8
+        }
+      ],
+      "original_expression": "((a + b) + c) + d",
+      "reason": "unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree",
+      "replacement_expression": "((a + b) + (c + d))",
+      "source": {
+        "column": 14,
+        "end_column": 31,
+        "end_line": 5,
+        "end_offset": 111,
+        "file": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+        "line": 5,
+        "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+        "start_offset": 94
+      },
+      "status": "candidate_available",
+      "target": {
+        "name": "y",
+        "width": 8
+      },
+      "top": "g01_add8_left",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+    "defines": [],
+    "design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+        "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "g01_add8_left"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-c4f9cfae24021eebebfe",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "f7d009aaa5158e5e67c3ed1740a097d2025a85bf68d081ac70ef5023f7e9a1dd",
+  "status": "completed"
+}

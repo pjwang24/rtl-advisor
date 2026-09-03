@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "aa3b94a4a07ca5b208e2f9ff7f541a5baed45fa29283f0de1997c81bba1228ec",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:axis_register.v",
+        "sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39"
+      }
+    ],
+    "top": "axis_register"
+  },
+  "defines": [],
+  "design_hash": "113d63b0af43b366e672ddb550309f6930ce210a63cef0bc74b9d0e681ed6552",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/verilog-axis/rtl/axis_register.v",
+      "sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "f2ccb16fe8821b09d7d01ed0eca71bf75402fd6dbdfcd475ecaec107627fdb36",
+  "top": "axis_register"
+}

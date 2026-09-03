@@ -1,0 +1,380 @@
+{
+  "schema": "rtl-advisor-plugin-abc-arm-result-v1",
+  "experiment_id": "plugin-abc-v1",
+  "arm": "A",
+  "repetition": 1,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "manifest_sha256": "9a66873f7cd820f2aa2e31a20d99d961e3aa80e8e735d9613a55bdb0e09f3dc2",
+  "cases": [
+    {
+      "case_id": "g01",
+      "source_sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv:5"],
+      "rationale": "A balanced reassociation was proven equivalent. It reduced the word-level RTLIL path from 3 to 2 cells with the same three adders, but the pinned generic Yosys/ABC synthesis produced exactly the same 107 gates and 15-cell longest path for baseline and candidate. The mapped flow already handles the association, so there is no established balanced-PPA gain.",
+      "candidates": [
+        {
+          "candidate_id": "g01-c1",
+          "path": "experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g01_c1.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g01_formal.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g01_baseline_rtlil.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g01_candidate_rtlil.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g01_baseline_synth.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g01_candidate_synth.log"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": ["The generic gate library is a relative comparison, not a characterized target technology."]
+    },
+    {
+      "case_id": "g02",
+      "source_sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv:5"],
+      "rationale": "The isolated five-operand reassociation passed equivalence and reduced the RTLIL longest path from 4 to 3 cells without changing the four-adder count. Full generic synthesis converged both versions to 681 gates and a 26-cell longest path, leaving no measured mapped PPA improvement to recommend.",
+      "candidates": [
+        {
+          "candidate_id": "g02-c1",
+          "path": "experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g02_c1.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g02_formal.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g02_baseline_rtlil.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g02_candidate_rtlil.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g02_baseline_synth.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g02_candidate_synth.log"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": ["The generic gate library is a relative comparison, not a characterized target technology."]
+    },
+    {
+      "case_id": "g03",
+      "source_sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv:7", "experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv:8"],
+      "rationale": "Only the independent sum cone was reassociated; the selection logic was preserved. Equivalence passed and RTLIL depth fell from 3 to 2 cells, but both versions mapped to 345 gates with a 19-cell longest path. Synthesis absorbed the source-level difference.",
+      "candidates": [
+        {
+          "candidate_id": "g03-c1",
+          "path": "experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g03_c1.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g03_formal.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g03_baseline_rtlil.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g03_candidate_rtlil.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g03_baseline_synth.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g03_candidate_synth.log"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": ["The generic gate library is a relative comparison, not a characterized target technology."]
+    },
+    {
+      "case_id": "g04",
+      "source_sha256": "d41c31a3112e798bd67ab057e52043949e3f0b0ed10526be7e62daaa74fa2dfc",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g04_mixed_procedural_add.sv:6", "experiments/plugin-abc-v1/cases/generated/g04_mixed_procedural_add.sv:10"],
+      "rationale": "A procedural-branch-local balanced sum passed equivalence. The RTLIL longest path improved from 4 to 3 cells, including the output selection, but generic synthesis made both designs identical at 261 gates and a 20-cell longest path. No mapped balanced-PPA win was established.",
+      "candidates": [
+        {
+          "candidate_id": "g04-c1",
+          "path": "experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g04_formal.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g04_baseline_rtlil.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g04_candidate_rtlil.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g04_baseline_synth.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g04_candidate_synth.log"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": ["The generic gate library is a relative comparison, not a characterized target technology."]
+    },
+    {
+      "case_id": "g05",
+      "source_sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv:6"],
+      "rationale": "Factoring the common addend into a mux-before-add form passed equivalence and reduced RTLIL cells from 3 to 2, with unchanged RTLIL depth. Generic synthesis already performed the equivalent optimization: both versions mapped to 114 gates and a 15-cell longest path.",
+      "candidates": [
+        {
+          "candidate_id": "g05-c1",
+          "path": "experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g05_c1.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g05_formal.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g05_baseline_rtlil.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g05_candidate_rtlil.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g05_baseline_synth.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g05_candidate_synth.log"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": ["The generic gate library is a relative comparison, not a characterized target technology."]
+    },
+    {
+      "case_id": "g06",
+      "source_sha256": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6", "experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:9"],
+      "rationale": "The ordered if/else chain directly encodes highest-bit priority and a separate empty-request validity result. No isolated rewrite with a credible balanced area/timing advantage was identified, and the baseline synthesized cleanly.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["No candidate was created because an alternative tree or case encoding would merely transfer implementation choices to synthesis without an established benefit."]
+    },
+    {
+      "case_id": "g07",
+      "source_sha256": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv:5", "experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv:7"],
+      "rationale": "The candidate deliberately preserved the explicit 8-bit partial truncation and only regrouped the remaining additions. It passed equivalence and reduced RTLIL depth from 3 to 2 cells, but both forms mapped to 126 gates with a 17-cell longest path. Reassociation across the partial boundary was not attempted.",
+      "candidates": [
+        {
+          "candidate_id": "g07-c1",
+          "path": "experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g07_c1.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g07_formal.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g07_baseline_rtlil.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g07_candidate_rtlil.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g07_baseline_synth.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g07_candidate_synth.log"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": ["The generic gate library is a relative comparison, not a characterized target technology."]
+    },
+    {
+      "case_id": "g08",
+      "source_sha256": "b012fa81c56e0e2a101f605b9b8f00de337063c29d9217c8ffd020b767372d6d",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g08_signed_chain.sv:5"],
+      "rationale": "A width-preserving signed reassociation was not assumed safe; it was checked formally and passed. Although RTLIL depth fell from 3 to 2 cells, generic synthesis produced the same 245 gates and 19-cell longest path, so no mapped PPA gain remained.",
+      "candidates": [
+        {
+          "candidate_id": "g08-c1",
+          "path": "experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g08_c1.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g08_formal.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g08_baseline_rtlil.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g08_candidate_rtlil.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g08_baseline_synth.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g08_candidate_synth.log"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": ["The generic gate library is a relative comparison, not a characterized target technology."]
+    },
+    {
+      "case_id": "g09",
+      "source_sha256": "c1bbfbc8ffc8ea0b18fdfa3ddaa621171e513d51a285aebde8181059ac7a1ff0",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g09_already_balanced.sv:5"],
+      "rationale": "The four-operand modular sum is already expressed as a balanced two-level tree. The baseline synthesized cleanly and no lower-depth same-area reassociation exists at this granularity.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": []
+    },
+    {
+      "case_id": "g10",
+      "source_sha256": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:5", "experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15"],
+      "rationale": "Each sat_add call clips its intermediate result, making the nested operation non-associative. Regrouping calls can change functional results, and no independent optimization opportunity with a credible PPA benefit was found.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["No unsafe saturation-boundary candidate was created."]
+    },
+    {
+      "case_id": "g11",
+      "source_sha256": "1c7e7a24c9db1fca9787798b355b2d9fca354646df1e056c229c658a3a8d36c6",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:13", "experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:14"],
+      "rationale": "This is a compact one-entry elastic stage: readiness is the standard empty-or-consumed condition, valid updates on acceptance, and data only changes for a valid accepted item. No change was identified that improves balanced PPA while preserving latency, backpressure, reset, and hold behavior.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["No sequential candidate was warranted, so no P2 equivalence run was needed."]
+    },
+    {
+      "case_id": "g12",
+      "source_sha256": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:20", "experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:22"],
+      "rationale": "The first-stage a_i+b_i value is consumed one cycle later together with that later cycle's c_i. Reassociation across these nonblocking assignments would change cycle alignment and latency semantics. The baseline synthesized cleanly and no within-stage balanced-PPA improvement was found.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["No unsafe cross-pipeline candidate was created."]
+    },
+    {
+      "case_id": "o01",
+      "source_sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv:25", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv:36", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv:77"],
+      "rationale": "The packet supplies only this top source, while elaboration also requires the prim utility package, assertion macros, and prim_leading_one_ppc implementation. The isolated source did not elaborate in the available raw flow, so no P2 candidate could be proven or measured.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["Packet-authorized compile context is insufficient for whole-case elaboration."]
+    },
+    {
+      "case_id": "o02",
+      "source_sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv:7", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv:22", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv:164"],
+      "rationale": "The supplied file depends on package functions, assertion includes, prim_fifo_sync_cnt, and secure-mode primitives not supplied as packet case sources. Standalone elaboration failed, preventing a trustworthy P2 proof or PPA comparison.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["Packet-authorized compile context is insufficient for whole-case elaboration."]
+    },
+    {
+      "case_id": "o03",
+      "source_sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv:26", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv:29", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv:126"],
+      "rationale": "The counter imports prim_count_pkg types and instantiates prim_flop, neither of which is included in the packet source set. Standalone parsing/elaboration failed, so stateful equivalence and balanced-PPA measurement were unavailable.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["Packet-authorized compile context is insufficient for whole-case elaboration."]
+    },
+    {
+      "case_id": "o04",
+      "source_sha256": "99aeb7564474111dc6662488c9f4ca6b788723e449b128d08ac54f8fc2da5cd2",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:98", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:119"],
+      "rationale": "The mutually exclusive pack and unpack generate branches already specialize constant width ratios and share compact depth/data state. The baseline elaborated and synthesized; no isolated change with a credible balanced-PPA benefit and preserved reset, clear, packing order, and handshake behavior was found.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["No candidate was created because the remaining shift, counter, and mux structures are parameter-dependent implementation choices."]
+    },
+    {
+      "case_id": "o05",
+      "source_sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": ["corpus/upstream/common_cells/src/spill_register.sv:31"],
+      "rationale": "This file is only a wrapper around spill_register_flushable, whose implementation and compile context are not among the packet sources. The wrapper alone is insufficient for whole-case stateful proof or PPA measurement.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["The wrapped implementation is absent from the packet-authorized source set."]
+    },
+    {
+      "case_id": "o06",
+      "source_sha256": "2e0e5b6d09ce4ade0881938ee042dcbc78438638fa2592338a374f88a3c27304",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": ["corpus/upstream/common_cells/src/stream_register.sv:11", "corpus/upstream/common_cells/src/stream_register.sv:37"],
+      "rationale": "The sequential implementation is supplied through FFLARNC macros in an include not present in the packet source set. The exact reset, enable, and test-mode expansion could not be elaborated, so P2 proof and measurement were unsupported.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["Packet-authorized compile context omits the register macro definition."]
+    },
+    {
+      "case_id": "o07",
+      "source_sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": ["corpus/upstream/common_cells/src/fifo_v3.sv:13", "corpus/upstream/common_cells/src/fifo_v3.sv:63", "corpus/upstream/common_cells/src/fifo_v3.sv:115"],
+      "rationale": "The packet omits the included assertion/compile context needed by the source, and standalone compilation stopped at that include. Without a complete P2 elaboration context, no stateful candidate was advanced.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["Packet-authorized compile context is incomplete."]
+    },
+    {
+      "case_id": "o08",
+      "source_sha256": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": ["corpus/upstream/common_cells/src/rr_arb_tree.sv:16", "corpus/upstream/common_cells/src/rr_arb_tree.sv:202", "corpus/upstream/common_cells/src/rr_arb_tree.sv:243"],
+      "rationale": "The arbiter depends on an omitted assertion include and two lzc submodule instances in the fair-arbitration path. Standalone elaboration failed, and the stateful arbitration semantics require the absent context for trustworthy P2 proof and measurement.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["Packet-authorized compile context omits required macros and submodules."]
+    },
+    {
+      "case_id": "o09",
+      "source_sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": ["corpus/upstream/common_cells/src/stream_mux.sv:11", "corpus/upstream/common_cells/src/stream_mux.sv:20", "corpus/upstream/common_cells/src/stream_mux.sv:33"],
+      "rationale": "The combinational mux itself is small, but its parameter derivation uses cf_math_pkg and the source requires an omitted assertion include. The packet-provided source did not elaborate standalone, so a whole-case claim was not made.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["Packet-authorized compile context omits the package and include required for elaboration."]
+    },
+    {
+      "case_id": "o10",
+      "source_sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/verilog-axis/rtl/axis_register.v:91", "corpus/upstream/verilog-axis/rtl/axis_register.v:128", "corpus/upstream/verilog-axis/rtl/axis_register.v:197", "corpus/upstream/verilog-axis/rtl/axis_register.v:261"],
+      "rationale": "The compile-time REG_TYPE branches provide bypass, one-entry, and skid-buffer implementations, with optional sidebands constant-pruned at synthesis. The default skid-buffer path elaborated and synthesized cleanly, and no isolated change was found that improves balanced PPA while preserving registered ready behavior and full AXI-stream backpressure semantics.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["No sequential candidate was warranted, so no P2 equivalence run was needed."]
+    },
+    {
+      "case_id": "o11",
+      "source_sha256": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": ["corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:121", "corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:122"],
+      "rationale": "The pipeline is structurally composed of axis_register instances, but that required module is not included in this case's packet source list. Hierarchy checking failed, and the requested P3 proof level cannot be satisfied from the isolated source.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["The instantiated axis_register implementation is absent from the packet-authorized source set."]
+    },
+    {
+      "case_id": "o12",
+      "source_sha256": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:103", "corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:151", "corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212"],
+      "rationale": "The self-contained design uses fixed pipeline stages feeding a decoupling FIFO, with compile-time sideband pruning and pointer-based full/empty control. It elaborated and synthesized cleanly. No isolated rewrite with an established balanced-PPA gain was identified without altering latency, buffering capacity, reset behavior, or AXI-stream ordering.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["No sequential candidate was warranted, so no P2 equivalence run was needed."]
+    }
+  ]
+}

@@ -88,25 +88,24 @@ _TOKEN_RE = re.compile(
     r"|(?P<symbol>.)",
     re.DOTALL,
 )
-_PROHIBITED_MODULE_WORDS = {
+_PROCEDURAL_REGION_WORDS = {
     "always",
     "always_comb",
     "always_ff",
     "always_latch",
     "initial",
     "final",
-    "generate",
-    "endgenerate",
-    "function",
-    "endfunction",
-    "task",
-    "endtask",
-    "class",
-    "interface",
-    "clocking",
-    "specify",
-    "property",
-    "sequence",
+}
+_UNSUPPORTED_REGION_END_WORDS = {
+    "generate": "endgenerate",
+    "function": "endfunction",
+    "task": "endtask",
+    "class": "endclass",
+    "interface": "endinterface",
+    "clocking": "endclocking",
+    "specify": "endspecify",
+    "property": "endproperty",
+    "sequence": "endsequence",
 }
 _DECLARATION_TYPES = {"wire", "logic", "bit"}
 _FORMAL_SUCCESS_MARKER = "Equivalence successfully proven!"
@@ -469,11 +468,118 @@ def _parse_assign(statement: Sequence[_Token]) -> _Assignment:
     return _Assignment(target, expression, expression_tokens)
 
 
-def _body_statements(tokens: Sequence[_Token]) -> list[list[_Token]]:
-    statements = _split_at_top_level(tokens, ";")
-    if statements and not statements[-1]:
-        statements.pop()
-    return statements
+def _statement_end(tokens: Sequence[_Token], start: int) -> int:
+    """Return the exclusive end of one semicolon-terminated top-level item."""
+
+    depths = {"(": 0, "[": 0, "{": 0}
+    closing = {")": "(", "]": "[", "}": "{"}
+    for index in range(start, len(tokens)):
+        token = tokens[index].text
+        if token in depths:
+            depths[token] += 1
+        elif token in closing:
+            depths[closing[token]] = max(0, depths[closing[token]] - 1)
+        elif token == ";" and all(depth == 0 for depth in depths.values()):
+            return index + 1
+    return len(tokens)
+
+
+def _keyword_region_end(
+    tokens: Sequence[_Token],
+    start: int,
+    opening: str,
+    closing: str,
+) -> int:
+    depth = 0
+    for index in range(start, len(tokens)):
+        token = tokens[index].text
+        if token == opening:
+            depth += 1
+        elif token == closing:
+            depth -= 1
+            if depth == 0:
+                end = index + 1
+                if end < len(tokens) and tokens[end].text == ";":
+                    end += 1
+                return end
+    return len(tokens)
+
+
+def _procedural_region_end(tokens: Sequence[_Token], start: int) -> int:
+    """Conservatively isolate one procedural process without parsing its body."""
+
+    block_pairs = {
+        "begin": {"end"},
+        "case": {"endcase"},
+        "casex": {"endcase"},
+        "casez": {"endcase"},
+        "randcase": {"endcase"},
+        "fork": {"join", "join_any", "join_none"},
+    }
+    stack: list[set[str]] = []
+    for index in range(start + 1, len(tokens)):
+        token = tokens[index].text
+        if token in block_pairs:
+            stack.append(block_pairs[token])
+            continue
+        if stack and token in stack[-1]:
+            stack.pop()
+            if not stack:
+                end = index + 1
+                if end < len(tokens) and tokens[end].text == ";":
+                    end += 1
+                return end
+            continue
+        if token == ";" and not stack:
+            return index + 1
+    return len(tokens)
+
+
+def _partition_body_items(
+    tokens: Sequence[_Token],
+) -> tuple[list[list[_Token]], list[tuple[str, str, list[_Token]]]]:
+    """Separate ordinary top-level items from unsupported source regions."""
+
+    items: list[list[_Token]] = []
+    regions: list[tuple[str, str, list[_Token]]] = []
+    index = 0
+    while index < len(tokens):
+        start = index
+        word = tokens[index].text
+        if word in _PROCEDURAL_REGION_WORDS:
+            index = _procedural_region_end(tokens, start)
+            regions.append(
+                (
+                    "procedural_or_generated_rtl",
+                    "this procedural region is outside the MVP rewrite scope",
+                    list(tokens[start:index]),
+                )
+            )
+            continue
+        if word in _UNSUPPORTED_REGION_END_WORDS:
+            index = _keyword_region_end(
+                tokens,
+                start,
+                word,
+                _UNSUPPORTED_REGION_END_WORDS[word],
+            )
+            regions.append(
+                (
+                    "procedural_or_generated_rtl",
+                    "this generated, function, task, or declaration region is outside the MVP rewrite scope",
+                    list(tokens[start:index]),
+                )
+            )
+            continue
+        index = _statement_end(tokens, start)
+        item = list(tokens[start:index])
+        if item and item[-1].text == ";":
+            item.pop()
+        if item:
+            items.append(item)
+        if index == start:
+            index += 1
+    return items, regions
 
 
 def _module_for_top(
@@ -592,13 +698,23 @@ def _parse_top(
     module_masked = masked[module_start:module_end]
     if "`" in module_masked:
         return reject("preprocessor_source", "macro-expanded source spans are not rewritten")
-    if any(token.text in _PROHIBITED_MODULE_WORDS for token in body_tokens):
-        return reject(
-            "procedural_or_generated_rtl",
-            "procedural, generated, function, or task constructs are outside MVP scope",
+    body_items, unsupported_regions = _partition_body_items(body_tokens)
+    exclusions = [
+        _exclusion(
+            path=path,
+            source_hash=source_hash,
+            reason_code=reason_code,
+            detail=detail,
+            tokens=region_tokens,
         )
-    if any(token.text in {"#", "@", "->"} for token in body_tokens):
-        return reject("timed_or_event_rtl", "timing and event constructs are outside MVP scope")
+        for reason_code, detail, region_tokens in unsupported_regions
+    ]
+    unsupported_identifiers = {
+        token.text
+        for _, _, region_tokens in unsupported_regions
+        for token in region_tokens
+        if token.kind == "identifier"
+    }
 
     signals: dict[str, _Signal] = {}
     header_names: set[str] = set()
@@ -619,24 +735,47 @@ def _parse_top(
         return reject("unsupported_declaration", str(exc))
 
     assignments: list[_Assignment] = []
-    try:
-        for statement in _body_statements(body_tokens):
-            if not statement:
-                continue
-            first = statement[0].text
-            if first in {"input", "output", "inout", *_DECLARATION_TYPES}:
+    for statement in body_items:
+        if not statement:
+            continue
+        first = statement[0].text
+        if any(token.text in {"#", "@", "->"} for token in statement):
+            exclusions.append(
+                _exclusion(
+                    path=path,
+                    source_hash=source_hash,
+                    reason_code="timed_or_event_rtl",
+                    detail="this timing or event source region is outside MVP scope",
+                    tokens=statement,
+                )
+            )
+            continue
+        if first in {"input", "output", "inout", *_DECLARATION_TYPES}:
+            try:
                 declared = _parse_declaration(statement)
-                for signal in declared:
-                    if signal.name in signals:
-                        return reject("duplicate_declaration", "a signal is declared more than once")
-                    if header_names and signal.direction is not None and signal.name not in header_names:
-                        return reject("port_declaration_mismatch", "port declarations do not match the header")
-                    signals[signal.name] = signal
+            except MVPRewriteError as exc:
+                exclusions.append(
+                    _exclusion(
+                        path=path,
+                        source_hash=source_hash,
+                        reason_code="unsupported_declaration",
+                        detail=str(exc),
+                        tokens=statement,
+                    )
+                )
                 continue
-            if first == "assign":
-                assignment = _parse_assign(statement)
-                if assignment.target is None or assignment.expression is None:
-                    return path, text, source_hash, [], [
+            for signal in declared:
+                if signal.name in signals:
+                    return reject("duplicate_declaration", "a signal is declared more than once")
+                if header_names and signal.direction is not None and signal.name not in header_names:
+                    return reject("port_declaration_mismatch", "port declarations do not match the header")
+                signals[signal.name] = signal
+            continue
+        if first == "assign":
+            assignment = _parse_assign(statement)
+            if assignment.target is None:
+                if any(token.text == "+" for token in statement):
+                    exclusions.append(
                         _exclusion(
                             path=path,
                             source_hash=source_hash,
@@ -648,14 +787,35 @@ def _parse_top(
                             tokens=statement,
                             target=assignment.target,
                         )
-                    ]
-                assignments.append(assignment)
+                    )
                 continue
-            # An unexpected top-level construct may be an instance, parameter,
-            # alias, or procedural syntax. The MVP deliberately fails closed.
-            return reject("unsupported_module_statement", "the module contains an unsupported statement")
-    except MVPRewriteError as exc:
-        return reject("unsupported_declaration", str(exc))
+            assignments.append(assignment)
+            if assignment.expression is None and any(
+                token.text == "+" for token in assignment.expression_tokens
+            ):
+                exclusions.append(
+                    _exclusion(
+                        path=path,
+                        source_hash=source_hash,
+                        reason_code="unsupported_assignment_expression",
+                        detail=(
+                            "this direct assignment contains addition but could not be "
+                            "parsed as a pure, side-effect-free addition expression"
+                        ),
+                        tokens=statement,
+                        target=assignment.target,
+                    )
+                )
+            continue
+        exclusions.append(
+            _exclusion(
+                path=path,
+                source_hash=source_hash,
+                reason_code="unsupported_module_statement",
+                detail="this top-level statement is outside the MVP rewrite scope",
+                tokens=statement,
+            )
+        )
 
     if header_names:
         declared_ports = {
@@ -687,9 +847,12 @@ def _parse_top(
         ]
 
     findings: list[dict[str, Any]] = []
-    exclusions: list[dict[str, Any]] = []
     for assignment in assignments:
-        assert assignment.target is not None and assignment.expression is not None
+        assert assignment.target is not None
+        if assignment.expression is None:
+            continue
+        if not any(token.text == "+" for token in assignment.expression_tokens):
+            continue
         operands = _flatten(assignment.expression)
         if len(operands) < 3:
             exclusions.append(
@@ -705,6 +868,18 @@ def _parse_top(
             continue
         target = signals.get(assignment.target)
         operand_signals = [signals.get(name) for name in operands]
+        if assignment.target in unsupported_identifiers:
+            exclusions.append(
+                _exclusion(
+                    path=path,
+                    source_hash=source_hash,
+                    reason_code="target_overlaps_unsupported_region",
+                    detail="the assignment target is also referenced by an unsupported source region",
+                    tokens=assignment.expression_tokens,
+                    target=assignment.target,
+                )
+            )
+            continue
         if target is None or target.direction != "output" or target.signed:
             exclusions.append(
                 _exclusion(
@@ -730,13 +905,19 @@ def _parse_top(
             )
             continue
         typed_operands = [signal for signal in operand_signals if signal is not None]
-        if any(signal.direction != "input" or signal.signed for signal in typed_operands):
+        if any(
+            signal.direction not in {None, "input"} or signal.signed
+            for signal in typed_operands
+        ):
             exclusions.append(
                 _exclusion(
                     path=path,
                     source_hash=source_hash,
                     reason_code="unsupported_operand_type",
-                    detail="all operands must be unsigned fixed-width inputs",
+                    detail=(
+                        "all operands must be unsigned fixed-width inputs or "
+                        "module-local signals"
+                    ),
                     tokens=assignment.expression_tokens,
                     target=assignment.target,
                 )
@@ -1062,6 +1243,18 @@ def prepare_addition_candidate(
             "isolated candidate compile context does not match the baseline",
             code="candidate_copy_error",
         )
+    from rtl_advisor.transformation_registry import (
+        DEFAULT_TRANSFORMATION_REGISTRY,
+    )
+
+    proof_contract = {
+        "schema": "rtl-advisor-proof-v1",
+        "level": "P1",
+        "kind": "combinational_rtl_equivalence",
+        "latency_relation": "combinational",
+        "assumptions": ["two-state bit-vector RTL semantics"],
+        "observables": ["all top-level outputs"],
+    }
     record = {
         "document_type": CANDIDATE_DOCUMENT_TYPE,
         "schema_version": RUN_SCHEMA_VERSION,
@@ -1071,6 +1264,13 @@ def prepare_addition_candidate(
         "finding_id": finding_id,
         "transformation_id": TRANSFORMATION_ID,
         "transformation_version": TRANSFORMATION_VERSION,
+        "transformation_registry_hash": (
+            DEFAULT_TRANSFORMATION_REGISTRY.registry_hash
+        ),
+        "candidate_origin": "deterministic_rewrite",
+        "proof_contract": proof_contract,
+        "proof_contract_hash": stable_hash(proof_contract),
+        "measurement_levels": ["M0", "M1"],
         "baseline_design_hash": design.design_hash,
         "candidate_design_hash": candidate_design.design_hash,
         "baseline_design": design.to_dict(),
@@ -1166,10 +1366,35 @@ def _yosys_quote(value: str | Path) -> str:
     return '"' + raw.replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
-def _yosys_read(design: DesignInputV2) -> str:
+def _yosys_option_path(value: str, base: Path | None) -> str:
+    resolved = Path(value).expanduser().resolve()
+    if base is not None:
+        try:
+            return resolved.relative_to(base.resolve()).as_posix()
+        except ValueError:
+            pass
+    raw = str(resolved)
+    if any(character.isspace() for character in raw):
+        raise MVPRewriteError(
+            "Yosys -I paths containing spaces must stay under the project root",
+            code="unsafe_compile_context",
+        )
+    return raw
+
+
+def _yosys_read(
+    design: DesignInputV2,
+    *,
+    base: Path | None = None,
+) -> str:
     parts = ["read_verilog", "-sv"]
-    parts.extend(f"-I{_yosys_quote(path)}" for path in design.include_dirs)
-    parts.extend(f"-D{_yosys_quote(definition)}" for definition in design.defines)
+    # Yosys' Verilog frontend does not accept a quoted value after ``-I``.
+    # Use a project-relative path so workspaces containing spaces remain
+    # representable while preserving one exact compile context.
+    parts.extend(
+        f"-I{_yosys_option_path(path, base)}" for path in design.include_dirs
+    )
+    parts.extend(f"-D{definition}" for definition in design.defines)
     parts.extend(_yosys_quote(source.path) for source in design.files)
     return " ".join(parts)
 
@@ -1326,14 +1551,16 @@ def _pyslang_lint(design: DesignInputV2) -> dict[str, Any]:
 def _formal_script(
     baseline: DesignInputV2,
     candidate: DesignInputV2,
+    *,
+    base: Path,
 ) -> str:
     return "\n".join(
         (
-            _yosys_read(baseline),
+            _yosys_read(baseline, base=base),
             f"prep -top {baseline.top}",
             "design -stash baseline_design",
             "design -reset",
-            _yosys_read(candidate),
+            _yosys_read(candidate, base=base),
             f"prep -top {candidate.top}",
             "design -stash candidate_design",
             "design -reset",
@@ -1357,7 +1584,7 @@ def _prove(
     output_dir.mkdir(parents=True, exist_ok=True)
     script_path = output_dir / "equivalence.ys"
     log_path = output_dir / "equivalence.log"
-    script = _formal_script(baseline, candidate)
+    script = _formal_script(baseline, candidate, base=config.root)
     script_path.write_text(script, encoding="utf-8")
     command = (config.tools.yosys, "-Q", "-s", str(script_path))
     from rtl_advisor.mvp_measure import MVPMeasurementError, _yosys_identity

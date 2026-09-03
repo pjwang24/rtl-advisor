@@ -1,0 +1,84 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-4812fb8cbe9b94451e22/input.json",
+    "review": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-4812fb8cbe9b94451e22/review.json",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-4812fb8cbe9b94451e22"
+  },
+  "candidate_generation_allowed": false,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/CAD Stuff/corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v",
+    "--objective",
+    "balanced",
+    "--top",
+    "axis_pipeline_fifo",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 0,
+    "excluded_site_count": 1
+  },
+  "decision": "unsupported",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "417f15eb28d1f4095a1a051d18b9ad59da7971cc940b9e1734535b8d22dd03b7",
+    "model_used": false,
+    "rules_only": true
+  },
+  "exclusions": [
+    {
+      "detail": "parameterized top modules are outside MVP scope",
+      "exclusion_id": "addexclude_75e737a142f65926",
+      "reason_code": "parameterized_top",
+      "source": {
+        "end_offset": 10352,
+        "file": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v",
+        "sha256": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02",
+        "start_offset": 1188
+      },
+      "status": "excluded",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "findings": [],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "2d5fd630730b60c42a41d58061dcf4e261edb07163f66044ab031448e59896a0",
+    "defines": [],
+    "design_hash": "bccc22f4aa8923e343d9a4e9d40fb6c2c680d36b08a9fc0d01cf87fb7461eb0e",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v",
+        "sha256": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "axis_pipeline_fifo"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-4812fb8cbe9b94451e22",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "7161f77bdfe8857455d07c473711f3a3a2810369bd7cafb8cf42a9dc668855f4",
+  "status": "completed"
+}

@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "a80db492d9596f1015b1fda0f20b846d7c565bb5525beb70d8257186c0692c67",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:prim_count.sv",
+        "sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb"
+      }
+    ],
+    "top": "prim_count"
+  },
+  "defines": [],
+  "design_hash": "783680f16b828b5988b561c005399c1b0be39f2adb65c579b8ac117899e464c9",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv",
+      "sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "14bc0f72d4c533d012d74a6c13705165b6d94b152979e0de3d2093d82b2f69ba",
+  "top": "prim_count"
+}

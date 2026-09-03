@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "ad28e89ad7cc6d5f6342d8318d94e5d685025eb765efdac41036adb4fced4fcb",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:g04_mixed_procedural_add.sv",
+        "sha256": "d41c31a3112e798bd67ab057e52043949e3f0b0ed10526be7e62daaa74fa2dfc"
+      }
+    ],
+    "top": "g04_mixed_procedural_add"
+  },
+  "defines": [],
+  "design_hash": "41fe4e069e8382607975b92cc84070995c5e99e94e7651f568631e42adb4d7f0",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g04_mixed_procedural_add.sv",
+      "sha256": "d41c31a3112e798bd67ab057e52043949e3f0b0ed10526be7e62daaa74fa2dfc"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "9c9831b0bd74c6cc116e3932543f501e491123beb7fb94a52f0d4182eae91392",
+  "top": "g04_mixed_procedural_add"
+}

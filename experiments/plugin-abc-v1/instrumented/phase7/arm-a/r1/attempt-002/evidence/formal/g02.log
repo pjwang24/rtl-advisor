@@ -1,0 +1,335 @@
+
+-- Running command `read_verilog -sv experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv; hierarchy -top g02_add32_five; proc; flatten; memory; opt; rename g02_add32_five gold; design -stash gold; read_verilog -sv experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv; hierarchy -top g02_add32_five; proc; flatten; memory; opt; rename g02_add32_five gate; design -stash gate; design -copy-from gold -as gold gold; design -copy-from gate -as gate gate; equiv_make gold gate equiv; hierarchy -top equiv; equiv_simple; equiv_status -assert' --
+
+1. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv' to AST representation.
+Generating RTLIL representation for module `\g02_add32_five'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \g02_add32_five
+
+2.2. Analyzing design hierarchy..
+Top module:  \g02_add32_five
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+4. Executing FLATTEN pass (flatten design).
+
+5. Executing MEMORY pass.
+
+5.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+5.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+5.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+5.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+5.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+5.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+5.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+5.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+5.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+
+5.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 4 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g02_add32_five..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g02_add32_five.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 4 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+6.9. Finished fast OPT passes. (There is nothing left to do.)
+Renaming module \g02_add32_five to \gold.
+
+7. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv' to AST representation.
+Generating RTLIL representation for module `\g02_add32_five'.
+Successfully finished Verilog frontend.
+
+8. Executing HIERARCHY pass (managing design hierarchy).
+
+8.1. Analyzing design hierarchy..
+Top module:  \g02_add32_five
+
+8.2. Analyzing design hierarchy..
+Top module:  \g02_add32_five
+Removed 0 unused modules.
+
+9. Executing PROC pass (convert processes to netlists).
+
+9.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+9.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+9.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+9.4. Executing PROC_INIT pass (extract init attributes).
+
+9.5. Executing PROC_ARST pass (detect async resets in processes).
+
+9.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+9.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+9.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+9.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+9.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+9.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+9.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+10. Executing FLATTEN pass (flatten design).
+
+11. Executing MEMORY pass.
+
+11.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+11.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+11.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+11.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+11.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+11.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+11.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+11.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+11.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+
+11.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+11.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+12. Executing OPT pass (performing simple optimizations).
+
+12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 4 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g02_add32_five..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g02_add32_five.
+Performed a total of 0 changes.
+
+12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 4 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+12.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+
+12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+12.9. Finished fast OPT passes. (There is nothing left to do.)
+Renaming module \g02_add32_five to \gate.
+
+13. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: y_gold (\y_gold), y_gate (\y_gate) -> y
+Presumably equivalent wires: e_gold (\e_gold), e_gate (\e_gate) -> e
+Presumably equivalent wires: d_gold (\d_gold), d_gate (\d_gate) -> d
+Presumably equivalent wires: c_gold (\c_gold), c_gate (\c_gate) -> c
+Presumably equivalent wires: b_gold (\b_gold), b_gate (\b_gate) -> b
+Presumably equivalent wires: a_gold (\a_gold), a_gate (\a_gate) -> a
+
+14. Executing HIERARCHY pass (managing design hierarchy).
+
+14.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+14.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+15. Executing EQUIV_SIMPLE pass.
+Found 32 unproven $equiv cells (1 groups) in equiv:
+ Grouping SAT models for \y:
+  Trying to prove $equiv for \y [0]:ezsat
+ success!
+  Trying to prove $equiv for \y [1]:ezsat
+ success!
+  Trying to prove $equiv for \y [2]:ezsat
+ success!
+  Trying to prove $equiv for \y [3]:ezsat
+ success!
+  Trying to prove $equiv for \y [4]:ezsat
+ success!
+  Trying to prove $equiv for \y [5]:ezsat
+ success!
+  Trying to prove $equiv for \y [6]:ezsat
+ success!
+  Trying to prove $equiv for \y [7]:ezsat
+ success!
+  Trying to prove $equiv for \y [8]:ezsat
+ success!
+  Trying to prove $equiv for \y [9]:ezsat
+ success!
+  Trying to prove $equiv for \y [10]:ezsat
+ success!
+  Trying to prove $equiv for \y [11]:ezsat
+ success!
+  Trying to prove $equiv for \y [12]:ezsat
+ success!
+  Trying to prove $equiv for \y [13]:ezsat
+ success!
+  Trying to prove $equiv for \y [14]:ezsat
+ success!
+  Trying to prove $equiv for \y [15]:ezsat
+ success!
+  Trying to prove $equiv for \y [16]:ezsat
+ success!
+  Trying to prove $equiv for \y [17]:ezsat
+ success!
+  Trying to prove $equiv for \y [18]:ezsat
+ success!
+  Trying to prove $equiv for \y [19]:ezsat
+ success!
+  Trying to prove $equiv for \y [20]:ezsat
+ success!
+  Trying to prove $equiv for \y [21]:ezsat
+ success!
+  Trying to prove $equiv for \y [22]:ezsat
+ success!
+  Trying to prove $equiv for \y [23]:ezsat
+ success!
+  Trying to prove $equiv for \y [24]:ezsat
+ success!
+  Trying to prove $equiv for \y [25]:ezsat
+ success!
+  Trying to prove $equiv for \y [26]:ezsat
+ success!
+  Trying to prove $equiv for \y [27]:ezsat
+ success!
+  Trying to prove $equiv for \y [28]:ezsat
+ success!
+  Trying to prove $equiv for \y [29]:ezsat
+ success!
+  Trying to prove $equiv for \y [30]:ezsat
+ success!
+  Trying to prove $equiv for \y [31]:ezsat
+ success!
+Proved 32 previously unproven $equiv cells.
+
+16. Executing EQUIV_STATUS pass.
+Found 32 $equiv cells in equiv:
+  Of those cells 32 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: 2d01cf1295, CPU: user 0.10s system 0.01s, MEM: 18.56 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 84% 1x equiv_simple (0 sec), 4% 6x opt_clean (0 sec), ...

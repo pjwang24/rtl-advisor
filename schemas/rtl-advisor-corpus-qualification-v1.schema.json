@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-corpus-qualification-v1.schema.json",
+  "title": "RTL Advisor Corpus Qualification V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "schema",
+    "document_type",
+    "qualification_id",
+    "status",
+    "read_only",
+    "registry_mutation",
+    "plan_id",
+    "plan_semantic_hash",
+    "tranche_id",
+    "tranche_semantic_hash",
+    "summary",
+    "source_result_semantic_hash",
+    "artifacts",
+    "limitations",
+    "command",
+    "semantic_hash"
+  ],
+  "$defs": {"sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-corpus-qualification-v1"},
+    "document_type": {"const": "rtl-advisor.corpus.qualification"},
+    "qualification_id": {"type": "string", "pattern": "^qualification-[0-9a-f]{20}$"},
+    "status": {"enum": ["passed", "completed_with_blockers"]},
+    "read_only": {"const": false},
+    "registry_mutation": {"const": "append_only"},
+    "plan_id": {"type": "string", "minLength": 1},
+    "plan_semantic_hash": {"$ref": "#/$defs/sha256"},
+    "tranche_id": {"type": "string", "minLength": 1},
+    "tranche_semantic_hash": {"$ref": "#/$defs/sha256"},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reference_count", "build_reproduced_count", "blocked_count", "verified_source_file_count"],
+      "properties": {
+        "reference_count": {"type": "integer", "minimum": 0},
+        "build_reproduced_count": {"type": "integer", "minimum": 0},
+        "blocked_count": {"type": "integer", "minimum": 0},
+        "verified_source_file_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "source_result_semantic_hash": {"$ref": "#/$defs/sha256"},
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["qualification", "qualification_engine_summary", "registry"],
+      "properties": {
+        "qualification": {"type": "string", "minLength": 1},
+        "qualification_engine_summary": {"type": "string", "minLength": 1},
+        "registry": {"type": "string", "minLength": 1}
+      }
+    },
+    "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "command": {"type": "array", "items": {"type": "string"}},
+    "semantic_hash": {"$ref": "#/$defs/sha256"}
+  }
+}

@@ -1,0 +1,345 @@
+{
+  "artifacts": {
+    "candidate_record": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-1a7de8d6db9264e38e2e/candidates/addcand_a0f170b7a9ad761e/candidate.json",
+    "diff": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-1a7de8d6db9264e38e2e/candidates/addcand_a0f170b7a9ad761e/candidate.diff",
+    "root": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-1a7de8d6db9264e38e2e/candidates/addcand_a0f170b7a9ad761e"
+  },
+  "candidate": {
+    "artifact_dir": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-1a7de8d6db9264e38e2e/candidates/addcand_a0f170b7a9ad761e",
+    "baseline_compile_context": {
+      "compile_context_hash": "8b1d24e03eadce1a1ab8fe9dd234d07ae94b69109f0a357c7afaeae243e53ae0",
+      "defines": [],
+      "filelists": [],
+      "include_trees": [],
+      "schema_version": 1,
+      "sources": [
+        {
+          "logical_id": "source:0000:g03_mixed_safe_add.sv",
+          "sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998"
+        }
+      ],
+      "top": "g03_mixed_safe_add"
+    },
+    "baseline_design": {
+      "defines": [],
+      "design_hash": "a918926771c77a82c848de8347c22fad4c6b2a47281bd0245c6e82fc7e30586e",
+      "filelists": [],
+      "files": [
+        {
+          "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv",
+          "sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998"
+        }
+      ],
+      "include_dirs": [],
+      "schema_version": 2,
+      "top": "g03_mixed_safe_add"
+    },
+    "baseline_design_hash": "a918926771c77a82c848de8347c22fad4c6b2a47281bd0245c6e82fc7e30586e",
+    "candidate_compile_context": {
+      "compile_context_hash": "6682ed67a3eceeb5419b7cecdbf1f0cf3290e135569b0a6841b2d3a1bd6d6365",
+      "defines": [],
+      "filelists": [],
+      "include_trees": [],
+      "schema_version": 1,
+      "sources": [
+        {
+          "logical_id": "source:0000:g03_mixed_safe_add.sv",
+          "sha256": "9992eeae425edb8dcb3a525dc68579684243d640b8ef06fd708b0ddd1b0336c1"
+        }
+      ],
+      "top": "g03_mixed_safe_add"
+    },
+    "candidate_design": {
+      "defines": [],
+      "design_hash": "fb96e61acb3cb4cdf74f80c56e9d95a445cfc1c76fcd4c523a282e960a002717",
+      "filelists": [],
+      "files": [
+        {
+          "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-1a7de8d6db9264e38e2e/candidates/addcand_a0f170b7a9ad761e/design/sources/0000/g03_mixed_safe_add.sv",
+          "sha256": "9992eeae425edb8dcb3a525dc68579684243d640b8ef06fd708b0ddd1b0336c1"
+        }
+      ],
+      "include_dirs": [],
+      "schema_version": 2,
+      "top": "g03_mixed_safe_add"
+    },
+    "candidate_design_hash": "fb96e61acb3cb4cdf74f80c56e9d95a445cfc1c76fcd4c523a282e960a002717",
+    "candidate_id": "addcand_a0f170b7a9ad761e",
+    "candidate_origin": "deterministic_rewrite",
+    "diff_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-1a7de8d6db9264e38e2e/candidates/addcand_a0f170b7a9ad761e/candidate.diff",
+    "diff_sha256": "7e3cc4af840b55874572698c44e3d023a20aaf5905892d3af1fa4bfed01674c8",
+    "document_type": "rtl-advisor.candidate",
+    "finding": {
+      "finding_id": "addsite_37a14af9e43e75b3",
+      "limitations": [
+        "candidate is unproven until current Yosys formal verification passes",
+        "only two-state bit-vector equivalence is supported in this MVP"
+      ],
+      "operands": [
+        {
+          "name": "a",
+          "signed": false,
+          "width": 16
+        },
+        {
+          "name": "b",
+          "signed": false,
+          "width": 16
+        },
+        {
+          "name": "c",
+          "signed": false,
+          "width": 16
+        },
+        {
+          "name": "d",
+          "signed": false,
+          "width": 16
+        }
+      ],
+      "original_expression": "((a + b) + c) + d",
+      "reason": "unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree",
+      "replacement_expression": "((a + b) + (c + d))",
+      "source": {
+        "column": 16,
+        "end_column": 33,
+        "end_line": 7,
+        "end_offset": 179,
+        "file": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv",
+        "line": 7,
+        "sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998",
+        "start_offset": 162
+      },
+      "status": "candidate_available",
+      "target": {
+        "name": "sum",
+        "width": 16
+      },
+      "top": "g03_mixed_safe_add",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    },
+    "finding_id": "addsite_37a14af9e43e75b3",
+    "formal": {
+      "safe": false,
+      "status": "not_run"
+    },
+    "limitations": [
+      "candidate is isolated but unproven",
+      "Yosys two-state bit-vector RTL equivalence for a self-contained combinational top; X/Z behavior is not proved"
+    ],
+    "lint": {
+      "status": "not_run"
+    },
+    "measurement_levels": [
+      "M0",
+      "M1"
+    ],
+    "proof_contract": {
+      "assumptions": [
+        "two-state bit-vector RTL semantics"
+      ],
+      "kind": "combinational_rtl_equivalence",
+      "latency_relation": "combinational",
+      "level": "P1",
+      "observables": [
+        "all top-level outputs"
+      ],
+      "schema": "rtl-advisor-proof-v1"
+    },
+    "proof_contract_hash": "5b66aafbe183bb9f50c32ffaba2089ec51b3cd38c5e84206918306aa12d3a72a",
+    "record_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-1a7de8d6db9264e38e2e/candidates/addcand_a0f170b7a9ad761e/candidate-core.json",
+    "run_schema": "rtl-advisor-run-v1",
+    "schema_version": 1,
+    "semantic_hash": "5497a434301312515afe5487f607e8bb46c0db62115ae76602c0373a3c086f56",
+    "source_integrity": {
+      "candidate": {
+        "compile_context": {
+          "compile_context_hash": "6682ed67a3eceeb5419b7cecdbf1f0cf3290e135569b0a6841b2d3a1bd6d6365",
+          "defines": [],
+          "filelists": [],
+          "include_trees": [],
+          "schema_version": 1,
+          "sources": [
+            {
+              "logical_id": "source:0000:g03_mixed_safe_add.sv",
+              "sha256": "9992eeae425edb8dcb3a525dc68579684243d640b8ef06fd708b0ddd1b0336c1"
+            }
+          ],
+          "top": "g03_mixed_safe_add"
+        },
+        "mismatches": [],
+        "ok": true
+      },
+      "original": {
+        "compile_context": {
+          "compile_context_hash": "8b1d24e03eadce1a1ab8fe9dd234d07ae94b69109f0a357c7afaeae243e53ae0",
+          "defines": [],
+          "filelists": [],
+          "include_trees": [],
+          "schema_version": 1,
+          "sources": [
+            {
+              "logical_id": "source:0000:g03_mixed_safe_add.sv",
+              "sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998"
+            }
+          ],
+          "top": "g03_mixed_safe_add"
+        },
+        "mismatches": [],
+        "ok": true
+      }
+    },
+    "status": "candidate_prepared",
+    "transformation_id": "adder_reduction_association",
+    "transformation_registry_hash": "ede9d27234c7c826bf115798b8df00774cc3e987a73be174c190ef6f99c28370",
+    "transformation_version": "balanced-unsigned-add-chain-v2"
+  },
+  "candidate_id": "addcand_a0f170b7a9ad761e",
+  "candidate_origin": "deterministic_rewrite",
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/rtl-advisor.toml",
+    "agent",
+    "candidate",
+    "mvp-1a7de8d6db9264e38e2e",
+    "--finding",
+    "addsite_37a14af9e43e75b3",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "configuration_id": null,
+  "decision": "candidate_prepared",
+  "document_type": "rtl-advisor.agent.v2.candidate",
+  "executor": {
+    "id": null,
+    "registry_hash": null,
+    "version": null
+  },
+  "finding": {
+    "finding_id": "addsite_37a14af9e43e75b3",
+    "limitations": [
+      "candidate is unproven until current Yosys formal verification passes",
+      "only two-state bit-vector equivalence is supported in this MVP"
+    ],
+    "operands": [
+      {
+        "name": "a",
+        "signed": false,
+        "width": 16
+      },
+      {
+        "name": "b",
+        "signed": false,
+        "width": 16
+      },
+      {
+        "name": "c",
+        "signed": false,
+        "width": 16
+      },
+      {
+        "name": "d",
+        "signed": false,
+        "width": 16
+      }
+    ],
+    "original_expression": "((a + b) + c) + d",
+    "reason": "unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree",
+    "replacement_expression": "((a + b) + (c + d))",
+    "source": {
+      "column": 16,
+      "end_column": 33,
+      "end_line": 7,
+      "end_offset": 179,
+      "file": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv",
+      "line": 7,
+      "sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998",
+      "start_offset": 162
+    },
+    "status": "candidate_available",
+    "target": {
+      "name": "sum",
+      "width": 16
+    },
+    "top": "g03_mixed_safe_add",
+    "transformation_id": "adder_reduction_association",
+    "transformation_version": "balanced-unsigned-add-chain-v2"
+  },
+  "flow_version": "rtl-advisor-agent-v2",
+  "limitations": [
+    "The isolated candidate is unproven until formal verification passes."
+  ],
+  "measurement_levels": [
+    "M0",
+    "M1"
+  ],
+  "objective": "balanced",
+  "parents": {
+    "review_semantic_hash": "3d076e64db729d483c3b8c3903742a765a748e413bbe1e32accd27e040ba899f"
+  },
+  "proof_contract": {
+    "assumptions": [
+      "two-state bit-vector RTL semantics"
+    ],
+    "kind": "combinational_rtl_equivalence",
+    "latency_relation": "combinational",
+    "level": "P1",
+    "observables": [
+      "all top-level outputs"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "proof_contract_hash": "5b66aafbe183bb9f50c32ffaba2089ec51b3cd38c5e84206918306aa12d3a72a",
+  "reference_id": null,
+  "run_id": "mvp-1a7de8d6db9264e38e2e",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "48dbad810551cd9de5fa896e340b29fa4d298fbc070f2d806018ba9ec3de4a25",
+  "source_integrity": {
+    "candidate": {
+      "compile_context": {
+        "compile_context_hash": "6682ed67a3eceeb5419b7cecdbf1f0cf3290e135569b0a6841b2d3a1bd6d6365",
+        "defines": [],
+        "filelists": [],
+        "include_trees": [],
+        "schema_version": 1,
+        "sources": [
+          {
+            "logical_id": "source:0000:g03_mixed_safe_add.sv",
+            "sha256": "9992eeae425edb8dcb3a525dc68579684243d640b8ef06fd708b0ddd1b0336c1"
+          }
+        ],
+        "top": "g03_mixed_safe_add"
+      },
+      "mismatches": [],
+      "ok": true
+    },
+    "original": {
+      "compile_context": {
+        "compile_context_hash": "8b1d24e03eadce1a1ab8fe9dd234d07ae94b69109f0a357c7afaeae243e53ae0",
+        "defines": [],
+        "filelists": [],
+        "include_trees": [],
+        "schema_version": 1,
+        "sources": [
+          {
+            "logical_id": "source:0000:g03_mixed_safe_add.sv",
+            "sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998"
+          }
+        ],
+        "top": "g03_mixed_safe_add"
+      },
+      "mismatches": [],
+      "ok": true
+    }
+  },
+  "status": "candidate_prepared",
+  "transformation": {
+    "id": "adder_reduction_association",
+    "registry_hash": "ede9d27234c7c826bf115798b8df00774cc3e987a73be174c190ef6f99c28370",
+    "version": "balanced-unsigned-add-chain-v2"
+  }
+}

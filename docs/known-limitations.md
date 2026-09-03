@@ -70,6 +70,9 @@ boundary.
 - The dashboard server accepts loopback hosts only. It is not a remotely served
   or authenticated internal web application in this preview.
 - CLI and Codex run tools; the browser only polls stored records.
+- Explore visualizes the recorded M0/M1 Yosys/ABC evidence. It does not turn
+  those measurements into target-flow or production-PPA predictions, and it
+  does not place family-study aggregate rows into the Agent V2 run drill-down.
 - Run records contain local absolute paths and are intended for the machine that
   produced them. Normalized evidence fields support interface comparison, but
   whole JSON documents are not path-portable.

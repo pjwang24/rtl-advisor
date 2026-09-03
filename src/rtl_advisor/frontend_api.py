@@ -4,6 +4,7 @@ from collections import Counter
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import shlex
@@ -19,7 +20,11 @@ from rtl_advisor.mvp_schema import (
     stable_hash,
     read_hashed_json,
 )
-from rtl_advisor.mvp_measure import MVPMeasurementError, classify_recipe
+from rtl_advisor.mvp_measure import (
+    MVPMeasurementError,
+    aggregate_measurements,
+    classify_recipe,
+)
 from rtl_advisor.rtl_input import DesignInputV2, SourceFileV2
 
 
@@ -32,6 +37,8 @@ CANDIDATE_ID_PATTERN = re.compile(r"^[A-Za-z0-9_-]+$")
 METRICS = ("delay", "area", "cell_count")
 RUNS_API_VERSION = "v1"
 RUNS_API_SCHEMA_VERSION = 1
+ANALYTICS_API_VERSION = "v1"
+ANALYTICS_API_SCHEMA_VERSION = 1
 RUN_DOCUMENT_TYPES = {
     "review": "rtl-advisor.agent.v2.review",
     "candidate": "rtl-advisor.agent.v2.candidate",
@@ -106,6 +113,96 @@ RUN_OUTCOMES = {
         "tone": "warning",
         "summary": "At least one eligible site is missing a required candidate, proof, or synthesis result.",
         "detail": "No positive final conclusion is supported until the missing stages are recorded.",
+    },
+}
+
+CLASSIFICATION_POLICIES = {
+    "timing": {
+        "label": "Timing",
+        "improved": (
+            "Delay improves by at least 3%, with area no worse than 10%."
+        ),
+        "regressed": (
+            "Delay worsens by at least 3%, or area worsens by more than 10%."
+        ),
+        "neutral": (
+            "The profile stays inside the regression limits without meeting "
+            "the improvement rule."
+        ),
+        "regression_boundaries": [
+            {
+                "metric": "delay_improvement_percent",
+                "axis": "y",
+                "operator": "<=",
+                "value": -3.0,
+                "label": "Delay regression limit",
+            },
+            {
+                "metric": "area_improvement_percent",
+                "axis": "x",
+                "operator": "<",
+                "value": -10.0,
+                "label": "Area guardrail",
+            },
+        ],
+    },
+    "area": {
+        "label": "Area",
+        "improved": (
+            "Area improves by at least 5%, with delay no worse than 2%."
+        ),
+        "regressed": (
+            "Area worsens by at least 5%, or delay worsens by more than 2%."
+        ),
+        "neutral": (
+            "The profile stays inside the regression limits without meeting "
+            "the improvement rule."
+        ),
+        "regression_boundaries": [
+            {
+                "metric": "area_improvement_percent",
+                "axis": "x",
+                "operator": "<=",
+                "value": -5.0,
+                "label": "Area regression limit",
+            },
+            {
+                "metric": "delay_improvement_percent",
+                "axis": "y",
+                "operator": "<",
+                "value": -2.0,
+                "label": "Delay guardrail",
+            },
+        ],
+    },
+    "balanced": {
+        "label": "Balanced",
+        "improved": (
+            "The profile meets either the timing or area improvement rule."
+        ),
+        "regressed": (
+            "Area worsens by more than 10%, or delay worsens by more than 2%."
+        ),
+        "neutral": (
+            "The profile stays inside the regression limits without meeting "
+            "either improvement rule."
+        ),
+        "regression_boundaries": [
+            {
+                "metric": "area_improvement_percent",
+                "axis": "x",
+                "operator": "<",
+                "value": -10.0,
+                "label": "Area guardrail",
+            },
+            {
+                "metric": "delay_improvement_percent",
+                "axis": "y",
+                "operator": "<",
+                "value": -2.0,
+                "label": "Delay guardrail",
+            },
+        ],
     },
 }
 
@@ -223,20 +320,109 @@ def _measurement_decision(profiles: Any, *, objective: str) -> str:
                 f"measurement profile {name!r} classification does not match its metrics"
             )
         classifications.append(expected)
-    standard, stronger = classifications
-    if standard not in {"improved", "neutral", "regressed"} or stronger not in {
-        "improved",
-        "neutral",
-        "regressed",
-    }:
-        raise FrontendAPIError("measurement has an invalid recipe classification")
-    if standard == stronger == "improved":
-        return "measured_improvement"
-    if standard == stronger == "neutral":
-        return "synthesis_handles"
-    if "regressed" in {standard, stronger}:
-        return "regression"
-    return "flow_dependent"
+    try:
+        return aggregate_measurements(*classifications)
+    except MVPMeasurementError as exc:
+        raise FrontendAPIError(
+            f"measurement has an invalid recipe classification: {exc}"
+        ) from exc
+
+
+def _cost_improvement_percent(baseline: Any, candidate: Any) -> float | None:
+    """Return a positive percentage when a cost metric decreases."""
+
+    try:
+        baseline_value = float(baseline)
+        candidate_value = float(candidate)
+    except (TypeError, ValueError):
+        return None
+    if (
+        not math.isfinite(baseline_value)
+        or not math.isfinite(candidate_value)
+        or baseline_value == 0.0
+    ):
+        return None
+    return round(
+        (baseline_value - candidate_value) / abs(baseline_value) * 100.0,
+        6,
+    )
+
+
+def _threshold_matches(actual: float, operator: str, boundary: float) -> bool:
+    if operator == "<=":
+        return actual < boundary or math.isclose(actual, boundary, abs_tol=1e-9)
+    if operator == "<":
+        return actual < boundary and not math.isclose(
+            actual, boundary, abs_tol=1e-9
+        )
+    raise FrontendAPIError(f"unsupported classification operator: {operator}")
+
+
+def _classification_context(
+    *,
+    objective: str,
+    classification: str,
+    delay_improvement_percent: float | None,
+    area_improvement_percent: float | None,
+) -> dict[str, Any]:
+    policy = CLASSIFICATION_POLICIES.get(objective)
+    if policy is None:
+        return {
+            "classification_reason": "No frontend policy explanation is available.",
+            "regression_triggers": [],
+        }
+    values = {
+        "delay_improvement_percent": delay_improvement_percent,
+        "area_improvement_percent": area_improvement_percent,
+    }
+    triggers = []
+    for boundary in policy["regression_boundaries"]:
+        actual = values.get(str(boundary["metric"]))
+        if not isinstance(actual, (int, float)) or not math.isfinite(float(actual)):
+            continue
+        if _threshold_matches(
+            float(actual), str(boundary["operator"]), float(boundary["value"])
+        ):
+            triggers.append({**boundary, "actual": float(actual)})
+
+    if classification == "regressed" and triggers:
+        reasons = []
+        for trigger in triggers:
+            metric = str(trigger["metric"])
+            actual = abs(float(trigger["actual"]))
+            limit = abs(float(trigger["value"]))
+            noun = "Delay" if metric.startswith("delay") else "Area"
+            verb = "meeting" if trigger["operator"] == "<=" else "exceeding"
+            reasons.append(
+                f"{noun} worsened {actual:.2f}%, {verb} the {limit:.2f}% "
+                "regression limit."
+            )
+        reason = " ".join(reasons)
+    else:
+        reason = str(policy.get(classification) or "Recorded profile classification.")
+    return {
+        "classification_reason": reason,
+        "regression_triggers": triggers,
+    }
+
+
+def _candidate_decision_reason(decision: Any) -> str:
+    return {
+        "regression": (
+            "Candidate regression because at least one pinned synthesis profile "
+            "is regressed."
+        ),
+        "measured_improvement": (
+            "Measured improvement because both pinned synthesis profiles improved."
+        ),
+        "synthesis_handles": (
+            "Synthesis handles this because both pinned synthesis profiles are neutral."
+        ),
+        "flow_dependent": (
+            "Flow dependent because the two pinned synthesis profiles disagree "
+            "without either profile regressing."
+        ),
+    }.get(str(decision), "Candidate decision is recorded in the measurement evidence.")
 
 
 class FrontendDataStore:
@@ -318,6 +504,7 @@ class FrontendDataStore:
                 {"method": "GET", "path": "/api/runs/v1/{run_id}"},
                 {"method": "GET", "path": "/api/runs/v1/{run_id}/diff"},
                 {"method": "GET", "path": "/api/runs/v1/{run_id}/artifacts"},
+                {"method": "GET", "path": "/api/analytics/v1"},
             ],
             "analysis_contract": {
                 "decision": ["recommend", "abstain"],
@@ -326,6 +513,476 @@ class FrontendDataStore:
                 "live_analysis_available": False,
                 "next_source_version": "v23",
             },
+        }
+
+    def _reproducibility_summaries(self) -> list[dict[str, Any]]:
+        family_root = self.config.artifacts_dir / "family-studies"
+        if not family_root.is_dir():
+            return []
+        summaries: list[dict[str, Any]] = []
+        for path in sorted(
+            family_root.glob("*/measurements/reproducibility.json")
+        ):
+            if path.is_symlink() or not path.is_file():
+                continue
+            try:
+                payload = read_hashed_json(path, schema_version=1)
+            except MVPSchemaError as exc:
+                raise FrontendAPIError(
+                    f"invalid family reproducibility record {path}: {exc}"
+                ) from exc
+            if payload.get("document_type") != (
+                "rtl-advisor.arbiter-family-m0-m1-reproducibility"
+            ):
+                continue
+            checks = payload.get("checks") or []
+            if not isinstance(checks, list) or any(
+                not isinstance(check, dict) for check in checks
+            ):
+                raise FrontendAPIError(
+                    f"invalid family reproducibility checks in {path}"
+                )
+            summaries.append(
+                {
+                    "study_id": str(payload.get("study_id") or path.parents[1].name),
+                    "status": payload.get("status"),
+                    "summary": payload.get("summary") or {},
+                    "semantic_hash": payload.get("semantic_hash"),
+                    "artifact_path": str(path.relative_to(self.config.artifacts_dir)),
+                    "checks": [
+                        {
+                            "reference_id": check.get("reference_id"),
+                            "configuration_id": check.get("configuration_id"),
+                            "status": check.get("status"),
+                            "error_code": check.get("error_code"),
+                            "repeat_count": len(check.get("repeat_hashes") or {}),
+                        }
+                        for check in checks
+                    ],
+                }
+            )
+        return summaries
+
+    def _family_analytics_rows(
+        self,
+    ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+        """Flatten current family-study aggregates without reopening every run."""
+
+        family_root = self.config.artifacts_dir / "family-studies"
+        if not family_root.is_dir():
+            return [], []
+        measurements: list[dict[str, Any]] = []
+        groups: list[dict[str, Any]] = []
+        for study_root in sorted(path for path in family_root.iterdir() if path.is_dir()):
+            measurements_root = study_root / "measurements" / "repeat-1"
+            evidence_candidates = (
+                measurements_root / "evidence-with-audited-retry.json",
+                measurements_root / "evidence.json",
+            )
+            evidence_path = next(
+                (path for path in evidence_candidates if path.is_file()), None
+            )
+            if evidence_path is None:
+                continue
+            try:
+                evidence = read_hashed_json(
+                    evidence_path,
+                    document_type="rtl-advisor.arbiter-family-m0-m1-evidence",
+                    schema_version=1,
+                )
+            except MVPSchemaError as exc:
+                raise FrontendAPIError(
+                    f"invalid family measurement evidence {evidence_path}: {exc}"
+                ) from exc
+
+            preppa_hash = evidence.get("preppa_semantic_hash")
+            preppa = None
+            for preppa_path in sorted(study_root.glob("preppa-*.json"), reverse=True):
+                try:
+                    candidate = read_hashed_json(
+                        preppa_path,
+                        document_type="rtl-advisor.arbiter-family-preppa-evidence",
+                        schema_version=1,
+                    )
+                except MVPSchemaError as exc:
+                    raise FrontendAPIError(
+                        f"invalid family formal evidence {preppa_path}: {exc}"
+                    ) from exc
+                if candidate.get("semantic_hash") == preppa_hash:
+                    preppa = candidate
+                    break
+            if preppa is None:
+                raise FrontendAPIError(
+                    f"family measurement evidence {evidence_path} has no matching "
+                    "formal-safety aggregate"
+                )
+            # The current arbiter-family measurement runner is frozen to timing.
+            # Future aggregate schemas may carry the objective explicitly.
+            family_objective = str(evidence.get("objective") or "timing")
+            if family_objective not in CLASSIFICATION_POLICIES:
+                raise FrontendAPIError(
+                    f"unsupported family measurement objective: {family_objective}"
+                )
+
+            formal_results = {
+                (
+                    str(result.get("reference_id")),
+                    str(result.get("configuration_id")),
+                    str(result.get("candidate_id")),
+                ): result
+                for result in preppa.get("results") or []
+                if isinstance(result, dict)
+            }
+            seen_groups: set[str] = set()
+            for result in evidence.get("results") or []:
+                if not isinstance(result, dict):
+                    raise FrontendAPIError(
+                        f"invalid family measurement result in {evidence_path}"
+                    )
+                reference_id = str(result.get("reference_id"))
+                configuration_id = str(result.get("configuration_id"))
+                candidate_id = str(result.get("candidate_id"))
+                formal = formal_results.get(
+                    (reference_id, configuration_id, candidate_id)
+                )
+                if formal is None:
+                    raise FrontendAPIError(
+                        "family measurement result has no matching formal record: "
+                        f"{reference_id}/{configuration_id}/{candidate_id}"
+                    )
+                if formal.get("safe") is not True or formal.get("formal_status") != (
+                    "formal_passed"
+                ):
+                    raise FrontendAPIError(
+                        "family measurement result is not formally safe: "
+                        f"{reference_id}/{configuration_id}/{candidate_id}"
+                    )
+
+                group_id = f"{study_root.name}/{reference_id}"
+                if group_id not in seen_groups:
+                    seen_groups.add(group_id)
+                    groups.append(
+                        {
+                            "run_id": group_id,
+                            "top": reference_id,
+                            "objective": family_objective,
+                            "decision": "family_study",
+                            "state": "complete",
+                            "transformation_ids": ["qualified_family_candidate"],
+                            "finding_count": 0,
+                            "candidate_count": 0,
+                            "updated_at": _timestamp(evidence_path),
+                            "review_semantic_hash": preppa_hash,
+                            "source_kind": "family_study",
+                        }
+                    )
+
+                profiles = result.get("profiles") or {}
+                for profile_id in ("M0", "M1"):
+                    profile = profiles.get(profile_id)
+                    if not isinstance(profile, dict):
+                        continue
+                    baseline = (profile.get("baseline") or {}).get("metrics") or {}
+                    modified = (profile.get("candidate") or {}).get("metrics") or {}
+                    comparison = profile.get("comparison") or {}
+
+                    def improvement(metric: str) -> float | None:
+                        detail = comparison.get(metric) or {}
+                        value = detail.get("improvement_percent")
+                        if isinstance(value, (int, float)) and math.isfinite(float(value)):
+                            return float(value)
+                        return _cost_improvement_percent(
+                            baseline.get(metric), modified.get(metric)
+                        )
+
+                    delay_improvement = improvement("critical_delay_ps")
+                    area_improvement = improvement("area_total")
+                    cell_count_improvement = improvement("cell_count")
+                    classification = str(profile.get("classification") or "")
+                    try:
+                        expected_classification = classify_recipe(
+                            family_objective, baseline, modified
+                        )
+                    except (MVPMeasurementError, TypeError, ValueError) as exc:
+                        raise FrontendAPIError(
+                            "family measurement profile cannot be classified: "
+                            f"{reference_id}/{configuration_id}/{profile_id}: {exc}"
+                        ) from exc
+                    if classification != expected_classification:
+                        raise FrontendAPIError(
+                            "family measurement profile classification does not "
+                            f"match its metrics: {reference_id}/{configuration_id}/"
+                            f"{profile_id}"
+                        )
+                    classification_context = _classification_context(
+                        objective=family_objective,
+                        classification=classification,
+                        delay_improvement_percent=delay_improvement,
+                        area_improvement_percent=area_improvement,
+                    )
+
+                    measurements.append(
+                        {
+                            "row_id": (
+                                f"{study_root.name}:{reference_id}:"
+                                f"{configuration_id}:{candidate_id}:{profile_id}"
+                            ),
+                            "run_id": group_id,
+                            "candidate_id": candidate_id,
+                            "top": reference_id,
+                            "objective": family_objective,
+                            "transformation_id": "qualified_family_candidate",
+                            "finding_id": None,
+                            "source_file": None,
+                            "source_line": None,
+                            "profile": profile_id,
+                            "decision": result.get("decision"),
+                            "classification": classification,
+                            **classification_context,
+                            "candidate_decision_reason": _candidate_decision_reason(
+                                result.get("decision")
+                            ),
+                            "formal_status": formal.get("formal_status"),
+                            "safe": True,
+                            "baseline_delay_ps": baseline.get("critical_delay_ps"),
+                            "candidate_delay_ps": modified.get("critical_delay_ps"),
+                            "delay_improvement_percent": delay_improvement,
+                            "baseline_area": baseline.get("area_total"),
+                            "candidate_area": modified.get("area_total"),
+                            "area_improvement_percent": area_improvement,
+                            "baseline_cell_count": baseline.get("cell_count"),
+                            "candidate_cell_count": modified.get("cell_count"),
+                            "cell_count_improvement_percent": cell_count_improvement,
+                            "recipe_hash": profile.get("recipe_hash"),
+                            "measurement_semantic_hash": result.get(
+                                "measurement_semantic_hash"
+                            ),
+                            "artifact_path": str(
+                                evidence_path.relative_to(self.config.artifacts_dir)
+                            ),
+                            "limitations": [],
+                            "source_kind": "family_study",
+                            "study_id": study_root.name,
+                            "reference_id": reference_id,
+                            "configuration_id": configuration_id,
+                            "repeat_id": evidence.get("repeat_id"),
+                            "drill_available": False,
+                        }
+                    )
+        return measurements, groups
+
+    def analytics(self) -> dict[str, Any]:
+        """Return bounded, verified rows for local visual exploration."""
+
+        measurements, run_rows = self._family_analytics_rows()
+        invalid: list[dict[str, str]] = []
+        measured_candidates: set[tuple[str, str]] = {
+            (str(row["run_id"]), str(row["candidate_id"]))
+            for row in measurements
+        }
+        if not measurements and self._runs_root.is_dir():
+            for root in sorted(self._runs_root.iterdir(), key=lambda path: path.name):
+                if not root.is_dir() or not RUN_ID_PATTERN.fullmatch(root.name):
+                    continue
+                try:
+                    records = self._load_run_records(root.name)
+                    review = records["review"]
+                    decision = self._decision(records)
+                    input_context = review.get("input") or {}
+                    findings = review.get("findings") or []
+                    transformations = sorted(
+                        {
+                            str(finding.get("transformation_id"))
+                            for finding in findings
+                            if isinstance(finding, dict)
+                            and finding.get("transformation_id")
+                        }
+                    )
+                    timestamp_path = (
+                        root / "report.json"
+                        if (root / "report.json").is_file()
+                        else root / "review.json"
+                    )
+                    run_rows.append(
+                        {
+                            "run_id": root.name,
+                            "top": input_context.get("top"),
+                            "objective": review.get("objective"),
+                            "decision": decision,
+                            "state": _run_state(decision),
+                            "transformation_ids": transformations,
+                            "finding_count": len(findings),
+                            "candidate_count": len(records["candidates"]),
+                            "updated_at": _timestamp(timestamp_path),
+                            "review_semantic_hash": review.get("semantic_hash"),
+                        }
+                    )
+                    for entry in records["candidates"]:
+                        measurement = entry.get("measurement")
+                        if not isinstance(measurement, dict):
+                            continue
+                        candidate_id = str(entry["candidate_id"])
+                        measured_candidates.add((root.name, candidate_id))
+                        candidate = entry["candidate"]
+                        finding = candidate.get("finding") or {}
+                        verification = entry.get("verification") or {}
+                        source = finding.get("source") or {}
+                        profiles = measurement.get("measurements") or {}
+                        for profile_id in ("standard", "stronger"):
+                            profile = profiles.get(profile_id)
+                            if not isinstance(profile, dict):
+                                continue
+                            baseline = (profile.get("baseline") or {}).get(
+                                "metrics"
+                            ) or {}
+                            modified = (profile.get("candidate") or {}).get(
+                                "metrics"
+                            ) or {}
+                            recipe = profile.get("recipe") or {}
+                            objective = str(review.get("objective") or "")
+                            classification = str(
+                                profile.get("classification") or ""
+                            )
+                            delay_improvement = _cost_improvement_percent(
+                                baseline.get("critical_delay_ps"),
+                                modified.get("critical_delay_ps"),
+                            )
+                            area_improvement = _cost_improvement_percent(
+                                baseline.get("area_total"),
+                                modified.get("area_total"),
+                            )
+                            cell_count_improvement = _cost_improvement_percent(
+                                baseline.get("cell_count"),
+                                modified.get("cell_count"),
+                            )
+                            classification_context = _classification_context(
+                                objective=objective,
+                                classification=classification,
+                                delay_improvement_percent=delay_improvement,
+                                area_improvement_percent=area_improvement,
+                            )
+                            measurements.append(
+                                {
+                                    "row_id": f"{root.name}:{candidate_id}:{profile_id}",
+                                    "run_id": root.name,
+                                    "candidate_id": candidate_id,
+                                    "top": input_context.get("top"),
+                                    "objective": objective,
+                                    "transformation_id": finding.get(
+                                        "transformation_id"
+                                    ),
+                                    "finding_id": finding.get("finding_id"),
+                                    "source_file": source.get("file"),
+                                    "source_line": source.get("line"),
+                                    "profile": profile_id,
+                                    "decision": measurement.get("decision"),
+                                    "classification": classification,
+                                    **classification_context,
+                                    "candidate_decision_reason": _candidate_decision_reason(
+                                        measurement.get("decision")
+                                    ),
+                                    "formal_status": verification.get("status"),
+                                    "safe": verification.get("safe") is True,
+                                    "baseline_delay_ps": baseline.get(
+                                        "critical_delay_ps"
+                                    ),
+                                    "candidate_delay_ps": modified.get(
+                                        "critical_delay_ps"
+                                    ),
+                                    "delay_improvement_percent": delay_improvement,
+                                    "baseline_area": baseline.get("area_total"),
+                                    "candidate_area": modified.get("area_total"),
+                                    "area_improvement_percent": area_improvement,
+                                    "baseline_cell_count": baseline.get(
+                                        "cell_count"
+                                    ),
+                                    "candidate_cell_count": modified.get(
+                                        "cell_count"
+                                    ),
+                                    "cell_count_improvement_percent": cell_count_improvement,
+                                    "recipe_hash": recipe.get("recipe_hash")
+                                    or profile.get("recipe_hash"),
+                                    "measurement_semantic_hash": measurement.get(
+                                        "semantic_hash"
+                                    ),
+                                    "artifact_path": (
+                                        "agent-v2/runs/"
+                                        f"{root.name}/candidates/{candidate_id}/measurement.json"
+                                    ),
+                                    "limitations": measurement.get("limitations")
+                                    or [],
+                                    "source_kind": "agent_v2_run",
+                                    "drill_available": True,
+                                }
+                            )
+                except FrontendAPIError as exc:
+                    invalid.append({"run_id": root.name, "error": str(exc)})
+
+        measurements.sort(
+            key=lambda row: (
+                str(row["run_id"]),
+                str(row["candidate_id"]),
+                str(row["profile"]),
+            )
+        )
+        run_rows.sort(key=lambda row: str(row["updated_at"]), reverse=True)
+        candidate_outcomes = {
+            (str(row["run_id"]), str(row["candidate_id"])): str(row["decision"])
+            for row in measurements
+        }
+        outcome_counts = Counter(candidate_outcomes.values())
+        return {
+            "api_version": ANALYTICS_API_VERSION,
+            "schema_version": ANALYTICS_API_SCHEMA_VERSION,
+            "run_schema": RUN_SCHEMA_ID,
+            "read_only": True,
+            "summary": {
+                "run_count": len(run_rows),
+                "measured_candidate_count": len(measured_candidates),
+                "measurement_row_count": len(measurements),
+                "invalid_run_count": len(invalid),
+                "outcome_counts": dict(sorted(outcome_counts.items())),
+            },
+            "metric_definitions": {
+                "delay_improvement_percent": (
+                    "Percent reduction in critical delay versus the baseline "
+                    "under the same recorded synthesis profile."
+                ),
+                "area_improvement_percent": (
+                    "Percent reduction in total cell area versus the baseline "
+                    "under the same recorded synthesis profile."
+                ),
+                "cell_count_improvement_percent": (
+                    "Percent reduction in cell count versus the baseline under "
+                    "the same recorded synthesis profile."
+                ),
+            },
+            "classification_policies": CLASSIFICATION_POLICIES,
+            "filters": {
+                "profiles": sorted(
+                    {str(row["profile"]) for row in measurements}
+                ),
+                "objectives": sorted(
+                    {str(row["objective"]) for row in measurements}
+                ),
+                "decisions": sorted(
+                    {str(row["decision"]) for row in measurements}
+                ),
+                "classifications": sorted(
+                    {str(row["classification"]) for row in measurements}
+                ),
+                "transformations": sorted(
+                    {
+                        str(row["transformation_id"])
+                        for row in measurements
+                        if row["transformation_id"]
+                    }
+                ),
+            },
+            "runs": run_rows,
+            "measurements": measurements,
+            "reproducibility": self._reproducibility_summaries(),
+            "invalid": invalid,
         }
 
     def overview(self) -> dict[str, Any]:
@@ -607,41 +1264,141 @@ class FrontendDataStore:
         )
         if baseline is None:
             raise FrontendAPIError(f"baseline variant missing for {case_id}")
-        relative_file = Path(str(baseline.get("file", "")))
-        if relative_file.is_absolute() or ".." in relative_file.parts:
-            raise FrontendAPIError(f"unsafe RTL path for {case_id}")
-        recorded_source_path = root / relative_file
-        source_path = recorded_source_path.resolve()
-        if (
-            recorded_source_path.is_symlink()
-            or not _is_within(source_path, root.resolve())
-            or not source_path.is_file()
-        ):
-            raise FrontendAPIError(f"unsafe RTL path for {case_id}")
-        try:
-            source = source_path.read_text(encoding="utf-8")
-        except OSError as exc:
-            raise FrontendAPIError(f"could not read generated RTL for {case_id}: {exc}") from exc
+
+        def load_variant(variant: dict[str, Any]) -> dict[str, Any]:
+            variant_id = str(variant.get("id", ""))
+            if not CANDIDATE_ID_PATTERN.fullmatch(variant_id):
+                raise FrontendAPIError(f"invalid RTL variant for {case_id}")
+            relative_file = Path(str(variant.get("file", "")))
+            if relative_file.is_absolute() or ".." in relative_file.parts:
+                raise FrontendAPIError(f"unsafe RTL path for {case_id}")
+            recorded_source_path = root / relative_file
+            source_path = recorded_source_path.resolve()
+            if (
+                recorded_source_path.is_symlink()
+                or not _is_within(source_path, root.resolve())
+                or not source_path.is_file()
+            ):
+                raise FrontendAPIError(f"unsafe RTL path for {case_id}")
+            recorded_hash = str(variant.get("sha256", ""))
+            if _sha256(source_path) != recorded_hash:
+                raise FrontendAPIError(
+                    f"generated RTL hash mismatch for {case_id}:{variant_id}"
+                )
+            try:
+                source = source_path.read_text(encoding="utf-8")
+            except OSError as exc:
+                raise FrontendAPIError(
+                    f"could not read generated RTL for {case_id}:{variant_id}: {exc}"
+                ) from exc
+            return {
+                "variant_id": variant_id,
+                "file": str(relative_file),
+                "top": variant.get("kernel_top"),
+                "sha256": recorded_hash,
+                "source": source,
+            }
+
+        baseline_rtl = load_variant(baseline)
+        candidate_rtl = {
+            str(variant.get("id")): load_variant(variant)
+            for variant in variants
+            if variant.get("role") == "candidate"
+        }
         topology = (
             ((manifest.get("metadata") or {}).get(metadata_key) or {}).get("topology")
             or {}
         )
         return {
             "split": split,
-            "file": str(relative_file),
-            "top": baseline.get("kernel_top"),
+            "baseline_id": baseline_id,
+            "file": baseline_rtl["file"],
+            "top": baseline_rtl["top"],
             "language": "systemverilog",
-            "source": source,
+            "sha256": baseline_rtl["sha256"],
+            "source": baseline_rtl["source"],
+            "candidates": candidate_rtl,
             "topology": topology,
         }
+
+    def _case_candidate_evidence(
+        self, case_id: str, baseline_id: str, candidate_id: str
+    ) -> dict[str, Any]:
+        evidence_root = self.config.artifacts_dir / "cases" / case_id
+
+        formal = {"status": "unavailable", "backend": None}
+        formal_path = evidence_root / "equivalence" / f"{candidate_id}.json"
+        if formal_path.is_file() and not formal_path.is_symlink():
+            payload = _load_json(formal_path, "formal result")
+            if (
+                payload.get("case_id") != case_id
+                or payload.get("baseline_id") != baseline_id
+                or payload.get("candidate_id") != candidate_id
+            ):
+                raise FrontendAPIError(
+                    f"formal result identity mismatch for {case_id}:{candidate_id}"
+                )
+            formal = {
+                "status": payload.get("status"),
+                "backend": "Yosys/ABC CEC",
+                "expected_equivalent": payload.get("expected_equivalent"),
+                "expectation_met": payload.get("expectation_met"),
+            }
+
+        synthesis: dict[str, Any] = {"status": "unavailable"}
+        baseline_path = evidence_root / "synthesis" / baseline_id / "result.json"
+        candidate_path = evidence_root / "synthesis" / candidate_id / "result.json"
+        if baseline_path.is_file() and candidate_path.is_file():
+            baseline = _load_json(baseline_path, "baseline synthesis result")
+            candidate = _load_json(candidate_path, "candidate synthesis result")
+            if (
+                baseline.get("case_id") != case_id
+                or baseline.get("variant_id") != baseline_id
+                or candidate.get("case_id") != case_id
+                or candidate.get("variant_id") != candidate_id
+            ):
+                raise FrontendAPIError(
+                    f"synthesis result identity mismatch for {case_id}:{candidate_id}"
+                )
+            baseline_metrics = baseline.get("metrics") or {}
+            candidate_metrics = candidate.get("metrics") or {}
+            provenance = candidate.get("provenance") or {}
+            synthesis = {
+                "status": (
+                    "passed"
+                    if baseline.get("status") == candidate.get("status") == "passed"
+                    else "failed"
+                ),
+                "backend": candidate.get("backend"),
+                "flow_version": provenance.get("flow_version"),
+                "liberty_name": provenance.get("liberty_name"),
+                "yosys_version": provenance.get("yosys_version"),
+                "baseline": {
+                    "critical_delay_ps": baseline_metrics.get("critical_delay_ps"),
+                    "area_total": baseline_metrics.get("area_total"),
+                    "cell_count": baseline_metrics.get("cell_count"),
+                },
+                "candidate": {
+                    "critical_delay_ps": candidate_metrics.get("critical_delay_ps"),
+                    "area_total": candidate_metrics.get("area_total"),
+                    "cell_count": candidate_metrics.get("cell_count"),
+                },
+            }
+        return {"formal": formal, "synthesis": synthesis}
 
     def case_detail(self, case_id: str) -> dict[str, Any]:
         case = self._find_case(case_id)
         classification = case.get("classification") or {}
+        rtl = self._case_rtl(case_id)
         selected_template = classification.get("selected_template")
         best_templates = set(classification.get("best_candidate_ids") or [])
         candidates = []
         for candidate in case.get("candidates") or []:
+            template_id = str(candidate.get("template_id", ""))
+            candidate_rtl = (rtl.get("candidates") or {}).get(template_id)
+            evidence = self._case_candidate_evidence(
+                case_id, str(rtl.get("baseline_id", "")), template_id
+            )
             predictions = candidate.get("predicted_improvement_percent") or {}
             measured = candidate.get("measured_improvement_percent") or {}
             probability = float(candidate.get("eligibility_probability", 0.0))
@@ -649,11 +1406,11 @@ class FrontendDataStore:
             candidates.append(
                 {
                     "candidate_id": (
-                        f"{case_id}:{candidate.get('template_id', 'unknown')}"
+                        f"{case_id}:{template_id or 'unknown'}"
                     ),
-                    "template_id": candidate.get("template_id"),
-                    "selected": candidate.get("template_id") == selected_template,
-                    "measured_best": candidate.get("template_id") in best_templates,
+                    "template_id": template_id,
+                    "selected": template_id == selected_template,
+                    "measured_best": template_id in best_templates,
                     "measured_eligible": bool(candidate.get("eligible")),
                     "safe_best": bool(candidate.get("safe_best")),
                     "eligibility": {
@@ -675,6 +1432,9 @@ class FrontendDataStore:
                     },
                     "predicted_utility": candidate.get("predicted_utility"),
                     "measured_utility": candidate.get("measured_utility"),
+                    "rtl": candidate_rtl,
+                    "formal": evidence["formal"],
+                    "synthesis": evidence["synthesis"],
                     "stages": {
                         "generation": "available",
                         "lint": "passed",
@@ -689,7 +1449,7 @@ class FrontendDataStore:
             "case": self._summary_case(case),
             "classification": classification,
             "ood": case.get("ood_leave_one_topology_out"),
-            "rtl": self._case_rtl(case_id),
+            "rtl": rtl,
             "candidates": candidates,
             "provenance": {
                 "evidence_kind": "calibration",

@@ -1,0 +1,505 @@
+{
+  "schema": "rtl-advisor-plugin-abc-evidence-audit-v1",
+  "experiment_id": "plugin-abc-v1",
+  "arm": "A",
+  "repetition": 1,
+  "result_path": "experiments/plugin-abc-v1/runs/arm-a/r1/result.json",
+  "result_sha256": "af164c29b4fcb9ef66c589a159f143c82d66ce123ac417c7538a464bd5596f88",
+  "all_baselines_unchanged": true,
+  "all_candidate_claims_supported": false,
+  "cases": [
+    {
+      "case_id": "g01",
+      "baseline_sha256_expected": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+      "baseline_sha256_actual": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+      "baseline_unchanged": true,
+      "candidates": [
+        {
+          "candidate_id": "g01-c1",
+          "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g01_c1.sv",
+          "path_exists": true,
+          "evidence": [
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g01_formal.log",
+              "exists": true,
+              "sha256": "6727d60edec020855879f8d191672d59ede924e4238b39257ccfcc6263ce2705"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g01_baseline_rtlil.log",
+              "exists": true,
+              "sha256": "312ede9e3ad771fda33f653227304af8780592bee0f5941796a08baa6643d964"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g01_candidate_rtlil.log",
+              "exists": true,
+              "sha256": "30867b1e8a882e207755eae794835bff680ae5e15e82512b39a6f7faa0daebeb"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g01_baseline_synth.log",
+              "exists": true,
+              "sha256": "4987fcd05a9c18b1815a5c745ac863b1cf8de9df45fedef609b8c50cde3fffa5"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g01_candidate_synth.log",
+              "exists": true,
+              "sha256": "c07f93e0b845657e67e4da83b83cbd67e017c07d8b9955e950a0b9b8f73e509e"
+            }
+          ],
+          "formal_claim_supported": true,
+          "measurement_claim_supported": false,
+          "independent_formal": {
+            "status": "formal_passed",
+            "returncode": 0,
+            "script": "experiments/plugin-abc-v1/evaluations/arm-a/r1/g01-candidate-1.formal.ys",
+            "log": "experiments/plugin-abc-v1/evaluations/arm-a/r1/g01-candidate-1.formal.log",
+            "script_sha256": "5b563ccdffd454ecb29d5c36cd00ed0ea4545639a933e687b301b192e65c31fe",
+            "log_sha256": "d97b3037241ec7e07ada6e6b5afa8c5c3a71f77bd7ade4b3e15e14cb5a737d20"
+          }
+        }
+      ],
+      "claims_supported": false
+    },
+    {
+      "case_id": "g02",
+      "baseline_sha256_expected": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c",
+      "baseline_sha256_actual": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c",
+      "baseline_unchanged": true,
+      "candidates": [
+        {
+          "candidate_id": "g02-c1",
+          "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g02_c1.sv",
+          "path_exists": true,
+          "evidence": [
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g02_formal.log",
+              "exists": true,
+              "sha256": "ce7b2d189bfa2d22054d324bd333485cdb2909f9ca72a4e7ee8460e534d18177"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g02_baseline_rtlil.log",
+              "exists": true,
+              "sha256": "b4e14679efa2210e1e060b0a1c16f5ac294fabe7ee2345ad62b7b5f4dd5a4ebc"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g02_candidate_rtlil.log",
+              "exists": true,
+              "sha256": "b24f7d965dd487d3d7c1b9f9f4ccf5c915c94215a7c28b8a3caad699c8a766a4"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g02_baseline_synth.log",
+              "exists": true,
+              "sha256": "d03f6d36af29ddf04a37f22047d794afc5a3103eb70f327fd266fa7bc497c42c"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g02_candidate_synth.log",
+              "exists": true,
+              "sha256": "278f8acded30e3690fbc38f85487940a62bb1dd87a5f2e099d288a860de0af2d"
+            }
+          ],
+          "formal_claim_supported": true,
+          "measurement_claim_supported": false,
+          "independent_formal": {
+            "status": "formal_passed",
+            "returncode": 0,
+            "script": "experiments/plugin-abc-v1/evaluations/arm-a/r1/g02-candidate-1.formal.ys",
+            "log": "experiments/plugin-abc-v1/evaluations/arm-a/r1/g02-candidate-1.formal.log",
+            "script_sha256": "a7036b5a9bb8691173980a3b304df8bff9130e17e7c1b3996f2f2451b3590c0c",
+            "log_sha256": "780a75fe9ac7654f0290c2d3690403098753c0627545d074dc80ce6f82dc62ee"
+          }
+        }
+      ],
+      "claims_supported": false
+    },
+    {
+      "case_id": "g03",
+      "baseline_sha256_expected": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998",
+      "baseline_sha256_actual": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998",
+      "baseline_unchanged": true,
+      "candidates": [
+        {
+          "candidate_id": "g03-c1",
+          "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g03_c1.sv",
+          "path_exists": true,
+          "evidence": [
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g03_formal.log",
+              "exists": true,
+              "sha256": "2f8f11fda667f57300c400f72e7f5c849977d1dd83de9480795bab341420e9cb"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g03_baseline_rtlil.log",
+              "exists": true,
+              "sha256": "813581235da7f6a8462ee6afeecd025a49de4f667b4f4e5ac3e2bc895b548d03"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g03_candidate_rtlil.log",
+              "exists": true,
+              "sha256": "87acd53b7803008afded1e628fa77259663dfc9afa2bda12f1b0761056ac4d7b"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g03_baseline_synth.log",
+              "exists": true,
+              "sha256": "620d94cfae29c3587b1eeaf41249c559e83565ece9697a277d7a316ad7265eb7"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g03_candidate_synth.log",
+              "exists": true,
+              "sha256": "fee230cb667b586da6ae6c9b317d093aeffaa0e7254bbc7a60a3e8673fdd2e4e"
+            }
+          ],
+          "formal_claim_supported": true,
+          "measurement_claim_supported": false,
+          "independent_formal": {
+            "status": "formal_passed",
+            "returncode": 0,
+            "script": "experiments/plugin-abc-v1/evaluations/arm-a/r1/g03-candidate-1.formal.ys",
+            "log": "experiments/plugin-abc-v1/evaluations/arm-a/r1/g03-candidate-1.formal.log",
+            "script_sha256": "d5bd71331095d936065f4365b9a95077609b7367f37d6a5920a4cff4c02f783d",
+            "log_sha256": "dd067b73ef853353767fdc4c33edb2738adab1da3c2c6b87fbeccfecaedf5fbf"
+          }
+        }
+      ],
+      "claims_supported": false
+    },
+    {
+      "case_id": "g04",
+      "baseline_sha256_expected": "d41c31a3112e798bd67ab057e52043949e3f0b0ed10526be7e62daaa74fa2dfc",
+      "baseline_sha256_actual": "d41c31a3112e798bd67ab057e52043949e3f0b0ed10526be7e62daaa74fa2dfc",
+      "baseline_unchanged": true,
+      "candidates": [
+        {
+          "candidate_id": "g04-c1",
+          "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv",
+          "path_exists": true,
+          "evidence": [
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g04_formal.log",
+              "exists": true,
+              "sha256": "378ee81017e767a24222179e879720333a65fd052a0c90fc95fd86707c1c525c"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g04_baseline_rtlil.log",
+              "exists": true,
+              "sha256": "818ed16e95be2e021a2f8c43edeed54f73f63f1e40b33fe43d42a39b9fd8f3ab"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g04_candidate_rtlil.log",
+              "exists": true,
+              "sha256": "e829384b79dd3da41cb234035a5cbb73a49e68927cadf34a5529fbb7059e7250"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g04_baseline_synth.log",
+              "exists": true,
+              "sha256": "91360a3e51df93798737997c7047be2cac1aa025ecfdf3c6d160080cb8e50c73"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g04_candidate_synth.log",
+              "exists": true,
+              "sha256": "66fcfc3285c2457845e00e98ab31bcacd4098103b4736e8f0a9d5fc4268b515d"
+            }
+          ],
+          "formal_claim_supported": true,
+          "measurement_claim_supported": false,
+          "independent_formal": {
+            "status": "formal_passed",
+            "returncode": 0,
+            "script": "experiments/plugin-abc-v1/evaluations/arm-a/r1/g04-candidate-1.formal.ys",
+            "log": "experiments/plugin-abc-v1/evaluations/arm-a/r1/g04-candidate-1.formal.log",
+            "script_sha256": "d75de69171d5d09980ff6d708e5e28ec2a4185753801d57d6af816ba24006e3c",
+            "log_sha256": "3b8f6ec9346aa9aff5f4dd707458fc851663c3bc4d9fa5a77952d1856a1d8cf1"
+          }
+        }
+      ],
+      "claims_supported": false
+    },
+    {
+      "case_id": "g05",
+      "baseline_sha256_expected": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+      "baseline_sha256_actual": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+      "baseline_unchanged": true,
+      "candidates": [
+        {
+          "candidate_id": "g05-c1",
+          "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g05_c1.sv",
+          "path_exists": true,
+          "evidence": [
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g05_formal.log",
+              "exists": true,
+              "sha256": "8a1cee0dd653a45b493da0c1c9b899e0ed1961a898094c201dba0442064ec89e"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g05_baseline_rtlil.log",
+              "exists": true,
+              "sha256": "e9c423c64d46352b733a48321ea042bba36a94a5ef5852ecb26d09acb4c8b6ec"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g05_candidate_rtlil.log",
+              "exists": true,
+              "sha256": "87d66a6717a4bd80c931ab6d8f0102152b48b0822f282adc4e71435c6cbe964b"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g05_baseline_synth.log",
+              "exists": true,
+              "sha256": "f2b7f642d94f97e3e8100f44b0b5ad018b31f595d1f4bd6b334c3c1e5233cc28"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g05_candidate_synth.log",
+              "exists": true,
+              "sha256": "75a2d3e450a337083dc1abeea768606879c5b9889f3d79f5e375a58e9e7618ea"
+            }
+          ],
+          "formal_claim_supported": true,
+          "measurement_claim_supported": false,
+          "independent_formal": {
+            "status": "formal_passed",
+            "returncode": 0,
+            "script": "experiments/plugin-abc-v1/evaluations/arm-a/r1/g05-candidate-1.formal.ys",
+            "log": "experiments/plugin-abc-v1/evaluations/arm-a/r1/g05-candidate-1.formal.log",
+            "script_sha256": "1e5bf3a9d65d12ec4c8d38cc6f3ddf5859af1d4a276476a7ac14d230f460a90c",
+            "log_sha256": "55ffd97bac412371e6d1ceb7767577700cc2ea965e594b91e5b3af022a2bcaf6"
+          }
+        }
+      ],
+      "claims_supported": false
+    },
+    {
+      "case_id": "g06",
+      "baseline_sha256_expected": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+      "baseline_sha256_actual": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "g07",
+      "baseline_sha256_expected": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2",
+      "baseline_sha256_actual": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2",
+      "baseline_unchanged": true,
+      "candidates": [
+        {
+          "candidate_id": "g07-c1",
+          "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g07_c1.sv",
+          "path_exists": true,
+          "evidence": [
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g07_formal.log",
+              "exists": true,
+              "sha256": "b234ac3ae9cfbbd316d6aab542d538adb606564ca1eaf26cbdc4e3be32008aab"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g07_baseline_rtlil.log",
+              "exists": true,
+              "sha256": "e29877adaf7c0ab37360a79af88151837b5211276a1b44dd7f994ace8896515b"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g07_candidate_rtlil.log",
+              "exists": true,
+              "sha256": "95066148d0dfe5f565c764bf6fab9ca671fd18b1bad40be7804cd5cac2776b6e"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g07_baseline_synth.log",
+              "exists": true,
+              "sha256": "c5106a75126cf73a765276bed51a0da954927b95d3d0b972fc436fbf157bee37"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g07_candidate_synth.log",
+              "exists": true,
+              "sha256": "b367d79e107921e08de46f5e948b30bbded66b84b65367b29cf89c43ab3da734"
+            }
+          ],
+          "formal_claim_supported": true,
+          "measurement_claim_supported": false,
+          "independent_formal": {
+            "status": "formal_passed",
+            "returncode": 0,
+            "script": "experiments/plugin-abc-v1/evaluations/arm-a/r1/g07-candidate-1.formal.ys",
+            "log": "experiments/plugin-abc-v1/evaluations/arm-a/r1/g07-candidate-1.formal.log",
+            "script_sha256": "98bd4841fc72d918fa0da361dad514ab35c5877a927eb2186d2e3489933894ba",
+            "log_sha256": "e4404569880a7f5fb806abdb8cd7bf4bc2185f840acf99c861e6217e46b7ec10"
+          }
+        }
+      ],
+      "claims_supported": false
+    },
+    {
+      "case_id": "g08",
+      "baseline_sha256_expected": "b012fa81c56e0e2a101f605b9b8f00de337063c29d9217c8ffd020b767372d6d",
+      "baseline_sha256_actual": "b012fa81c56e0e2a101f605b9b8f00de337063c29d9217c8ffd020b767372d6d",
+      "baseline_unchanged": true,
+      "candidates": [
+        {
+          "candidate_id": "g08-c1",
+          "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g08_c1.sv",
+          "path_exists": true,
+          "evidence": [
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g08_formal.log",
+              "exists": true,
+              "sha256": "cf1534aa006ee984ce38c30bf36f78d9caf49ab946cba20cdc1be5a5fb01d19a"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g08_baseline_rtlil.log",
+              "exists": true,
+              "sha256": "43320ec0f8fc8e4070de83c268167eaf7a3689e7cf53d75c3f0136ca6ce24be8"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g08_candidate_rtlil.log",
+              "exists": true,
+              "sha256": "374b6113fb9f02f5667d61e2d185019a1bd86e8b39fbe9bd2f2f1c3ccac06eb0"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g08_baseline_synth.log",
+              "exists": true,
+              "sha256": "c32a41ebf22be06d938df1c3abf9602b5a1da747e419146b96403eb668e34653"
+            },
+            {
+              "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/evidence/g08_candidate_synth.log",
+              "exists": true,
+              "sha256": "b5d4d8c532ad019757a7e0f3fef685782c15a9c6380af7e6d61088f58ec5af60"
+            }
+          ],
+          "formal_claim_supported": true,
+          "measurement_claim_supported": false,
+          "independent_formal": {
+            "status": "formal_passed",
+            "returncode": 0,
+            "script": "experiments/plugin-abc-v1/evaluations/arm-a/r1/g08-candidate-1.formal.ys",
+            "log": "experiments/plugin-abc-v1/evaluations/arm-a/r1/g08-candidate-1.formal.log",
+            "script_sha256": "cc0472ff86bc60223b46d3bbfa6177755e345da27ccf321d53b408374a15bcd6",
+            "log_sha256": "3483a7b9480a37b550c6e86bd0e844d5b6e4364694587c727236eb654262fe3b"
+          }
+        }
+      ],
+      "claims_supported": false
+    },
+    {
+      "case_id": "g09",
+      "baseline_sha256_expected": "c1bbfbc8ffc8ea0b18fdfa3ddaa621171e513d51a285aebde8181059ac7a1ff0",
+      "baseline_sha256_actual": "c1bbfbc8ffc8ea0b18fdfa3ddaa621171e513d51a285aebde8181059ac7a1ff0",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "g10",
+      "baseline_sha256_expected": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+      "baseline_sha256_actual": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "g11",
+      "baseline_sha256_expected": "1c7e7a24c9db1fca9787798b355b2d9fca354646df1e056c229c658a3a8d36c6",
+      "baseline_sha256_actual": "1c7e7a24c9db1fca9787798b355b2d9fca354646df1e056c229c658a3a8d36c6",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "g12",
+      "baseline_sha256_expected": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+      "baseline_sha256_actual": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "o01",
+      "baseline_sha256_expected": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99",
+      "baseline_sha256_actual": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "o02",
+      "baseline_sha256_expected": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630",
+      "baseline_sha256_actual": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "o03",
+      "baseline_sha256_expected": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb",
+      "baseline_sha256_actual": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "o04",
+      "baseline_sha256_expected": "99aeb7564474111dc6662488c9f4ca6b788723e449b128d08ac54f8fc2da5cd2",
+      "baseline_sha256_actual": "99aeb7564474111dc6662488c9f4ca6b788723e449b128d08ac54f8fc2da5cd2",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "o05",
+      "baseline_sha256_expected": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec",
+      "baseline_sha256_actual": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "o06",
+      "baseline_sha256_expected": "2e0e5b6d09ce4ade0881938ee042dcbc78438638fa2592338a374f88a3c27304",
+      "baseline_sha256_actual": "2e0e5b6d09ce4ade0881938ee042dcbc78438638fa2592338a374f88a3c27304",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "o07",
+      "baseline_sha256_expected": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc",
+      "baseline_sha256_actual": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "o08",
+      "baseline_sha256_expected": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e",
+      "baseline_sha256_actual": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "o09",
+      "baseline_sha256_expected": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+      "baseline_sha256_actual": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "o10",
+      "baseline_sha256_expected": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39",
+      "baseline_sha256_actual": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "o11",
+      "baseline_sha256_expected": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc",
+      "baseline_sha256_actual": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    },
+    {
+      "case_id": "o12",
+      "baseline_sha256_expected": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02",
+      "baseline_sha256_actual": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02",
+      "baseline_unchanged": true,
+      "candidates": [],
+      "claims_supported": true
+    }
+  ]
+}

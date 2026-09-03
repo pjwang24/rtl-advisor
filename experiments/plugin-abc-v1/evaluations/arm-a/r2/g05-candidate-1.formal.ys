@@ -1,0 +1,14 @@
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv"
+prep -top g05_mux_common_logic
+flatten
+design -stash gold
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r2/candidates/g05/candidate_1.sv"
+prep -top g05_mux_common_logic
+flatten
+design -stash gate
+design -copy-from gold -as gold g05_mux_common_logic
+design -copy-from gate -as gate g05_mux_common_logic
+equiv_make gold gate equiv
+prep -top equiv
+equiv_simple -seq 1
+equiv_status -assert

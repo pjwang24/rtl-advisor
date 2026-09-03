@@ -1,0 +1,621 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Executing script file `/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/evaluations/arm-a/r3/g06-candidate-1.formal.ys' --
+
+1. Executing Verilog-2005 frontend: /Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv
+Parsing SystemVerilog input from `/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv' to AST representation.
+Generating RTLIL representation for module `\g06_priority_decode'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \g06_priority_decode
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \g06_priority_decode
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 8 switch rules as full_case in process $proc$/Users/peter/Desktop/CAD$20Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6$1 in module g06_priority_decode.
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 2 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~8 debug messages>
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\g06_priority_decode.$proc$/Users/peter/Desktop/CAD$20Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6$1'.
+     1/16: $8\index[2:0]
+     2/16: $8\valid[0:0]
+     3/16: $7\index[2:0]
+     4/16: $7\valid[0:0]
+     5/16: $6\index[2:0]
+     6/16: $6\valid[0:0]
+     7/16: $5\index[2:0]
+     8/16: $5\valid[0:0]
+     9/16: $4\index[2:0]
+    10/16: $4\valid[0:0]
+    11/16: $3\index[2:0]
+    12/16: $3\valid[0:0]
+    13/16: $2\index[2:0]
+    14/16: $2\valid[0:0]
+    15/16: $1\index[2:0]
+    16/16: $1\valid[0:0]
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\g06_priority_decode.\index' from process `\g06_priority_decode.$proc$/Users/peter/Desktop/CAD$20Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6$1'.
+No latch inferred for signal `\g06_priority_decode.\valid' from process `\g06_priority_decode.$proc$/Users/peter/Desktop/CAD$20Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6$1'.
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 8 empty switches in `\g06_priority_decode.$proc$/Users/peter/Desktop/CAD$20Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6$1'.
+Removing empty process `g06_priority_decode.$proc$/Users/peter/Desktop/CAD$20Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6$1'.
+Cleaned up 8 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g06_priority_decode.
+
+2.3. Executing FUTURE pass.
+
+2.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g06_priority_decode.
+
+2.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g06_priority_decode..
+Removed 0 unused cells and 91 unused wires.
+<suppressed ~1 debug messages>
+
+2.6. Executing CHECK pass (checking for obvious problems).
+Checking module g06_priority_decode...
+Found and reported 0 problems.
+
+2.7. Executing OPT pass (performing simple optimizations).
+
+2.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g06_priority_decode.
+
+2.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g06_priority_decode'.
+Computing hashes of 71 cells of `\g06_priority_decode'.
+Finding duplicate cells in `\g06_priority_decode'.
+Removed a total of 0 cells.
+
+2.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g06_priority_decode..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$209.
+    dead port 1/2 on $mux $procmux$203.
+    dead port 1/2 on $mux $procmux$197.
+    dead port 1/2 on $mux $procmux$194.
+    dead port 1/2 on $mux $procmux$188.
+    dead port 1/2 on $mux $procmux$185.
+    dead port 1/2 on $mux $procmux$179.
+    dead port 1/2 on $mux $procmux$176.
+    dead port 1/2 on $mux $procmux$173.
+    dead port 1/2 on $mux $procmux$167.
+    dead port 1/2 on $mux $procmux$164.
+    dead port 1/2 on $mux $procmux$161.
+    dead port 1/2 on $mux $procmux$155.
+    dead port 1/2 on $mux $procmux$152.
+    dead port 1/2 on $mux $procmux$149.
+    dead port 1/2 on $mux $procmux$146.
+    dead port 1/2 on $mux $procmux$140.
+    dead port 1/2 on $mux $procmux$137.
+    dead port 1/2 on $mux $procmux$134.
+    dead port 1/2 on $mux $procmux$131.
+    dead port 1/2 on $mux $procmux$125.
+    dead port 1/2 on $mux $procmux$122.
+    dead port 1/2 on $mux $procmux$119.
+    dead port 1/2 on $mux $procmux$116.
+    dead port 1/2 on $mux $procmux$113.
+    dead port 1/2 on $mux $procmux$107.
+    dead port 1/2 on $mux $procmux$104.
+    dead port 1/2 on $mux $procmux$101.
+    dead port 1/2 on $mux $procmux$98.
+    dead port 1/2 on $mux $procmux$95.
+    dead port 1/2 on $mux $procmux$89.
+    dead port 1/2 on $mux $procmux$86.
+    dead port 1/2 on $mux $procmux$83.
+    dead port 1/2 on $mux $procmux$80.
+    dead port 1/2 on $mux $procmux$77.
+    dead port 1/2 on $mux $procmux$74.
+    dead port 1/2 on $mux $procmux$68.
+    dead port 1/2 on $mux $procmux$65.
+    dead port 1/2 on $mux $procmux$62.
+    dead port 1/2 on $mux $procmux$59.
+    dead port 1/2 on $mux $procmux$56.
+    dead port 1/2 on $mux $procmux$53.
+    dead port 1/2 on $mux $procmux$47.
+    dead port 1/2 on $mux $procmux$44.
+    dead port 1/2 on $mux $procmux$41.
+    dead port 1/2 on $mux $procmux$38.
+    dead port 1/2 on $mux $procmux$35.
+    dead port 1/2 on $mux $procmux$32.
+    dead port 1/2 on $mux $procmux$29.
+    dead port 1/2 on $mux $procmux$23.
+    dead port 1/2 on $mux $procmux$20.
+    dead port 1/2 on $mux $procmux$17.
+    dead port 1/2 on $mux $procmux$14.
+    dead port 1/2 on $mux $procmux$11.
+    dead port 1/2 on $mux $procmux$8.
+    dead port 1/2 on $mux $procmux$5.
+Removed 56 multiplexer ports.
+<suppressed ~73 debug messages>
+
+2.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g06_priority_decode.
+Performed a total of 0 changes.
+
+2.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g06_priority_decode'.
+Computing hashes of 15 cells of `\g06_priority_decode'.
+Finding duplicate cells in `\g06_priority_decode'.
+Removed a total of 0 cells.
+
+2.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g06_priority_decode..
+Removed 0 unused cells and 56 unused wires.
+<suppressed ~1 debug messages>
+
+2.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g06_priority_decode.
+
+2.7.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+2.7.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g06_priority_decode..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~17 debug messages>
+
+2.7.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g06_priority_decode.
+Performed a total of 0 changes.
+
+2.7.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g06_priority_decode'.
+Computing hashes of 15 cells of `\g06_priority_decode'.
+Finding duplicate cells in `\g06_priority_decode'.
+Removed a total of 0 cells.
+
+2.7.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g06_priority_decode..
+
+2.7.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g06_priority_decode.
+
+2.7.14. Finished fast OPT passes. (There is nothing left to do.)
+
+2.8. Executing WREDUCE pass (reducing word size of cells).
+Removed top 2 bits (of 3) from mux cell g06_priority_decode.$procmux$50 ($mux).
+Removed top 1 bits (of 3) from mux cell g06_priority_decode.$procmux$92 ($mux).
+Removed top 1 bits (of 3) from mux cell g06_priority_decode.$procmux$128 ($mux).
+Removed top 1 bits (of 3) from wire g06_priority_decode.$6\index[2:0].
+Removed top 1 bits (of 3) from wire g06_priority_decode.$5\index[2:0].
+Removed top 2 bits (of 3) from wire g06_priority_decode.$7\index[2:0].
+
+2.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g06_priority_decode..
+Removed 0 unused cells and 3 unused wires.
+<suppressed ~1 debug messages>
+
+2.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.11. Executing OPT pass (performing simple optimizations).
+
+2.11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g06_priority_decode.
+
+2.11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g06_priority_decode'.
+Computing hashes of 15 cells of `\g06_priority_decode'.
+Finding duplicate cells in `\g06_priority_decode'.
+Removed a total of 0 cells.
+
+2.11.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g06_priority_decode..
+
+2.11.4. Finished fast OPT passes.
+
+2.12. Executing SORT pass.
+
+2.13. Printing statistics.
+
+=== g06_priority_decode ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       16 wires
+       33 wire bits
+        3 public wires
+       12 public wire bits
+        3 ports
+       12 port bits
+       15 cells
+       15   $mux
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module g06_priority_decode...
+Found and reported 0 problems.
+
+3. Executing FLATTEN pass (flatten design).
+
+4. Executing Verilog-2005 frontend: /Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r3/candidates/g06_priority_decode_candidate.sv
+Parsing SystemVerilog input from `/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r3/candidates/g06_priority_decode_candidate.sv' to AST representation.
+Generating RTLIL representation for module `\g06_priority_decode_candidate'.
+Successfully finished Verilog frontend.
+
+5. Executing PREP pass.
+
+5.1. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1.1. Analyzing design hierarchy..
+Top module:  \g06_priority_decode_candidate
+
+5.1.2. Analyzing design hierarchy..
+Top module:  \g06_priority_decode_candidate
+Removed 0 unused modules.
+
+5.2. Executing PROC pass (convert processes to netlists).
+
+5.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+5.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+5.2.4. Executing PROC_INIT pass (extract init attributes).
+
+5.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+5.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+5.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+5.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+5.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+5.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+5.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g06_priority_decode_candidate.
+
+5.3. Executing FUTURE pass.
+
+5.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g06_priority_decode_candidate.
+
+5.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g06_priority_decode_candidate..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+5.6. Executing CHECK pass (checking for obvious problems).
+Checking module g06_priority_decode_candidate...
+Found and reported 0 problems.
+
+5.7. Executing OPT pass (performing simple optimizations).
+
+5.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g06_priority_decode_candidate.
+
+5.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g06_priority_decode_candidate'.
+Computing hashes of 18 cells of `\g06_priority_decode_candidate'.
+Finding duplicate cells in `\g06_priority_decode_candidate'.
+Computing hashes of 17 cells of `\g06_priority_decode_candidate'.
+Finding duplicate cells in `\g06_priority_decode_candidate'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+5.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g06_priority_decode_candidate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+5.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g06_priority_decode_candidate.
+Performed a total of 0 changes.
+
+5.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g06_priority_decode_candidate'.
+Computing hashes of 17 cells of `\g06_priority_decode_candidate'.
+Finding duplicate cells in `\g06_priority_decode_candidate'.
+Removed a total of 0 cells.
+
+5.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g06_priority_decode_candidate..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+5.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g06_priority_decode_candidate.
+
+5.7.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.7.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g06_priority_decode_candidate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+5.7.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g06_priority_decode_candidate.
+Performed a total of 0 changes.
+
+5.7.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g06_priority_decode_candidate'.
+Computing hashes of 17 cells of `\g06_priority_decode_candidate'.
+Finding duplicate cells in `\g06_priority_decode_candidate'.
+Removed a total of 0 cells.
+
+5.7.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g06_priority_decode_candidate..
+
+5.7.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g06_priority_decode_candidate.
+
+5.7.14. Finished fast OPT passes. (There is nothing left to do.)
+
+5.8. Executing WREDUCE pass (reducing word size of cells).
+
+5.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g06_priority_decode_candidate..
+
+5.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.11. Executing OPT pass (performing simple optimizations).
+
+5.11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g06_priority_decode_candidate.
+
+5.11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g06_priority_decode_candidate'.
+Computing hashes of 17 cells of `\g06_priority_decode_candidate'.
+Finding duplicate cells in `\g06_priority_decode_candidate'.
+Removed a total of 0 cells.
+
+5.11.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g06_priority_decode_candidate..
+
+5.11.4. Finished fast OPT passes.
+
+5.12. Executing SORT pass.
+
+5.13. Printing statistics.
+
+=== g06_priority_decode_candidate ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       17 wires
+       26 wire bits
+        4 public wires
+       13 public wire bits
+        3 ports
+       12 port bits
+       17 cells
+        4   $and
+        2   $logic_not
+        2   $not
+        6   $or
+        3   $reduce_or
+
+5.14. Executing CHECK pass (checking for obvious problems).
+Checking module g06_priority_decode_candidate...
+Found and reported 0 problems.
+
+6. Executing FLATTEN pass (flatten design).
+
+7. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: index_gold (\index_gold), index_gate ({ \upper_half_gate \index_gate [1:0] }) -> index
+Presumably equivalent wires: request_gold (\request_gold), request_gate (\request_gate) -> request
+Presumably equivalent wires: valid_gold (\valid_gold), valid_gate (\valid_gate) -> valid
+Changing input A of cell $logic_not$/Users/peter/Desktop/CAD$20Stuff/experiments/plugin-abc-v1/runs/arm-a/r3/candidates/g06_priority_decode_candidate.sv:15$231_gate ($logic_not): \upper_half_gate -> \index [2]
+Changing input A of cell $not$/Users/peter/Desktop/CAD$20Stuff/experiments/plugin-abc-v1/runs/arm-a/r3/candidates/g06_priority_decode_candidate.sv:12$223_gate ($not): \upper_half_gate -> \index [2]
+
+8. Executing PREP pass.
+
+8.1. Executing HIERARCHY pass (managing design hierarchy).
+
+8.1.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+8.1.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+8.2. Executing PROC pass (convert processes to netlists).
+
+8.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+8.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+8.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+8.2.4. Executing PROC_INIT pass (extract init attributes).
+
+8.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+8.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+8.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+8.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+8.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+8.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+8.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+8.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+8.3. Executing FUTURE pass.
+
+8.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+8.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \equiv..
+
+8.6. Executing CHECK pass (checking for obvious problems).
+Checking module equiv...
+Found and reported 0 problems.
+
+8.7. Executing OPT pass (performing simple optimizations).
+
+8.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+8.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\equiv'.
+Computing hashes of 36 cells of `\equiv'.
+Finding duplicate cells in `\equiv'.
+Removed a total of 0 cells.
+
+8.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \equiv..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~17 debug messages>
+
+8.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \equiv.
+Performed a total of 0 changes.
+
+8.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\equiv'.
+Computing hashes of 36 cells of `\equiv'.
+Finding duplicate cells in `\equiv'.
+Removed a total of 0 cells.
+
+8.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \equiv..
+
+8.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+8.7.8. Finished fast OPT passes. (There is nothing left to do.)
+
+8.8. Executing WREDUCE pass (reducing word size of cells).
+
+8.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \equiv..
+
+8.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+8.11. Executing OPT pass (performing simple optimizations).
+
+8.11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+8.11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\equiv'.
+Computing hashes of 36 cells of `\equiv'.
+Finding duplicate cells in `\equiv'.
+Removed a total of 0 cells.
+
+8.11.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \equiv..
+
+8.11.4. Finished fast OPT passes.
+
+8.12. Executing SORT pass.
+
+8.13. Printing statistics.
+
+=== equiv ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       36 wires
+       71 wire bits
+       10 public wires
+       37 public wire bits
+        3 ports
+       12 port bits
+       36 cells
+        4   $and
+        4   $equiv
+        2   $logic_not
+       15   $mux
+        2   $not
+        6   $or
+        3   $reduce_or
+
+8.14. Executing CHECK pass (checking for obvious problems).
+Checking module equiv...
+Found and reported 0 problems.
+
+9. Executing EQUIV_SIMPLE pass.
+Found 4 unproven $equiv cells (2 groups) in equiv:
+ Grouping SAT models for \index:
+  Trying to prove $equiv for \index [0]:ezsat
+ success!
+  Trying to prove $equiv for \index [1]:ezsat
+ success!
+  Trying to prove $equiv for \index [2]:ezsat
+ success!
+  Trying to prove $equiv for \valid:ezsat
+ success!
+Proved 4 previously unproven $equiv cells.
+
+10. Executing EQUIV_STATUS pass.
+Found 4 $equiv cells in equiv:
+  Of those cells 4 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: d5fa9588ee, CPU: user 0.04s system 0.01s, MEM: 14.00 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 29% 17x opt_expr (0 sec), 23% 14x opt_clean (0 sec), ...

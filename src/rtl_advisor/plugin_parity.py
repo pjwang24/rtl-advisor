@@ -39,6 +39,7 @@ class ParityScenario:
     config_path: Path
     expected_exit_code: int
     expected_document_type: str
+    schema_version: int = 2
     expected_values: tuple[ExpectedValue, ...] = ()
     source_paths: tuple[Path, ...] = ()
 
@@ -163,7 +164,7 @@ def compare_scenario(
         scenario.operation,
         *scenario.arguments,
         "--schema-version",
-        "2",
+        str(scenario.schema_version),
         "--json",
     )
     plugin_command = (
@@ -402,6 +403,38 @@ def build_scenarios(
         config,
         path=runtime_dir / "missing-tools/rtl-advisor.toml",
     )
+    tranche_lock = repo_root / "examples/corpus/wave2_tier_a/tranche.lock.json"
+    isolated_registry = runtime_dir / "corpus-registry"
+    missing_qualification_plan = runtime_dir / "missing-qualification-plan.json"
+    workflow_batch_dir = runtime_dir / "workflow-batch"
+    workflow_batch_dir.mkdir(parents=True, exist_ok=True)
+    workflow_prompt = workflow_batch_dir / "prompt.txt"
+    workflow_prompt.write_text("Review this generated RTL.\n", encoding="utf-8")
+    workflow_manifest = workflow_batch_dir / "manifest.json"
+    workflow_manifest.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "schema": "rtl-advisor-workflow-batch-manifest-v1",
+                "document_type": "rtl-advisor.workflow.batch-manifest",
+                "items": [
+                    {
+                        "item_id": "minimal",
+                        "input": {
+                            "kind": "generated_rtl",
+                            "path": str(fixture),
+                            "top": "parity_minimal",
+                        },
+                        "objective": "balanced",
+                    }
+                ],
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
     scenarios = [
         ParityScenario(
             scenario_id="capabilities",
@@ -479,6 +512,33 @@ def build_scenarios(
             source_paths=(fixture,),
         ),
         ParityScenario(
+            scenario_id="workflow_batch_review",
+            description="Compact batch workflow is identical through both transports",
+            operation="workflow",
+            arguments=(
+                "batch",
+                str(workflow_manifest),
+                "--authorized-through",
+                "review",
+                "--prompt-file",
+                str(workflow_prompt),
+                "--output-dir",
+                str(workflow_batch_dir / "artifacts"),
+                "--jobs",
+                "1",
+            ),
+            config_path=config.config_path,
+            expected_exit_code=0,
+            expected_document_type="rtl-advisor.workflow.batch-summary",
+            schema_version=1,
+            expected_values=(
+                ExpectedValue("status", "completed"),
+                ExpectedValue("counts.items", 1),
+                ExpectedValue("counts.failed", 0),
+            ),
+            source_paths=(fixture, workflow_manifest, workflow_prompt),
+        ),
+        ParityScenario(
             scenario_id="invalid_run_id",
             description="Candidate preparation rejects an invalid review ID",
             operation="candidate",
@@ -501,6 +561,81 @@ def build_scenarios(
             expected_exit_code=2,
             expected_document_type="rtl-advisor.agent.v2.error",
             expected_values=(ExpectedValue("error.code", "invalid_mvp_artifact"),),
+        ),
+        ParityScenario(
+            scenario_id="corpus_validate",
+            description="Frozen corpus tranche validation is identical and read-only",
+            operation="corpus",
+            arguments=("validate", str(tranche_lock)),
+            config_path=missing_tools_config,
+            expected_exit_code=0,
+            expected_document_type="rtl-advisor.corpus.tranche-validation",
+            schema_version=1,
+            expected_values=(
+                ExpectedValue("status", "passed"),
+                ExpectedValue("read_only", True),
+                ExpectedValue("tranche.reference_count", 12),
+            ),
+            source_paths=(tranche_lock,),
+        ),
+        ParityScenario(
+            scenario_id="corpus_register",
+            description="Frozen tranche registration is identical and idempotent",
+            operation="corpus",
+            arguments=(
+                "register",
+                str(tranche_lock),
+                "--registry-dir",
+                str(isolated_registry),
+            ),
+            config_path=missing_tools_config,
+            expected_exit_code=0,
+            expected_document_type="rtl-advisor.corpus.registration",
+            schema_version=1,
+            expected_values=(
+                ExpectedValue("status", "registered"),
+                ExpectedValue("registry_mutation", "append_only"),
+                ExpectedValue("registered_count", 12),
+            ),
+            source_paths=(tranche_lock,),
+        ),
+        ParityScenario(
+            scenario_id="corpus_coverage",
+            description="Lineage-aware corpus coverage is identical and read-only",
+            operation="corpus",
+            arguments=(
+                "coverage",
+                "--registry-dir",
+                str(isolated_registry),
+            ),
+            config_path=missing_tools_config,
+            expected_exit_code=0,
+            expected_document_type="rtl-advisor.corpus.coverage",
+            schema_version=1,
+            expected_values=(
+                ExpectedValue("status", "ready"),
+                ExpectedValue("read_only", True),
+                ExpectedValue("counting_unit", "independent_design_lineage"),
+                ExpectedValue("population.independent_design_lineage_count", 12),
+            ),
+        ),
+        ParityScenario(
+            scenario_id="corpus_qualify_blocked",
+            description="Corpus qualification fails closed on a missing frozen plan",
+            operation="corpus",
+            arguments=(
+                "qualify",
+                str(tranche_lock),
+                str(missing_qualification_plan),
+                "--registry-dir",
+                str(isolated_registry),
+            ),
+            config_path=missing_tools_config,
+            expected_exit_code=2,
+            expected_document_type="rtl-advisor.corpus.error",
+            schema_version=1,
+            expected_values=(ExpectedValue("status", "failed"),),
+            source_paths=(tranche_lock,),
         ),
     ]
     if review_input is not None:

@@ -1,0 +1,37 @@
+{
+  "tool": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2)",
+  "recipes": {
+    "lut4": "read_verilog -sv; hierarchy -top; proc; flatten; opt; techmap; opt; abc -lut 4; clean; stat; ltp",
+    "lut6": "read_verilog -sv; hierarchy -top; proc; flatten; opt; techmap; opt; abc -lut 6; clean; stat; ltp"
+  },
+  "metrics": {
+    "g01-c1": {
+      "lut4": {"baseline_luts": 45, "candidate_luts": 44, "baseline_depth": 8, "candidate_depth": 7},
+      "lut6": {"baseline_luts": 30, "candidate_luts": 30, "baseline_depth": 5, "candidate_depth": 5}
+    },
+    "g02-c1": {
+      "lut4": {"baseline_luts": 312, "candidate_luts": 307, "baseline_depth": 25, "candidate_depth": 24},
+      "lut6": {"baseline_luts": 216, "candidate_luts": 249, "baseline_depth": 16, "candidate_depth": 16}
+    },
+    "g03-c1": {
+      "lut4": {"baseline_luts": 139, "candidate_luts": 135, "baseline_depth": 13, "candidate_depth": 12},
+      "lut6": {"baseline_luts": 90, "candidate_luts": 95, "baseline_depth": 9, "candidate_depth": 8}
+    },
+    "g04-c1": {
+      "lut4": {"baseline_luts": 121, "candidate_luts": 121, "baseline_depth": 14, "candidate_depth": 13},
+      "lut6": {"baseline_luts": 83, "candidate_luts": 87, "baseline_depth": 9, "candidate_depth": 8}
+    },
+    "g05-c1": {
+      "lut4": {"baseline_luts": 78, "candidate_luts": 46, "baseline_depth": 12, "candidate_depth": 11},
+      "lut6": {"baseline_luts": 52, "candidate_luts": 44, "baseline_depth": 7, "candidate_depth": 7}
+    },
+    "g06-c1": {
+      "lut4": {"baseline_luts": 7, "candidate_luts": 8, "baseline_depth": 2, "candidate_depth": 3},
+      "lut6": {"baseline_luts": 5, "candidate_luts": 7, "baseline_depth": 2, "candidate_depth": 2}
+    },
+    "g08-c1": {
+      "lut4": {"baseline_luts": 105, "candidate_luts": 108, "baseline_depth": 13, "candidate_depth": 12},
+      "lut6": {"baseline_luts": 67, "candidate_luts": 77, "baseline_depth": 9, "candidate_depth": 8}
+    }
+  }
+}

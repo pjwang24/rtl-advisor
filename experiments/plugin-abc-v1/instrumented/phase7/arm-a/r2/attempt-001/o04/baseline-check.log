@@ -1,0 +1,85 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv -DSYNTHESIS -Icorpus/upstream/opentitan/hw/ip/prim/rtl corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv; hierarchy -check -top prim_packer_fifo; proc; check -assert' --
+
+1. Executing Verilog-2005 frontend: corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv
+Parsing SystemVerilog input from `corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv' to AST representation.
+Generating RTLIL representation for module `\prim_packer_fifo'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \prim_packer_fifo
+
+2.2. Analyzing design hierarchy..
+Top module:  \prim_packer_fifo
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:126$3 in module prim_packer_fifo.
+Marked 1 switch rules as full_case in process $proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:81$1 in module prim_packer_fifo.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 4 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_ni in `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:126$3'.
+Found async reset \rst_ni in `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:81$1'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:126$3'.
+     1/1: $0\gen_unpack_mode.ptr_q[2:0]
+Creating decoders for process `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:81$1'.
+     1/3: $0\clr_q[0:0]
+     2/3: $0\data_q[31:0]
+     3/3: $0\depth_q[2:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\prim_packer_fifo.\gen_unpack_mode.ptr_q' using process `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:126$3'.
+  created $adff cell `$procdff$34' with positive edge clock and positive level reset.
+Creating register for signal `\prim_packer_fifo.\depth_q' using process `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:81$1'.
+  created $adff cell `$procdff$39' with positive edge clock and positive level reset.
+Creating register for signal `\prim_packer_fifo.\data_q' using process `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:81$1'.
+  created $adff cell `$procdff$44' with positive edge clock and positive level reset.
+Creating register for signal `\prim_packer_fifo.\clr_q' using process `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:81$1'.
+  created $adff cell `$procdff$49' with positive edge clock and positive level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:126$3'.
+Removing empty process `prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:81$1'.
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+<suppressed ~11 debug messages>
+
+4. Executing CHECK pass (checking for obvious problems).
+Checking module prim_packer_fifo...
+Found and reported 0 problems.
+
+End of script. Logfile hash: 37a8fff9d1, CPU: user 0.04s system 0.02s, MEM: 13.70 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 70% 2x read_verilog (0 sec), 10% 1x opt_expr (0 sec), ...

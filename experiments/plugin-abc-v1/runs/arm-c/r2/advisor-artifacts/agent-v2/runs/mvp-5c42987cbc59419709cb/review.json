@@ -1,0 +1,120 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/input.json",
+    "review": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/review.json",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb"
+  },
+  "candidate_generation_allowed": true,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+    "--objective",
+    "balanced",
+    "--top",
+    "g01_add8_left",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 1,
+    "excluded_site_count": 0
+  },
+  "decision": "candidate_available",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "76ab9daf38ac5573a37301cab938397c5fe0a99e47a73a8d080dc4dacba0928c",
+    "model_used": false,
+    "rules_only": true
+  },
+  "exclusions": [],
+  "findings": [
+    {
+      "finding_id": "addsite_9067dfe8e174e103",
+      "limitations": [
+        "candidate is unproven until current Yosys formal verification passes",
+        "only two-state bit-vector equivalence is supported in this MVP"
+      ],
+      "operands": [
+        {
+          "name": "a",
+          "signed": false,
+          "width": 8
+        },
+        {
+          "name": "b",
+          "signed": false,
+          "width": 8
+        },
+        {
+          "name": "c",
+          "signed": false,
+          "width": 8
+        },
+        {
+          "name": "d",
+          "signed": false,
+          "width": 8
+        }
+      ],
+      "original_expression": "((a + b) + c) + d",
+      "reason": "unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree",
+      "replacement_expression": "((a + b) + (c + d))",
+      "source": {
+        "column": 14,
+        "end_column": 31,
+        "end_line": 5,
+        "end_offset": 111,
+        "file": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+        "line": 5,
+        "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+        "start_offset": 94
+      },
+      "status": "candidate_available",
+      "target": {
+        "name": "y",
+        "width": 8
+      },
+      "top": "g01_add8_left",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+    "defines": [],
+    "design_hash": "1e49c90b185383b61191990bca48e0e214b7915eb5e5d2dfd228021f95f02ac5",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+        "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "g01_add8_left"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-5c42987cbc59419709cb",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "cff2a06600bd822460b3570aa4330bf8d70050cbaf61a12a7df8121e3f0d29b8",
+  "status": "completed"
+}

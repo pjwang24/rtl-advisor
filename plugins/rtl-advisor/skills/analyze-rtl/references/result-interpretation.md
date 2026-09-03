@@ -6,7 +6,7 @@ Lead with one of these engineer-facing states and retain the CLI reason.
 | --- | --- | --- |
 | `candidate_available` | Candidate available | Explain the source-linked structure; do not call it a recommendation. |
 | `candidate_prepared` | Candidate prepared | Review the isolated diff; formal proof is still required. |
-| `formal_passed` | Formally equivalent | The candidate may proceed to the two fixed synthesis recipes. |
+| `formal_passed` | Formally equivalent under the recorded contract | State the proof level and assumptions; the candidate may proceed to the two fixed synthesis recipes. |
 | `formal_failed` | Formal proof failed | Reject the candidate and keep the original RTL. |
 | `formal_inconclusive` | Formal proof inconclusive | Treat the candidate as unverified; do not measure or recommend it. |
 | `measured_improvement` | Measured improvement in both Yosys recipes | Review the candidate while retaining the stated target-flow limitation. |
@@ -33,10 +33,10 @@ target-flow claim.
 
 ## Rules and diagnostic-only models
 
-MVP findings come from the released deterministic rule, not from ML. The V2.2
-model remains diagnostic-only and cannot select a site, unlock a candidate, or
-change a formal or synthesis result. Never present its ranking or predicted PPA
-as an MVP recommendation.
+Released findings come from registered deterministic rules or pre-registered
+curated alternatives, not from ML. The V2.2 model remains diagnostic-only and
+cannot select a site, unlock a candidate, or change a formal or synthesis
+result. Never present its ranking or predicted PPA as an MVP recommendation.
 
 ## Candidate states
 
@@ -44,8 +44,10 @@ as an MVP recommendation.
 - `formal_failed` or `formal_inconclusive`: the candidate cannot proceed.
 - `formal_passed` plus `safe: true`: current hash-matched formal equivalence passed.
 
-Formal equivalence proves behavior for the checked baseline and candidate. It
-does not prove PPA benefit, synthesis robustness, or production readiness.
+Formal equivalence proves the recorded relation for the checked baseline and
+candidate under the stated P1/P2 assumptions. It does not prove the reference
+implements its specification, PPA benefit, synthesis robustness, or production
+readiness.
 
 ## Language
 

@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "ad28e89ad7cc6d5f6342d8318d94e5d685025eb765efdac41036adb4fced4fcb",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:g04_mixed_procedural_add.sv",
+        "sha256": "d41c31a3112e798bd67ab057e52043949e3f0b0ed10526be7e62daaa74fa2dfc"
+      }
+    ],
+    "top": "g04_mixed_procedural_add"
+  },
+  "defines": [],
+  "design_hash": "df52a9e6d6f54735ace950e682d174b8f136d56e82724302edf21a6771a64709",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g04_mixed_procedural_add.sv",
+      "sha256": "d41c31a3112e798bd67ab057e52043949e3f0b0ed10526be7e62daaa74fa2dfc"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "ca3907aa411b4b26e8c9ea549ea9b2c019639a00a1db3fa621ab2343aaec327e",
+  "top": "g04_mixed_procedural_add"
+}

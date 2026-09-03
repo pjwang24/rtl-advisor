@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "6faffe2447a042d3fe1542de9d25cd868d952c7e98a97875dce177491e48e34d",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:prim_fifo_sync.sv",
+        "sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630"
+      }
+    ],
+    "top": "prim_fifo_sync"
+  },
+  "defines": [],
+  "design_hash": "676464b4aa4139fa9e0fad091c823466109e768648afd81e55b4f15f23896841",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv",
+      "sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "5aa030676b2d9f2fcbd2a4eb42b15cc8dd542505ea5c583b9be88b4a9b54f584",
+  "top": "prim_fifo_sync"
+}

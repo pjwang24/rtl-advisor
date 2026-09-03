@@ -10,16 +10,15 @@ to trust a suggestion. It links a finding to source, prepares a change in an
 isolated copy, requires formal equivalence, and measures the original and
 candidate under identical synthesis settings.
 
-> **Status:** `0.2.0a1` developer preview. The generated end-to-end example
-> formally passes and returns `synthesis_handles`: both pinned Yosys/ABC recipes
-> found no useful improvement. The first project-scale open tranche now has
-> **8 qualified Tier A references out of 12 frozen candidates**; four remain
-> explicitly blocked. Candidate variants for this broader corpus have not yet
-> been measured, so this is a reference/proof foundation—not an optimization
-> success claim.
+> **Status:** `0.2.0a1` developer preview. The generated example returns
+> `synthesis_handles`. The first realistic same-cycle arbiter slice now has one
+> P2-safe result that repeats in Yosys/ABC and OpenROAD at its frozen N=8
+> configuration. The broader family gate is still open: this is evidence for
+> one reference/alternative pair, not a general optimization claim.
 
-The current preview supports one narrow combinational transformation. The
-long-range program is intentionally larger: a curated Tier A–D corpus of 50–100
+The current preview supports one narrow combinational rewrite and one curated
+same-cycle sequential alternative. The long-range program is intentionally
+larger: a curated Tier A–D corpus of 50–100
 standalone modules, 15–30 complete IP blocks, 5–10 processor or accelerator
 subsystems, and 2–4 complete SoCs. Variants do not count toward those totals;
 every reference must have pinned provenance, compile context, behavioral basis,
@@ -51,14 +50,14 @@ Genus, Design Compiler, physical-timing, power, or production-PPA predictions.
 
 ```mermaid
 flowchart TD
-    A["Generated or explicitly approved open RTL"] --> B["Parse and apply deterministic rules"]
-    B --> C{"Supported unsigned fixed-width addition chain?"}
+    A["Generated or explicitly approved open RTL"] --> B["Resolve registered transformation"]
+    B --> C{"Registered rewrite or curated alternative?"}
     C -- "No" --> C1["Unsupported: no change"]
-    C -- "Yes" --> D["Source-linked finding"]
-    D --> E["Isolated balanced candidate and diff"]
+    C -- "Yes" --> D["Source-linked finding and proof contract"]
+    D --> E["Isolated candidate and diff"]
     E --> E1{"Compile and lint in the same context"}
     E1 -- "Failed" --> E2["Unverified: do not measure"]
-    E1 -- "Passed" --> F{"RTL-to-RTL formal equivalence"}
+    E1 -- "Passed" --> F{"P1 or P2 formal contract"}
     F -- "Failed" --> F1["Reject candidate; do not measure"]
     F -- "Incomplete" --> F2["Manual review; do not measure"]
     F -- "Passed" --> G["Standard and stronger Yosys/ABC recipes"]
@@ -75,11 +74,19 @@ records. A changed source or compile context invalidates later evidence.
 
 ## Supported in this preview
 
-The decision path supports one transformation only: balancing an unbalanced
-continuous assignment with at least three unsigned, equal-width, fixed-width
-addends in a self-contained combinational module. It rejects sequential state,
-mixed signedness, implicit truncation, macros, functions, generated spans,
-ambiguous drivers, and unresolved compile context.
+The transformation registry currently supports:
+
+- `adder_reduction_association`: a deterministic isolated rewrite for an
+  unsigned, equal-width, fixed-width combinational addition chain, gated by P1
+  RTL equivalence.
+- `same_cycle_arbiter_topology`: the curated OpenTitan
+  `prim_arbiter_ppc`/`prim_arbiter_tree` alternative, gated by a P2 same-cycle
+  sequential contract.
+
+The adder rule rejects sequential state, mixed signedness, implicit truncation,
+macros, functions, generated spans, ambiguous drivers, and unresolved compile
+context. The arbiter alternative is available only through its pinned,
+qualified corpus reference; it is not an unseen-RTL rewrite.
 
 The V2.2 ML model remains **diagnostic-only**. It does not select findings,
 unlock candidates, or decide the final result. The MVP uses deterministic rules,
@@ -136,6 +143,20 @@ uv run --frozen rtl-advisor agent report <run-id> \
 fixture currently reaches `synthesis_handles`, which is useful evidence that the
 tested synthesis recipes already normalize this rewrite.
 
+The frozen OpenTitan reference uses the same Agent V2 commands:
+
+```bash
+uv run --frozen rtl-advisor agent review \
+  corpus/registry-v1/references/opentitan-prim-arbiter-ppc/000007-after-fe8ac76915242cad.json \
+  --objective timing \
+  --schema-version 2 \
+  --json
+```
+
+That review exposes the pre-registered N=1, 4, 8, and 16 configurations as
+separate findings. Each alternative remains unproven until its registered P2
+backend passes.
+
 Agent V1 remains the default for existing operations through the `0.2.x` line.
 New integrations should pass `--schema-version 2` explicitly. Agent V2 is
 `rtl-advisor-agent-v2`; stored run records use `rtl-advisor-run-v1`.
@@ -152,13 +173,19 @@ uv run --frozen rtl-advisor frontend --host 127.0.0.1 --port 8765
 Open `http://127.0.0.1:8765`. The run viewer presents Review → Candidate →
 Formal → Synthesis → Final result, including the source location, diff, proof
 limits, both synthesis recipes, hashes, logs, and reproduction commands. Its
-read-only endpoints are:
+Explore adds filterable M0/M1 area-versus-delay plots, candidate-outcome
+composition, reproducibility facts, exact measurement rows, and CSV export.
+When a current family-study aggregate is present, Explore uses that compact,
+hash-validated record linked to the matching formal-safety aggregate; otherwise
+it falls back to verified Agent V2 run measurements. Its read-only endpoints
+are:
 
 ```text
 GET /api/runs/v1
 GET /api/runs/v1/{run_id}
 GET /api/runs/v1/{run_id}/diff
 GET /api/runs/v1/{run_id}/artifacts
+GET /api/analytics/v1
 ```
 
 The earlier V2.2 research evidence remains available as a secondary dashboard
@@ -178,6 +205,31 @@ An engineer can ask:
 > synthesis recipes already handle the change.
 
 ## Current evidence
+
+### Realistic same-cycle arbiter slice
+
+The frozen OpenTitan `prim_arbiter_ppc` reference and upstream
+`prim_arbiter_tree` alternative were evaluated at N=1, 4, 8, and 16 with
+`DW=32` and `EnDataPort=1`.
+
+All four configurations passed the strengthened P2 contract in both clean
+repeats. Incorrect reset, mask-state, grant, and data-selection controls each
+produced a counterexample. M0/M1 normalized metrics and netlist hashes
+reproduced exactly; M2 area and delay also reproduced with 0% drift.
+
+| Configuration | Pinned Yosys/ABC | Pinned OpenROAD | Supported conclusion |
+| --- | --- | --- | --- |
+| N=1 | Neutral | Not sampled | Synthesis handles the difference |
+| N=4 | 14.35% faster, 10.57% more area | Not sampled | Reject: area guardrail exceeded |
+| N=8 | 21.20% faster, 2.38% less area | 29.35% faster, 1.69% less area | OpenROAD-confirmed improvement in the pinned flows |
+| N=16 | 27.43% faster, 0.52% less area | 0.90% slower, 6.60% less area | Cross-flow disagreement; do not recommend |
+
+The N=8 result permits only these narrow statements: “repeatable Yosys/ABC
+improvement for this configuration” and “confirmed by the pinned OpenROAD
+cross-check.” It is not Genus, target-flow, production-PPA, or unseen-RTL
+evidence. The family remains below its ten-pair and three-lineage release gate.
+
+### Earlier generated and corpus evidence
 
 The complete generated workflow has produced a hash-matched formal pass and a
 `synthesis_handles` result under the standard and stronger pinned recipes.
@@ -209,7 +261,8 @@ unseen RTL.
 
 ## Why engineers can trust the result
 
-- A deterministic rule—not ML or Codex—selects the supported source pattern.
+- A registered deterministic rule or pre-approved upstream alternative—not ML
+  or Codex—selects the candidate.
 - The tool edits an isolated copy and records source, context, and diff hashes.
 - Direct Yosys RTL-to-RTL equivalence gates all synthesis measurement.
 - Deliberately incorrect controls must fail the same formal checker.
@@ -237,7 +290,19 @@ uv run --frozen rtl-advisor corpus add <reference-or-variant.json> --json
 uv run --frozen rtl-advisor corpus list --json
 uv run --frozen rtl-advisor corpus summary --json
 uv run --frozen rtl-advisor corpus validate --json
+
+# Stable plugin-facing corpus workflow
+uv run --frozen rtl-advisor agent corpus validate \
+  examples/corpus/wave2_tier_a/tranche.lock.json --schema-version 1 --json
+uv run --frozen rtl-advisor agent corpus coverage --schema-version 1 --json
 ```
+
+The Agent-facing coverage result fixes `independent_design_lineage` as the
+dataset-size unit. Its current audit reports 12 independent design lineages
+across three repository lineages and eight separately reported variants; only
+eight lineages are fully qualified. Registration and qualification are
+separate explicit append-only operations and are never implied by a coverage
+or tranche-validation request.
 
 The frozen Wave 2 evidence is driven by
 [`tranche.lock.json`](examples/corpus/wave2_tier_a/tranche.lock.json),
@@ -247,11 +312,11 @@ Third-party source trees and large run artifacts remain outside the repository.
 
 ## What is needed next
 
-The next engineering step is Wave 3: freeze the Tier A expansion and
-transformation portfolio before candidate PPA is visible, then grow from eight
-to 50–100 qualified standalone modules across at least eight categories and
-five independent upstream lineages. Each meaningful variant must use its
-declared P2 or P3 contract before identical-flow candidate measurement.
+The next engineering step is to grow `same_cycle_arbiter_topology` from one
+reference/alternative pair to ten qualified pairs across at least three
+independent upstream lineages, with three pre-registered M2 samples. In
+parallel, Wave 3 must grow from eight to 50–100 qualified Tier A modules across
+at least eight categories and five independent upstream lineages.
 
 Broader recommendations need more independent RTL structures, multiple
 equivalent variants per supported family, the correct formal contract for every
@@ -260,13 +325,14 @@ topology-, and hierarchy-separated evaluation sets.
 
 ML can enter a future decision path only after enough independent evidence is
 collected and a frozen release test passes. EQY, commercial LEC, target-flow
-synthesis, OpenROAD gating, proprietary RTL, and SoC-scale operation remain
-later tracks. The dashboard remains unchanged until category-first corpus
-records are available.
+synthesis, proprietary RTL, and SoC-scale operation remain later tracks. The
+dashboard remains read-only; category-first corpus integration remains a
+separate product track.
 
 ## Documentation
 
 - [MVP V1 implementation plan](implementation%20plan/MVP%20V1.md)
+- [Realistic RTL Evidence Slice V1](implementation%20plan/Realistic%20RTL%20Evidence%20Slice%20V1.md)
 - [Project Roadmap V1](implementation%20plan/project%20roadmap%20v1.md)
 - [Corpus Strategy V1](implementation%20plan/corpus%20strategy%20v1.md)
 - [Project Checklist V1](implementation%20plan/project%20checklist%20v1.md)

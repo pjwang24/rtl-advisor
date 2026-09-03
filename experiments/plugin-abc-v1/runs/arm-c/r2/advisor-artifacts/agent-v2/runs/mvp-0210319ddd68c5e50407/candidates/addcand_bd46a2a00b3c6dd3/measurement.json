@@ -1,0 +1,563 @@
+{
+  "artifacts": {
+    "evidence_record": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/measurement.json",
+    "evidence_semantic_hash": "a990e82bebc5fb7fb9241684c101c4b776770433af30935e292cc41daa276449",
+    "measurement": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement.json",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b"
+  },
+  "candidate_id": "addcand_bd46a2a00b3c6dd3",
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "measure",
+    "mvp-0210319ddd68c5e50407",
+    "--candidate",
+    "addcand_bd46a2a00b3c6dd3",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "decision": "synthesis_handles",
+  "document_type": "rtl-advisor.agent.v2.measurement",
+  "flow_version": "rtl-advisor-agent-v2",
+  "formal": {
+    "semantic_hash": "49cf61535a843127b7f6db0c8db40b5704fa421bd9ff888ef6306011680e738e",
+    "status": "passed"
+  },
+  "limitations": [
+    "This decision describes two pinned Yosys/ABC recipes and is not target-flow PPA."
+  ],
+  "measurements": {
+    "standard": {
+      "baseline": {
+        "constraints": {
+          "driving_cell": "BUF_X1",
+          "output_load_ff": 10.0,
+          "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+        },
+        "design_hash": "f38eb4380cf2bab0375ccd22c0ff9eac8b4eaf2dd559a5357147e8ebb91e416b",
+        "metrics": {
+          "abc_area_combinational": 344.2,
+          "abc_gate_count": 263,
+          "area_combinational": 344.204,
+          "area_sequential": 0.0,
+          "area_total": 344.204,
+          "cell_count": 263,
+          "cells_by_type": {
+            "AND2_X1": 20,
+            "AND3_X1": 9,
+            "AOI211_X2": 1,
+            "AOI21_X1": 23,
+            "AOI21_X2": 5,
+            "AOI21_X4": 1,
+            "AOI22_X1": 32,
+            "BUF_X1": 2,
+            "CLKBUF_X1": 2,
+            "INV_X1": 4,
+            "NAND2_X1": 37,
+            "NAND3_X1": 2,
+            "NOR2_X1": 23,
+            "NOR3_X1": 4,
+            "NOR3_X4": 1,
+            "OAI21_X1": 5,
+            "OAI21_X2": 2,
+            "OAI21_X4": 4,
+            "OAI33_X1": 1,
+            "OR2_X1": 4,
+            "OR3_X1": 5,
+            "XNOR2_X1": 41,
+            "XNOR2_X2": 5,
+            "XOR2_X1": 26,
+            "XOR2_X2": 4
+          },
+          "critical_delay_ps": 729.25,
+          "raw_cell_count": 263
+        },
+        "netlist": {
+          "cell_signature": "4d2fc01debe105cedf2de721e86408ba5f5c717f94872ef9ad0953b2df605d69",
+          "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/standard/baseline/mapped.v",
+          "sha256": "20171c8579ec12fb6a0818c363a172ec23272e40c2724d7fa65443dcdbbccd2c"
+        },
+        "provenance": {
+          "abc": {
+            "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+            "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+            "provider": "Yosys abc pass with explicit -exe",
+            "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+            "transcript_sha256": "49d007775aa610d2d881d0dbb054e97a8e8db3b94d57239a394f4dc756309f4e",
+            "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+          },
+          "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+          "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+          "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+          "command": [
+            "yosys",
+            "-Q",
+            "-s",
+            "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/standard/baseline/synthesis.ys"
+          ],
+          "constraints_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/standard/abc.constr",
+          "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+          "liberty_name": "Nangate45 typical",
+          "liberty_path": "/Users/peter/Desktop/CAD Stuff/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+          "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+          "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+          "log_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/standard/baseline/synthesis.log",
+          "log_sha256": "ad80a0927eb661423f1f78b76ac4b534ae2ab6a5a3ca1083ac91c50b7e1878a7",
+          "profile": "standard",
+          "recipe_hash": "c24052e33855a3b08b74dec7b2416a72c8c2cddb3a9afebf4b90a3498c2ddb00",
+          "script_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/standard/baseline/synthesis.ys",
+          "script_sha256": "dc48ab65199fa84cb2af4aa1aeb3efb7993e42d2a30bbb31b747d919e53e99e6",
+          "stat_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/standard/baseline/stat.json",
+          "stat_sha256": "9d3ebd0bf3fa76e9ff7fb15c303e52c8fcc6a53d62e5fbebe770f187af28d30e",
+          "warnings": {
+            "count": 2,
+            "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+          },
+          "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+          "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+          "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+        },
+        "role": "baseline",
+        "source_hashes": {
+          "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998"
+        },
+        "status": "passed",
+        "top": "g03_mixed_safe_add"
+      },
+      "candidate": {
+        "constraints": {
+          "driving_cell": "BUF_X1",
+          "output_load_ff": 10.0,
+          "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+        },
+        "design_hash": "723689dd3871f7de29e4064b0b1029b2286017d46baaa8ac4302a6a5632f96cd",
+        "metrics": {
+          "abc_area_combinational": 344.2,
+          "abc_gate_count": 263,
+          "area_combinational": 344.204,
+          "area_sequential": 0.0,
+          "area_total": 344.204,
+          "cell_count": 263,
+          "cells_by_type": {
+            "AND2_X1": 20,
+            "AND3_X1": 9,
+            "AOI211_X2": 1,
+            "AOI21_X1": 23,
+            "AOI21_X2": 5,
+            "AOI21_X4": 1,
+            "AOI22_X1": 32,
+            "BUF_X1": 2,
+            "CLKBUF_X1": 2,
+            "INV_X1": 4,
+            "NAND2_X1": 37,
+            "NAND3_X1": 2,
+            "NOR2_X1": 23,
+            "NOR3_X1": 4,
+            "NOR3_X4": 1,
+            "OAI21_X1": 5,
+            "OAI21_X2": 2,
+            "OAI21_X4": 4,
+            "OAI33_X1": 1,
+            "OR2_X1": 4,
+            "OR3_X1": 5,
+            "XNOR2_X1": 41,
+            "XNOR2_X2": 5,
+            "XOR2_X1": 26,
+            "XOR2_X2": 4
+          },
+          "critical_delay_ps": 729.25,
+          "raw_cell_count": 263
+        },
+        "netlist": {
+          "cell_signature": "4d2fc01debe105cedf2de721e86408ba5f5c717f94872ef9ad0953b2df605d69",
+          "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/standard/candidate/mapped.v",
+          "sha256": "20171c8579ec12fb6a0818c363a172ec23272e40c2724d7fa65443dcdbbccd2c"
+        },
+        "provenance": {
+          "abc": {
+            "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+            "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+            "provider": "Yosys abc pass with explicit -exe",
+            "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+            "transcript_sha256": "49d007775aa610d2d881d0dbb054e97a8e8db3b94d57239a394f4dc756309f4e",
+            "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+          },
+          "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+          "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+          "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+          "command": [
+            "yosys",
+            "-Q",
+            "-s",
+            "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/standard/candidate/synthesis.ys"
+          ],
+          "constraints_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/standard/abc.constr",
+          "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+          "liberty_name": "Nangate45 typical",
+          "liberty_path": "/Users/peter/Desktop/CAD Stuff/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+          "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+          "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+          "log_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/standard/candidate/synthesis.log",
+          "log_sha256": "9fe198c354064f8fe34a37326d2cfbbe67aee559dc865d4000071d2fca5bb8fe",
+          "profile": "standard",
+          "recipe_hash": "c24052e33855a3b08b74dec7b2416a72c8c2cddb3a9afebf4b90a3498c2ddb00",
+          "script_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/standard/candidate/synthesis.ys",
+          "script_sha256": "f9de7cc05697f5b890d9c48630b72457452a9d0ae1d03a784f1111828f49fb1d",
+          "stat_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/standard/candidate/stat.json",
+          "stat_sha256": "9d3ebd0bf3fa76e9ff7fb15c303e52c8fcc6a53d62e5fbebe770f187af28d30e",
+          "warnings": {
+            "count": 2,
+            "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+          },
+          "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+          "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+          "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+        },
+        "role": "candidate",
+        "source_hashes": {
+          "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/design/sources/0000/g03_mixed_safe_add.sv": "9992eeae425edb8dcb3a525dc68579684243d640b8ef06fd708b0ddd1b0336c1"
+        },
+        "status": "passed",
+        "top": "g03_mixed_safe_add"
+      },
+      "classification": "neutral",
+      "comparison": {
+        "area_total": {
+          "baseline": 344.204,
+          "candidate": 344.204,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        },
+        "cell_count": {
+          "baseline": 263.0,
+          "candidate": 263.0,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        },
+        "critical_delay_ps": {
+          "baseline": 729.25,
+          "candidate": 729.25,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        }
+      },
+      "recipe": {
+        "abc_provider": "explicit adjacent yosys-abc",
+        "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+        "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+        "driving_cell": "BUF_X1",
+        "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+        "frontend": "read_verilog -sv",
+        "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+        "output_load_ff": 10.0,
+        "passes": [
+          "hierarchy -check",
+          "synth -flatten -noabc",
+          "dfflibmap",
+          "abc -exe -liberty -constr",
+          "clean",
+          "check -assert"
+        ],
+        "profile": "standard",
+        "recipe_hash": "c24052e33855a3b08b74dec7b2416a72c8c2cddb3a9afebf4b90a3498c2ddb00",
+        "script_template": [
+          "read_liberty -lib <LIBERTY>",
+          "read_verilog -sv <INCLUDE_DIRS> <DEFINES> <SOURCES>",
+          "hierarchy -check -top g03_mixed_safe_add",
+          "synth -top g03_mixed_safe_add -flatten -noabc",
+          "dfflibmap -liberty <LIBERTY>",
+          "abc -exe <ABC> -liberty <LIBERTY> -constr <CONSTRAINTS>",
+          "clean",
+          "check -assert",
+          "stat -top g03_mixed_safe_add -liberty <LIBERTY> -json",
+          "write_verilog -noattr -noexpr <NETLIST>"
+        ],
+        "script_template_sha256": "772fe6be4c33e28ac8327b3a423cf0374bbd845d2dc7c2b49027a305210efb8d",
+        "top": "g03_mixed_safe_add",
+        "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+        "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+      }
+    },
+    "stronger": {
+      "baseline": {
+        "constraints": {
+          "driving_cell": "BUF_X1",
+          "output_load_ff": 10.0,
+          "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+        },
+        "design_hash": "f38eb4380cf2bab0375ccd22c0ff9eac8b4eaf2dd559a5357147e8ebb91e416b",
+        "metrics": {
+          "abc_area_combinational": 344.2,
+          "abc_gate_count": 263,
+          "area_combinational": 344.204,
+          "area_sequential": 0.0,
+          "area_total": 344.204,
+          "cell_count": 263,
+          "cells_by_type": {
+            "AND2_X1": 20,
+            "AND3_X1": 9,
+            "AOI211_X2": 1,
+            "AOI21_X1": 23,
+            "AOI21_X2": 5,
+            "AOI21_X4": 1,
+            "AOI22_X1": 32,
+            "BUF_X1": 2,
+            "CLKBUF_X1": 2,
+            "INV_X1": 4,
+            "NAND2_X1": 37,
+            "NAND3_X1": 2,
+            "NOR2_X1": 23,
+            "NOR3_X1": 4,
+            "NOR3_X4": 1,
+            "OAI21_X1": 5,
+            "OAI21_X2": 2,
+            "OAI21_X4": 4,
+            "OAI33_X1": 1,
+            "OR2_X1": 4,
+            "OR3_X1": 5,
+            "XNOR2_X1": 41,
+            "XNOR2_X2": 5,
+            "XOR2_X1": 26,
+            "XOR2_X2": 4
+          },
+          "critical_delay_ps": 729.25,
+          "raw_cell_count": 263
+        },
+        "netlist": {
+          "cell_signature": "4d2fc01debe105cedf2de721e86408ba5f5c717f94872ef9ad0953b2df605d69",
+          "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/stronger/baseline/mapped.v",
+          "sha256": "20171c8579ec12fb6a0818c363a172ec23272e40c2724d7fa65443dcdbbccd2c"
+        },
+        "provenance": {
+          "abc": {
+            "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+            "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+            "provider": "Yosys abc pass with explicit -exe",
+            "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+            "transcript_sha256": "0f5b0fe1c6d1c40eda45ddc2d7a7eafbff7f1160cb37fbcd723eee335d24e47c",
+            "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+          },
+          "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+          "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+          "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+          "command": [
+            "yosys",
+            "-Q",
+            "-s",
+            "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/stronger/baseline/synthesis.ys"
+          ],
+          "constraints_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/stronger/abc.constr",
+          "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+          "liberty_name": "Nangate45 typical",
+          "liberty_path": "/Users/peter/Desktop/CAD Stuff/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+          "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+          "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+          "log_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/stronger/baseline/synthesis.log",
+          "log_sha256": "f42b386a3fc8d299751da3ee01e44983dc5de08e08d1978ff041bffd983b175d",
+          "profile": "stronger",
+          "recipe_hash": "7b9e3b33d12b0d81429b3f711cdf53ea748c940b26389d9e818296cb55160eb3",
+          "script_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/stronger/baseline/synthesis.ys",
+          "script_sha256": "95f2143018feb72511c56ff7e16706264a9ffc42696e8629f84ff434d848383a",
+          "stat_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/stronger/baseline/stat.json",
+          "stat_sha256": "9d3ebd0bf3fa76e9ff7fb15c303e52c8fcc6a53d62e5fbebe770f187af28d30e",
+          "warnings": {
+            "count": 2,
+            "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+          },
+          "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+          "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+          "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+        },
+        "role": "baseline",
+        "source_hashes": {
+          "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998"
+        },
+        "status": "passed",
+        "top": "g03_mixed_safe_add"
+      },
+      "candidate": {
+        "constraints": {
+          "driving_cell": "BUF_X1",
+          "output_load_ff": 10.0,
+          "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+        },
+        "design_hash": "723689dd3871f7de29e4064b0b1029b2286017d46baaa8ac4302a6a5632f96cd",
+        "metrics": {
+          "abc_area_combinational": 344.2,
+          "abc_gate_count": 263,
+          "area_combinational": 344.204,
+          "area_sequential": 0.0,
+          "area_total": 344.204,
+          "cell_count": 263,
+          "cells_by_type": {
+            "AND2_X1": 20,
+            "AND3_X1": 9,
+            "AOI211_X2": 1,
+            "AOI21_X1": 23,
+            "AOI21_X2": 5,
+            "AOI21_X4": 1,
+            "AOI22_X1": 32,
+            "BUF_X1": 2,
+            "CLKBUF_X1": 2,
+            "INV_X1": 4,
+            "NAND2_X1": 37,
+            "NAND3_X1": 2,
+            "NOR2_X1": 23,
+            "NOR3_X1": 4,
+            "NOR3_X4": 1,
+            "OAI21_X1": 5,
+            "OAI21_X2": 2,
+            "OAI21_X4": 4,
+            "OAI33_X1": 1,
+            "OR2_X1": 4,
+            "OR3_X1": 5,
+            "XNOR2_X1": 41,
+            "XNOR2_X2": 5,
+            "XOR2_X1": 26,
+            "XOR2_X2": 4
+          },
+          "critical_delay_ps": 729.25,
+          "raw_cell_count": 263
+        },
+        "netlist": {
+          "cell_signature": "4d2fc01debe105cedf2de721e86408ba5f5c717f94872ef9ad0953b2df605d69",
+          "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/stronger/candidate/mapped.v",
+          "sha256": "20171c8579ec12fb6a0818c363a172ec23272e40c2724d7fa65443dcdbbccd2c"
+        },
+        "provenance": {
+          "abc": {
+            "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+            "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+            "provider": "Yosys abc pass with explicit -exe",
+            "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+            "transcript_sha256": "1b741634f3c804a6fedc2e5b6fe4c964eb046c57105951dfe211e124f23198f9",
+            "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+          },
+          "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+          "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+          "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+          "command": [
+            "yosys",
+            "-Q",
+            "-s",
+            "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/stronger/candidate/synthesis.ys"
+          ],
+          "constraints_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/stronger/abc.constr",
+          "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+          "liberty_name": "Nangate45 typical",
+          "liberty_path": "/Users/peter/Desktop/CAD Stuff/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+          "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+          "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+          "log_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/stronger/candidate/synthesis.log",
+          "log_sha256": "59453ab36eeafaabd9a0002f6499295fc949a8533cce66e42e0e4bc1cfe036e1",
+          "profile": "stronger",
+          "recipe_hash": "7b9e3b33d12b0d81429b3f711cdf53ea748c940b26389d9e818296cb55160eb3",
+          "script_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/stronger/candidate/synthesis.ys",
+          "script_sha256": "1a8ee4b7b1fa9ef4571cd58bd207b32cf170edf9025bff27af03bd1f853ed441",
+          "stat_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement/measurements/b31b1ab3f92a2a84644ca64b/stronger/candidate/stat.json",
+          "stat_sha256": "9d3ebd0bf3fa76e9ff7fb15c303e52c8fcc6a53d62e5fbebe770f187af28d30e",
+          "warnings": {
+            "count": 2,
+            "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+          },
+          "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+          "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+          "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+        },
+        "role": "candidate",
+        "source_hashes": {
+          "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/design/sources/0000/g03_mixed_safe_add.sv": "9992eeae425edb8dcb3a525dc68579684243d640b8ef06fd708b0ddd1b0336c1"
+        },
+        "status": "passed",
+        "top": "g03_mixed_safe_add"
+      },
+      "classification": "neutral",
+      "comparison": {
+        "area_total": {
+          "baseline": 344.204,
+          "candidate": 344.204,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        },
+        "cell_count": {
+          "baseline": 263.0,
+          "candidate": 263.0,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        },
+        "critical_delay_ps": {
+          "baseline": 729.25,
+          "candidate": 729.25,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        }
+      },
+      "recipe": {
+        "abc_provider": "explicit adjacent yosys-abc",
+        "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+        "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+        "driving_cell": "BUF_X1",
+        "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+        "frontend": "read_verilog -sv",
+        "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+        "output_load_ff": 10.0,
+        "passes": [
+          "hierarchy -check",
+          "synth -flatten -noabc -run begin:fine",
+          "share -aggressive",
+          "opt -full",
+          "clean",
+          "synth -flatten -noabc -run fine:check",
+          "dfflibmap",
+          "abc -exe -liberty -constr",
+          "clean",
+          "check -assert"
+        ],
+        "profile": "stronger",
+        "recipe_hash": "7b9e3b33d12b0d81429b3f711cdf53ea748c940b26389d9e818296cb55160eb3",
+        "script_template": [
+          "read_liberty -lib <LIBERTY>",
+          "read_verilog -sv <INCLUDE_DIRS> <DEFINES> <SOURCES>",
+          "hierarchy -check -top g03_mixed_safe_add",
+          "synth -top g03_mixed_safe_add -flatten -noabc -run begin:fine",
+          "share -aggressive",
+          "opt -full",
+          "clean",
+          "synth -top g03_mixed_safe_add -flatten -noabc -run fine:check",
+          "dfflibmap -liberty <LIBERTY>",
+          "abc -exe <ABC> -liberty <LIBERTY> -constr <CONSTRAINTS>",
+          "clean",
+          "check -assert",
+          "stat -top g03_mixed_safe_add -liberty <LIBERTY> -json",
+          "write_verilog -noattr -noexpr <NETLIST>"
+        ],
+        "script_template_sha256": "a0a0119649022b488b15b211040d19bd610cdc81d8c42d8098045bd18c0ea26e",
+        "top": "g03_mixed_safe_add",
+        "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+        "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+      }
+    }
+  },
+  "objective": "balanced",
+  "parents": {
+    "verification_semantic_hash": "49cf61535a843127b7f6db0c8db40b5704fa421bd9ff888ef6306011680e738e"
+  },
+  "run_id": "mvp-0210319ddd68c5e50407",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "c4570ddb2c2f7b53f8c9fa2e992bfa6eac54d9d0b4b3e1dcaf508f9864e5f4ef",
+  "source_integrity": {
+    "baseline": {
+      "mismatches": [],
+      "ok": true
+    },
+    "candidate": {
+      "mismatches": [],
+      "ok": true
+    }
+  },
+  "status": "completed"
+}

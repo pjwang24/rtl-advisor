@@ -10,6 +10,26 @@ Plugin counterpart: `0.2.0-alpha.1`. Agent protocol:
 
 ### Added
 
+- Agent-facing `corpus validate`, `corpus register`, `corpus qualify`, and
+  `corpus coverage` operations with four versioned schemas, semantic-hash and
+  exit-code validation in the shared plugin runner, and a new
+  `manage-rtl-corpus` skill.
+- Lineage-aware coverage that treats independent design lineage as the primary
+  population while reporting references, parameter configurations, and
+  implementation variants separately, plus explicit qualification, tier, and
+  category gaps.
+
+- A versioned transformation registry for deterministic rewrites, curated
+  upstream alternatives, future reviewed Codex variants, and declared P1/P2/P3
+  proof contracts.
+- A frozen OpenTitan `prim_arbiter_ppc`/`prim_arbiter_tree` evidence study at
+  N=1, 4, 8, and 16 with strengthened P2 assumptions and reset, state, grant,
+  and data-selection negative controls.
+- A pinned Nangate45 OpenROAD M2 cross-check for N=8 and N=16 using immutable
+  ORFS snapshots, a 10 ns constraint, fixed die, and 35% target utilization.
+- Complete clean-repeat and final-result records that separate synthesis
+  handling, guardrail regression, confirmed improvement, and cross-flow
+  disagreement.
 - A frozen 12-reference Tier A tranche spanning OpenTitan, PULP common_cells,
   and verilog-axis, with exact source/archive/license hashes and no
   candidate-PPA-driven replacement.
@@ -47,6 +67,11 @@ Plugin counterpart: `0.2.0-alpha.1`. Agent protocol:
   HTML reports; Codex orchestration; and a read-only local run dashboard.
 - Plain-language dashboard presentation of hash-linked synthesis failures,
   including the recorded error code and message.
+- Read-only PPA exploration with profile, objective, outcome, transformation,
+  and text filters; area-versus-delay plots; candidate-outcome composition;
+  M0/M1 reproducibility facts; exact measurement rows; and CSV export.
+- A bounded analytics API that prefers the current hash-linked family-study and
+  formal-safety aggregates, with verified Agent V2 measurements as a fallback.
 - Complete run-level counts and explicit incomplete-evidence reporting so a
   favorable candidate cannot hide a missing, failed, or regressed site.
 - `PilotManifest v1`, a frozen feasibility lock, fast Python/package CI, and a
@@ -66,6 +91,13 @@ Plugin counterpart: `0.2.0-alpha.1`. Agent protocol:
 
 ### Evidence
 
+- All four frozen arbiter configurations pass P2 twice, and all four incorrect
+  controls produce counterexamples.
+- M0/M1 normalized metrics and netlist hashes reproduce exactly. N=8 improves
+  timing by 21.20% and area by 2.38%; N=16 improves Yosys/ABC timing by 27.43%
+  but is not recommended because M2 is neutral for timing.
+- M2 reproduces with 0% area/delay drift. N=8 is 29.35% faster and 1.69%
+  smaller in the pinned OpenROAD flow; N=16 is 0.90% slower and 6.60% smaller.
 - The first corpus tranche qualifies 8/12 Tier A references, including seven
   stateful modules and two documented equivalent pairs; the other four remain
   explicit blockers.
@@ -86,5 +118,5 @@ Plugin counterpart: `0.2.0-alpha.1`. Agent protocol:
 - A release tag and project license, pending owner confirmation.
 - Two qualifying frozen open-source pilot modules.
 - EQY, block/subsystem proof, technology-netlist equivalence, target-flow
-  validation, live ML decisions, OpenROAD gating, MCP, proprietary RTL, and
-  SoC-scale use.
+  validation, live ML decisions, broad OpenROAD release gating, MCP,
+  proprietary RTL, and SoC-scale use.

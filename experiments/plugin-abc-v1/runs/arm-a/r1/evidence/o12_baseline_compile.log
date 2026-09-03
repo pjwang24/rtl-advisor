@@ -1,0 +1,1124 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v; hierarchy -check -top axis_pipeline_fifo; synth -top axis_pipeline_fifo; check -assert; stat' --
+
+1. Executing Verilog-2005 frontend: corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v
+Parsing SystemVerilog input from `corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v' to AST representation.
+Generating RTLIL representation for module `\axis_pipeline_fifo'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \axis_pipeline_fifo
+
+2.2. Analyzing design hierarchy..
+Top module:  \axis_pipeline_fifo
+Removed 0 unused modules.
+
+3. Executing SYNTH pass.
+
+3.1. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1.1. Analyzing design hierarchy..
+Top module:  \axis_pipeline_fifo
+
+3.1.2. Analyzing design hierarchy..
+Top module:  \axis_pipeline_fifo
+Removed 0 unused modules.
+
+3.2. Executing PROC pass (convert processes to netlists).
+
+3.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13 in module axis_pipeline_fifo.
+Removed a total of 0 dead cases.
+
+3.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 81 assignments to connections.
+
+3.2.4. Executing PROC_INIT pass (extract init attributes).
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:184$118'.
+  Set init value: \fifo.out_fifo_half_full_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:183$117'.
+  Set init value: \fifo.out_fifo_rd_ptr_reg = 5'00000
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:182$116'.
+  Set init value: \fifo.out_fifo_wr_ptr_reg = 5'00000
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:180$115'.
+  Set init value: \fifo.m_axis_tuser_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:179$114'.
+  Set init value: \fifo.m_axis_tdest_reg = 8'00000000
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:178$113'.
+  Set init value: \fifo.m_axis_tid_reg = 8'00000000
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:177$112'.
+  Set init value: \fifo.m_axis_tlast_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:176$111'.
+  Set init value: \fifo.m_axis_tvalid_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:175$110'.
+  Set init value: \fifo.m_axis_tkeep_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:174$109'.
+  Set init value: \fifo.m_axis_tdata_reg = 8'00000000
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:120$108'.
+  Set init value: \stage[1].axis_tuser_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:118$107'.
+  Set init value: \stage[1].axis_tdest_reg = 8'00000000
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:116$106'.
+  Set init value: \stage[1].axis_tid_reg = 8'00000000
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:114$105'.
+  Set init value: \stage[1].axis_tlast_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:112$104'.
+  Set init value: \stage[1].axis_tready_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:110$103'.
+  Set init value: \stage[1].axis_tvalid_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:108$102'.
+  Set init value: \stage[1].axis_tkeep_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:106$101'.
+  Set init value: \stage[1].axis_tdata_reg = 8'00000000
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:120$100'.
+  Set init value: \stage[0].axis_tuser_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:118$99'.
+  Set init value: \stage[0].axis_tdest_reg = 8'00000000
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:116$98'.
+  Set init value: \stage[0].axis_tid_reg = 8'00000000
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:114$97'.
+  Set init value: \stage[0].axis_tlast_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:112$96'.
+  Set init value: \stage[0].axis_tready_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:110$95'.
+  Set init value: \stage[0].axis_tvalid_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:108$94'.
+  Set init value: \stage[0].axis_tkeep_reg = 1'0
+Found init rule in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:106$93'.
+  Set init value: \stage[0].axis_tdata_reg = 8'00000000
+
+3.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~5 debug messages>
+
+3.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:184$118'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:183$117'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:182$116'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:180$115'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:179$114'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:178$113'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:177$112'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:176$111'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:175$110'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:174$109'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:120$108'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:118$107'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:116$106'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:114$105'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:112$104'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:110$103'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:108$102'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:106$101'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:120$100'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:118$99'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:116$98'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:114$97'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:112$96'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:110$95'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:108$94'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:106$93'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:171$92'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:159$91'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:158$90'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:157$89'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:156$88'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:155$86'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:154$85'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:153$84'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:130$83'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:128$82'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:127$81'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:126$80'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:125$79'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:124$78'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:123$77'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:122$76'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:130$75'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:128$74'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:127$73'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:126$72'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:125$71'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:124$70'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:123$69'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:122$68'.
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+     1/27: $1$memwr$\fifo.out_fifo_tuser$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:223$6_EN[0:0]$55
+     2/27: $1$memwr$\fifo.out_fifo_tuser$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:223$6_DATA[0:0]$54
+     3/27: $1$memwr$\fifo.out_fifo_tuser$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:223$6_ADDR[3:0]$53
+     4/27: $1$memwr$\fifo.out_fifo_tdest$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:222$5_EN[7:0]$52
+     5/27: $1$memwr$\fifo.out_fifo_tdest$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:222$5_DATA[7:0]$51
+     6/27: $1$memwr$\fifo.out_fifo_tdest$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:222$5_ADDR[3:0]$50
+     7/27: $1$memwr$\fifo.out_fifo_tid$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:221$4_EN[7:0]$49
+     8/27: $1$memwr$\fifo.out_fifo_tid$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:221$4_DATA[7:0]$48
+     9/27: $1$memwr$\fifo.out_fifo_tid$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:221$4_ADDR[3:0]$47
+    10/27: $1$memwr$\fifo.out_fifo_tlast$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:220$3_EN[0:0]$46
+    11/27: $1$memwr$\fifo.out_fifo_tlast$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:220$3_DATA[0:0]$45
+    12/27: $1$memwr$\fifo.out_fifo_tlast$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:220$3_ADDR[3:0]$44
+    13/27: $1$memwr$\fifo.out_fifo_tkeep$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:219$2_EN[0:0]$43
+    14/27: $1$memwr$\fifo.out_fifo_tkeep$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:219$2_DATA[0:0]$42
+    15/27: $1$memwr$\fifo.out_fifo_tkeep$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:219$2_ADDR[3:0]$41
+    16/27: $1$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_EN[7:0]$40
+    17/27: $1$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_DATA[7:0]$39
+    18/27: $1$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_ADDR[3:0]$38
+    19/27: $0\fifo.m_axis_tvalid_reg[0:0]
+    20/27: $0\fifo.out_fifo_rd_ptr_reg[4:0]
+    21/27: $0\fifo.out_fifo_wr_ptr_reg[4:0]
+    22/27: $0\fifo.m_axis_tuser_reg[0:0]
+    23/27: $0\fifo.m_axis_tdest_reg[7:0]
+    24/27: $0\fifo.m_axis_tid_reg[7:0]
+    25/27: $0\fifo.m_axis_tlast_reg[0:0]
+    26/27: $0\fifo.m_axis_tkeep_reg[0:0]
+    27/27: $0\fifo.m_axis_tdata_reg[7:0]
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$8'.
+     1/2: $0\stage[1].axis_tready_reg[0:0]
+     2/2: $0\stage[1].axis_tvalid_reg[0:0]
+Creating decoders for process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$7'.
+     1/2: $0\stage[0].axis_tready_reg[0:0]
+     2/2: $0\stage[0].axis_tvalid_reg[0:0]
+
+3.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tready_pipe[2]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:171$92'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tuser_pipe[0]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:159$91'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tdest_pipe[0]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:158$90'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tid_pipe[0]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:157$89'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tlast_pipe[0]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:156$88'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tvalid_pipe[0]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:155$86'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tkeep_pipe[0]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:154$85'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tdata_pipe[0]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:153$84'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tready_pipe[1]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:130$83'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tuser_pipe[2]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:128$82'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tdest_pipe[2]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:127$81'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tid_pipe[2]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:126$80'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tlast_pipe[2]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:125$79'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tvalid_pipe[2]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:124$78'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tkeep_pipe[2]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:123$77'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tdata_pipe[2]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:122$76'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tready_pipe[0]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:130$75'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tuser_pipe[1]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:128$74'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tdest_pipe[1]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:127$73'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tid_pipe[1]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:126$72'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tlast_pipe[1]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:125$71'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tvalid_pipe[1]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:124$70'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tkeep_pipe[1]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:123$69'.
+No latch inferred for signal `\axis_pipeline_fifo.\axis_tdata_pipe[1]' from process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:122$68'.
+
+3.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\axis_pipeline_fifo.\fifo.m_axis_tdata_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$206' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\fifo.m_axis_tkeep_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$207' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\fifo.m_axis_tvalid_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$208' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\fifo.m_axis_tlast_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$209' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\fifo.m_axis_tid_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$210' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\fifo.m_axis_tdest_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$211' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\fifo.m_axis_tuser_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$212' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\fifo.out_fifo_wr_ptr_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$213' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\fifo.out_fifo_rd_ptr_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$214' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\fifo.out_fifo_half_full_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$215' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_ADDR' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$216' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_DATA' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$217' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_EN' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$218' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tkeep$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:219$2_ADDR' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$219' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tkeep$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:219$2_DATA' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$220' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tkeep$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:219$2_EN' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$221' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tlast$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:220$3_ADDR' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$222' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tlast$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:220$3_DATA' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$223' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tlast$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:220$3_EN' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$224' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tid$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:221$4_ADDR' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$225' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tid$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:221$4_DATA' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$226' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tid$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:221$4_EN' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$227' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tdest$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:222$5_ADDR' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$228' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tdest$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:222$5_DATA' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$229' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tdest$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:222$5_EN' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$230' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tuser$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:223$6_ADDR' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$231' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tuser$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:223$6_DATA' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$232' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.$memwr$\fifo.out_fifo_tuser$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:223$6_EN' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+  created $dff cell `$procdff$233' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[1].axis_tdata_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$8'.
+  created $dff cell `$procdff$234' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[1].axis_tkeep_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$8'.
+  created $dff cell `$procdff$235' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[1].axis_tvalid_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$8'.
+  created $dff cell `$procdff$236' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[1].axis_tready_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$8'.
+  created $dff cell `$procdff$237' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[1].axis_tlast_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$8'.
+  created $dff cell `$procdff$238' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[1].axis_tid_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$8'.
+  created $dff cell `$procdff$239' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[1].axis_tdest_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$8'.
+  created $dff cell `$procdff$240' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[1].axis_tuser_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$8'.
+  created $dff cell `$procdff$241' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[0].axis_tdata_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$7'.
+  created $dff cell `$procdff$242' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[0].axis_tkeep_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$7'.
+  created $dff cell `$procdff$243' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[0].axis_tvalid_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$7'.
+  created $dff cell `$procdff$244' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[0].axis_tready_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$7'.
+  created $dff cell `$procdff$245' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[0].axis_tlast_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$7'.
+  created $dff cell `$procdff$246' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[0].axis_tid_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$7'.
+  created $dff cell `$procdff$247' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[0].axis_tdest_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$7'.
+  created $dff cell `$procdff$248' with positive edge clock.
+Creating register for signal `\axis_pipeline_fifo.\stage[0].axis_tuser_reg' using process `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$7'.
+  created $dff cell `$procdff$249' with positive edge clock.
+
+3.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:184$118'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:183$117'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:182$116'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:180$115'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:179$114'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:178$113'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:177$112'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:176$111'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:175$110'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:174$109'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:120$108'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:118$107'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:116$106'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:114$105'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:112$104'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:110$103'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:108$102'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:106$101'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:120$100'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:118$99'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:116$98'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:114$97'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:112$96'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:110$95'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:108$94'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:106$93'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:171$92'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:159$91'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:158$90'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:157$89'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:156$88'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:155$86'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:154$85'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:153$84'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:130$83'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:128$82'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:127$81'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:126$80'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:125$79'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:124$78'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:123$77'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:122$76'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:130$75'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:128$74'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:127$73'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:126$72'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:125$71'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:124$70'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:123$69'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:122$68'.
+Found and cleaned up 3 empty switches in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212$13'.
+Found and cleaned up 1 empty switch in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$8'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$8'.
+Found and cleaned up 1 empty switch in `\axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$7'.
+Removing empty process `axis_pipeline_fifo.$proc$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132$7'.
+Cleaned up 5 empty switches.
+
+3.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+<suppressed ~1 debug messages>
+
+3.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+
+3.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+Removed 45 unused cells and 202 unused wires.
+<suppressed ~67 debug messages>
+
+3.5. Executing CHECK pass (checking for obvious problems).
+Checking module axis_pipeline_fifo...
+Found and reported 0 problems.
+
+3.6. Executing OPT pass (performing simple optimizations).
+
+3.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+
+3.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 62 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Removed a total of 0 cells.
+
+3.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axis_pipeline_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~41 debug messages>
+
+3.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axis_pipeline_fifo.
+    Consolidated identical input bits for $mux cell $procmux$165:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_EN[7:0]$16
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_EN[7:0]$16 [0]
+      New connections: $0$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_EN[7:0]$16 [7:1] = { $0$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_EN[7:0]$16 [0] $0$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_EN[7:0]$16 [0] $0$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_EN[7:0]$16 [0] $0$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_EN[7:0]$16 [0] $0$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_EN[7:0]$16 [0] $0$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_EN[7:0]$16 [0] $0$memwr$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:218$1_EN[7:0]$16 [0] }
+  Optimizing cells in module \axis_pipeline_fifo.
+Performed a total of 1 changes.
+
+3.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 62 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Computing hashes of 58 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+<suppressed ~12 debug messages>
+Removed a total of 4 cells.
+
+3.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+3.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+
+3.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axis_pipeline_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~33 debug messages>
+
+3.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axis_pipeline_fifo.
+Performed a total of 0 changes.
+
+3.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 58 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Removed a total of 0 cells.
+
+3.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+
+3.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+
+3.6.16. Finished fast OPT passes. (There is nothing left to do.)
+
+3.7. Executing FSM pass (extract and optimize FSM).
+
+3.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+3.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+3.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+3.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+
+3.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+3.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+3.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+3.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+3.8. Executing OPT pass (performing simple optimizations).
+
+3.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+
+3.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 58 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Removed a total of 0 cells.
+
+3.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axis_pipeline_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~33 debug messages>
+
+3.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axis_pipeline_fifo.
+Performed a total of 0 changes.
+
+3.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 58 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Removed a total of 0 cells.
+
+3.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$237 ($dff) from module axis_pipeline_fifo (D = \axis_tready_pipe[2], Q = \stage[1].axis_tready_reg, rval = 1'0).
+Adding SRST signal on $procdff$208 ($dff) from module axis_pipeline_fifo (D = $procmux$173_Y, Q = \fifo.m_axis_tvalid_reg, rval = 1'0).
+Adding EN signal on $procdff$212 ($dff) from module axis_pipeline_fifo (D = $memrd$\fifo.out_fifo_tuser$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:234$66_DATA, Q = \fifo.m_axis_tuser_reg).
+Adding SRST signal on $procdff$245 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tready_reg, Q = \stage[0].axis_tready_reg, rval = 1'0).
+Adding SRST signal on $procdff$244 ($dff) from module axis_pipeline_fifo (D = \axis_tvalid_pipe[0], Q = \stage[0].axis_tvalid_reg, rval = 1'0).
+Adding EN signal on $procdff$209 ($dff) from module axis_pipeline_fifo (D = $memrd$\fifo.out_fifo_tlast$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:231$63_DATA, Q = \fifo.m_axis_tlast_reg).
+Adding SRST signal on $procdff$236 ($dff) from module axis_pipeline_fifo (D = \stage[0].axis_tvalid_reg, Q = \stage[1].axis_tvalid_reg, rval = 1'0).
+Adding SRST signal on $procdff$213 ($dff) from module axis_pipeline_fifo (D = $procmux$182_Y, Q = \fifo.out_fifo_wr_ptr_reg, rval = 5'00000).
+Adding EN signal on $auto$ff.cc:337:slice$265 ($sdff) from module axis_pipeline_fifo (D = $add$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:224$56_Y [4:0], Q = \fifo.out_fifo_wr_ptr_reg).
+Adding SRST signal on $procdff$214 ($dff) from module axis_pipeline_fifo (D = $procmux$177_Y, Q = \fifo.out_fifo_rd_ptr_reg, rval = 5'00000).
+Adding EN signal on $auto$ff.cc:337:slice$267 ($sdff) from module axis_pipeline_fifo (D = $add$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:235$67_Y [4:0], Q = \fifo.out_fifo_rd_ptr_reg).
+Adding EN signal on $procdff$206 ($dff) from module axis_pipeline_fifo (D = $memrd$\fifo.out_fifo_tdata$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:228$61_DATA, Q = \fifo.m_axis_tdata_reg).
+
+3.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+Removed 12 unused cells and 12 unused wires.
+<suppressed ~13 debug messages>
+
+3.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+
+3.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axis_pipeline_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~12 debug messages>
+
+3.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axis_pipeline_fifo.
+Performed a total of 0 changes.
+
+3.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 46 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Removed a total of 0 cells.
+
+3.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+
+3.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+
+3.8.16. Finished fast OPT passes. (There is nothing left to do.)
+
+3.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 27 bits (of 32) from port A of cell axis_pipeline_fifo.$ge$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:215$35 ($ge).
+Removed top 28 bits (of 32) from port B of cell axis_pipeline_fifo.$ge$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:215$35 ($ge).
+Removed top 31 bits (of 32) from port B of cell axis_pipeline_fifo.$add$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:224$56 ($add).
+Removed top 27 bits (of 32) from port Y of cell axis_pipeline_fifo.$add$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:224$56 ($add).
+Removed top 31 bits (of 32) from port B of cell axis_pipeline_fifo.$add$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:235$67 ($add).
+Removed top 27 bits (of 32) from port Y of cell axis_pipeline_fifo.$add$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:235$67 ($add).
+Removed top 27 bits (of 32) from wire axis_pipeline_fifo.$add$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:224$56_Y.
+Removed top 27 bits (of 32) from wire axis_pipeline_fifo.$add$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:235$67_Y.
+
+3.10. Executing PEEPOPT pass (run peephole optimizers).
+
+3.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+3.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module axis_pipeline_fifo:
+  creating $macc model for $add$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:235$67 ($add).
+  creating $macc model for $add$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:224$56 ($add).
+  creating $macc model for $sub$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:215$34 ($sub).
+  creating $alu model for $macc $sub$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:215$34.
+  creating $alu model for $macc $add$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:224$56.
+  creating $alu model for $macc $add$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:235$67.
+  creating $alu model for $ge$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:215$35 ($ge): new $alu
+  creating $alu model for $eq$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:187$11 ($eq): merged with $sub$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:215$34.
+  creating $alu cell for $ge$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:215$35: $auto$alumacc.cc:512:replace_alu$273
+  creating $alu cell for $add$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:235$67: $auto$alumacc.cc:512:replace_alu$286
+  creating $alu cell for $add$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:224$56: $auto$alumacc.cc:512:replace_alu$289
+  creating $alu cell for $sub$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:215$34, $eq$corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:187$11: $auto$alumacc.cc:512:replace_alu$292
+  created 4 $alu and 0 $macc cells.
+
+3.13. Executing SHARE pass (SAT-based resource sharing).
+
+3.14. Executing OPT pass (performing simple optimizations).
+
+3.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+
+3.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 51 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Removed a total of 0 cells.
+
+3.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axis_pipeline_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~12 debug messages>
+
+3.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axis_pipeline_fifo.
+Performed a total of 0 changes.
+
+3.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 51 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Removed a total of 0 cells.
+
+3.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+3.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+
+3.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axis_pipeline_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~12 debug messages>
+
+3.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axis_pipeline_fifo.
+Performed a total of 0 changes.
+
+3.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 51 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Removed a total of 0 cells.
+
+3.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+
+3.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+
+3.14.16. Finished fast OPT passes. (There is nothing left to do.)
+
+3.15. Executing MEMORY pass.
+
+3.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+3.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+3.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+  Analyzing axis_pipeline_fifo.fifo.out_fifo_tlast write port 0.
+  Analyzing axis_pipeline_fifo.fifo.out_fifo_tuser write port 0.
+  Analyzing axis_pipeline_fifo.fifo.out_fifo_tdata write port 0.
+
+3.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+3.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+Checking read port `\fifo.out_fifo_tlast'[0] in module `\axis_pipeline_fifo': merging output FF to cell.
+    Write port 0: don't care on collision.
+Checking read port `\fifo.out_fifo_tuser'[0] in module `\axis_pipeline_fifo': merging output FF to cell.
+    Write port 0: don't care on collision.
+Checking read port `\fifo.out_fifo_tdata'[0] in module `\axis_pipeline_fifo': merging output FF to cell.
+    Write port 0: don't care on collision.
+
+3.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+Removed 3 unused cells and 13 unused wires.
+<suppressed ~4 debug messages>
+
+3.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+3.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+3.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+
+3.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+3.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+
+3.17. Executing OPT pass (performing simple optimizations).
+
+3.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+<suppressed ~7 debug messages>
+
+3.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 43 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Removed a total of 0 cells.
+
+3.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+Removed 0 unused cells and 8 unused wires.
+<suppressed ~1 debug messages>
+
+3.17.5. Finished fast OPT passes.
+
+3.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+Mapping memory \fifo.out_fifo_tuser in module \axis_pipeline_fifo:
+  created 16 $dff cells and 0 static cells of width 1.
+Extracted data FF from read port 0 of axis_pipeline_fifo.fifo.out_fifo_tuser: $\fifo.out_fifo_tuser$rdreg[0]
+  read interface: 1 $dff and 15 $mux cells.
+  write interface: 16 write mux blocks.
+Mapping memory \fifo.out_fifo_tlast in module \axis_pipeline_fifo:
+  created 16 $dff cells and 0 static cells of width 1.
+Extracted data FF from read port 0 of axis_pipeline_fifo.fifo.out_fifo_tlast: $\fifo.out_fifo_tlast$rdreg[0]
+  read interface: 1 $dff and 15 $mux cells.
+  write interface: 16 write mux blocks.
+Mapping memory \fifo.out_fifo_tdata in module \axis_pipeline_fifo:
+  created 16 $dff cells and 0 static cells of width 8.
+Extracted data FF from read port 0 of axis_pipeline_fifo.fifo.out_fifo_tdata: $\fifo.out_fifo_tdata$rdreg[0]
+  read interface: 1 $dff and 15 $mux cells.
+  write interface: 16 write mux blocks.
+
+3.19. Executing OPT pass (performing simple optimizations).
+
+3.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+<suppressed ~11 debug messages>
+
+3.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 266 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Computing hashes of 232 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Computing hashes of 230 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+<suppressed ~108 debug messages>
+Removed a total of 36 cells.
+
+3.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axis_pipeline_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~144 debug messages>
+
+3.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axis_pipeline_fifo.
+Performed a total of 0 changes.
+
+3.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 230 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Removed a total of 0 cells.
+
+3.19.6. Executing OPT_SHARE pass.
+
+3.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+Removed 2 unused cells and 141 unused wires.
+<suppressed ~3 debug messages>
+
+3.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+
+3.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axis_pipeline_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~144 debug messages>
+
+3.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axis_pipeline_fifo.
+Performed a total of 0 changes.
+
+3.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 228 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Removed a total of 0 cells.
+
+3.19.14. Executing OPT_SHARE pass.
+
+3.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $memory\fifo.out_fifo_tuser[0]$316 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[0]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[1]$318 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[1]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[2]$320 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[2]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[3]$322 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[3]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[4]$324 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[4]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[5]$326 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[5]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[6]$328 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[6]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[7]$330 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[7]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[8]$332 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[8]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[9]$334 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[9]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[10]$336 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[10]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[11]$338 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[11]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[12]$340 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[12]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[13]$342 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[13]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[14]$344 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[14]).
+Adding EN signal on $memory\fifo.out_fifo_tuser[15]$346 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tuser_reg, Q = \fifo.out_fifo_tuser[15]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[0]$524 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[0]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[1]$526 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[1]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[2]$528 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[2]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[3]$530 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[3]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[4]$532 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[4]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[5]$534 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[5]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[6]$536 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[6]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[7]$538 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[7]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[8]$540 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[8]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[9]$542 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[9]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[10]$544 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[10]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[11]$546 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[11]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[12]$548 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[12]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[13]$550 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[13]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[14]$552 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[14]).
+Adding EN signal on $memory\fifo.out_fifo_tlast[15]$554 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tlast_reg, Q = \fifo.out_fifo_tlast[15]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[0]$668 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[0]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[1]$670 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[1]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[2]$672 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[2]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[3]$674 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[3]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[4]$676 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[4]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[5]$678 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[5]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[6]$680 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[6]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[7]$682 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[7]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[8]$684 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[8]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[9]$686 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[9]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[10]$688 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[10]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[11]$690 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[11]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[12]$692 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[12]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[13]$694 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[13]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[14]$696 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[14]).
+Adding EN signal on $memory\fifo.out_fifo_tdata[15]$698 ($dff) from module axis_pipeline_fifo (D = \stage[1].axis_tdata_reg, Q = \fifo.out_fifo_tdata[15]).
+
+3.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+Removed 48 unused cells and 48 unused wires.
+<suppressed ~49 debug messages>
+
+3.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+
+3.19.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.19.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axis_pipeline_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~48 debug messages>
+
+3.19.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axis_pipeline_fifo.
+Performed a total of 0 changes.
+
+3.19.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 180 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Removed a total of 0 cells.
+
+3.19.22. Executing OPT_SHARE pass.
+
+3.19.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.19.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+
+3.19.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+
+3.19.26. Finished fast OPT passes. (There is nothing left to do.)
+
+3.20. Executing TECHMAP pass (map to technology primitives).
+
+3.20.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+3.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $dffe.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$b18e16801adf491a64caa0542270798e5d4ac6b6\_90_alu for cells of type $alu.
+Using template $paramod$672a140277c71df8314410f22acc08d55222c3c7\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod$ba698a254f9a5947e85cbe7beae6b161eefc5386\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $sdff.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $dff.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000101 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000101 for cells of type $lcu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000010 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~648 debug messages>
+
+3.21. Executing OPT pass (performing simple optimizations).
+
+3.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+<suppressed ~123 debug messages>
+
+3.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 502 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Computing hashes of 487 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Computing hashes of 485 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+<suppressed ~51 debug messages>
+Removed a total of 17 cells.
+
+3.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+Removed 10 unused cells and 187 unused wires.
+<suppressed ~12 debug messages>
+
+3.21.5. Finished fast OPT passes.
+
+3.22. Executing ABC pass (technology mapping using ABC).
+
+3.22.1. Extracting gate netlist of module `\axis_pipeline_fifo' to `<abc-temp-dir>/input.blif'..
+
+3.22.1.1. Executed ABC.
+Extracted 269 gates and 445 wires to a netlist network with 176 inputs and 42 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        5
+ABC RESULTS:            ANDNOT cells:       34
+ABC RESULTS:               MUX cells:      150
+ABC RESULTS:              NAND cells:        5
+ABC RESULTS:               NOR cells:        2
+ABC RESULTS:               NOT cells:        6
+ABC RESULTS:                OR cells:       20
+ABC RESULTS:             ORNOT cells:       11
+ABC RESULTS:              XNOR cells:        6
+ABC RESULTS:               XOR cells:       14
+ABC RESULTS:        internal signals:      227
+ABC RESULTS:           input signals:      176
+ABC RESULTS:          output signals:       42
+Removing temp directory.
+Removing global temp directory.
+
+3.23. Executing OPT pass (performing simple optimizations).
+
+3.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axis_pipeline_fifo.
+<suppressed ~70 debug messages>
+
+3.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axis_pipeline_fifo'.
+Computing hashes of 459 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+Computing hashes of 458 cells of `\axis_pipeline_fifo'.
+Finding duplicate cells in `\axis_pipeline_fifo'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+3.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axis_pipeline_fifo..
+Removed 2 unused cells and 324 unused wires.
+<suppressed ~4 debug messages>
+
+3.23.5. Finished fast OPT passes.
+
+3.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `axis_pipeline_fifo'. Setting top module to axis_pipeline_fifo.
+
+3.24.1. Analyzing design hierarchy..
+Top module:  \axis_pipeline_fifo
+
+3.24.2. Analyzing design hierarchy..
+Top module:  \axis_pipeline_fifo
+Removed 0 unused modules.
+
+3.25. Printing statistics.
+
+=== axis_pipeline_fifo ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      341 wires
+      596 wire bits
+      106 public wires
+      331 public wire bits
+       18 ports
+       60 port bits
+      456 cells
+       34   $_ANDNOT_
+        5   $_AND_
+      170   $_DFFE_PP_
+       21   $_DFF_P_
+      150   $_MUX_
+        5   $_NAND_
+        2   $_NOR_
+        4   $_NOT_
+       11   $_ORNOT_
+       20   $_OR_
+       10   $_SDFFE_PP0P_
+        5   $_SDFF_PP0_
+        6   $_XNOR_
+       13   $_XOR_
+
+3.26. Executing CHECK pass (checking for obvious problems).
+Checking module axis_pipeline_fifo...
+Found and reported 0 problems.
+
+4. Executing CHECK pass (checking for obvious problems).
+Checking module axis_pipeline_fifo...
+Found and reported 0 problems.
+
+5. Printing statistics.
+
+=== axis_pipeline_fifo ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      341 wires
+      596 wire bits
+      106 public wires
+      331 public wire bits
+       18 ports
+       60 port bits
+      456 cells
+       34   $_ANDNOT_
+        5   $_AND_
+      170   $_DFFE_PP_
+       21   $_DFF_P_
+      150   $_MUX_
+        5   $_NAND_
+        2   $_NOR_
+        4   $_NOT_
+       11   $_ORNOT_
+       20   $_OR_
+       10   $_SDFFE_PP0P_
+        5   $_SDFF_PP0_
+        6   $_XNOR_
+       13   $_XOR_
+
+End of script. Logfile hash: f18b9977dd, CPU: user 0.16s system 0.02s, MEM: 19.95 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 35% 1x abc (0 sec), 15% 22x opt_expr (0 sec), ...

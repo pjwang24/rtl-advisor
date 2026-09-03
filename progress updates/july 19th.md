@@ -388,3 +388,35 @@ environment. The final pinned integration image was rebuilt as manifest
 and passed its offline tool smoke with Yosys `0.63+49`, Verilator `5.047`, ABC
 `1.01`, Python `3.13.14`, and uv `0.11.5`. A cached behavior-gate rerun produced
 zero registry events, confirming idempotent append-only progression.
+
+## Category-first dashboard redesign complete
+
+Replaced the model-metric-heavy landing page with a direct engineering evidence
+workspace. The default flow is now category → example → reference RTL →
+modified RTL → formal result → Yosys/ABC synthesis comparison. The interface
+keeps generated calibration examples visibly labeled as generated benchmark
+references rather than production golden RTL.
+
+The read-only case API now exposes each candidate's hash-checked SystemVerilog,
+the recorded Yosys/ABC CEC result, and absolute reference/candidate synthesis
+metrics alongside the existing percentage deltas. The UI shows all nine current
+RTL families, searchable cases, candidate switching, topology, proof scope,
+post-synthesis delay/area/cell counts, and expandable provenance. Analysis runs
+remain a separate engineer-workflow view, while model evaluation is confined to
+a secondary Research status view and does not control displayed formal or
+synthesis conclusions.
+
+Installed the Build Web Apps plugin globally and used its frontend design and
+browser QA workflows. The implementation remains self-contained vanilla
+HTML/CSS/JavaScript with no external assets or new runtime dependencies.
+Desktop and mobile checks covered category selection, search, candidate
+selection, completed run inspection, the two synthesis recipes, formal status,
+research metrics, overflow, overlays, and console output. No browser console
+errors or blocking overlays were found.
+
+Focused validation passes all 26 frontend API, server, and run tests, and the
+complete repository regression passes at 100%. This is a completed interface
+increment, not completion of the Wave 3 corpus-backed
+dashboard gate: the landing library still reads generated calibration evidence.
+Connecting the same category-first contract to qualified Tier A references and
+their future proof-passing variants remains part of Wave 3.

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rtl-advisor-plugin-abc-arm-result-v1",
+  "title": "RTL Advisor plugin A/B/C arm result V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "experiment_id", "arm", "repetition", "model", "reasoning_effort", "manifest_sha256", "cases"],
+  "properties": {
+    "schema": {"const": "rtl-advisor-plugin-abc-arm-result-v1"},
+    "experiment_id": {"const": "plugin-abc-v1"},
+    "arm": {"enum": ["A", "B", "C"]},
+    "repetition": {"type": "integer", "minimum": 1, "maximum": 3},
+    "model": {"const": "gpt-5.6-sol"},
+    "reasoning_effort": {"const": "xhigh"},
+    "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "wall_time_seconds": {"type": "number", "minimum": 0},
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 24,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["case_id", "source_sha256", "decision", "scope_claim", "source_locations", "rationale", "candidates", "evidence_complete"],
+        "properties": {
+          "case_id": {"type": "string"},
+          "source_sha256": {"type": "string"},
+          "decision": {"enum": ["recommend_change", "no_change", "unsupported", "inconclusive"]},
+          "scope_claim": {"enum": ["whole_case", "finding_only", "none"]},
+          "source_locations": {"type": "array", "items": {"type": "string"}},
+          "rationale": {"type": "string"},
+          "candidates": {
+            "type": "array",
+            "maxItems": 3,
+            "items": {
+              "type": "object",
+              "required": ["candidate_id", "path", "formal_status", "measurement_status", "final_state"],
+              "properties": {
+                "candidate_id": {"type": "string"},
+                "path": {"type": "string"},
+                "formal_status": {"enum": ["formal_passed", "formal_failed", "formal_inconclusive", "not_run"]},
+                "measurement_status": {"enum": ["measured", "not_run", "not_applicable"]},
+                "final_state": {"enum": ["measured_improvement", "synthesis_handles", "flow_dependent", "regression", "unproven", "not_applicable"]},
+                "evidence_paths": {"type": "array", "items": {"type": "string"}}
+              }
+            }
+          },
+          "evidence_complete": {"type": "boolean"},
+          "limitations": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

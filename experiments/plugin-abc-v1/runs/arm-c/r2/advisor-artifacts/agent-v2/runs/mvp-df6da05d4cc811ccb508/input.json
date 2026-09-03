@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "870e06a3a6b9fe5d93194afc3f94a5c9957879281fb084bd4db7bfb1634f2336",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:g05_mux_common_logic.sv",
+        "sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac"
+      }
+    ],
+    "top": "g05_mux_common_logic"
+  },
+  "defines": [],
+  "design_hash": "41f62314930ecbc108e992611db0b3c71f4733b06011c18feaf7e670e262053d",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv",
+      "sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "2e540ac1e797c1c5570a97f1315bad93915256bc44b16f168f8fe6e14e9a0887",
+  "top": "g05_mux_common_logic"
+}

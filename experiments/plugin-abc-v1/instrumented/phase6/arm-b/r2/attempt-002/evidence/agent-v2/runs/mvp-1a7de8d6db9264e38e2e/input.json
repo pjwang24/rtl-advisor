@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "8b1d24e03eadce1a1ab8fe9dd234d07ae94b69109f0a357c7afaeae243e53ae0",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:g03_mixed_safe_add.sv",
+        "sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998"
+      }
+    ],
+    "top": "g03_mixed_safe_add"
+  },
+  "defines": [],
+  "design_hash": "a918926771c77a82c848de8347c22fad4c6b2a47281bd0245c6e82fc7e30586e",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv",
+      "sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "5a0b573fa5919cd2b6d052c5a2561d6242812abad0041beb31f3890353ce7b5e",
+  "top": "g03_mixed_safe_add"
+}

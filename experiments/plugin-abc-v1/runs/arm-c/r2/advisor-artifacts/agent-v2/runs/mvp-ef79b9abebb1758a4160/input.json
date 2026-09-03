@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "f3277d0937d41283ec32977c760f774a68c863819ff3288d2665ced130873ccb",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:prim_arbiter_ppc.sv",
+        "sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99"
+      }
+    ],
+    "top": "prim_arbiter_ppc"
+  },
+  "defines": [],
+  "design_hash": "6934075bb12313cd9e89472624b3e480425ce13aacb61206be91f78d7d4340f2",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv",
+      "sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "35565f3b21b8789b790fedda2d2c01b374caac8375b140b72d535d02d9c80e4f",
+  "top": "prim_arbiter_ppc"
+}

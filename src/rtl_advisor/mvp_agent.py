@@ -39,6 +39,13 @@ from rtl_advisor.rtl_input import (
     RTLInputError,
     normalize_design_input,
 )
+from rtl_advisor.transformation_registry import (
+    ARBITER_TRANSFORMATION_ID,
+    DEFAULT_TRANSFORMATION_REGISTRY,
+)
+from rtl_advisor.transformation_executor import (
+    DEFAULT_EXECUTOR_REGISTRY,
+)
 
 
 _RUN_ID = re.compile(r"^mvp-[0-9a-f]{20}$")
@@ -51,6 +58,18 @@ class MVPAgentError(RuntimeError):
     def __init__(self, message: str, *, code: str = "mvp_agent_error") -> None:
         super().__init__(message)
         self.code = code
+
+
+def _executor_call(operation: Any, *args: Any, **kwargs: Any) -> Any:
+    """Translate declared executor failures without hiding programming errors."""
+
+    try:
+        return operation(*args, **kwargs)
+    except Exception as exc:
+        code = getattr(exc, "code", None)
+        if not isinstance(code, str):
+            raise
+        raise MVPAgentError(str(exc), code=code) from exc
 
 
 def _command_status(command: str) -> dict[str, Any]:
@@ -279,12 +298,26 @@ def _design_from_record(record: Mapping[str, Any]) -> DesignInputV2:
 
 
 def _load_run_design(root: Path) -> tuple[dict[str, Any], DesignInputV2]:
-    record = read_hashed_json(
-        root / "input.json",
-        document_type="rtl-advisor.run.design-input",
-        schema_version=1,
-    )
+    record = _load_run_input_record(root)
+    if record.get("document_type") != "rtl-advisor.run.design-input":
+        raise MVPAgentError(
+            "run input is not a normalized RTL design",
+            code="invalid_input_kind",
+        )
     return record, _design_from_record(record)
+
+
+def _load_run_input_record(root: Path) -> dict[str, Any]:
+    record = read_hashed_json(root / "input.json", schema_version=1)
+    if record.get("document_type") not in {
+        "rtl-advisor.run.design-input",
+        "rtl-advisor.run.reference-input",
+    }:
+        raise MVPAgentError(
+            "run input has an unsupported document type",
+            code="invalid_artifact",
+        )
+    return record
 
 
 def _load_normalized_input(path: Path) -> DesignInputV2:
@@ -374,12 +407,23 @@ def agent_v2_capabilities(
     *,
     normalized_command: Sequence[str] = (),
 ) -> dict[str, Any]:
+    from rtl_advisor.realistic_evidence import SLANG_PLUGIN_PATH
+
     tools = {
         "pyslang": _pyslang_status(),
         "verilator": _verilator_status(config),
         "yosys": _yosys_status(config),
         "liberty": _liberty_status(config),
         "eqy": {"status": "deferred", "path": None},
+        "sby": _command_status("sby"),
+        "yosys_slang": {
+            "status": (
+                "available"
+                if Path(SLANG_PLUGIN_PATH).is_file()
+                else "pinned_container_required"
+            ),
+            "path": SLANG_PLUGIN_PATH,
+        },
     }
     # Review and isolated rewrite are implemented by the conservative source
     # scanner and do not execute external tools. Verification performs both
@@ -407,6 +451,44 @@ def agent_v2_capabilities(
             "rewriter_available": candidate_ready,
             "sequential_supported": False,
         },
+        transformations=[
+            {
+                "id": item.transformation_id,
+                "version": item.version,
+                "display_name": item.display_name,
+                "candidate_origins": list(item.candidate_origins),
+                "proof_levels": list(item.proof_levels),
+                "reference_ids": list(item.reference_ids),
+                "analysis_supported": item.analysis_supported,
+                "rewriter_available": item.rewriter_available,
+                "sequential_supported": item.sequential_supported,
+                "execution_environment": (
+                    "pinned_container"
+                    if item.transformation_id == ARBITER_TRANSFORMATION_ID
+                    else "local_or_pinned_container"
+                ),
+                "executors": [
+                    {
+                        "id": executor.spec.executor_id,
+                        "version": executor.spec.version,
+                        "reference_ids": list(executor.spec.reference_ids),
+                    }
+                    for executor in DEFAULT_EXECUTOR_REGISTRY.executors()
+                    if executor.spec.transformation_id == item.transformation_id
+                ],
+            }
+            for item in DEFAULT_TRANSFORMATION_REGISTRY.specs()
+        ],
+        transformation_registry={
+            "version": DEFAULT_TRANSFORMATION_REGISTRY.manifest()[
+                "registry_version"
+            ],
+            "hash": DEFAULT_TRANSFORMATION_REGISTRY.registry_hash,
+        },
+        executor_registry={
+            "version": DEFAULT_EXECUTOR_REGISTRY.manifest()["registry_version"],
+            "hash": DEFAULT_EXECUTOR_REGISTRY.registry_hash,
+        },
         objectives=list(OBJECTIVES),
         synthesis_profiles=list(SYNTHESIS_PROFILES),
         operations={
@@ -423,10 +505,11 @@ def agent_v2_capabilities(
             "affects_mvp_decision": False,
         },
         limitations=[
-            "Only unsigned fixed-width combinational addition chains are supported.",
-            "Formal equivalence uses two-state RTL semantics.",
+            "Deterministic rewriting is limited to unsigned fixed-width addition chains.",
+            "The OpenTitan arbiter study uses a frozen upstream alternative, not an unseen-RTL rewrite.",
+            "P1 formal uses two-state combinational semantics; the arbiter alternative requires its P2 contract.",
             "Measurements describe the pinned Yosys/ABC recipes, not a target flow.",
-            "EQY, sequential proof, and technology-netlist LEC are deferred.",
+            "EQY and technology-netlist LEC remain deferred.",
         ],
     )
     return write_hashed_json(_agent_root(config) / "capabilities.json", payload)
@@ -444,6 +527,103 @@ def agent_v2_review(
 ) -> dict[str, Any]:
     if objective not in OBJECTIVES:
         raise MVPAgentError(f"unsupported objective: {objective!r}", code="unsupported_objective")
+    requested_path = Path(input_path).expanduser()
+    if not requested_path.is_absolute():
+        requested_path = config.root / requested_path
+    requested_path = requested_path.resolve()
+    from rtl_advisor.realistic_evidence import is_qualified_reference_manifest
+
+    if is_qualified_reference_manifest(requested_path):
+        if top is not None or include_dirs or defines:
+            raise MVPAgentError(
+                "--top, include directories, and defines must come from the "
+                "qualified reference manifest",
+                code="reference_context_override",
+            )
+        if objective != "timing":
+            raise MVPAgentError(
+                "the frozen arbiter evidence study requires objective=timing",
+                code="objective_mismatch",
+            )
+        executor = _executor_call(
+            DEFAULT_EXECUTOR_REGISTRY.for_manifest,
+            requested_path,
+        )
+        reference = _executor_call(
+            executor.load_reference,
+            config,
+            requested_path,
+        )
+        findings = _executor_call(executor.findings, reference)
+        identity = {
+            "run_schema": RUN_SCHEMA_ID,
+            "reference_manifest_hash": reference["manifest_semantic_hash"],
+            "objective": objective,
+            "transformation_registry_hash": (
+                DEFAULT_TRANSFORMATION_REGISTRY.registry_hash
+            ),
+            "executor_id": executor.spec.executor_id,
+            "executor_version": executor.spec.version,
+            "executor_registry_hash": DEFAULT_EXECUTOR_REGISTRY.registry_hash,
+        }
+        run_id = f"mvp-{stable_hash(identity)[:20]}"
+        root = _run_root(config, run_id)
+        input_record = _executor_call(
+            executor.write_reference_input,
+            root / "input.json",
+            reference,
+        )
+        payload = _agent_record(
+            document_type="rtl-advisor.agent.v2.review",
+            status="completed",
+            command=normalized_command,
+            run_id=run_id,
+            decision="candidate_available",
+            objective=objective,
+            input={
+                "kind": "qualified_reference",
+                "requested_path": str(requested_path),
+                "reference_id": input_record["reference_id"],
+                "reference_manifest_hash": input_record[
+                    "manifest_semantic_hash"
+                ],
+                "provenance": input_record["provenance"],
+                "source_integrity": {"ok": True, "mismatches": []},
+                "transformation_registry_hash": (
+                    DEFAULT_TRANSFORMATION_REGISTRY.registry_hash
+                ),
+                "executor_id": executor.spec.executor_id,
+                "executor_version": executor.spec.version,
+                "executor_registry_hash": DEFAULT_EXECUTOR_REGISTRY.registry_hash,
+            },
+            findings=findings,
+            exclusions=[],
+            coverage={
+                "eligible_site_count": len(findings),
+                "excluded_site_count": 0,
+            },
+            candidate_generation_allowed=True,
+            evidence={
+                "rules_only": True,
+                "model_used": False,
+                "input_semantic_hash": input_record["semantic_hash"],
+                "transformation_registry_hash": (
+                    DEFAULT_TRANSFORMATION_REGISTRY.registry_hash
+                ),
+                "executor_registry_hash": DEFAULT_EXECUTOR_REGISTRY.registry_hash,
+            },
+            limitations=[
+                "Each finding is a frozen configuration to evaluate, not a recommendation.",
+                "The alternative is a curated upstream implementation and does not demonstrate unseen-RTL generation.",
+                "PPA claims require P2 proof followed by M0/M1 measurement.",
+            ],
+            artifacts={
+                "root": str(root),
+                "review": str(root / "review.json"),
+                "input": str(root / "input.json"),
+            },
+        )
+        return _write_immutable_stage(root / "review.json", payload)
     design, input_context, manifest_objective = _resolve_design(
         config,
         input_path,
@@ -480,6 +660,9 @@ def agent_v2_review(
         "compile_context_hash": compile_context_snapshot(design)["compile_context_hash"],
         "objective": objective,
         "transformation_version": TRANSFORMATION_VERSION,
+        "transformation_registry_hash": (
+            DEFAULT_TRANSFORMATION_REGISTRY.registry_hash
+        ),
         "input_context": input_context,
     }
     run_id = f"mvp-{stable_hash(identity)[:20]}"
@@ -514,6 +697,9 @@ def agent_v2_review(
             "rules_only": True,
             "model_used": False,
             "input_semantic_hash": design_record["semantic_hash"],
+            "transformation_registry_hash": (
+                DEFAULT_TRANSFORMATION_REGISTRY.registry_hash
+            ),
         },
         limitations=[
             "A finding is only a candidate to evaluate, not a recommendation.",
@@ -531,7 +717,7 @@ def _read_review(root: Path) -> dict[str, Any]:
         schema_version=AGENT_V2_SCHEMA_VERSION,
     )
     _validate_stage_identity(review, root=root, stage="review")
-    input_record, _ = _load_run_design(root)
+    input_record = _load_run_input_record(root)
     input_parent = (review.get("evidence") or {}).get("input_semantic_hash")
     if input_parent != input_record.get("semantic_hash"):
         raise MVPAgentError(
@@ -660,6 +846,21 @@ def _require_current_design(root: Path) -> tuple[dict[str, Any], DesignInputV2]:
     return design_record, design
 
 
+def _require_current_reference(root: Path) -> dict[str, Any]:
+    record = _load_run_input_record(root)
+    if record.get("document_type") != "rtl-advisor.run.reference-input":
+        raise MVPAgentError(
+            "run input is not a qualified reference",
+            code="invalid_input_kind",
+        )
+    executor = _executor_call(
+        DEFAULT_EXECUTOR_REGISTRY.for_reference,
+        str(record.get("reference_id", "")),
+    )
+    _executor_call(executor.validate_reference_input, record)
+    return record
+
+
 def agent_v2_candidate(
     config: ProjectConfig,
     run_id: str,
@@ -669,20 +870,46 @@ def agent_v2_candidate(
 ) -> dict[str, Any]:
     root = _run_root(config, run_id)
     review = _read_review(root)
-    _, design = _require_current_design(root)
     findings = {str(item.get("finding_id")): item for item in review.get("findings", [])}
     if finding_id not in findings:
         raise MVPAgentError(f"unknown finding ID: {finding_id}", code="finding_not_found")
-    from rtl_advisor.mvp_rewriter import MVPRewriteError, prepare_addition_candidate
-
-    try:
-        prepared = prepare_addition_candidate(
-            design,
-            finding_id,
+    finding = findings[finding_id]
+    if finding.get("transformation_id") == ARBITER_TRANSFORMATION_ID:
+        reference_input = _require_current_reference(root)
+        executor_id = finding.get("executor_id")
+        if isinstance(executor_id, str):
+            executor = _executor_call(
+                DEFAULT_EXECUTOR_REGISTRY.get,
+                executor_id,
+                str(finding.get("executor_version", "")),
+            )
+        else:
+            executor = _executor_call(
+                DEFAULT_EXECUTOR_REGISTRY.for_reference,
+                str(reference_input.get("reference_id", "")),
+            )
+        prepared = _executor_call(
+            executor.prepare_candidate,
+            config,
+            reference_input,
+            finding,
             root / "candidates",
         )
-    except MVPRewriteError as exc:
-        raise MVPAgentError(str(exc), code=exc.code) from exc
+    else:
+        _, design = _require_current_design(root)
+        from rtl_advisor.mvp_rewriter import (
+            MVPRewriteError,
+            prepare_addition_candidate,
+        )
+
+        try:
+            prepared = prepare_addition_candidate(
+                design,
+                finding_id,
+                root / "candidates",
+            )
+        except MVPRewriteError as exc:
+            raise MVPAgentError(str(exc), code=exc.code) from exc
     candidate_id = _candidate_id(str(prepared["candidate_id"]))
     candidate_root = root / "candidates" / candidate_id
     payload = _agent_record(
@@ -693,7 +920,28 @@ def agent_v2_candidate(
         decision="candidate_prepared",
         objective=review["objective"],
         candidate_id=candidate_id,
-        finding=findings[finding_id],
+        finding=finding,
+        transformation={
+            "id": prepared.get("transformation_id"),
+            "version": prepared.get("transformation_version"),
+            "registry_hash": prepared.get("transformation_registry_hash"),
+        },
+        executor={
+            "id": prepared.get("executor_id") or finding.get("executor_id"),
+            "version": (
+                prepared.get("executor_version") or finding.get("executor_version")
+            ),
+            "registry_hash": (
+                prepared.get("executor_registry_hash")
+                or finding.get("executor_registry_hash")
+            ),
+        },
+        candidate_origin=prepared.get("candidate_origin"),
+        reference_id=prepared.get("reference_id"),
+        configuration_id=prepared.get("configuration_id"),
+        proof_contract=prepared.get("proof_contract"),
+        proof_contract_hash=prepared.get("proof_contract_hash"),
+        measurement_levels=prepared.get("measurement_levels"),
         source_integrity=prepared.get("source_integrity"),
         candidate=prepared,
         parents={"review_semantic_hash": review["semantic_hash"]},
@@ -762,6 +1010,20 @@ def _candidate_record(
         candidate_design_from_record(prepared)
     except MVPRewriteError as exc:
         raise MVPAgentError(str(exc), code=exc.code) from exc
+    if prepared.get("transformation_registry_hash") is not None:
+        try:
+            DEFAULT_TRANSFORMATION_REGISTRY.validate_candidate_metadata(prepared)
+        except Exception as exc:
+            raise MVPAgentError(
+                str(exc),
+                code=getattr(exc, "code", "invalid_candidate"),
+            ) from exc
+    if prepared.get("transformation_id") == ARBITER_TRANSFORMATION_ID:
+        executor = _executor_call(
+            DEFAULT_EXECUTOR_REGISTRY.for_candidate,
+            prepared,
+        )
+        _executor_call(executor.validate_candidate, prepared)
     diff_path = Path(str(prepared.get("diff_path", ""))).expanduser().resolve()
     candidate_root = (root / "candidates" / candidate_id).resolve()
     try:
@@ -828,7 +1090,6 @@ def _verification_record(
     )
     if evidence is not None:
         evidence_fields = (
-            "status",
             "safe",
             "baseline_design_hash",
             "candidate_design_hash",
@@ -836,7 +1097,13 @@ def _verification_record(
             "lint",
             "formal",
         )
-        if any(evidence.get(field) != verification.get(field) for field in evidence_fields):
+        if (
+            evidence.get("status") not in {status, formal_status}
+            or any(
+                evidence.get(field) != verification.get(field)
+                for field in evidence_fields
+            )
+        ):
             raise MVPAgentError(
                 "verification disagrees with its hash-linked formal evidence",
                 code="artifact_parent_mismatch",
@@ -844,6 +1111,12 @@ def _verification_record(
     if status == "formal_passed":
         formal = verification.get("formal")
         assert isinstance(formal, Mapping)
+        proof_contract = verification.get("proof_contract")
+        proof_level = (
+            str(proof_contract.get("level"))
+            if isinstance(proof_contract, Mapping)
+            else "P1"
+        )
         lint = verification.get("lint")
         verilator = lint.get("verilator") if isinstance(lint, Mapping) else None
         baseline_lint = (
@@ -871,37 +1144,87 @@ def _verification_record(
                 code="invalid_artifact",
             )
         identity = formal.get("tool_identity")
-        if (
-            not isinstance(identity, Mapping)
-            or identity.get("yosys_version") != formal.get("yosys_version")
-            or identity.get("yosys_path") != formal.get("yosys_path")
-            or identity.get("yosys_sha256") != formal.get("yosys_sha256")
-            or formal.get("success_marker_seen") is not True
-        ):
-            raise MVPAgentError(
-                "passing verification has incomplete Yosys identity or transcript evidence",
-                code="invalid_artifact",
+        if proof_level == "P2":
+            p2_result = evidence.get("p2_result") if evidence is not None else None
+            yosys_identity = (
+                identity.get("yosys") if isinstance(identity, Mapping) else None
             )
-        for label in ("script", "log"):
-            artifact_path = Path(str(formal.get(f"{label}_path", ""))).expanduser().resolve()
-            try:
-                artifact_path.relative_to(candidate_root.resolve())
-            except ValueError as exc:
-                raise MVPAgentError(
-                    f"formal {label} escapes its candidate workspace",
-                    code="invalid_artifact_path",
-                ) from exc
-            expected_hash = formal.get(f"{label}_sha256")
             if (
-                artifact_path.is_symlink()
-                or not artifact_path.is_file()
-                or not isinstance(expected_hash, str)
-                or file_sha256(artifact_path) != expected_hash
+                not isinstance(p2_result, Mapping)
+                or p2_result.get("status") != "formal_passed"
+                or p2_result.get("safe") is not True
+                or p2_result.get("semantic_hash")
+                != formal.get("p2_result_semantic_hash")
+                or not isinstance(yosys_identity, Mapping)
+                or not yosys_identity.get("version")
+                or not yosys_identity.get("sha256")
+                or formal.get("success_marker_seen") is not True
             ):
                 raise MVPAgentError(
-                    f"formal {label} artifact is stale",
+                    "passing P2 verification has incomplete proof or tool identity",
+                    code="invalid_artifact",
+                )
+            if (
+                not isinstance(proof_contract, Mapping)
+                or verification.get("proof_contract_hash")
+                != stable_hash(dict(proof_contract))
+            ):
+                raise MVPAgentError(
+                    "passing P2 verification has a stale proof contract",
+                    code="artifact_parent_mismatch",
+                )
+            transcript_path = Path(
+                str(formal.get("p2_transcript_path", ""))
+            )
+            if transcript_path.as_posix().startswith("/workspace/"):
+                transcript_path = (
+                    root.parents[3]
+                    / transcript_path.as_posix().removeprefix("/workspace/")
+                )
+            transcript_path = transcript_path.expanduser().resolve()
+            if (
+                not transcript_path.is_file()
+                or file_sha256(transcript_path)
+                != formal.get("p2_transcript_sha256")
+            ):
+                raise MVPAgentError(
+                    "passing P2 verification has stale transcript evidence",
                     code="stale_formal_artifact",
                 )
+        else:
+            if (
+                not isinstance(identity, Mapping)
+                or identity.get("yosys_version") != formal.get("yosys_version")
+                or identity.get("yosys_path") != formal.get("yosys_path")
+                or identity.get("yosys_sha256") != formal.get("yosys_sha256")
+                or formal.get("success_marker_seen") is not True
+            ):
+                raise MVPAgentError(
+                    "passing verification has incomplete Yosys identity or transcript evidence",
+                    code="invalid_artifact",
+                )
+            for label in ("script", "log"):
+                artifact_path = Path(
+                    str(formal.get(f"{label}_path", ""))
+                ).expanduser().resolve()
+                try:
+                    artifact_path.relative_to(candidate_root.resolve())
+                except ValueError as exc:
+                    raise MVPAgentError(
+                        f"formal {label} escapes its candidate workspace",
+                        code="invalid_artifact_path",
+                    ) from exc
+                expected_hash = formal.get(f"{label}_sha256")
+                if (
+                    artifact_path.is_symlink()
+                    or not artifact_path.is_file()
+                    or not isinstance(expected_hash, str)
+                    or file_sha256(artifact_path) != expected_hash
+                ):
+                    raise MVPAgentError(
+                        f"formal {label} artifact is stale",
+                        code="stale_formal_artifact",
+                    )
     return verification
 
 
@@ -1035,19 +1358,36 @@ def agent_v2_verify(
     normalized_command: Sequence[str] = (),
 ) -> dict[str, Any]:
     root = _run_root(config, run_id)
-    _read_review(root)
-    _require_current_design(root)
+    review = _read_review(root)
     candidate = _candidate_record(root, candidate_id)
-    from rtl_advisor.mvp_rewriter import MVPRewriteError, verify_addition_candidate
-
-    try:
-        verification = verify_addition_candidate(
+    prepared = candidate["candidate"]
+    if prepared.get("transformation_id") == ARBITER_TRANSFORMATION_ID:
+        _require_current_reference(root)
+        executor = _executor_call(
+            DEFAULT_EXECUTOR_REGISTRY.for_candidate,
+            prepared,
+        )
+        verification = _executor_call(
+            executor.verify_candidate,
             config,
-            candidate["candidate"],
+            prepared,
             root / "candidates",
         )
-    except MVPRewriteError as exc:
-        raise MVPAgentError(str(exc), code=exc.code) from exc
+    else:
+        _require_current_design(root)
+        from rtl_advisor.mvp_rewriter import (
+            MVPRewriteError,
+            verify_addition_candidate,
+        )
+
+        try:
+            verification = verify_addition_candidate(
+                config,
+                prepared,
+                root / "candidates",
+            )
+        except MVPRewriteError as exc:
+            raise MVPAgentError(str(exc), code=exc.code) from exc
     formal_evidence = dict(verification.get("formal") or verification)
     formal_status = str(formal_evidence.get("status", verification.get("status", "inconclusive")))
     low_level_safe = verification.get("safe") is True
@@ -1077,9 +1417,23 @@ def agent_v2_verify(
         source_integrity=verification.get("source_integrity"),
         lint=verification.get("lint"),
         formal=formal_evidence,
+        transformation=candidate.get("transformation"),
+        executor=candidate.get("executor"),
+        candidate_origin=candidate.get("candidate_origin"),
+        reference_id=candidate.get("reference_id"),
+        configuration_id=candidate.get("configuration_id"),
+        proof_contract=prepared.get("proof_contract"),
+        proof_contract_hash=prepared.get("proof_contract_hash"),
         safe=status == "formal_passed" and low_level_safe,
         parents={"candidate_semantic_hash": candidate["semantic_hash"]},
-        limitations=["The proof covers two-state combinational RTL semantics."],
+        limitations=(
+            [
+                "The P2 proof covers cycle-aligned behavior only under the recorded reset and protocol assumptions.",
+                "The proof does not establish four-state X/Z equivalence.",
+            ]
+            if prepared.get("transformation_id") == ARBITER_TRANSFORMATION_ID
+            else ["The proof covers two-state combinational RTL semantics."]
+        ),
         artifacts={
             "verification": str(output_path),
             "evidence_record": verification.get("record_path"),
@@ -1099,8 +1453,8 @@ def agent_v2_measure(
 ) -> dict[str, Any]:
     root = _run_root(config, run_id)
     review = _read_review(root)
-    _, baseline = _require_current_design(root)
     candidate = _candidate_record(root, candidate_id, review=review)
+    prepared = candidate["candidate"]
     verification = _verification_record(
         root, candidate_id, candidate=candidate
     )
@@ -1110,7 +1464,21 @@ def agent_v2_measure(
     from rtl_advisor.mvp_measure import MVPMeasurementError, measure_candidate
 
     try:
-        candidate_design = candidate_design_from_record(candidate["candidate"])
+        if prepared.get("transformation_id") == ARBITER_TRANSFORMATION_ID:
+            _require_current_reference(root)
+            executor = _executor_call(
+                DEFAULT_EXECUTOR_REGISTRY.for_candidate,
+                prepared,
+            )
+            baseline, candidate_design = _executor_call(
+                executor.measurement_designs,
+                prepared,
+            )
+            frontend = prepared.get("frontend")
+        else:
+            _, baseline = _require_current_design(root)
+            candidate_design = candidate_design_from_record(prepared)
+            frontend = None
         measurement = measure_candidate(
             config,
             baseline,
@@ -1118,6 +1486,7 @@ def agent_v2_measure(
             verification,
             root / "candidates" / candidate_id / "measurement",
             objective=str(review["objective"]),
+            frontend=frontend,
         )
     except (MVPRewriteError, MVPMeasurementError) as exc:
         failure_core = {
@@ -1163,6 +1532,17 @@ def agent_v2_measure(
         decision=decision,
         objective=review["objective"],
         candidate_id=candidate_id,
+        transformation=candidate.get("transformation"),
+        candidate_origin=candidate.get("candidate_origin"),
+        reference_id=candidate.get("reference_id"),
+        configuration_id=candidate.get("configuration_id"),
+        proof_level=(prepared.get("proof_contract") or {}).get("level"),
+        proof_contract_hash=prepared.get("proof_contract_hash"),
+        transformation_registry_hash=prepared.get(
+            "transformation_registry_hash"
+        ),
+        measurement_levels=prepared.get("measurement_levels", ["M0", "M1"]),
+        frontend=measurement.get("frontend"),
         source_integrity=measurement.get("source_integrity"),
         formal={"status": "passed", "semantic_hash": verification["semantic_hash"]},
         measurements=measurement.get("measurements"),
@@ -1429,7 +1809,23 @@ def agent_v2_report(
 ) -> dict[str, Any]:
     root = _run_root(config, run_id)
     review = _read_review(root)
-    _, current_design = _require_current_design(root)
+    input_record = _load_run_input_record(root)
+    if input_record.get("document_type") == "rtl-advisor.run.reference-input":
+        reference = _require_current_reference(root)
+        report_source_integrity = source_integrity(
+            {
+                "path": str(
+                    Path(str(reference["source_root"])) / str(relative)
+                ),
+                "sha256": digest,
+            }
+            for relative, digest in reference["source_hashes"].items()
+        )
+    else:
+        _, current_design = _require_current_design(root)
+        report_source_integrity = source_integrity(
+            asdict(source) for source in current_design.files
+        )
     records = _candidate_records(root, review)
     completion = _evidence_summary(records, review)
     decision = _overall_decision(records, review, completion)
@@ -1469,9 +1865,7 @@ def agent_v2_report(
             "synthesis": completion["measurement_decision_counts"],
         },
         parents=parent_hashes,
-        source_integrity=source_integrity(
-            asdict(source) for source in current_design.files
-        ),
+        source_integrity=report_source_integrity,
         limitations=[
             "A finding is not a recommendation until formal and both synthesis recipes support it.",
             "Results apply only to the recorded Yosys/ABC recipes.",

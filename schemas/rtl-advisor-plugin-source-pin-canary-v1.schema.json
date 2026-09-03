@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rtl-advisor-plugin-source-pin-canary-v1.schema.json",
+  "title": "RTL Advisor Phase 7 source-pin canary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["source_pin_ok", "batch_supported", "skill_name"],
+  "properties": {
+    "source_pin_ok": {"type": "boolean", "const": true},
+    "batch_supported": {"type": "boolean", "const": true},
+    "skill_name": {"type": "string", "const": "analyze-rtl"}
+  }
+}

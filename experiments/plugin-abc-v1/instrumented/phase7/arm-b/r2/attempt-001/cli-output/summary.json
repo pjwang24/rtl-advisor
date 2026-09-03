@@ -1,0 +1,265 @@
+{
+  "artifacts": {
+    "authorization": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/attempt-001/cli-output/authorization.json",
+    "capabilities": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/attempt-001/cli-output/capabilities/75750a34bad7eabd40d7fdc3d7839fbe696192bd9bf41041fc4509645633960e.json",
+    "manifest": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/attempt-001/batch-manifest.json",
+    "request": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/attempt-001/cli-output/request.json",
+    "root": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/attempt-001/cli-output",
+    "summary": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/attempt-001/cli-output/summary.json"
+  },
+  "authorization_semantic_hash": "9ce5fc4c92c9c4c774292166c5ec4bfad19e1d7494c6c2915b729ccc079e8344",
+  "batch_id": "batch-5b9427584b032375c49f",
+  "capabilities_semantic_hash": "75750a34bad7eabd40d7fdc3d7839fbe696192bd9bf41041fc4509645633960e",
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/Users/peter/Desktop/rtl-advisor/rtl-advisor.toml",
+    "agent",
+    "workflow",
+    "batch",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/attempt-001/batch-manifest.json",
+    "--authorized-through",
+    "measure",
+    "--prompt-file",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/attempt-001/prompt.txt",
+    "--output-dir",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/attempt-001/cli-output",
+    "--first-eligible",
+    "--jobs",
+    "1",
+    "--schema-version",
+    "1",
+    "--json"
+  ],
+  "counts": {
+    "completed": 0,
+    "failed": 24,
+    "items": 24,
+    "unique_workflows": 24
+  },
+  "document_type": "rtl-advisor.workflow.batch-summary",
+  "items": [
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "g01",
+      "status": "failed",
+      "workflow_id": "workflow-6eb04148ae3e719a40a5"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "g02",
+      "status": "failed",
+      "workflow_id": "workflow-33b20e7be45a7b3e3091"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "g03",
+      "status": "failed",
+      "workflow_id": "workflow-361b33a05a7b99dc3d0d"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "g04",
+      "status": "failed",
+      "workflow_id": "workflow-1e643cd606ac4b87ae06"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "g05",
+      "status": "failed",
+      "workflow_id": "workflow-016afd9b69d6512c99c5"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "g06",
+      "status": "failed",
+      "workflow_id": "workflow-83baa16b765a669d87a8"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "g07",
+      "status": "failed",
+      "workflow_id": "workflow-a4cbc92845fb7f1d143c"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "g08",
+      "status": "failed",
+      "workflow_id": "workflow-a00a174912f1484f3dc5"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "g09",
+      "status": "failed",
+      "workflow_id": "workflow-e823e46a6a9e34dc245e"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "g10",
+      "status": "failed",
+      "workflow_id": "workflow-05a1b8fc98e6972890d3"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "g11",
+      "status": "failed",
+      "workflow_id": "workflow-dee432ed50a25645e0de"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "g12",
+      "status": "failed",
+      "workflow_id": "workflow-4e831462a26b6515cc86"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "o01",
+      "status": "failed",
+      "workflow_id": "workflow-aef4d54e031fed635cbe"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "o02",
+      "status": "failed",
+      "workflow_id": "workflow-e9a36b211e046f353811"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "o03",
+      "status": "failed",
+      "workflow_id": "workflow-5a458a9d40a0fdea4fda"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "o04",
+      "status": "failed",
+      "workflow_id": "workflow-5938e7b399e6835e608f"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "o05",
+      "status": "failed",
+      "workflow_id": "workflow-b86da1b340c838d0ab14"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "o06",
+      "status": "failed",
+      "workflow_id": "workflow-eeea4d7fa8db5ad8b764"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "o07",
+      "status": "failed",
+      "workflow_id": "workflow-ad53085d17c6939c4a85"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "o08",
+      "status": "failed",
+      "workflow_id": "workflow-553a161b235e2d7fe54f"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "o09",
+      "status": "failed",
+      "workflow_id": "workflow-157cdc77a5cbfa547a09"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "o10",
+      "status": "failed",
+      "workflow_id": "workflow-052e0191157d5925e13f"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "o11",
+      "status": "failed",
+      "workflow_id": "workflow-3e5a03db24fd4ee459b1"
+    },
+    {
+      "error": {
+        "code": "authorization_resume_required",
+        "message": "workflow already exists with different authorization; use resume"
+      },
+      "item_id": "o12",
+      "status": "failed",
+      "workflow_id": "workflow-97160b65942e60847789"
+    }
+  ],
+  "jobs": 1,
+  "request_semantic_hash": "138986d07dfa4c35eb8debbadf522fa8186064ba4dc8a0c27442abdaa738643a",
+  "schema": "rtl-advisor-workflow-batch-summary-v1",
+  "schema_version": 1,
+  "semantic_hash": "933c6fc664ae5c441d04c3887d84a46c7dfe6e92d7b1beca4e872d71ea311a44",
+  "status": "partial"
+}

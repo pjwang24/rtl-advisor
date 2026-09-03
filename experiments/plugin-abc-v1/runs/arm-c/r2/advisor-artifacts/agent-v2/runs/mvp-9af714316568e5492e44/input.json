@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "c1cf8e87ccd526279ef688a24b6c0aebf7dc064dcfeeed89821da269a928f177",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:g12_two_stage_pipeline.sv",
+        "sha256": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d"
+      }
+    ],
+    "top": "g12_two_stage_pipeline"
+  },
+  "defines": [],
+  "design_hash": "91dc53e790e22fb7d603eeb2d5771d9f9072f4a456ea17ab5520186b95040262",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv",
+      "sha256": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "07cb41a9c3e38c942a5eb2256bfb0495eaf48110c47d6f611e38632da72c4fde",
+  "top": "g12_two_stage_pipeline"
+}

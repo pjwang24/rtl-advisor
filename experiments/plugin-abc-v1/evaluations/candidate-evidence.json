@@ -1,0 +1,56 @@
+{
+  "schema": "rtl-advisor-plugin-abc-candidate-evidence-v1",
+  "experiment_id": "plugin-abc-v1",
+  "rows": [
+    {
+      "case_id": "g01",
+      "hypothesis": "Balance a four-term unsigned addition chain",
+      "formal": "passed",
+      "measurement_scope": "pinned standard + stronger",
+      "result": "synthesis_handles",
+      "timing_delta_percent": 0.0,
+      "area_delta_percent": 0.0,
+      "decision": "no_change"
+    },
+    {
+      "case_id": "g02",
+      "hypothesis": "Balance a five-term unsigned addition chain",
+      "formal": "passed",
+      "measurement_scope": "pinned standard + stronger",
+      "result": "synthesis_handles",
+      "timing_delta_percent": 0.0,
+      "area_delta_percent": 0.0,
+      "decision": "no_change"
+    },
+    {
+      "case_id": "g03",
+      "hypothesis": "Balance a continuous add chain beside procedural logic",
+      "formal": "passed",
+      "measurement_scope": "pinned standard + stronger",
+      "result": "synthesis_handles",
+      "timing_delta_percent": 0.0,
+      "area_delta_percent": 0.0,
+      "decision": "no_change"
+    },
+    {
+      "case_id": "g05",
+      "hypothesis": "Factor a common addend across a mux",
+      "formal": "passed",
+      "measurement_scope": "control-arm generic ABC only",
+      "result": "neutral but not product-grade evidence",
+      "timing_delta_percent": null,
+      "area_delta_percent": null,
+      "decision": "no_change"
+    },
+    {
+      "case_id": "g06",
+      "hypothesis": "Replace priority chain with direct Boolean equations",
+      "formal": "passed",
+      "measurement_scope": "tie-break generic ABC only",
+      "result": "regression in generic mapping",
+      "timing_delta_percent": -40.0,
+      "area_delta_percent": -7.5,
+      "decision": "no_change"
+    }
+  ]
+}

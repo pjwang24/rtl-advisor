@@ -1,0 +1,10 @@
+{
+  "document_type": "rtl-advisor.run.report-latest",
+  "html_sha256": "48726d6e0fb02dff3d14a5aaaea9dca3acdddc3ca9639956a924d172ed8c9017",
+  "html_snapshot": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/reports/0afc04cfddbf92370ec5ad33c4d71e1313e6ccece80163e32b8454c57a53eee2.html",
+  "report_semantic_hash": "0afc04cfddbf92370ec5ad33c4d71e1313e6ccece80163e32b8454c57a53eee2",
+  "report_snapshot": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/reports/0afc04cfddbf92370ec5ad33c4d71e1313e6ccece80163e32b8454c57a53eee2.json",
+  "run_id": "mvp-5c42987cbc59419709cb",
+  "schema_version": 1,
+  "semantic_hash": "a9afa8ac9739974c9d7c94f18694a1c5d9dcdb11e19f3aae99696a76a437ba8a"
+}

@@ -1,0 +1,346 @@
+{
+  "batch_id": "batch-5b9427584b032375c49f",
+  "document_type": "rtl-advisor.workflow.batch-request",
+  "items": [
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "generated_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+        "top": "g01_add8_left"
+      },
+      "item_id": "g01",
+      "objective": "balanced",
+      "request_semantic_hash": "d14b14d54ef4621df7ab6ddd7333f7c167cdf9df673583c835c38b75b8180019",
+      "status": "ready",
+      "workflow_id": "workflow-6eb04148ae3e719a40a5"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "generated_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv",
+        "top": "g02_add32_five"
+      },
+      "item_id": "g02",
+      "objective": "balanced",
+      "request_semantic_hash": "bd160af3ad8428aa13917a3aa9803e25248db1520e5cb235f872e1624fdea077",
+      "status": "ready",
+      "workflow_id": "workflow-33b20e7be45a7b3e3091"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "generated_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv",
+        "top": "g03_mixed_safe_add"
+      },
+      "item_id": "g03",
+      "objective": "balanced",
+      "request_semantic_hash": "360b8a74bc9ac3a7d636460d20a184ce16479121e6e2965b685b6e0bf0ef9244",
+      "status": "ready",
+      "workflow_id": "workflow-361b33a05a7b99dc3d0d"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "generated_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g04_mixed_procedural_add.sv",
+        "top": "g04_mixed_procedural_add"
+      },
+      "item_id": "g04",
+      "objective": "balanced",
+      "request_semantic_hash": "fea5ffbe42c95f3307a41f30dd59bbf5617d105e555f6153bdaa632ef5bbbcdd",
+      "status": "ready",
+      "workflow_id": "workflow-1e643cd606ac4b87ae06"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "generated_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv",
+        "top": "g05_mux_common_logic"
+      },
+      "item_id": "g05",
+      "objective": "balanced",
+      "request_semantic_hash": "dbb4f32fb4ee80ca6d32b6a29d042d2744e5a681d29330ec5bd3e35365d5fa25",
+      "status": "ready",
+      "workflow_id": "workflow-016afd9b69d6512c99c5"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "generated_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv",
+        "top": "g06_priority_decode"
+      },
+      "item_id": "g06",
+      "objective": "balanced",
+      "request_semantic_hash": "c94531dec7152032b30e0e5a06839b3860299094f4a04c5b6e30ea760475e0f4",
+      "status": "ready",
+      "workflow_id": "workflow-83baa16b765a669d87a8"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "generated_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv",
+        "top": "g07_width_truncation"
+      },
+      "item_id": "g07",
+      "objective": "balanced",
+      "request_semantic_hash": "37b5b4c3510c754735c8dbe3fd4c93b91a29c6fc7d5303091e3f66ac7ba7299d",
+      "status": "ready",
+      "workflow_id": "workflow-a4cbc92845fb7f1d143c"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "generated_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g08_signed_chain.sv",
+        "top": "g08_signed_chain"
+      },
+      "item_id": "g08",
+      "objective": "balanced",
+      "request_semantic_hash": "1fbac3867c4f6df9f8718dd4269b4a1f1d80ebcbb2008a4d24674f3a5f472d96",
+      "status": "ready",
+      "workflow_id": "workflow-a00a174912f1484f3dc5"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "generated_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g09_already_balanced.sv",
+        "top": "g09_already_balanced"
+      },
+      "item_id": "g09",
+      "objective": "balanced",
+      "request_semantic_hash": "7b18982751ba2fa63712b12c29d2151a05d6311aa1720f19d0030c85d1e56295",
+      "status": "ready",
+      "workflow_id": "workflow-e823e46a6a9e34dc245e"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "generated_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv",
+        "top": "g10_function_boundary"
+      },
+      "item_id": "g10",
+      "objective": "balanced",
+      "request_semantic_hash": "6594234c086dad32c6e72ecb9c9abe32edd9b00c71c3369e4733da40bbf71ca6",
+      "status": "ready",
+      "workflow_id": "workflow-05a1b8fc98e6972890d3"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "generated_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv",
+        "top": "g11_one_stage_stream"
+      },
+      "item_id": "g11",
+      "objective": "balanced",
+      "request_semantic_hash": "01110e3b268cbbe8797c89ad73c6b8bd3cd4c4223a528592743054075a2d5cb9",
+      "status": "ready",
+      "workflow_id": "workflow-dee432ed50a25645e0de"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "generated_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv",
+        "top": "g12_two_stage_pipeline"
+      },
+      "item_id": "g12",
+      "objective": "balanced",
+      "request_semantic_hash": "98c26e0994acb04275272123d42b84a42321b2f48a23d72da56183486431f064",
+      "status": "ready",
+      "workflow_id": "workflow-4e831462a26b6515cc86"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "explicitly_approved_open_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv",
+        "top": "prim_arbiter_ppc"
+      },
+      "item_id": "o01",
+      "objective": "balanced",
+      "request_semantic_hash": "7aea4c7352b4451c659978c85ef72dadc5aecb87c85688b4184546fce3edd7cc",
+      "status": "ready",
+      "workflow_id": "workflow-aef4d54e031fed635cbe"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "explicitly_approved_open_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv",
+        "top": "prim_fifo_sync"
+      },
+      "item_id": "o02",
+      "objective": "balanced",
+      "request_semantic_hash": "a14d2d643afdf52d15fffb2166bb8affe8c295ebc6c32b25e785dde48e657fd2",
+      "status": "ready",
+      "workflow_id": "workflow-e9a36b211e046f353811"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "explicitly_approved_open_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv",
+        "top": "prim_count"
+      },
+      "item_id": "o03",
+      "objective": "balanced",
+      "request_semantic_hash": "72fb4adbda704ab3d206b25aabd5c39e789d660d60ac16a473fa6028aa158279",
+      "status": "ready",
+      "workflow_id": "workflow-5a458a9d40a0fdea4fda"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "explicitly_approved_open_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv",
+        "top": "prim_packer_fifo"
+      },
+      "item_id": "o04",
+      "objective": "balanced",
+      "request_semantic_hash": "6a5a48f2b9dff7c2e5c72f37550892621bfb11133854ba83f373324e377cf35c",
+      "status": "ready",
+      "workflow_id": "workflow-5938e7b399e6835e608f"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "explicitly_approved_open_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/common_cells/src/spill_register.sv",
+        "top": "spill_register"
+      },
+      "item_id": "o05",
+      "objective": "balanced",
+      "request_semantic_hash": "3404054c115fbe63afc35e2f4170a64668555f0e94dab90a04031e852a932993",
+      "status": "ready",
+      "workflow_id": "workflow-b86da1b340c838d0ab14"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "explicitly_approved_open_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/common_cells/src/stream_register.sv",
+        "top": "stream_register"
+      },
+      "item_id": "o06",
+      "objective": "balanced",
+      "request_semantic_hash": "5b9f8958ce276281e97dc13dbe6bea5e25ddf4ea1a6f4ac40928bdedb1b889ac",
+      "status": "ready",
+      "workflow_id": "workflow-eeea4d7fa8db5ad8b764"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "explicitly_approved_open_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/common_cells/src/fifo_v3.sv",
+        "top": "fifo_v3"
+      },
+      "item_id": "o07",
+      "objective": "balanced",
+      "request_semantic_hash": "0b8115938c2665ea0163f4645af675912b8ebc2b6b1c02179b448dc59ebe9877",
+      "status": "ready",
+      "workflow_id": "workflow-ad53085d17c6939c4a85"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "explicitly_approved_open_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/common_cells/src/rr_arb_tree.sv",
+        "top": "rr_arb_tree"
+      },
+      "item_id": "o08",
+      "objective": "balanced",
+      "request_semantic_hash": "372b0ca7f908456ae32f8a71e16fa6a3f246e6ba91f570a06f8a48b6890c5542",
+      "status": "ready",
+      "workflow_id": "workflow-553a161b235e2d7fe54f"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "explicitly_approved_open_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/common_cells/src/stream_mux.sv",
+        "top": "stream_mux"
+      },
+      "item_id": "o09",
+      "objective": "balanced",
+      "request_semantic_hash": "f40713b0ed93247d254895b3568322ae4e9335097efc7f072fc83d3af36ac213",
+      "status": "ready",
+      "workflow_id": "workflow-157cdc77a5cbfa547a09"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "explicitly_approved_open_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/verilog-axis/rtl/axis_register.v",
+        "top": "axis_register"
+      },
+      "item_id": "o10",
+      "objective": "balanced",
+      "request_semantic_hash": "827b56c12b9749a493adc848dfd216aac83d88e50b939fc36c382028b3f62cff",
+      "status": "ready",
+      "workflow_id": "workflow-052e0191157d5925e13f"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "explicitly_approved_open_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v",
+        "top": "axis_pipeline_register"
+      },
+      "item_id": "o11",
+      "objective": "balanced",
+      "request_semantic_hash": "e116b164a0113054ff7d81e6aafe01f21ba1a80702044462875cc7d4f4a5476f",
+      "status": "ready",
+      "workflow_id": "workflow-3e5a03db24fd4ee459b1"
+    },
+    {
+      "input": {
+        "defines": [],
+        "include_dirs": [],
+        "kind": "explicitly_approved_open_rtl",
+        "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v",
+        "top": "axis_pipeline_fifo"
+      },
+      "item_id": "o12",
+      "objective": "balanced",
+      "request_semantic_hash": "0b0d6457adc967fe9b072f0c6636092b76f85927f9959ceb963f181b79fe3f1f",
+      "status": "ready",
+      "workflow_id": "workflow-97160b65942e60847789"
+    }
+  ],
+  "manifest_semantic_hash": "8c229dfcb6ea9b9608685c530fd9bf333c25d6e11d83ca49225a1a7a298eeb02",
+  "schema": "rtl-advisor-workflow-batch-request-v1",
+  "schema_version": 1,
+  "semantic_hash": "138986d07dfa4c35eb8debbadf522fa8186064ba4dc8a0c27442abdaa738643a"
+}

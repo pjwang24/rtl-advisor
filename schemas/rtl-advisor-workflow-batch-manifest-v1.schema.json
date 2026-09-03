@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-workflow-batch-manifest-v1.schema.json",
+  "title": "RTL Advisor Workflow Batch Manifest V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "schema", "document_type", "items"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-workflow-batch-manifest-v1"},
+    "document_type": {"const": "rtl-advisor.workflow.batch-manifest"},
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["item_id", "input", "objective"],
+        "properties": {
+          "item_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$"},
+          "input": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "path"],
+            "properties": {
+              "kind": {"enum": ["generated_rtl", "explicitly_approved_open_rtl", "qualified_corpus_reference"]},
+              "path": {"type": "string", "minLength": 1},
+              "top": {"type": "string", "minLength": 1},
+              "include_dirs": {"type": "array", "items": {"type": "string"}},
+              "defines": {"type": "array", "items": {"type": "string", "minLength": 1}}
+            }
+          },
+          "objective": {"enum": ["timing", "area", "balanced"]},
+          "expected_source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    }
+  }
+}

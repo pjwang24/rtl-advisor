@@ -1,0 +1,362 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g09_already_balanced.sv; hierarchy -top g09_already_balanced; proc; flatten; opt; techmap; opt; abc -g simple; clean; stat; ltp' --
+
+1. Executing Verilog-2005 frontend: /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g09_already_balanced.sv
+Parsing SystemVerilog input from `/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g09_already_balanced.sv' to AST representation.
+Generating RTLIL representation for module `\g09_already_balanced'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \g09_already_balanced
+
+2.2. Analyzing design hierarchy..
+Top module:  \g09_already_balanced
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g09_already_balanced.
+
+4. Executing FLATTEN pass (flatten design).
+
+5. Executing OPT pass (performing simple optimizations).
+
+5.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g09_already_balanced.
+
+5.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g09_already_balanced'.
+Computing hashes of 3 cells of `\g09_already_balanced'.
+Finding duplicate cells in `\g09_already_balanced'.
+Removed a total of 0 cells.
+
+5.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g09_already_balanced..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+5.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g09_already_balanced.
+Performed a total of 0 changes.
+
+5.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g09_already_balanced'.
+Computing hashes of 3 cells of `\g09_already_balanced'.
+Finding duplicate cells in `\g09_already_balanced'.
+Removed a total of 0 cells.
+
+5.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g09_already_balanced..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+5.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g09_already_balanced.
+
+5.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g09_already_balanced..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+5.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g09_already_balanced.
+Performed a total of 0 changes.
+
+5.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g09_already_balanced'.
+Computing hashes of 3 cells of `\g09_already_balanced'.
+Finding duplicate cells in `\g09_already_balanced'.
+Removed a total of 0 cells.
+
+5.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g09_already_balanced..
+
+5.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g09_already_balanced.
+
+5.16. Finished fast OPT passes. (There is nothing left to do.)
+
+6. Executing TECHMAP pass (map to technology primitives).
+
+6.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+6.2. Continuing TECHMAP pass.
+Running "alumacc" on wrapper $extern:wrap:$add:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=32:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $and.
+No more expansions possible.
+<suppressed ~729 debug messages>
+
+7. Executing OPT pass (performing simple optimizations).
+
+7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g09_already_balanced.
+<suppressed ~396 debug messages>
+
+7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g09_already_balanced'.
+Computing hashes of 801 cells of `\g09_already_balanced'.
+Finding duplicate cells in `\g09_already_balanced'.
+Removed a total of 0 cells.
+
+7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g09_already_balanced..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g09_already_balanced.
+Performed a total of 0 changes.
+
+7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g09_already_balanced'.
+Computing hashes of 801 cells of `\g09_already_balanced'.
+Finding duplicate cells in `\g09_already_balanced'.
+Removed a total of 0 cells.
+
+7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g09_already_balanced..
+Removed 141 unused cells and 165 unused wires.
+<suppressed ~142 debug messages>
+
+7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g09_already_balanced.
+
+7.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+7.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g09_already_balanced..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+7.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g09_already_balanced.
+Performed a total of 0 changes.
+
+7.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g09_already_balanced'.
+Computing hashes of 660 cells of `\g09_already_balanced'.
+Finding duplicate cells in `\g09_already_balanced'.
+Removed a total of 0 cells.
+
+7.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g09_already_balanced..
+
+7.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g09_already_balanced.
+
+7.16. Finished fast OPT passes. (There is nothing left to do.)
+
+8. Executing ABC pass (technology mapping using ABC).
+
+8.1. Extracting gate netlist of module `\g09_already_balanced' to `<abc-temp-dir>/input.blif'..
+
+8.1.1. Executed ABC.
+Extracted 660 gates and 788 wires to a netlist network with 128 inputs and 32 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:      183
+ABC RESULTS:                OR cells:      105
+ABC RESULTS:               XOR cells:      189
+ABC RESULTS:        internal signals:      628
+ABC RESULTS:           input signals:      128
+ABC RESULTS:          output signals:       32
+Removing temp directory.
+Removing global temp directory.
+Removed 0 unused cells and 459 unused wires.
+
+9. Printing statistics.
+
+=== g09_already_balanced ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      450 wires
+      605 wire bits
+        5 public wires
+      160 public wire bits
+        5 ports
+      160 port bits
+      477 cells
+      183   $_AND_
+      105   $_OR_
+      189   $_XOR_
+
+10. Executing LTP pass (find longest path).
+
+Longest topological path in g09_already_balanced (length=64):
+    0: \a [1]
+    1: $abc$1461$new_n209 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1510)
+    2: $abc$1461$new_n510 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1811)
+    3: $abc$1461$new_n516 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1817)
+    4: $abc$1461$new_n517 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1818)
+    5: $abc$1461$new_n518 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1819)
+    6: $abc$1461$new_n520 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1821)
+    7: $abc$1461$new_n521 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1822)
+    8: $abc$1461$new_n523 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1824)
+    9: $abc$1461$new_n524 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1825)
+   10: $abc$1461$new_n526 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1827)
+   11: $abc$1461$new_n527 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1828)
+   12: $abc$1461$new_n529 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1830)
+   13: $abc$1461$new_n530 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1831)
+   14: $abc$1461$new_n532 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1833)
+   15: $abc$1461$new_n533 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1834)
+   16: $abc$1461$new_n535 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1836)
+   17: $abc$1461$new_n536 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1837)
+   18: $abc$1461$new_n538 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1839)
+   19: $abc$1461$new_n539 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1840)
+   20: $abc$1461$new_n541 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1842)
+   21: $abc$1461$new_n542 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1843)
+   22: $abc$1461$new_n544 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1845)
+   23: $abc$1461$new_n545 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1846)
+   24: $abc$1461$new_n546 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1847)
+   25: $abc$1461$new_n547 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1848)
+   26: $abc$1461$new_n549 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1850)
+   27: $abc$1461$new_n550 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1851)
+   28: $abc$1461$new_n552 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1853)
+   29: $abc$1461$new_n553 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1854)
+   30: $abc$1461$new_n555 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1856)
+   31: $abc$1461$new_n556 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1857)
+   32: $abc$1461$new_n557 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1858)
+   33: $abc$1461$new_n558 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1859)
+   34: $abc$1461$new_n560 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1861)
+   35: $abc$1461$new_n561 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1862)
+   36: $abc$1461$new_n563 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1864)
+   37: $abc$1461$new_n564 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1865)
+   38: $abc$1461$new_n566 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1867)
+   39: $abc$1461$new_n567 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1868)
+   40: $abc$1461$new_n568 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1869)
+   41: $abc$1461$new_n569 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1870)
+   42: $abc$1461$new_n571 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1872)
+   43: $abc$1461$new_n572 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1873)
+   44: $abc$1461$new_n573 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1874)
+   45: $abc$1461$new_n574 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1875)
+   46: $abc$1461$new_n576 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1877)
+   47: $abc$1461$new_n577 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1878)
+   48: $abc$1461$new_n578 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1879)
+   49: $abc$1461$new_n579 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1880)
+   50: $abc$1461$new_n581 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1882)
+   51: $abc$1461$new_n582 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1883)
+   52: $abc$1461$new_n584 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1885)
+   53: $abc$1461$new_n585 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1886)
+   54: $abc$1461$new_n586 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1887)
+   55: $abc$1461$new_n587 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1888)
+   56: $abc$1461$new_n588 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1889)
+   57: $abc$1461$new_n589 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1890)
+   58: $abc$1461$new_n591 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1892)
+   59: $abc$1461$new_n592 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1893)
+   60: $abc$1461$new_n594 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1895)
+   61: $abc$1461$new_n595 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1896)
+   62: $abc$1461$new_n597 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1898)
+   63: $abc$1461$new_n598 (via $abc$1461$auto$blifparse.cc:397:parse_blif$1899)
+   64: \y [31] (via $abc$1461$auto$blifparse.cc:397:parse_blif$1907)
+
+End of script. Logfile hash: e91416411f, CPU: user 0.05s system 0.01s, MEM: 21.28 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 60% 1x abc (0 sec), 11% 1x techmap (0 sec), ...

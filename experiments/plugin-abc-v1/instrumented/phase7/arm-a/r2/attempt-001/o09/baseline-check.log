@@ -1,0 +1,13 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv -DSYNTHESIS -Icorpus/upstream/common_cells/include corpus/upstream/common_cells/src/cf_math_pkg.sv corpus/upstream/common_cells/src/stream_mux.sv; chparam -set N_INP 4 stream_mux; hierarchy -check -top stream_mux; proc; check -assert' --
+
+1. Executing Verilog-2005 frontend: corpus/upstream/common_cells/src/cf_math_pkg.sv
+Parsing SystemVerilog input from `corpus/upstream/common_cells/src/cf_math_pkg.sv' to AST representation.
+corpus/upstream/common_cells/src/cf_math_pkg.sv:24: ERROR: syntax error, unexpected TOK_AUTOMATIC

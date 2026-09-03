@@ -1,0 +1,657 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv; hierarchy -check -top prim_packer_fifo; synth -top prim_packer_fifo; check -assert; stat' --
+
+1. Executing Verilog-2005 frontend: corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv
+Parsing SystemVerilog input from `corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv' to AST representation.
+Generating RTLIL representation for module `\prim_packer_fifo'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \prim_packer_fifo
+
+2.2. Analyzing design hierarchy..
+Top module:  \prim_packer_fifo
+Removed 0 unused modules.
+
+3. Executing SYNTH pass.
+
+3.1. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1.1. Analyzing design hierarchy..
+Top module:  \prim_packer_fifo
+
+3.1.2. Analyzing design hierarchy..
+Top module:  \prim_packer_fifo
+Removed 0 unused modules.
+
+3.2. Executing PROC pass (convert processes to netlists).
+
+3.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:126$3 in module prim_packer_fifo.
+Marked 1 switch rules as full_case in process $proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:81$1 in module prim_packer_fifo.
+Removed a total of 0 dead cases.
+
+3.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 4 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.2.4. Executing PROC_INIT pass (extract init attributes).
+
+3.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_ni in `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:126$3'.
+Found async reset \rst_ni in `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:81$1'.
+
+3.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:126$3'.
+     1/1: $0\gen_unpack_mode.ptr_q[2:0]
+Creating decoders for process `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:81$1'.
+     1/3: $0\clr_q[0:0]
+     2/3: $0\data_q[31:0]
+     3/3: $0\depth_q[2:0]
+
+3.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\prim_packer_fifo.\gen_unpack_mode.ptr_q' using process `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:126$3'.
+  created $adff cell `$procdff$34' with positive edge clock and positive level reset.
+Creating register for signal `\prim_packer_fifo.\depth_q' using process `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:81$1'.
+  created $adff cell `$procdff$39' with positive edge clock and positive level reset.
+Creating register for signal `\prim_packer_fifo.\data_q' using process `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:81$1'.
+  created $adff cell `$procdff$44' with positive edge clock and positive level reset.
+Creating register for signal `\prim_packer_fifo.\clr_q' using process `\prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:81$1'.
+  created $adff cell `$procdff$49' with positive edge clock and positive level reset.
+
+3.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:126$3'.
+Removing empty process `prim_packer_fifo.$proc$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:81$1'.
+Cleaned up 0 empty switches.
+
+3.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+<suppressed ~11 debug messages>
+
+3.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+<suppressed ~2 debug messages>
+
+3.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+Removed 6 unused cells and 26 unused wires.
+<suppressed ~7 debug messages>
+
+3.5. Executing CHECK pass (checking for obvious problems).
+Checking module prim_packer_fifo...
+Found and reported 0 problems.
+
+3.6. Executing OPT pass (performing simple optimizations).
+
+3.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+
+3.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\prim_packer_fifo'.
+Computing hashes of 27 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+Computing hashes of 25 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
+
+3.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \prim_packer_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~10 debug messages>
+
+3.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \prim_packer_fifo.
+Performed a total of 0 changes.
+
+3.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\prim_packer_fifo'.
+Computing hashes of 25 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+Removed a total of 0 cells.
+
+3.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+3.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+
+3.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \prim_packer_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~10 debug messages>
+
+3.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \prim_packer_fifo.
+Performed a total of 0 changes.
+
+3.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\prim_packer_fifo'.
+Computing hashes of 25 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+Removed a total of 0 cells.
+
+3.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+
+3.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+
+3.6.16. Finished fast OPT passes. (There is nothing left to do.)
+
+3.7. Executing FSM pass (extract and optimize FSM).
+
+3.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+3.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+3.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+3.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+
+3.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+3.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+3.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+3.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+3.8. Executing OPT pass (performing simple optimizations).
+
+3.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+
+3.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\prim_packer_fifo'.
+Computing hashes of 25 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+Removed a total of 0 cells.
+
+3.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \prim_packer_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~10 debug messages>
+
+3.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \prim_packer_fifo.
+Performed a total of 0 changes.
+
+3.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\prim_packer_fifo'.
+Computing hashes of 25 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+Removed a total of 0 cells.
+
+3.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$44 ($adff) from module prim_packer_fifo (D = \data_d, Q = \data_q).
+Adding EN signal on $procdff$34 ($adff) from module prim_packer_fifo (D = \gen_unpack_mode.ptr_d, Q = \gen_unpack_mode.ptr_q).
+Adding EN signal on $procdff$39 ($adff) from module prim_packer_fifo (D = \depth_d, Q = \depth_q).
+
+3.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+
+3.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+<suppressed ~3 debug messages>
+
+3.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \prim_packer_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~10 debug messages>
+
+3.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \prim_packer_fifo.
+Performed a total of 0 changes.
+
+3.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\prim_packer_fifo'.
+Computing hashes of 28 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+Removed a total of 0 cells.
+
+3.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+
+3.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+
+3.8.16. Finished fast OPT passes. (There is nothing left to do.)
+
+3.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 26 bits (of 32) from port B of cell prim_packer_fifo.$shr$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:136$6 ($shr).
+Removed top 24 bits (of 32) from port Y of cell prim_packer_fifo.$shr$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:136$6 ($shr).
+Removed top 2 bits (of 3) from port B of cell prim_packer_fifo.$eq$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:137$7 ($eq).
+Removed top 2 bits (of 3) from port B of cell prim_packer_fifo.$sub$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:144$14 ($sub).
+Removed top 2 bits (of 3) from port B of cell prim_packer_fifo.$add$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:148$18 ($add).
+
+3.10. Executing PEEPOPT pass (run peephole optimizers).
+
+3.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+3.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module prim_packer_fifo:
+  creating $macc model for $add$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:148$18 ($add).
+  creating $macc model for $sub$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:144$14 ($sub).
+  creating $alu model for $macc $sub$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:144$14.
+  creating $alu model for $macc $add$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:148$18.
+  creating $alu model for $eq$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:137$7 ($eq): merged with $sub$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:144$14.
+  creating $alu cell for $add$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:148$18: $auto$alumacc.cc:512:replace_alu$59
+  creating $alu cell for $sub$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:144$14, $eq$corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:137$7: $auto$alumacc.cc:512:replace_alu$62
+  created 2 $alu and 0 $macc cells.
+
+3.13. Executing SHARE pass (SAT-based resource sharing).
+
+3.14. Executing OPT pass (performing simple optimizations).
+
+3.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+
+3.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\prim_packer_fifo'.
+Computing hashes of 28 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+Removed a total of 0 cells.
+
+3.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \prim_packer_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~10 debug messages>
+
+3.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \prim_packer_fifo.
+Performed a total of 0 changes.
+
+3.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\prim_packer_fifo'.
+Computing hashes of 28 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+Removed a total of 0 cells.
+
+3.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+3.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+
+3.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \prim_packer_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~10 debug messages>
+
+3.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \prim_packer_fifo.
+Performed a total of 0 changes.
+
+3.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\prim_packer_fifo'.
+Computing hashes of 28 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+Removed a total of 0 cells.
+
+3.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+
+3.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+
+3.14.16. Finished fast OPT passes. (There is nothing left to do.)
+
+3.15. Executing MEMORY pass.
+
+3.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+3.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+3.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+3.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+3.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+3.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+
+3.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+3.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+3.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+
+3.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+3.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+
+3.17. Executing OPT pass (performing simple optimizations).
+
+3.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+<suppressed ~16 debug messages>
+
+3.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\prim_packer_fifo'.
+Computing hashes of 25 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+Removed a total of 0 cells.
+
+3.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+Removed 0 unused cells and 3 unused wires.
+<suppressed ~1 debug messages>
+
+3.17.5. Finished fast OPT passes.
+
+3.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+3.19. Executing OPT pass (performing simple optimizations).
+
+3.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+
+3.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\prim_packer_fifo'.
+Computing hashes of 25 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+Removed a total of 0 cells.
+
+3.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \prim_packer_fifo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+3.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \prim_packer_fifo.
+Performed a total of 0 changes.
+
+3.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\prim_packer_fifo'.
+Computing hashes of 25 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+Removed a total of 0 cells.
+
+3.19.6. Executing OPT_SHARE pass.
+
+3.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+
+3.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+
+3.19.10. Finished fast OPT passes. (There is nothing left to do.)
+
+3.20. Executing TECHMAP pass (map to technology primitives).
+
+3.20.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+3.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$b8c0a997bce700f23568a5ada79cc6781d1f5ca0\_90_alu for cells of type $alu.
+Using template $paramod$3ef7d3dd227da7627a99c5e5a6a4deb817573e39\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $adffe.
+Using template $paramod$constmap:0cbbddc4c81f6bab72c70f407d1644fd9aee929e$paramod$99d3526a70cb61446f095825fdb95206e3eed84d\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shr.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000011 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $and.
+No more expansions possible.
+<suppressed ~928 debug messages>
+
+3.21. Executing OPT pass (performing simple optimizations).
+
+3.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+<suppressed ~50 debug messages>
+
+3.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\prim_packer_fifo'.
+Computing hashes of 146 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+Computing hashes of 144 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
+
+3.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+Removed 5 unused cells and 98 unused wires.
+<suppressed ~6 debug messages>
+
+3.21.5. Finished fast OPT passes.
+
+3.22. Executing ABC pass (technology mapping using ABC).
+
+3.22.1. Extracting gate netlist of module `\prim_packer_fifo' to `<abc-temp-dir>/input.blif'..
+
+3.22.1.1. Executed ABC.
+Extracted 100 gates and 175 wires to a netlist network with 73 inputs and 51 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:            ANDNOT cells:       50
+ABC RESULTS:               MUX cells:       24
+ABC RESULTS:              NAND cells:        1
+ABC RESULTS:               NOR cells:        3
+ABC RESULTS:               NOT cells:        2
+ABC RESULTS:                OR cells:        7
+ABC RESULTS:             ORNOT cells:        3
+ABC RESULTS:              XNOR cells:        1
+ABC RESULTS:               XOR cells:        3
+ABC RESULTS:        internal signals:       51
+ABC RESULTS:           input signals:       73
+ABC RESULTS:          output signals:       51
+Removing temp directory.
+Removing global temp directory.
+
+3.23. Executing OPT pass (performing simple optimizations).
+
+3.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module prim_packer_fifo.
+<suppressed ~8 debug messages>
+
+3.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\prim_packer_fifo'.
+Computing hashes of 135 cells of `\prim_packer_fifo'.
+Finding duplicate cells in `\prim_packer_fifo'.
+Removed a total of 0 cells.
+
+3.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \prim_packer_fifo..
+Removed 1 unused cells and 146 unused wires.
+<suppressed ~6 debug messages>
+
+3.23.5. Finished fast OPT passes.
+
+3.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `prim_packer_fifo'. Setting top module to prim_packer_fifo.
+
+3.24.1. Analyzing design hierarchy..
+Top module:  \prim_packer_fifo
+
+3.24.2. Analyzing design hierarchy..
+Top module:  \prim_packer_fifo
+Removed 0 unused modules.
+
+3.25. Printing statistics.
+
+=== prim_packer_fifo ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       68 wires
+      213 wire bits
+       21 public wires
+      166 public wire bits
+       10 ports
+       50 port bits
+      134 cells
+       50   $_ANDNOT_
+        2   $_AND_
+       38   $_DFFE_PN0P_
+        1   $_DFF_PN1_
+       24   $_MUX_
+        1   $_NAND_
+        3   $_NOR_
+        1   $_NOT_
+        3   $_ORNOT_
+        7   $_OR_
+        1   $_XNOR_
+        3   $_XOR_
+
+3.26. Executing CHECK pass (checking for obvious problems).
+Checking module prim_packer_fifo...
+Found and reported 0 problems.
+
+4. Executing CHECK pass (checking for obvious problems).
+Checking module prim_packer_fifo...
+Found and reported 0 problems.
+
+5. Printing statistics.
+
+=== prim_packer_fifo ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       68 wires
+      213 wire bits
+       21 public wires
+      166 public wire bits
+       10 ports
+       50 port bits
+      134 cells
+       50   $_ANDNOT_
+        2   $_AND_
+       38   $_DFFE_PN0P_
+        1   $_DFF_PN1_
+       24   $_MUX_
+        1   $_NAND_
+        3   $_NOR_
+        1   $_NOT_
+        3   $_ORNOT_
+        7   $_OR_
+        1   $_XNOR_
+        3   $_XOR_
+
+End of script. Logfile hash: eb84e3239e, CPU: user 0.12s system 0.01s, MEM: 20.25 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 42% 1x abc (0 sec), 16% 20x opt_expr (0 sec), ...

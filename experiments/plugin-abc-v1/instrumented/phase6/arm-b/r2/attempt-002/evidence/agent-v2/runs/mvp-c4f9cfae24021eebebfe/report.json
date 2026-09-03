@@ -1,0 +1,1383 @@
+{
+  "artifacts": {
+    "html": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/report.html",
+    "html_sha256": "9d00a0d46dafc5f0280bb2c7ac15c4240063a9910716932525c2502ebc29fd96",
+    "report": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/report.json",
+    "root": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe",
+    "snapshots": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/reports"
+  },
+  "candidates": [
+    {
+      "candidate": {
+        "artifacts": {
+          "candidate_record": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/candidate.json",
+          "diff": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/candidate.diff",
+          "root": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d"
+        },
+        "candidate": {
+          "artifact_dir": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d",
+          "baseline_compile_context": {
+            "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+            "defines": [],
+            "filelists": [],
+            "include_trees": [],
+            "schema_version": 1,
+            "sources": [
+              {
+                "logical_id": "source:0000:g01_add8_left.sv",
+                "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+              }
+            ],
+            "top": "g01_add8_left"
+          },
+          "baseline_design": {
+            "defines": [],
+            "design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+            "filelists": [],
+            "files": [
+              {
+                "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+                "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+              }
+            ],
+            "include_dirs": [],
+            "schema_version": 2,
+            "top": "g01_add8_left"
+          },
+          "baseline_design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+          "candidate_compile_context": {
+            "compile_context_hash": "2de30f999a4b45a464f998a3e3d3686061f37881c68151893752b26c39cd60e6",
+            "defines": [],
+            "filelists": [],
+            "include_trees": [],
+            "schema_version": 1,
+            "sources": [
+              {
+                "logical_id": "source:0000:g01_add8_left.sv",
+                "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+              }
+            ],
+            "top": "g01_add8_left"
+          },
+          "candidate_design": {
+            "defines": [],
+            "design_hash": "2475f778cbe664233a357ca0c2aa24653f2c243590660194b493cdf11d7398df",
+            "filelists": [],
+            "files": [
+              {
+                "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/design/sources/0000/g01_add8_left.sv",
+                "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+              }
+            ],
+            "include_dirs": [],
+            "schema_version": 2,
+            "top": "g01_add8_left"
+          },
+          "candidate_design_hash": "2475f778cbe664233a357ca0c2aa24653f2c243590660194b493cdf11d7398df",
+          "candidate_id": "addcand_8f83706addf00e0d",
+          "candidate_origin": "deterministic_rewrite",
+          "diff_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/candidate.diff",
+          "diff_sha256": "81991d5814cd7bbf863d4dd4bd3330e5d9aa95aa5095297e9cb4cdcbb40aff2e",
+          "document_type": "rtl-advisor.candidate",
+          "finding": {
+            "finding_id": "addsite_9067dfe8e174e103",
+            "limitations": [
+              "candidate is unproven until current Yosys formal verification passes",
+              "only two-state bit-vector equivalence is supported in this MVP"
+            ],
+            "operands": [
+              {
+                "name": "a",
+                "signed": false,
+                "width": 8
+              },
+              {
+                "name": "b",
+                "signed": false,
+                "width": 8
+              },
+              {
+                "name": "c",
+                "signed": false,
+                "width": 8
+              },
+              {
+                "name": "d",
+                "signed": false,
+                "width": 8
+              }
+            ],
+            "original_expression": "((a + b) + c) + d",
+            "reason": "unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree",
+            "replacement_expression": "((a + b) + (c + d))",
+            "source": {
+              "column": 14,
+              "end_column": 31,
+              "end_line": 5,
+              "end_offset": 111,
+              "file": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+              "line": 5,
+              "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+              "start_offset": 94
+            },
+            "status": "candidate_available",
+            "target": {
+              "name": "y",
+              "width": 8
+            },
+            "top": "g01_add8_left",
+            "transformation_id": "adder_reduction_association",
+            "transformation_version": "balanced-unsigned-add-chain-v2"
+          },
+          "finding_id": "addsite_9067dfe8e174e103",
+          "formal": {
+            "safe": false,
+            "status": "not_run"
+          },
+          "limitations": [
+            "candidate is isolated but unproven",
+            "Yosys two-state bit-vector RTL equivalence for a self-contained combinational top; X/Z behavior is not proved"
+          ],
+          "lint": {
+            "status": "not_run"
+          },
+          "measurement_levels": [
+            "M0",
+            "M1"
+          ],
+          "proof_contract": {
+            "assumptions": [
+              "two-state bit-vector RTL semantics"
+            ],
+            "kind": "combinational_rtl_equivalence",
+            "latency_relation": "combinational",
+            "level": "P1",
+            "observables": [
+              "all top-level outputs"
+            ],
+            "schema": "rtl-advisor-proof-v1"
+          },
+          "proof_contract_hash": "5b66aafbe183bb9f50c32ffaba2089ec51b3cd38c5e84206918306aa12d3a72a",
+          "record_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/candidate-core.json",
+          "run_schema": "rtl-advisor-run-v1",
+          "schema_version": 1,
+          "semantic_hash": "aeb005fc8645349286e1e9e039d9d0d429300462a7d2006ec77c0c303f776f5b",
+          "source_integrity": {
+            "candidate": {
+              "compile_context": {
+                "compile_context_hash": "2de30f999a4b45a464f998a3e3d3686061f37881c68151893752b26c39cd60e6",
+                "defines": [],
+                "filelists": [],
+                "include_trees": [],
+                "schema_version": 1,
+                "sources": [
+                  {
+                    "logical_id": "source:0000:g01_add8_left.sv",
+                    "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+                  }
+                ],
+                "top": "g01_add8_left"
+              },
+              "mismatches": [],
+              "ok": true
+            },
+            "original": {
+              "compile_context": {
+                "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+                "defines": [],
+                "filelists": [],
+                "include_trees": [],
+                "schema_version": 1,
+                "sources": [
+                  {
+                    "logical_id": "source:0000:g01_add8_left.sv",
+                    "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+                  }
+                ],
+                "top": "g01_add8_left"
+              },
+              "mismatches": [],
+              "ok": true
+            }
+          },
+          "status": "candidate_prepared",
+          "transformation_id": "adder_reduction_association",
+          "transformation_registry_hash": "ede9d27234c7c826bf115798b8df00774cc3e987a73be174c190ef6f99c28370",
+          "transformation_version": "balanced-unsigned-add-chain-v2"
+        },
+        "candidate_id": "addcand_8f83706addf00e0d",
+        "candidate_origin": "deterministic_rewrite",
+        "command": [
+          "rtl-advisor",
+          "--config",
+          "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/rtl-advisor.toml",
+          "agent",
+          "candidate",
+          "mvp-c4f9cfae24021eebebfe",
+          "--finding",
+          "addsite_9067dfe8e174e103",
+          "--schema-version",
+          "2",
+          "--json"
+        ],
+        "configuration_id": null,
+        "decision": "candidate_prepared",
+        "document_type": "rtl-advisor.agent.v2.candidate",
+        "executor": {
+          "id": null,
+          "registry_hash": null,
+          "version": null
+        },
+        "finding": {
+          "finding_id": "addsite_9067dfe8e174e103",
+          "limitations": [
+            "candidate is unproven until current Yosys formal verification passes",
+            "only two-state bit-vector equivalence is supported in this MVP"
+          ],
+          "operands": [
+            {
+              "name": "a",
+              "signed": false,
+              "width": 8
+            },
+            {
+              "name": "b",
+              "signed": false,
+              "width": 8
+            },
+            {
+              "name": "c",
+              "signed": false,
+              "width": 8
+            },
+            {
+              "name": "d",
+              "signed": false,
+              "width": 8
+            }
+          ],
+          "original_expression": "((a + b) + c) + d",
+          "reason": "unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree",
+          "replacement_expression": "((a + b) + (c + d))",
+          "source": {
+            "column": 14,
+            "end_column": 31,
+            "end_line": 5,
+            "end_offset": 111,
+            "file": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+            "line": 5,
+            "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+            "start_offset": 94
+          },
+          "status": "candidate_available",
+          "target": {
+            "name": "y",
+            "width": 8
+          },
+          "top": "g01_add8_left",
+          "transformation_id": "adder_reduction_association",
+          "transformation_version": "balanced-unsigned-add-chain-v2"
+        },
+        "flow_version": "rtl-advisor-agent-v2",
+        "limitations": [
+          "The isolated candidate is unproven until formal verification passes."
+        ],
+        "measurement_levels": [
+          "M0",
+          "M1"
+        ],
+        "objective": "balanced",
+        "parents": {
+          "review_semantic_hash": "f7d009aaa5158e5e67c3ed1740a097d2025a85bf68d081ac70ef5023f7e9a1dd"
+        },
+        "proof_contract": {
+          "assumptions": [
+            "two-state bit-vector RTL semantics"
+          ],
+          "kind": "combinational_rtl_equivalence",
+          "latency_relation": "combinational",
+          "level": "P1",
+          "observables": [
+            "all top-level outputs"
+          ],
+          "schema": "rtl-advisor-proof-v1"
+        },
+        "proof_contract_hash": "5b66aafbe183bb9f50c32ffaba2089ec51b3cd38c5e84206918306aa12d3a72a",
+        "reference_id": null,
+        "run_id": "mvp-c4f9cfae24021eebebfe",
+        "run_schema": "rtl-advisor-run-v1",
+        "schema_version": 2,
+        "semantic_hash": "076d94cd6380ec0cca2f7b68d7571a1e9d9dddfda2a2c953a880aa350d8938d0",
+        "source_integrity": {
+          "candidate": {
+            "compile_context": {
+              "compile_context_hash": "2de30f999a4b45a464f998a3e3d3686061f37881c68151893752b26c39cd60e6",
+              "defines": [],
+              "filelists": [],
+              "include_trees": [],
+              "schema_version": 1,
+              "sources": [
+                {
+                  "logical_id": "source:0000:g01_add8_left.sv",
+                  "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+                }
+              ],
+              "top": "g01_add8_left"
+            },
+            "mismatches": [],
+            "ok": true
+          },
+          "original": {
+            "compile_context": {
+              "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+              "defines": [],
+              "filelists": [],
+              "include_trees": [],
+              "schema_version": 1,
+              "sources": [
+                {
+                  "logical_id": "source:0000:g01_add8_left.sv",
+                  "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+                }
+              ],
+              "top": "g01_add8_left"
+            },
+            "mismatches": [],
+            "ok": true
+          }
+        },
+        "status": "candidate_prepared",
+        "transformation": {
+          "id": "adder_reduction_association",
+          "registry_hash": "ede9d27234c7c826bf115798b8df00774cc3e987a73be174c190ef6f99c28370",
+          "version": "balanced-unsigned-add-chain-v2"
+        }
+      },
+      "candidate_id": "addcand_8f83706addf00e0d",
+      "measurement": {
+        "artifacts": {
+          "evidence_record": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/measurement.json",
+          "evidence_semantic_hash": "338c067410b1b3fcbaa91fecb4263633dcdf5b31862530e4d3d5f3cce7180106",
+          "measurement": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement.json",
+          "root": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5"
+        },
+        "candidate_id": "addcand_8f83706addf00e0d",
+        "candidate_origin": "deterministic_rewrite",
+        "command": [
+          "rtl-advisor",
+          "--config",
+          "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/rtl-advisor.toml",
+          "agent",
+          "measure",
+          "mvp-c4f9cfae24021eebebfe",
+          "--candidate",
+          "addcand_8f83706addf00e0d",
+          "--schema-version",
+          "2",
+          "--json"
+        ],
+        "configuration_id": null,
+        "decision": "synthesis_handles",
+        "document_type": "rtl-advisor.agent.v2.measurement",
+        "flow_version": "rtl-advisor-agent-v2",
+        "formal": {
+          "semantic_hash": "7ecf9f8291ad407226676959704fbc1d336950570e9e4611d3b236fd588a5ce8",
+          "status": "passed"
+        },
+        "frontend": {
+          "kind": "read_verilog",
+          "plugin_path": null,
+          "plugin_sha256": null
+        },
+        "limitations": [
+          "This decision describes two pinned Yosys/ABC recipes and is not target-flow PPA."
+        ],
+        "measurement_levels": [
+          "M0",
+          "M1"
+        ],
+        "measurements": {
+          "standard": {
+            "baseline": {
+              "constraints": {
+                "driving_cell": "BUF_X1",
+                "output_load_ff": 10.0,
+                "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+              },
+              "design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+              "metrics": {
+                "abc_area_combinational": 147.63,
+                "abc_gate_count": 94,
+                "area_combinational": 147.63,
+                "area_sequential": 0.0,
+                "area_total": 147.63,
+                "cell_count": 94,
+                "cells_by_type": {
+                  "AND2_X1": 8,
+                  "AND3_X1": 5,
+                  "AOI21_X1": 9,
+                  "AOI21_X2": 4,
+                  "AOI21_X4": 2,
+                  "INV_X1": 1,
+                  "NAND2_X1": 7,
+                  "NAND3_X1": 3,
+                  "NOR2_X1": 3,
+                  "NOR2_X2": 1,
+                  "NOR3_X4": 2,
+                  "OAI21_X1": 1,
+                  "OAI21_X4": 2,
+                  "OR2_X1": 7,
+                  "OR3_X1": 1,
+                  "XNOR2_X1": 17,
+                  "XNOR2_X2": 7,
+                  "XOR2_X1": 10,
+                  "XOR2_X2": 4
+                },
+                "critical_delay_ps": 442.21,
+                "raw_cell_count": 94
+              },
+              "netlist": {
+                "cell_signature": "3a4d4970ccdfe6b1f6668cbe5cbbc3d54e76c773fa327f940eadc94df87b11f3",
+                "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/mapped.v",
+                "sha256": "bbd189e44ff668eae0ac30f92cea9686d04d34be21189560e9fa43dbeeef2cf9"
+              },
+              "provenance": {
+                "abc": {
+                  "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+                  "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                  "provider": "Yosys abc pass with explicit -exe",
+                  "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                  "transcript_sha256": "2ca1b346e6b1d6d994c7f3cd9e2174d4a365d59c31823199e547f26d9e39daaf",
+                  "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+                },
+                "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+                "command": [
+                  "yosys",
+                  "-Q",
+                  "-s",
+                  "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/synthesis.ys"
+                ],
+                "constraints_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/abc.constr",
+                "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+                "frontend": "read_verilog",
+                "frontend_plugin_path": null,
+                "frontend_plugin_sha256": null,
+                "liberty_name": "Nangate45 typical",
+                "liberty_path": "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+                "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+                "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+                "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/synthesis.log",
+                "log_sha256": "b8826f33ad0787aed51f6330e368b74effad059be60bb0dad3724ead44fd3372",
+                "profile": "standard",
+                "recipe_hash": "60078c22befb2b96ea7534dc573800f631ed3be6c8410c483db7e41234c19c01",
+                "script_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/synthesis.ys",
+                "script_sha256": "2e4332300318a9670a99336626d41499eba43172bf1e6828aee5088d99e3f60a",
+                "stat_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/stat.json",
+                "stat_sha256": "a088052dd96f53439374352fac468c709fe7682a1dd7e50a02c834aef39dcec5",
+                "warnings": {
+                  "count": 2,
+                  "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+                },
+                "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+                "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+                "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+              },
+              "role": "baseline",
+              "source_hashes": {
+                "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+              },
+              "status": "passed",
+              "top": "g01_add8_left"
+            },
+            "candidate": {
+              "constraints": {
+                "driving_cell": "BUF_X1",
+                "output_load_ff": 10.0,
+                "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+              },
+              "design_hash": "2475f778cbe664233a357ca0c2aa24653f2c243590660194b493cdf11d7398df",
+              "metrics": {
+                "abc_area_combinational": 147.63,
+                "abc_gate_count": 94,
+                "area_combinational": 147.63,
+                "area_sequential": 0.0,
+                "area_total": 147.63,
+                "cell_count": 94,
+                "cells_by_type": {
+                  "AND2_X1": 8,
+                  "AND3_X1": 5,
+                  "AOI21_X1": 9,
+                  "AOI21_X2": 4,
+                  "AOI21_X4": 2,
+                  "INV_X1": 1,
+                  "NAND2_X1": 7,
+                  "NAND3_X1": 3,
+                  "NOR2_X1": 3,
+                  "NOR2_X2": 1,
+                  "NOR3_X4": 2,
+                  "OAI21_X1": 1,
+                  "OAI21_X4": 2,
+                  "OR2_X1": 7,
+                  "OR3_X1": 1,
+                  "XNOR2_X1": 17,
+                  "XNOR2_X2": 7,
+                  "XOR2_X1": 10,
+                  "XOR2_X2": 4
+                },
+                "critical_delay_ps": 442.21,
+                "raw_cell_count": 94
+              },
+              "netlist": {
+                "cell_signature": "3a4d4970ccdfe6b1f6668cbe5cbbc3d54e76c773fa327f940eadc94df87b11f3",
+                "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/mapped.v",
+                "sha256": "bbd189e44ff668eae0ac30f92cea9686d04d34be21189560e9fa43dbeeef2cf9"
+              },
+              "provenance": {
+                "abc": {
+                  "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+                  "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                  "provider": "Yosys abc pass with explicit -exe",
+                  "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                  "transcript_sha256": "2ca1b346e6b1d6d994c7f3cd9e2174d4a365d59c31823199e547f26d9e39daaf",
+                  "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+                },
+                "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+                "command": [
+                  "yosys",
+                  "-Q",
+                  "-s",
+                  "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/synthesis.ys"
+                ],
+                "constraints_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/abc.constr",
+                "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+                "frontend": "read_verilog",
+                "frontend_plugin_path": null,
+                "frontend_plugin_sha256": null,
+                "liberty_name": "Nangate45 typical",
+                "liberty_path": "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+                "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+                "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+                "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/synthesis.log",
+                "log_sha256": "60ef685979390d1c351bb3d2e296d28c9a5c544658cbeea43f8335980b863a47",
+                "profile": "standard",
+                "recipe_hash": "60078c22befb2b96ea7534dc573800f631ed3be6c8410c483db7e41234c19c01",
+                "script_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/synthesis.ys",
+                "script_sha256": "a45c6a91b055402225e489972b583790e7109a0bc39cb83cea2d48f746666a98",
+                "stat_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/stat.json",
+                "stat_sha256": "a088052dd96f53439374352fac468c709fe7682a1dd7e50a02c834aef39dcec5",
+                "warnings": {
+                  "count": 2,
+                  "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+                },
+                "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+                "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+                "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+              },
+              "role": "candidate",
+              "source_hashes": {
+                "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/design/sources/0000/g01_add8_left.sv": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+              },
+              "status": "passed",
+              "top": "g01_add8_left"
+            },
+            "classification": "neutral",
+            "comparison": {
+              "area_total": {
+                "baseline": 147.63,
+                "candidate": 147.63,
+                "delta": 0.0,
+                "improvement_percent": 0.0
+              },
+              "cell_count": {
+                "baseline": 94.0,
+                "candidate": 94.0,
+                "delta": 0.0,
+                "improvement_percent": 0.0
+              },
+              "critical_delay_ps": {
+                "baseline": 442.21,
+                "candidate": 442.21,
+                "delta": 0.0,
+                "improvement_percent": 0.0
+              }
+            },
+            "recipe": {
+              "abc_provider": "explicit adjacent yosys-abc",
+              "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+              "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+              "driving_cell": "BUF_X1",
+              "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+              "frontend": "read_verilog",
+              "frontend_plugin_path": null,
+              "frontend_plugin_sha256": null,
+              "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+              "output_load_ff": 10.0,
+              "passes": [
+                "hierarchy -check",
+                "synth -flatten -noabc",
+                "dfflibmap",
+                "abc -exe -liberty -constr",
+                "clean",
+                "check -assert"
+              ],
+              "profile": "standard",
+              "recipe_hash": "60078c22befb2b96ea7534dc573800f631ed3be6c8410c483db7e41234c19c01",
+              "script_template": [
+                "read_liberty -lib <LIBERTY>",
+                "read_verilog -sv <INCLUDE_DIRS> <DEFINES> <SOURCES>",
+                "hierarchy -check -top g01_add8_left",
+                "synth -top g01_add8_left -flatten -noabc",
+                "dfflibmap -liberty <LIBERTY>",
+                "abc -exe <ABC> -liberty <LIBERTY> -constr <CONSTRAINTS>",
+                "clean",
+                "check -assert",
+                "stat -top g01_add8_left -liberty <LIBERTY> -json",
+                "write_verilog -noattr -noexpr <NETLIST>"
+              ],
+              "script_template_sha256": "6103bbb7ae173a3500d1c53477bec61b29ba67aba2a6d56fcc709927f4f74bcf",
+              "top": "g01_add8_left",
+              "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+              "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+            }
+          },
+          "stronger": {
+            "baseline": {
+              "constraints": {
+                "driving_cell": "BUF_X1",
+                "output_load_ff": 10.0,
+                "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+              },
+              "design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+              "metrics": {
+                "abc_area_combinational": 147.63,
+                "abc_gate_count": 94,
+                "area_combinational": 147.63,
+                "area_sequential": 0.0,
+                "area_total": 147.63,
+                "cell_count": 94,
+                "cells_by_type": {
+                  "AND2_X1": 8,
+                  "AND3_X1": 5,
+                  "AOI21_X1": 9,
+                  "AOI21_X2": 4,
+                  "AOI21_X4": 2,
+                  "INV_X1": 1,
+                  "NAND2_X1": 7,
+                  "NAND3_X1": 3,
+                  "NOR2_X1": 3,
+                  "NOR2_X2": 1,
+                  "NOR3_X4": 2,
+                  "OAI21_X1": 1,
+                  "OAI21_X4": 2,
+                  "OR2_X1": 7,
+                  "OR3_X1": 1,
+                  "XNOR2_X1": 17,
+                  "XNOR2_X2": 7,
+                  "XOR2_X1": 10,
+                  "XOR2_X2": 4
+                },
+                "critical_delay_ps": 442.21,
+                "raw_cell_count": 94
+              },
+              "netlist": {
+                "cell_signature": "3a4d4970ccdfe6b1f6668cbe5cbbc3d54e76c773fa327f940eadc94df87b11f3",
+                "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/mapped.v",
+                "sha256": "bbd189e44ff668eae0ac30f92cea9686d04d34be21189560e9fa43dbeeef2cf9"
+              },
+              "provenance": {
+                "abc": {
+                  "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+                  "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                  "provider": "Yosys abc pass with explicit -exe",
+                  "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                  "transcript_sha256": "650c2c049c03a7925eedae3abaad82eb3c3bc35e0e7556ccd0ee646cf5c887f9",
+                  "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+                },
+                "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+                "command": [
+                  "yosys",
+                  "-Q",
+                  "-s",
+                  "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/synthesis.ys"
+                ],
+                "constraints_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/abc.constr",
+                "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+                "frontend": "read_verilog",
+                "frontend_plugin_path": null,
+                "frontend_plugin_sha256": null,
+                "liberty_name": "Nangate45 typical",
+                "liberty_path": "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+                "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+                "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+                "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/synthesis.log",
+                "log_sha256": "f30c0850fc90ee4f3faff5c11ae7ccd9a02766f90cf0e701d510e436dce5d4e2",
+                "profile": "stronger",
+                "recipe_hash": "f07ec727c38629e023c3f0c3c8d7aa4e43dfce16b795c3be60a4889521ef2732",
+                "script_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/synthesis.ys",
+                "script_sha256": "964383cbf2dfd4fac004198b43128ddc9a149ba1f3768a7f5cb8e6015af6f5dc",
+                "stat_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/stat.json",
+                "stat_sha256": "a088052dd96f53439374352fac468c709fe7682a1dd7e50a02c834aef39dcec5",
+                "warnings": {
+                  "count": 2,
+                  "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+                },
+                "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+                "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+                "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+              },
+              "role": "baseline",
+              "source_hashes": {
+                "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+              },
+              "status": "passed",
+              "top": "g01_add8_left"
+            },
+            "candidate": {
+              "constraints": {
+                "driving_cell": "BUF_X1",
+                "output_load_ff": 10.0,
+                "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+              },
+              "design_hash": "2475f778cbe664233a357ca0c2aa24653f2c243590660194b493cdf11d7398df",
+              "metrics": {
+                "abc_area_combinational": 147.63,
+                "abc_gate_count": 94,
+                "area_combinational": 147.63,
+                "area_sequential": 0.0,
+                "area_total": 147.63,
+                "cell_count": 94,
+                "cells_by_type": {
+                  "AND2_X1": 8,
+                  "AND3_X1": 5,
+                  "AOI21_X1": 9,
+                  "AOI21_X2": 4,
+                  "AOI21_X4": 2,
+                  "INV_X1": 1,
+                  "NAND2_X1": 7,
+                  "NAND3_X1": 3,
+                  "NOR2_X1": 3,
+                  "NOR2_X2": 1,
+                  "NOR3_X4": 2,
+                  "OAI21_X1": 1,
+                  "OAI21_X4": 2,
+                  "OR2_X1": 7,
+                  "OR3_X1": 1,
+                  "XNOR2_X1": 17,
+                  "XNOR2_X2": 7,
+                  "XOR2_X1": 10,
+                  "XOR2_X2": 4
+                },
+                "critical_delay_ps": 442.21,
+                "raw_cell_count": 94
+              },
+              "netlist": {
+                "cell_signature": "3a4d4970ccdfe6b1f6668cbe5cbbc3d54e76c773fa327f940eadc94df87b11f3",
+                "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/mapped.v",
+                "sha256": "bbd189e44ff668eae0ac30f92cea9686d04d34be21189560e9fa43dbeeef2cf9"
+              },
+              "provenance": {
+                "abc": {
+                  "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+                  "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                  "provider": "Yosys abc pass with explicit -exe",
+                  "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                  "transcript_sha256": "650c2c049c03a7925eedae3abaad82eb3c3bc35e0e7556ccd0ee646cf5c887f9",
+                  "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+                },
+                "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+                "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+                "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+                "command": [
+                  "yosys",
+                  "-Q",
+                  "-s",
+                  "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/synthesis.ys"
+                ],
+                "constraints_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/abc.constr",
+                "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+                "frontend": "read_verilog",
+                "frontend_plugin_path": null,
+                "frontend_plugin_sha256": null,
+                "liberty_name": "Nangate45 typical",
+                "liberty_path": "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+                "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+                "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+                "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/synthesis.log",
+                "log_sha256": "53733af8b31ef19aba59c5372913d0619fa6b34b54ea9c77c41f843b88da5c46",
+                "profile": "stronger",
+                "recipe_hash": "f07ec727c38629e023c3f0c3c8d7aa4e43dfce16b795c3be60a4889521ef2732",
+                "script_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/synthesis.ys",
+                "script_sha256": "3f8be65aadb4c11dc52ef6aaaf7faffa0c4ad72fbedefe7a80f41116906b346b",
+                "stat_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/stat.json",
+                "stat_sha256": "a088052dd96f53439374352fac468c709fe7682a1dd7e50a02c834aef39dcec5",
+                "warnings": {
+                  "count": 2,
+                  "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+                },
+                "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+                "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+                "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+              },
+              "role": "candidate",
+              "source_hashes": {
+                "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/design/sources/0000/g01_add8_left.sv": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+              },
+              "status": "passed",
+              "top": "g01_add8_left"
+            },
+            "classification": "neutral",
+            "comparison": {
+              "area_total": {
+                "baseline": 147.63,
+                "candidate": 147.63,
+                "delta": 0.0,
+                "improvement_percent": 0.0
+              },
+              "cell_count": {
+                "baseline": 94.0,
+                "candidate": 94.0,
+                "delta": 0.0,
+                "improvement_percent": 0.0
+              },
+              "critical_delay_ps": {
+                "baseline": 442.21,
+                "candidate": 442.21,
+                "delta": 0.0,
+                "improvement_percent": 0.0
+              }
+            },
+            "recipe": {
+              "abc_provider": "explicit adjacent yosys-abc",
+              "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+              "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+              "driving_cell": "BUF_X1",
+              "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+              "frontend": "read_verilog",
+              "frontend_plugin_path": null,
+              "frontend_plugin_sha256": null,
+              "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+              "output_load_ff": 10.0,
+              "passes": [
+                "hierarchy -check",
+                "synth -flatten -noabc -run begin:fine",
+                "share -aggressive",
+                "opt -full",
+                "clean",
+                "synth -flatten -noabc -run fine:check",
+                "dfflibmap",
+                "abc -exe -liberty -constr",
+                "clean",
+                "check -assert"
+              ],
+              "profile": "stronger",
+              "recipe_hash": "f07ec727c38629e023c3f0c3c8d7aa4e43dfce16b795c3be60a4889521ef2732",
+              "script_template": [
+                "read_liberty -lib <LIBERTY>",
+                "read_verilog -sv <INCLUDE_DIRS> <DEFINES> <SOURCES>",
+                "hierarchy -check -top g01_add8_left",
+                "synth -top g01_add8_left -flatten -noabc -run begin:fine",
+                "share -aggressive",
+                "opt -full",
+                "clean",
+                "synth -top g01_add8_left -flatten -noabc -run fine:check",
+                "dfflibmap -liberty <LIBERTY>",
+                "abc -exe <ABC> -liberty <LIBERTY> -constr <CONSTRAINTS>",
+                "clean",
+                "check -assert",
+                "stat -top g01_add8_left -liberty <LIBERTY> -json",
+                "write_verilog -noattr -noexpr <NETLIST>"
+              ],
+              "script_template_sha256": "ffd73c827dda433080ff27dbdb912a2a6d0c9b800601d7ad6c10fe70d865af92",
+              "top": "g01_add8_left",
+              "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+              "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+            }
+          }
+        },
+        "objective": "balanced",
+        "parents": {
+          "verification_semantic_hash": "7ecf9f8291ad407226676959704fbc1d336950570e9e4611d3b236fd588a5ce8"
+        },
+        "proof_contract_hash": "5b66aafbe183bb9f50c32ffaba2089ec51b3cd38c5e84206918306aa12d3a72a",
+        "proof_level": "P1",
+        "reference_id": null,
+        "run_id": "mvp-c4f9cfae24021eebebfe",
+        "run_schema": "rtl-advisor-run-v1",
+        "schema_version": 2,
+        "semantic_hash": "1380954a8c3b0b2251c9f31bff6f57666863ed02a0dfc2cfc4f4e4cd710b130a",
+        "source_integrity": {
+          "baseline": {
+            "mismatches": [],
+            "ok": true
+          },
+          "candidate": {
+            "mismatches": [],
+            "ok": true
+          }
+        },
+        "status": "completed",
+        "transformation": {
+          "id": "adder_reduction_association",
+          "registry_hash": "ede9d27234c7c826bf115798b8df00774cc3e987a73be174c190ef6f99c28370",
+          "version": "balanced-unsigned-add-chain-v2"
+        },
+        "transformation_registry_hash": "ede9d27234c7c826bf115798b8df00774cc3e987a73be174c190ef6f99c28370"
+      },
+      "verification": {
+        "artifacts": {
+          "evidence_record": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/formal/formal.json",
+          "evidence_semantic_hash": "5510f3ecfc62b99acf163afce58f9a8b5f37eb3397e31917497292f06dca9ceb",
+          "verification": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/verification.json"
+        },
+        "baseline_design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+        "candidate_design_hash": "2475f778cbe664233a357ca0c2aa24653f2c243590660194b493cdf11d7398df",
+        "candidate_id": "addcand_8f83706addf00e0d",
+        "candidate_origin": "deterministic_rewrite",
+        "command": [
+          "rtl-advisor",
+          "--config",
+          "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/rtl-advisor.toml",
+          "agent",
+          "verify",
+          "mvp-c4f9cfae24021eebebfe",
+          "--candidate",
+          "addcand_8f83706addf00e0d",
+          "--schema-version",
+          "2",
+          "--json"
+        ],
+        "compile_context": {
+          "baseline": {
+            "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+            "defines": [],
+            "filelists": [],
+            "include_trees": [],
+            "schema_version": 1,
+            "sources": [
+              {
+                "logical_id": "source:0000:g01_add8_left.sv",
+                "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+              }
+            ],
+            "top": "g01_add8_left"
+          },
+          "candidate": {
+            "compile_context_hash": "2de30f999a4b45a464f998a3e3d3686061f37881c68151893752b26c39cd60e6",
+            "defines": [],
+            "filelists": [],
+            "include_trees": [],
+            "schema_version": 1,
+            "sources": [
+              {
+                "logical_id": "source:0000:g01_add8_left.sv",
+                "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+              }
+            ],
+            "top": "g01_add8_left"
+          }
+        },
+        "configuration_id": null,
+        "decision": "formal_passed",
+        "document_type": "rtl-advisor.agent.v2.verification",
+        "executor": {
+          "id": null,
+          "registry_hash": null,
+          "version": null
+        },
+        "flow_version": "rtl-advisor-agent-v2",
+        "formal": {
+          "backend": "yosys-combinational-equiv-v1",
+          "command": [
+            "yosys",
+            "-Q",
+            "-s",
+            "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/formal/equivalence.ys"
+          ],
+          "detail": null,
+          "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/formal/equivalence.log",
+          "log_sha256": "147c1dac061089e03248cc769e6b83818f560b8037bbcbdbc4f93b9e4939b3f0",
+          "returncode": 0,
+          "script_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/formal/equivalence.ys",
+          "script_sha256": "f36fe027a848ebc6daa9119e05b071cfff18b250d90de5dbed4b7aac6b4422ac",
+          "semantics": "Yosys two-state bit-vector RTL equivalence for a self-contained combinational top; X/Z behavior is not proved",
+          "status": "passed",
+          "success_marker_seen": true,
+          "tool_identity": {
+            "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+            "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+            "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+          },
+          "tool_identity_after": {
+            "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+            "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+            "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+          },
+          "tool_identity_before": {
+            "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+            "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+            "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+          },
+          "tool_identity_error": null,
+          "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+          "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+          "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+        },
+        "limitations": [
+          "The proof covers two-state combinational RTL semantics."
+        ],
+        "lint": {
+          "pyslang": {
+            "baseline": {
+              "diagnostics": [],
+              "ok": true,
+              "status": "passed",
+              "version": "9.1.0"
+            },
+            "candidate": {
+              "diagnostics": [],
+              "ok": true,
+              "status": "passed",
+              "version": "9.1.0"
+            }
+          },
+          "status": "passed",
+          "verilator": {
+            "baseline": {
+              "blocking_warnings": [],
+              "command": [
+                "verilator",
+                "--lint-only",
+                "--language",
+                "1800-2017",
+                "--Wall",
+                "--Wno-fatal",
+                "--Wno-DECLFILENAME",
+                "--top-module",
+                "g01_add8_left",
+                "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv"
+              ],
+              "detail": null,
+              "identity": {
+                "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+                "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+                "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+              },
+              "identity_after": {
+                "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+                "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+                "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+              },
+              "identity_before": {
+                "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+                "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+                "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+              },
+              "identity_error": null,
+              "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/formal/baseline-verilator.log",
+              "log_sha256": "202adbe0ce7895aed7d659729d3d49e1b5dac1798df0470ded2f24f996e4dcf1",
+              "returncode": 0,
+              "status": "passed"
+            },
+            "candidate": {
+              "blocking_warnings": [],
+              "command": [
+                "verilator",
+                "--lint-only",
+                "--language",
+                "1800-2017",
+                "--Wall",
+                "--Wno-fatal",
+                "--Wno-DECLFILENAME",
+                "--top-module",
+                "g01_add8_left",
+                "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/design/sources/0000/g01_add8_left.sv"
+              ],
+              "detail": null,
+              "identity": {
+                "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+                "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+                "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+              },
+              "identity_after": {
+                "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+                "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+                "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+              },
+              "identity_before": {
+                "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+                "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+                "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+              },
+              "identity_error": null,
+              "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/formal/candidate-verilator.log",
+              "log_sha256": "2c0487b4c64fba86c22031f4d2fdc7ce75d4b37dd17610146b0387ac6de58d9a",
+              "returncode": 0,
+              "status": "passed"
+            },
+            "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+          }
+        },
+        "parents": {
+          "candidate_semantic_hash": "076d94cd6380ec0cca2f7b68d7571a1e9d9dddfda2a2c953a880aa350d8938d0"
+        },
+        "proof_contract": {
+          "assumptions": [
+            "two-state bit-vector RTL semantics"
+          ],
+          "kind": "combinational_rtl_equivalence",
+          "latency_relation": "combinational",
+          "level": "P1",
+          "observables": [
+            "all top-level outputs"
+          ],
+          "schema": "rtl-advisor-proof-v1"
+        },
+        "proof_contract_hash": "5b66aafbe183bb9f50c32ffaba2089ec51b3cd38c5e84206918306aa12d3a72a",
+        "reference_id": null,
+        "run_id": "mvp-c4f9cfae24021eebebfe",
+        "run_schema": "rtl-advisor-run-v1",
+        "safe": true,
+        "schema_version": 2,
+        "semantic_hash": "7ecf9f8291ad407226676959704fbc1d336950570e9e4611d3b236fd588a5ce8",
+        "source_integrity": {
+          "candidate": {
+            "compile_context": {
+              "compile_context_hash": "2de30f999a4b45a464f998a3e3d3686061f37881c68151893752b26c39cd60e6",
+              "defines": [],
+              "filelists": [],
+              "include_trees": [],
+              "schema_version": 1,
+              "sources": [
+                {
+                  "logical_id": "source:0000:g01_add8_left.sv",
+                  "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+                }
+              ],
+              "top": "g01_add8_left"
+            },
+            "mismatches": [],
+            "ok": true
+          },
+          "diff": {
+            "ok": true
+          },
+          "original": {
+            "compile_context": {
+              "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+              "defines": [],
+              "filelists": [],
+              "include_trees": [],
+              "schema_version": 1,
+              "sources": [
+                {
+                  "logical_id": "source:0000:g01_add8_left.sv",
+                  "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+                }
+              ],
+              "top": "g01_add8_left"
+            },
+            "mismatches": [],
+            "ok": true
+          }
+        },
+        "status": "formal_passed",
+        "transformation": {
+          "id": "adder_reduction_association",
+          "registry_hash": "ede9d27234c7c826bf115798b8df00774cc3e987a73be174c190ef6f99c28370",
+          "version": "balanced-unsigned-add-chain-v2"
+        }
+      }
+    }
+  ],
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/rtl-advisor.toml",
+    "agent",
+    "report",
+    "mvp-c4f9cfae24021eebebfe",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "completion": {
+    "candidate_count": 1,
+    "complete": true,
+    "eligible_site_count": 1,
+    "formal_count": 1,
+    "formal_status_counts": {
+      "formal_passed": 1
+    },
+    "measurement_count": 1,
+    "measurement_decision_counts": {
+      "synthesis_handles": 1
+    },
+    "missing_candidate_finding_ids": [],
+    "missing_formal_candidate_ids": [],
+    "missing_measurement_candidate_ids": [],
+    "mixed_outcomes": false,
+    "terminal_candidate_count": 1
+  },
+  "decision": "synthesis_handles",
+  "document_type": "rtl-advisor.agent.v2.report",
+  "flow_version": "rtl-advisor-agent-v2",
+  "limitations": [
+    "A finding is not a recommendation until formal and both synthesis recipes support it.",
+    "Results apply only to the recorded Yosys/ABC recipes."
+  ],
+  "objective": "balanced",
+  "parents": {
+    "candidates": {
+      "addcand_8f83706addf00e0d": {
+        "candidate_semantic_hash": "076d94cd6380ec0cca2f7b68d7571a1e9d9dddfda2a2c953a880aa350d8938d0",
+        "measurement_semantic_hash": "1380954a8c3b0b2251c9f31bff6f57666863ed02a0dfc2cfc4f4e4cd710b130a",
+        "verification_semantic_hash": "7ecf9f8291ad407226676959704fbc1d336950570e9e4611d3b236fd588a5ce8"
+      }
+    },
+    "review_semantic_hash": "f7d009aaa5158e5e67c3ed1740a097d2025a85bf68d081ac70ef5023f7e9a1dd"
+  },
+  "result_counts": {
+    "formal": {
+      "formal_passed": 1
+    },
+    "synthesis": {
+      "synthesis_handles": 1
+    }
+  },
+  "review": {
+    "artifacts": {
+      "input": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/input.json",
+      "review": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/review.json",
+      "root": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe"
+    },
+    "candidate_generation_allowed": true,
+    "command": [
+      "rtl-advisor",
+      "--config",
+      "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/rtl-advisor.toml",
+      "agent",
+      "review",
+      "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+      "--objective",
+      "balanced",
+      "--top",
+      "g01_add8_left",
+      "--schema-version",
+      "2",
+      "--json"
+    ],
+    "coverage": {
+      "eligible_site_count": 1,
+      "excluded_site_count": 0
+    },
+    "decision": "candidate_available",
+    "document_type": "rtl-advisor.agent.v2.review",
+    "evidence": {
+      "input_semantic_hash": "45cda69cc2e269e07c5747fad9ea23368c3025054ddd2b4154c53bba755b9929",
+      "model_used": false,
+      "rules_only": true,
+      "transformation_registry_hash": "ede9d27234c7c826bf115798b8df00774cc3e987a73be174c190ef6f99c28370"
+    },
+    "exclusions": [],
+    "findings": [
+      {
+        "finding_id": "addsite_9067dfe8e174e103",
+        "limitations": [
+          "candidate is unproven until current Yosys formal verification passes",
+          "only two-state bit-vector equivalence is supported in this MVP"
+        ],
+        "operands": [
+          {
+            "name": "a",
+            "signed": false,
+            "width": 8
+          },
+          {
+            "name": "b",
+            "signed": false,
+            "width": 8
+          },
+          {
+            "name": "c",
+            "signed": false,
+            "width": 8
+          },
+          {
+            "name": "d",
+            "signed": false,
+            "width": 8
+          }
+        ],
+        "original_expression": "((a + b) + c) + d",
+        "reason": "unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree",
+        "replacement_expression": "((a + b) + (c + d))",
+        "source": {
+          "column": 14,
+          "end_column": 31,
+          "end_line": 5,
+          "end_offset": 111,
+          "file": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+          "line": 5,
+          "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+          "start_offset": 94
+        },
+        "status": "candidate_available",
+        "target": {
+          "name": "y",
+          "width": 8
+        },
+        "top": "g01_add8_left",
+        "transformation_id": "adder_reduction_association",
+        "transformation_version": "balanced-unsigned-add-chain-v2"
+      }
+    ],
+    "flow_version": "rtl-advisor-agent-v2",
+    "input": {
+      "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+      "defines": [],
+      "design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+      "files": [
+        {
+          "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+          "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+        }
+      ],
+      "include_dirs": [],
+      "kind": "rtl_file",
+      "provenance": {
+        "scope": "explicitly_approved_open_or_generated"
+      },
+      "requested_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+      "source_integrity": {
+        "mismatches": [],
+        "ok": true
+      },
+      "top": "g01_add8_left"
+    },
+    "limitations": [
+      "A finding is only a candidate to evaluate, not a recommendation.",
+      "The source is unchanged; any candidate must be requested explicitly."
+    ],
+    "objective": "balanced",
+    "run_id": "mvp-c4f9cfae24021eebebfe",
+    "run_schema": "rtl-advisor-run-v1",
+    "schema_version": 2,
+    "semantic_hash": "f7d009aaa5158e5e67c3ed1740a097d2025a85bf68d081ac70ef5023f7e9a1dd",
+    "status": "completed"
+  },
+  "run_id": "mvp-c4f9cfae24021eebebfe",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "888e684dea60df29b41a4c70e681635461b6251fb65aea7e9310fffc4d628652",
+  "source_integrity": {
+    "mismatches": [],
+    "ok": true
+  },
+  "status": "completed"
+}

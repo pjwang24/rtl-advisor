@@ -1,0 +1,17 @@
+{
+  "document_type": "rtl-advisor.workflow.request",
+  "input": {
+    "compile_context_hash": "92a52e17da0a04039f7ce941064c08325d25ba02694a0d69f707341bf90d0f59",
+    "defines": [],
+    "include_dirs": [],
+    "kind": "generated_rtl",
+    "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g08_signed_chain.sv",
+    "sha256": "b012fa81c56e0e2a101f605b9b8f00de337063c29d9217c8ffd020b767372d6d",
+    "top": "g08_signed_chain"
+  },
+  "objective": "balanced",
+  "schema": "rtl-advisor-workflow-request-v1",
+  "schema_version": 1,
+  "semantic_hash": "1fbac3867c4f6df9f8718dd4269b4a1f1d80ebcbb2008a4d24674f3a5f472d96",
+  "workflow_id": "workflow-a00a174912f1484f3dc5"
+}

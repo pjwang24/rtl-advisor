@@ -1,0 +1,135 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/input.json",
+    "review": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/review.json",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407"
+  },
+  "candidate_generation_allowed": true,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv",
+    "--objective",
+    "balanced",
+    "--top",
+    "g03_mixed_safe_add",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 1,
+    "excluded_site_count": 1
+  },
+  "decision": "candidate_available",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "032a83b2505a8467061120a9ae2676809da0d0b34c9a95fc0e610f1bf3b1909b",
+    "model_used": false,
+    "rules_only": true
+  },
+  "exclusions": [
+    {
+      "detail": "this procedural region is outside the MVP rewrite scope",
+      "exclusion_id": "addexclude_d5aae037bb7859ea",
+      "reason_code": "procedural_or_generated_rtl",
+      "source": {
+        "end_offset": 332,
+        "file": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv",
+        "sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998",
+        "start_offset": 183
+      },
+      "status": "excluded",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "addsite_37a14af9e43e75b3",
+      "limitations": [
+        "candidate is unproven until current Yosys formal verification passes",
+        "only two-state bit-vector equivalence is supported in this MVP"
+      ],
+      "operands": [
+        {
+          "name": "a",
+          "signed": false,
+          "width": 16
+        },
+        {
+          "name": "b",
+          "signed": false,
+          "width": 16
+        },
+        {
+          "name": "c",
+          "signed": false,
+          "width": 16
+        },
+        {
+          "name": "d",
+          "signed": false,
+          "width": 16
+        }
+      ],
+      "original_expression": "((a + b) + c) + d",
+      "reason": "unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree",
+      "replacement_expression": "((a + b) + (c + d))",
+      "source": {
+        "column": 16,
+        "end_column": 33,
+        "end_line": 7,
+        "end_offset": 179,
+        "file": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv",
+        "line": 7,
+        "sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998",
+        "start_offset": 162
+      },
+      "status": "candidate_available",
+      "target": {
+        "name": "sum",
+        "width": 16
+      },
+      "top": "g03_mixed_safe_add",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "8b1d24e03eadce1a1ab8fe9dd234d07ae94b69109f0a357c7afaeae243e53ae0",
+    "defines": [],
+    "design_hash": "f38eb4380cf2bab0375ccd22c0ff9eac8b4eaf2dd559a5357147e8ebb91e416b",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv",
+        "sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "g03_mixed_safe_add"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-0210319ddd68c5e50407",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "37c5d06ecbec93f93beb0277370edb96768900a700c8ab8aba6e2a09d7d6e5a5",
+  "status": "completed"
+}

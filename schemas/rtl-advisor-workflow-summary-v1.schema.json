@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-workflow-summary-v1.schema.json",
+  "title": "RTL Advisor Workflow Summary V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "schema",
+    "document_type",
+    "workflow_id",
+    "request_semantic_hash",
+    "authorization_semantic_hash",
+    "state_semantic_hash",
+    "status",
+    "authorized_through",
+    "completed_stages",
+    "decision",
+    "safe",
+    "limitations",
+    "next_action",
+    "artifacts",
+    "semantic_hash"
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "stage": {
+      "enum": ["capabilities", "review", "candidate", "verify", "measure"]
+    },
+    "profileResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification"],
+      "properties": {
+        "classification": {
+          "enum": ["improved", "neutral", "regressed"]
+        },
+        "area_improvement_percent": {"type": ["number", "null"]},
+        "delay_improvement_percent": {"type": ["number", "null"]}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-workflow-summary-v1"},
+    "document_type": {"const": "rtl-advisor.workflow.summary"},
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^workflow-[0-9a-f]{20}$"
+    },
+    "request_semantic_hash": {"$ref": "#/$defs/sha256"},
+    "authorization_semantic_hash": {"$ref": "#/$defs/sha256"},
+    "state_semantic_hash": {"$ref": "#/$defs/sha256"},
+    "status": {
+      "enum": [
+        "ready",
+        "running",
+        "waiting_authorization",
+        "blocked",
+        "failed",
+        "completed",
+        "untrusted"
+      ]
+    },
+    "authorized_through": {
+      "enum": ["review", "candidate", "verify", "measure"]
+    },
+    "completed_stages": {
+      "type": "array",
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/stage"}
+    },
+    "decision": {
+      "enum": [
+        "pending",
+        "candidate_available",
+        "no_change",
+        "unsupported",
+        "candidate_prepared",
+        "formal_passed",
+        "formal_failed",
+        "formal_inconclusive",
+        "measured_improvement",
+        "synthesis_handles",
+        "flow_dependent",
+        "regression",
+        "evidence_incomplete"
+      ]
+    },
+    "safe": {"type": "boolean"},
+    "profile_results": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "standard": {"$ref": "#/$defs/profileResult"},
+        "stronger": {"$ref": "#/$defs/profileResult"}
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "next_action": {
+      "enum": [
+        "run_capabilities",
+        "run_review",
+        "request_candidate_authorization",
+        "prepare_candidate",
+        "request_verify_authorization",
+        "run_verification",
+        "request_measure_authorization",
+        "run_measurement",
+        "inspect_failure",
+        "none"
+      ]
+    },
+    "artifacts": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[a-z][a-z0-9_]*$"},
+      "additionalProperties": {"type": "string", "minLength": 1}
+    },
+    "normalized_commands": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "minItems": 1,
+        "items": {"type": "string"}
+      }
+    },
+    "semantic_hash": {"$ref": "#/$defs/sha256"}
+  }
+}

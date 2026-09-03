@@ -1,0 +1,217 @@
+{
+  "artifact_dir": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/formal",
+  "baseline_design_hash": "1e49c90b185383b61191990bca48e0e214b7915eb5e5d2dfd228021f95f02ac5",
+  "candidate_design_hash": "f761a9d3afdec7d0585a160dd0a03a5800b01da81c8d006a2155fcf40bc1ac92",
+  "candidate_id": "addcand_5db95f9b35f13ff5",
+  "compile_context": {
+    "baseline": {
+      "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+      "defines": [],
+      "filelists": [],
+      "include_trees": [],
+      "schema_version": 1,
+      "sources": [
+        {
+          "logical_id": "source:0000:g01_add8_left.sv",
+          "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+        }
+      ],
+      "top": "g01_add8_left"
+    },
+    "candidate": {
+      "compile_context_hash": "2de30f999a4b45a464f998a3e3d3686061f37881c68151893752b26c39cd60e6",
+      "defines": [],
+      "filelists": [],
+      "include_trees": [],
+      "schema_version": 1,
+      "sources": [
+        {
+          "logical_id": "source:0000:g01_add8_left.sv",
+          "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+        }
+      ],
+      "top": "g01_add8_left"
+    }
+  },
+  "document_type": "rtl-advisor.formal-result",
+  "finding_id": "addsite_9067dfe8e174e103",
+  "formal": {
+    "backend": "yosys-combinational-equiv-v1",
+    "command": [
+      "yosys",
+      "-Q",
+      "-s",
+      "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/formal/equivalence.ys"
+    ],
+    "detail": null,
+    "log_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/formal/equivalence.log",
+    "log_sha256": "521b776715b83942f37db431e6b6913b3a7627ca4687e3510425dcee9a0a146f",
+    "returncode": 0,
+    "script_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/formal/equivalence.ys",
+    "script_sha256": "2e193a055373981b02a876e61ce341880c6e7f8ea8ce618e2f6d8ad5b350307c",
+    "semantics": "Yosys two-state bit-vector RTL equivalence for a self-contained combinational top; X/Z behavior is not proved",
+    "status": "passed",
+    "success_marker_seen": true,
+    "tool_identity": {
+      "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+      "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+      "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+    },
+    "tool_identity_after": {
+      "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+      "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+      "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+    },
+    "tool_identity_before": {
+      "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+      "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+      "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+    },
+    "tool_identity_error": null,
+    "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+    "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+    "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+  },
+  "limitations": [
+    "Yosys two-state bit-vector RTL equivalence for a self-contained combinational top; X/Z behavior is not proved"
+  ],
+  "lint": {
+    "pyslang": {
+      "baseline": {
+        "diagnostics": [],
+        "ok": true,
+        "status": "passed",
+        "version": "9.1.0"
+      },
+      "candidate": {
+        "diagnostics": [],
+        "ok": true,
+        "status": "passed",
+        "version": "9.1.0"
+      }
+    },
+    "status": "passed",
+    "verilator": {
+      "baseline": {
+        "blocking_warnings": [],
+        "command": [
+          "verilator",
+          "--lint-only",
+          "--language",
+          "1800-2017",
+          "--Wall",
+          "--Wno-fatal",
+          "--Wno-DECLFILENAME",
+          "--top-module",
+          "g01_add8_left",
+          "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv"
+        ],
+        "detail": null,
+        "identity": {
+          "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+          "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+          "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+        },
+        "identity_after": {
+          "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+          "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+          "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+        },
+        "identity_before": {
+          "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+          "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+          "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+        },
+        "identity_error": null,
+        "log_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/formal/baseline-verilator.log",
+        "log_sha256": "2aa743ac2b8a6a67f07a472a9a88e739f642b641164a0a6f509c60a08bc68399",
+        "returncode": 0,
+        "status": "passed"
+      },
+      "candidate": {
+        "blocking_warnings": [],
+        "command": [
+          "verilator",
+          "--lint-only",
+          "--language",
+          "1800-2017",
+          "--Wall",
+          "--Wno-fatal",
+          "--Wno-DECLFILENAME",
+          "--top-module",
+          "g01_add8_left",
+          "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/design/sources/0000/g01_add8_left.sv"
+        ],
+        "detail": null,
+        "identity": {
+          "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+          "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+          "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+        },
+        "identity_after": {
+          "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+          "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+          "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+        },
+        "identity_before": {
+          "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+          "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+          "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+        },
+        "identity_error": null,
+        "log_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/formal/candidate-verilator.log",
+        "log_sha256": "fc807244c1ed34ab2cf9a5711feb03f0ab5ea881cabdcf83902c712db7ac22be",
+        "returncode": 0,
+        "status": "passed"
+      },
+      "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+    }
+  },
+  "record_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/formal/formal.json",
+  "run_schema": "rtl-advisor-run-v1",
+  "safe": true,
+  "schema_version": 1,
+  "semantic_hash": "cc7d539c580e9bafefd3b2af261a53dabe7334cfbbb1fae0c8ef2fcd37f65568",
+  "source_integrity": {
+    "candidate": {
+      "compile_context": {
+        "compile_context_hash": "2de30f999a4b45a464f998a3e3d3686061f37881c68151893752b26c39cd60e6",
+        "defines": [],
+        "filelists": [],
+        "include_trees": [],
+        "schema_version": 1,
+        "sources": [
+          {
+            "logical_id": "source:0000:g01_add8_left.sv",
+            "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+          }
+        ],
+        "top": "g01_add8_left"
+      },
+      "mismatches": [],
+      "ok": true
+    },
+    "diff": {
+      "ok": true
+    },
+    "original": {
+      "compile_context": {
+        "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+        "defines": [],
+        "filelists": [],
+        "include_trees": [],
+        "schema_version": 1,
+        "sources": [
+          {
+            "logical_id": "source:0000:g01_add8_left.sv",
+            "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+          }
+        ],
+        "top": "g01_add8_left"
+      },
+      "mismatches": [],
+      "ok": true
+    }
+  },
+  "status": "formal_passed"
+}

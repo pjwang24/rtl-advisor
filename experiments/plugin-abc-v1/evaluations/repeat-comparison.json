@@ -1,0 +1,85 @@
+{
+  "schema": "rtl-advisor-plugin-abc-repeat-comparison-v1",
+  "experiment_id": "plugin-abc-v1",
+  "comparisons": [
+    {
+      "arm": "A",
+      "repetitions": [
+        1,
+        2
+      ],
+      "decision_reproducibility_percent": 45.83,
+      "normalized_evidence_reproducibility_percent": 33.33,
+      "decision_disagreements": [
+        "g06",
+        "o01",
+        "o02",
+        "o03",
+        "o04",
+        "o05",
+        "o06",
+        "o07",
+        "o08",
+        "o09",
+        "o10",
+        "o11",
+        "o12"
+      ],
+      "evidence_disagreements": [
+        "g03",
+        "g04",
+        "g06",
+        "g07",
+        "o01",
+        "o02",
+        "o03",
+        "o04",
+        "o05",
+        "o06",
+        "o07",
+        "o08",
+        "o09",
+        "o10",
+        "o11",
+        "o12"
+      ],
+      "third_repetition_required": true
+    },
+    {
+      "arm": "B",
+      "repetitions": [
+        1,
+        2
+      ],
+      "decision_reproducibility_percent": 100.0,
+      "normalized_evidence_reproducibility_percent": 100.0,
+      "decision_disagreements": [],
+      "evidence_disagreements": [],
+      "third_repetition_required": false
+    },
+    {
+      "arm": "C",
+      "repetitions": [
+        1,
+        2
+      ],
+      "decision_reproducibility_percent": 70.83,
+      "normalized_evidence_reproducibility_percent": 87.5,
+      "decision_disagreements": [
+        "g05",
+        "g06",
+        "g07",
+        "g10",
+        "g11",
+        "g12",
+        "o09"
+      ],
+      "evidence_disagreements": [
+        "g05",
+        "g06",
+        "o09"
+      ],
+      "third_repetition_required": true
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+read_liberty -lib "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib"
+read_verilog -sv "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv"
+hierarchy -check -top g01_add8_left
+synth -top g01_add8_left -flatten -noabc -run begin:fine
+share -aggressive
+opt -full
+clean
+synth -top g01_add8_left -flatten -noabc -run fine:check
+dfflibmap -liberty "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib"
+abc -exe "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc" -liberty "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib" -constr "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/abc.constr"
+clean
+check -assert
+tee -o "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/stat.json" stat -top g01_add8_left -liberty "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib" -json
+write_verilog -noattr -noexpr "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/mapped.v"

@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "a80db492d9596f1015b1fda0f20b846d7c565bb5525beb70d8257186c0692c67",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:prim_count.sv",
+        "sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb"
+      }
+    ],
+    "top": "prim_count"
+  },
+  "defines": [],
+  "design_hash": "1ea36d4a2711900add0d0c3170d405c8885234660ac0ebb95da3ad61cfcfae88",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv",
+      "sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "3754d4efaf97a63a9a7eae4358452f36d371940dfd6ee70f412a79898ff65664",
+  "top": "prim_count"
+}

@@ -112,6 +112,9 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
         path = parsed.path.rstrip("/") or "/"
         store = self.server.data_store
         try:
+            if path == "/api/analytics/v1":
+                self._send_json(HTTPStatus.OK, store.analytics())
+                return
             if path == "/api/runs/v1":
                 self._send_json(HTTPStatus.OK, store.runs())
                 return

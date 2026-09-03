@@ -1,0 +1,138 @@
+{
+  "schema": "rtl-advisor-plugin-abc-arm-result-v1",
+  "experiment_id": "plugin-abc-v1",
+  "arm": "C",
+  "repetition": 3,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "manifest_sha256": "9a66873f7cd820f2aa2e31a20d99d961e3aa80e8e735d9613a55bdb0e09f3dc2",
+  "wall_time_seconds": 660.0,
+  "cases": [
+    {
+      "case_id": "g05",
+      "source_sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+      "decision": "inconclusive",
+      "scope_claim": "none",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv:6"
+      ],
+      "rationale": "The common operand suggests the broader rewrite y = a + (sel ? b : c), which could avoid an apparent duplicated adder. RTL Advisor preserved this conditional assignment as unsupported (review semantic hash 7eba89938bfc94ada461444e8b6fb5e02aac5b54f7281cb3a466523edfc74eb4; report semantic hash ac011bf8536200d7e8486d532312e3a2e41c6cd086a66d59bb4d2bf48e3b170d) and generated no candidate. Because the broader rewrite was not isolated, formally proved, and measured with both identical recipes, neither a change recommendation nor a synthesis-handles conclusion is supported.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": [
+        "RTL Advisor report decision is unsupported; candidate_generation_allowed=false; eligible_site_count=0.",
+        "Normalized review command: rtl-advisor --config /Users/peter/Desktop/CAD Stuff/rtl-advisor.toml agent review /Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv --objective balanced --top g05_mux_common_logic --schema-version 2 --json",
+        "Immutable artifacts: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-df6da05d4cc811ccb508/review.json and /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-df6da05d4cc811ccb508/report.json.",
+        "No case-appropriate formal proof or standard/stronger measurement exists for the broader factoring idea."
+      ]
+    },
+    {
+      "case_id": "g06",
+      "source_sha256": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6-18"
+      ],
+      "rationale": "The source is already a direct descending-priority encoder with explicit valid behavior. A case or casez spelling would be stylistic rather than a distinct structural candidate, and no other bounded change with a credible timing or area advantage was identified. RTL Advisor preserved the procedural region as outside its released family (review semantic hash ba161544555c38ae1d153c2736abbfaa33fd56ab0ddc911dc4328e775086a84d; report semantic hash 2a59484c30d0d3b579b726fdf8277d6fd4a424822408ed093d249b5f6402d70a).",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "RTL Advisor report decision is unsupported; candidate_generation_allowed=false; eligible_site_count=0.",
+        "Normalized review command: rtl-advisor --config /Users/peter/Desktop/CAD Stuff/rtl-advisor.toml agent review /Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv --objective balanced --top g06_priority_decode --schema-version 2 --json",
+        "Immutable artifacts: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-e1213134a1df608b6795/review.json and /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-e1213134a1df608b6795/report.json.",
+        "No candidate was advanced, so formal and synthesis comparison are not applicable."
+      ]
+    },
+    {
+      "case_id": "g07",
+      "source_sha256": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv:5-7"
+      ],
+      "rationale": "The 8-bit partial assignment is an explicit semantic truncation boundary. Reassociating a or b across that boundary can change behavior, while rearranging only the later expression offers no supported material advantage. RTL Advisor independently excluded the outer chain for width_or_truncation_risk and the inner addition for having fewer than three addends (review semantic hash 0fef25d8787021d522b5f10f645fef6057b07ed6f97f28052e1672ee8e80090e; report semantic hash b235e04272ed3600dbae2e244e7730ebf4c8dc66178a28611080c5e96b59ce8e).",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "RTL Advisor report decision is unsupported; candidate_generation_allowed=false; eligible_site_count=0.",
+        "Normalized review command: rtl-advisor --config /Users/peter/Desktop/CAD Stuff/rtl-advisor.toml agent review /Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv --objective balanced --top g07_width_truncation --schema-version 2 --json",
+        "Immutable artifacts: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-7b5ad31f5caa871222d7/review.json and /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-7b5ad31f5caa871222d7/report.json.",
+        "No candidate was advanced, so formal and synthesis comparison are not applicable."
+      ]
+    },
+    {
+      "case_id": "g10",
+      "source_sha256": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+      "decision": "inconclusive",
+      "scope_claim": "none",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:5-15"
+      ],
+      "rationale": "For unsigned operands, repeated saturation at the same maximum is mathematically associative, so a wider total followed by one saturation is a plausible broader candidate. RTL Advisor preserved the function/declaration region as unsupported (review semantic hash f8650c397c29dc0ece06df2b313b9a6ebb60b46cc9ed31b9727b1e943bea0137; report semantic hash d13d17367313af66c26c5c8a835d6ad8e13751c5be468e253e474196413e0a92) and generated no candidate. Without an isolated implementation, P1 formal proof, and identical two-recipe measurement, the potential simplification remains unproven and cannot be recommended.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": [
+        "RTL Advisor report decision is unsupported; candidate_generation_allowed=false; eligible_site_count=0.",
+        "Normalized review command: rtl-advisor --config /Users/peter/Desktop/CAD Stuff/rtl-advisor.toml agent review /Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv --objective balanced --top g10_function_boundary --schema-version 2 --json",
+        "Immutable artifacts: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-d9d2f9d3e3638a978e9a/review.json and /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-d9d2f9d3e3638a978e9a/report.json.",
+        "No case-appropriate formal proof or standard/stronger measurement exists for the broader saturation-folding idea."
+      ]
+    },
+    {
+      "case_id": "g11",
+      "source_sha256": "1c7e7a24c9db1fca9787798b355b2d9fca354646df1e056c229c658a3a8d36c6",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:13-23"
+      ],
+      "rationale": "This case contains a one-entry valid-ready state element and no arithmetic reduction target. Retiming, bypassing, or changing storage would affect latency or stateful handshake behavior and would require a sequential candidate and P2 proof; no bounded change with a credible PPA benefit was identified. RTL Advisor preserved the parameterized top as outside its released combinational scope (review semantic hash 06f5393abb88d6b10f58123e8233977bed5408db5c3bc95339e06927d12d3d3c; report semantic hash f2a095c5e33eba98348fa4dffaa355f15a193f3561931ed8e5a1b77e619650eb).",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "RTL Advisor report decision is unsupported; candidate_generation_allowed=false; eligible_site_count=0; sequential transformations are unsupported.",
+        "Normalized review command: rtl-advisor --config /Users/peter/Desktop/CAD Stuff/rtl-advisor.toml agent review /Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv --objective balanced --top g11_one_stage_stream --schema-version 2 --json",
+        "Immutable artifacts: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0dad30fc2a06cac8173e/review.json and /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0dad30fc2a06cac8173e/report.json.",
+        "No sequential candidate was advanced, so P2 formal and synthesis comparison are not applicable."
+      ]
+    },
+    {
+      "case_id": "g12",
+      "source_sha256": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:13-24"
+      ],
+      "rationale": "The two additions are separated by a register boundary. Reassociation across that boundary would change cycle alignment, latency, or input dependencies, while each individual stage has only one addition and offers no reduction-chain rewrite. RTL Advisor preserved the parameterized top as outside its released combinational scope (review semantic hash ae594a3579efeb740c933c64c2a0ab4eeac26c491fa4ed87a6b82380bee7b4ce; report semantic hash 6ee04be5730cfb8523d15c15c70a55695c481c24bd8e38a6ea57c9e0158adad1).",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "RTL Advisor report decision is unsupported; candidate_generation_allowed=false; eligible_site_count=0; sequential transformations are unsupported.",
+        "Normalized review command: rtl-advisor --config /Users/peter/Desktop/CAD Stuff/rtl-advisor.toml agent review /Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv --objective balanced --top g12_two_stage_pipeline --schema-version 2 --json",
+        "Immutable artifacts: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-9af714316568e5492e44/review.json and /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-9af714316568e5492e44/report.json.",
+        "No sequential candidate was advanced, so P2 formal and synthesis comparison are not applicable."
+      ]
+    },
+    {
+      "case_id": "o09",
+      "source_sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": [
+        "corpus/upstream/common_cells/src/stream_mux.sv:16-42"
+      ],
+      "rationale": "The module already uses canonical indexed selection for data and valid and a direct one-hot ready decode. Loop or case rewrites would be alternate source spellings without an identified structural advantage, so no broader candidate was advanced. RTL Advisor preserved the parameterized top as outside its released family (review semantic hash 57f7845d7a9f27fb4b8c9985c3d781e283143753f0d14a18012b082c4d482388; report semantic hash 7bce135998e448aa7d9811ae09b6f9d0fbd91fcbd53f95aa2fbb00918a5a9a71).",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "RTL Advisor report decision is unsupported; candidate_generation_allowed=false; eligible_site_count=0.",
+        "Normalized review command: rtl-advisor --config /Users/peter/Desktop/CAD Stuff/rtl-advisor.toml agent review /Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/stream_mux.sv --objective balanced --top stream_mux --schema-version 2 --json",
+        "Immutable artifacts: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-62956b8cd7f8b41b1f4e/review.json and /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-62956b8cd7f8b41b1f4e/report.json.",
+        "The released review did not elaborate the package/include context; no candidate was advanced, so formal and synthesis comparison are not applicable."
+      ]
+    }
+  ]
+}

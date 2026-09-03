@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "956b42af0e190b626e27ce831b9a6d63a8290bfaec1f3e5321099f1f87a8acd8",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:g07_width_truncation.sv",
+        "sha256": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2"
+      }
+    ],
+    "top": "g07_width_truncation"
+  },
+  "defines": [],
+  "design_hash": "224f28ebe3723c5980f29a74e6395c0b9e511408d2436c38ee7e7ae7eaf6e9a4",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv",
+      "sha256": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "b4e01a500d238028289fbd9e90e7355224c586044de8200c1273ac44bfc00fb7",
+  "top": "g07_width_truncation"
+}
