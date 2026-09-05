@@ -1,0 +1,89 @@
+{
+  "artifacts": {
+    "authorization": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/artifacts/workflows-v1/workflow-6eb04148ae3e719a40a5/authorizations/authorization-d46e26f5172234f94f34.json",
+    "config": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/rtl-advisor.toml",
+    "digest": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/artifacts/workflows-v1/workflow-6eb04148ae3e719a40a5/digests/733a59ed472b69fda03119edc72c4b1260b4048aa200db848af3b1470bbdc6da.json",
+    "events": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/codex-events.jsonl",
+    "prompt": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/prompt.txt",
+    "record": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/acceptance.json",
+    "response": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/response.md",
+    "stderr": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/codex-stderr.log"
+  },
+  "attempt": 3,
+  "checks": {
+    "candidate_ceiling_preserved": true,
+    "codex_exit_zero": true,
+    "compact_digest_under_4kb": true,
+    "installed_analyze_rtl_skill_selected": true,
+    "installed_tree_matches_repository": true,
+    "no_redundant_artifact_loading": true,
+    "no_separate_capability_call": true,
+    "prompt_hash_bound": true,
+    "runner_used_expected_compact_route": true,
+    "single_deterministic_runner_call": true,
+    "source_unchanged": true
+  },
+  "document_type": "rtl-advisor.installed-plugin-acceptance",
+  "phase7_comparison": {
+    "baseline": {
+      "mean_total_tokens": 448552.5,
+      "mean_uncached_token_volume": 75816.5,
+      "mean_wall_time_seconds": 445.519,
+      "name": "phase7_arm_b_two-run_mean_24-case_batch"
+    },
+    "comparability": "No efficiency reduction or regression can be inferred: this acceptance run is one candidate-ceiling case; the checked-in Phase 7 Arm B mean is a 24-case measure-ceiling batch.",
+    "observed": {
+      "total_tokens": 59805,
+      "uncached_token_volume": 31133,
+      "wall_time_seconds": 35.981
+    },
+    "performance_regression_assessment": "not_comparable"
+  },
+  "plugin": {
+    "installed_tree_sha256": "4ba2245bb4cae0b010f33bacff2a45ac9dcf3fa44e283c1bed1c0e4061906528",
+    "repository_tree_sha256": "4ba2245bb4cae0b010f33bacff2a45ac9dcf3fa44e283c1bed1c0e4061906528",
+    "runner_path": "/Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py",
+    "skill_path": "/Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/SKILL.md",
+    "version": "0.2.0-alpha.1+codex.20260903154742"
+  },
+  "schema": "rtl-advisor-installed-plugin-acceptance-v1",
+  "schema_version": 1,
+  "semantic_hash": "ae97560ede7971f5f422268c01a16baafd71330cb1a203ca4fcce3dc1bfbf472",
+  "status": "passed",
+  "telemetry": {
+    "agent_message_bytes": 1638,
+    "cache_write_input_tokens": 0,
+    "cached_input_tokens": 28672,
+    "command_categories": {
+      "other": 1,
+      "rtl_advisor": 1
+    },
+    "command_count": 2,
+    "command_output_bytes": 6861,
+    "command_wave_count": 2,
+    "input_tokens": 58500,
+    "output_bytes": 8499,
+    "output_tokens": 1305,
+    "reasoning_output_tokens": 518,
+    "total_tokens": 59805,
+    "uncached_token_volume": 31133,
+    "wall_time_seconds": 35.981
+  },
+  "thread_id": "01a0701e-c381-7a91-b133-9b1c074601ff",
+  "workflow": {
+    "action": "inconclusive",
+    "decision": "candidate_prepared",
+    "digest_bytes": 2323,
+    "digest_semantic_hash": "09a88cef89ce2d05b89f13caa5c4f18cd1d9b13e2647e0c32218b62a2e57dca6",
+    "formal_status": "not_run",
+    "measurement_status": "not_run",
+    "runner_command": "/bin/zsh -lc 'python3 /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py workflow prepare /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv --input-kind generated_rtl --objective balanced --authorized-through candidate --prompt-file /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/prompt.txt --top g01_add8_left --first-eligible --start --compact'",
+    "safe": false,
+    "stage_names": [
+      "candidate",
+      "capabilities",
+      "review"
+    ],
+    "workflow_id": "workflow-6eb04148ae3e719a40a5"
+  }
+}

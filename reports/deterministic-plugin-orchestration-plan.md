@@ -1,8 +1,8 @@
 # Deterministic Plugin Orchestration Plan
 
 **Date:** 2026-09-01  
-**Status:** Phase 5 corpus workflow implemented  
-**Product goal:** Turn working RTL into faster, smaller silicon without breaking behavior.
+**Status:** Phases 1–7 implemented; installed-plugin acceptance passed September 4, 2026
+**Product goal:** Turn RTL optimization into a reproducible, evidence-backed workflow that proves correctness and exposes PPA regressions before they reach production.
 
 ## Decision
 
@@ -342,7 +342,7 @@ have no coverage.
 - [x] Run plugin parity tests between direct CLI and plugin-orchestrated execution.
 - [x] Compare token usage, task completion, decision agreement, and latency in the
   existing plugin A/B/C framework.
-- [ ] Package and reinstall the plugin through the repository's release process.
+- [x] Package and reinstall the plugin through the repository's release process (after the Phase 7 gates passed).
 
 The Phase 6 state matrix now covers the valid review terminals (`no_change` and
 `unsupported`), all authorization ceilings, both formal non-pass terminals, all
@@ -494,11 +494,105 @@ The architecture is ready when:
 
 ## Recommended next implementation slice
 
-Add a deterministic multi-input batch adapter that executes the existing
-per-case workflow contracts but returns one compact result containing only the
-fields needed by the A/B schema. Codex should issue one batch command and read
-one compact summary; full review, candidate, proof, measurement, and report
-payloads must stay behind artifact paths. Re-run the same instrumented A/B
-protocol only after that contract is tested and plugin parity passes. A release
-remains gated on at least 25% total-token reduction with unchanged task
-completion and decision agreement.
+The batch adapter and installed-plugin acceptance are complete. A future
+performance release should repeat the matched 24-case A/B protocol with two
+repetitions and the existing quality, token, latency, and agreement gates.
+The acceptance smoke below does not replace that release experiment.
+
+## Installed-plugin fresh-thread acceptance — September 4, 2026
+
+**Result: passed for the representative candidate-only workflow.** Before work,
+`codex/mvp-v1` was clean at published commit
+`9b3b3e10449abdffba64ee475c5476d76a517fab`; fetching origin confirmed identical
+local and remote heads, with zero commits ahead or behind. The installed plugin
+was enabled at `0.2.0-alpha.1+codex.20260903154742`, and its entire plugin tree
+matched the repository byte-for-byte.
+
+The acceptance prompt requested balanced-PPA review of generated
+`g01_add8_left.sv`, top `g01_add8_left`, and preparation of the first eligible
+isolated candidate. It explicitly withheld formal and measurement permission.
+The fresh `codex exec --ephemeral` thread used the Phase 7 model and effort
+(`gpt-5.6-sol`, `xhigh`) with the installed plugin available through normal user
+configuration. Unlike the release benchmark's workspace source pin, no skill
+text was injected into developer instructions. All new evidence is under
+`experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/`.
+
+The successful thread `01a0701e-c381-7a91-b133-9b1c074601ff` read the installed
+`analyze-rtl/SKILL.md` exactly once, then called its installed
+`scripts/run_rtl_advisor.py workflow prepare` exactly once with
+`--authorized-through candidate --first-eligible --start --compact`. The
+recorded prompt hash matched the authorization basis. Only capabilities,
+review, and candidate stages were persisted. The returned digest recorded
+`candidate_prepared`, `action: inconclusive`, `safe: false`,
+`evidence_complete: false`, and formal/measurement `not_run`. The final response
+preserved these fields and requested verification authorization as its next
+action. There were no separate capability calls, individual-stage fallbacks,
+or commands after the successful runner call. No RTL or full stage artifact
+was loaded into the fresh thread's context.
+
+Authoritative `turn.completed` usage and process wall time were recorded with
+the existing Phase 7 parser and command diagnostics:
+
+| Measurement | Fresh acceptance | Checked-in Phase 7 Arm B mean |
+| --- | ---: | ---: |
+| Workload | 1 case, through candidate | 24 cases, through measure |
+| Total tokens (input + output) | 59,805 | 448,552.5 |
+| Uncached volume (input + output − cached input) | 31,133 | 75,816.5 |
+| Wall time, seconds | 35.981 | 445.519 |
+| Commands / command waves | 2 / 2 | 10.5 / 9.0 |
+| Command output bytes | 6,861 | 49,490 |
+
+The returned digest was 2,323 bytes, below the 4 KiB target. Input usage was
+58,500 tokens (28,672 cached); output usage was 1,305 tokens. Reasoning tokens
+are retained as a counter and are not added again to output usage. The two
+command outputs comprise the skill and digest. The workloads and configuration
+loading differ, so these totals do **not** establish a performance improvement
+or regression against Phase 7. Its frozen release evaluation and reported
+77.48% total-token, 46.86% uncached-token, and 30.12% latency reductions remain
+historical evidence. This acceptance completes 1/1 assigned workflow; it does
+not supply a new 24-case decision-agreement or PPA result.
+
+A separate deterministic replay of the same authorized command took 0.273
+seconds and preserved the workflow ID, digest semantic hash, source hash, and
+the bytes of all 33 artifact files, with no additional artifacts. That replay
+measures local execution only and has no model token counter. The acceptance
+auditor inspected authorization and artifact metadata after the measured thread
+ended; those audit reads are outside the model measurement.
+
+Two earlier attempts remain preserved. Attempt 001 omitted the required top
+module and returned compact `top_required` after one runner call; its completed
+turn recorded 59,605 total and 11,349 uncached tokens. Its process wall time was
+not durably captured and is unavailable. Attempt 002 hit the account usage
+limit before any plugin command; no authoritative usage exists. Neither is
+treated as a successful sample. The missing-top case exposed the recorder's
+assumption that every JSON result contained a digest artifact path. The new
+acceptance harness now validates document type, semantic hash, and runner exit
+code before looking up artifacts, and records failures with usage unavailable
+when no completed-turn counter exists. Providing the top corrected the test
+input; no change to the installed plugin, RTL, or deterministic engine was
+supported by the evidence.
+
+Evidence and reproduction:
+
+- [Acceptance record](../experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/acceptance.json)
+- [Exact prompt](../experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/prompt.txt)
+- [Fresh-thread event stream](../experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/codex-events.jsonl)
+- [Final response](../experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/response.md)
+- [Replay audit](../experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/replay.json)
+
+```bash
+.venv/bin/python scripts/plugin_installed_acceptance.py
+```
+
+The harness allocates a new attempt and isolated artifact directory each time.
+Optional `--replay-record <acceptance.json>` audits local reuse once and refuses
+to overwrite an existing replay record. Runtime artifacts remain local under
+the repository's existing `artifacts/` ignore rule; compact records, event
+streams, prompts, and response text retain the auditable handoff.
+
+Validation: **118 tests passed**, covering the 95-test release-critical workflow,
+runner, parity, telemetry, evaluation, and corpus set, plus 19 existing framework
+and evidence-exploration tests and four acceptance-recorder regression cases.
+The full slow integration suite was not rerun. Frozen Phase 6/7 evidence and
+the installed plugin were not modified; new work consists of the acceptance
+harness, its tests, new acceptance evidence, and this report update.

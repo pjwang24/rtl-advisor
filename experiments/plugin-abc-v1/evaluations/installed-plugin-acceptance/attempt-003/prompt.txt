@@ -1,0 +1,5 @@
+Use RTL Advisor to review the generated RTL at /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv, top module g01_add8_left, for balanced PPA and prepare the first eligible isolated candidate.
+
+Authorization stops at candidate preparation. Do not run formal verification or synthesis measurement, and do not modify the source. Use the installed RTL Advisor plugin, its normal compact workflow, and only the returned compact digest in your answer. Do not open stage artifacts, reports, logs, capabilities payloads, or the source after a successful runner call.
+
+The exact authorization prompt is stored at /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/prompt.txt; pass that path as the workflow prompt file. Keep any model-created session files under /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003.

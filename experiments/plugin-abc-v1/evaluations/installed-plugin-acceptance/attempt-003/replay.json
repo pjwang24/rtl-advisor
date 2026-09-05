@@ -1,0 +1,42 @@
+{
+  "acceptance_semantic_hash": "ae97560ede7971f5f422268c01a16baafd71330cb1a203ca4fcce3dc1bfbf472",
+  "artifact_file_count": 33,
+  "artifact_tree_sha256": "c4536340241ec546b7c8506f7a3b769b360e8dc36c493308d506739d98542a37",
+  "checks": {
+    "all_artifact_bytes_unchanged": true,
+    "authorization_ceiling_preserved": true,
+    "same_digest_semantic_hash": true,
+    "same_workflow_id": true,
+    "source_unchanged": true
+  },
+  "command": [
+    "/Users/peter/Desktop/rtl-advisor/.venv/bin/python",
+    "/Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py",
+    "--config",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/rtl-advisor.toml",
+    "workflow",
+    "prepare",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+    "--input-kind",
+    "generated_rtl",
+    "--objective",
+    "balanced",
+    "--authorized-through",
+    "candidate",
+    "--prompt-file",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-plugin-acceptance/attempt-003/prompt.txt",
+    "--top",
+    "g01_add8_left",
+    "--first-eligible",
+    "--start",
+    "--compact"
+  ],
+  "digest_bytes": 2323,
+  "document_type": "rtl-advisor.installed-plugin-replay-audit",
+  "measurement_scope": "deterministic runner only; no model token measurement",
+  "schema_version": 1,
+  "semantic_hash": "cb32e7a918ed13defcaac14f2aa1bdf240d24e17c2295947b8aae13a692794be",
+  "status": "passed",
+  "usage_available": false,
+  "wall_time_seconds": 0.273
+}
