@@ -1,0 +1,13 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv -I experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r1/attempt-002/scratch -D COMMON_CELLS_ASSERTS_OFF corpus/upstream/common_cells/src/fifo_v3.sv; hierarchy -top fifo_v3; proc; check' --
+
+1. Executing Verilog-2005 frontend: corpus/upstream/common_cells/src/fifo_v3.sv
+Parsing SystemVerilog input from `corpus/upstream/common_cells/src/fifo_v3.sv' to AST representation.
+corpus/upstream/common_cells/src/fifo_v3.sv:19: ERROR: syntax error, unexpected TOK_ID, expecting ')' or ',' or '='

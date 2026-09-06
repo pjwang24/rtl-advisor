@@ -1,0 +1,4 @@
+======== ABC command line "read_blif /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-a/r1/attempt-002/evidence/mapped/g07_baseline.blif; print_stats"
+Warning: Constant-0 drivers added to 4 non-driven nets in network "g07_width_truncation":
+$auto$maccmap.cc:240:synth$89.CO[1], $auto$alumacc.cc:512:replace_alu$5.CO[0], partial[0], $auto$maccmap.cc:114:fulladd$88.X[7] ...
+[1;37mg07_width_truncation          :[0m i/o =   32/    9  lat =    0  nd =   101  edge =    196  cube =   280  lev = 10

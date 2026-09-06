@@ -1,0 +1,249 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/candidates/g05_factor_common.sv; proc; equiv_make g05_mux_common_logic g05_mux_common_logic_candidate equiv; prep -top equiv; equiv_simple; equiv_status -assert' --
+
+1. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv' to AST representation.
+Generating RTLIL representation for module `\g05_mux_common_logic'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/candidates/g05_factor_common.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/candidates/g05_factor_common.sv' to AST representation.
+Generating RTLIL representation for module `\g05_mux_common_logic_candidate'.
+Successfully finished Verilog frontend.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic_candidate.
+Optimizing module g05_mux_common_logic.
+
+4. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: y_gold ($ternary$experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv:6$3_Y_gold), y_gate ($add$experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/candidates/g05_factor_common.sv:6$5_Y_gate) -> y
+Presumably equivalent wires: sel_gold (\sel_gold), sel_gate (\sel_gate) -> sel
+Presumably equivalent wires: c_gold (\c_gold), c_gate (\c_gate) -> c
+Presumably equivalent wires: b_gold (\b_gold), b_gate (\b_gate) -> b
+Presumably equivalent wires: a_gold (\a_gold), a_gate (\a_gate) -> a
+
+5. Executing PREP pass.
+
+5.1. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+5.1.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\g05_mux_common_logic_candidate'.
+Removing unused module `\g05_mux_common_logic'.
+Removed 2 unused modules.
+
+5.2. Executing PROC pass (convert processes to netlists).
+
+5.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+5.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+5.2.4. Executing PROC_INIT pass (extract init attributes).
+
+5.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+5.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+5.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+5.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+5.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+5.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+5.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+5.3. Executing FUTURE pass.
+
+5.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+5.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \equiv..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+5.6. Executing CHECK pass (checking for obvious problems).
+Checking module equiv...
+Found and reported 0 problems.
+
+5.7. Executing OPT pass (performing simple optimizations).
+
+5.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+5.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\equiv'.
+Computing hashes of 21 cells of `\equiv'.
+Finding duplicate cells in `\equiv'.
+Removed a total of 0 cells.
+
+5.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \equiv..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+5.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \equiv.
+Performed a total of 0 changes.
+
+5.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\equiv'.
+Computing hashes of 21 cells of `\equiv'.
+Finding duplicate cells in `\equiv'.
+Removed a total of 0 cells.
+
+5.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \equiv..
+
+5.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+5.7.8. Finished fast OPT passes. (There is nothing left to do.)
+
+5.8. Executing WREDUCE pass (reducing word size of cells).
+
+5.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \equiv..
+
+5.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.11. Executing OPT pass (performing simple optimizations).
+
+5.11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+5.11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\equiv'.
+Computing hashes of 21 cells of `\equiv'.
+Finding duplicate cells in `\equiv'.
+Removed a total of 0 cells.
+
+5.11.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \equiv..
+
+5.11.4. Finished fast OPT passes.
+
+5.12. Executing SORT pass.
+
+5.13. Printing statistics.
+
+=== equiv ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       18 wires
+      243 wire bits
+       15 public wires
+      195 public wire bits
+        5 ports
+       65 port bits
+       21 cells
+        3   $add
+       16   $equiv
+        2   $mux
+
+5.14. Executing CHECK pass (checking for obvious problems).
+Checking module equiv...
+Found and reported 0 problems.
+
+6. Executing EQUIV_SIMPLE pass.
+Found 16 unproven $equiv cells (1 groups) in equiv:
+ Grouping SAT models for \y:
+  Trying to prove $equiv for \y [0]:ezsat
+ success!
+  Trying to prove $equiv for \y [1]:ezsat
+ success!
+  Trying to prove $equiv for \y [2]:ezsat
+ success!
+  Trying to prove $equiv for \y [3]:ezsat
+ success!
+  Trying to prove $equiv for \y [4]:ezsat
+ success!
+  Trying to prove $equiv for \y [5]:ezsat
+ success!
+  Trying to prove $equiv for \y [6]:ezsat
+ success!
+  Trying to prove $equiv for \y [7]:ezsat
+ success!
+  Trying to prove $equiv for \y [8]:ezsat
+ success!
+  Trying to prove $equiv for \y [9]:ezsat
+ success!
+  Trying to prove $equiv for \y [10]:ezsat
+ success!
+  Trying to prove $equiv for \y [11]:ezsat
+ success!
+  Trying to prove $equiv for \y [12]:ezsat
+ success!
+  Trying to prove $equiv for \y [13]:ezsat
+ success!
+  Trying to prove $equiv for \y [14]:ezsat
+ success!
+  Trying to prove $equiv for \y [15]:ezsat
+ success!
+Proved 16 previously unproven $equiv cells.
+
+7. Executing EQUIV_STATUS pass.
+Found 16 $equiv cells in equiv:
+  Of those cells 16 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: 6c5dc82e87, CPU: user 0.04s system 0.01s, MEM: 14.45 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 37% 1x equiv_simple (0 sec), 18% 6x opt_expr (0 sec), ...

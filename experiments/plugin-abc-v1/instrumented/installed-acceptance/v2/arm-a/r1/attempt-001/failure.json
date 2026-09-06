@@ -1,0 +1,19 @@
+{
+  "agent_message_bytes": 0,
+  "arm": "A",
+  "attempt": 1,
+  "command_categories": {},
+  "command_count": 0,
+  "command_output_bytes": 0,
+  "command_wave_count": 0,
+  "events_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r1/attempt-001/codex-events.jsonl",
+  "exit_code": 1,
+  "output_bytes": 0,
+  "parse_error": "Codex JSONL has no completed turn with usage",
+  "repetition": 1,
+  "schema": "rtl-advisor-plugin-abc-attempt-failure-v1",
+  "stderr_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r1/attempt-001/codex-stderr.log",
+  "thread_id": null,
+  "usage_available": false,
+  "wall_time_seconds": 0.051
+}

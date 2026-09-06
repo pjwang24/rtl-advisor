@@ -1,0 +1,13 @@
+{
+  "tool": "Yosys 0.63 with bundled ABC",
+  "flow": "synth -flatten -noabc; abc -lut 4",
+  "cases": {
+    "g01": {"baseline_luts": 40, "candidate_luts": 40, "baseline_levels": 8, "candidate_levels": 8},
+    "g02": {"baseline_luts": 275, "candidate_luts": 275, "baseline_levels": 25, "candidate_levels": 25},
+    "g03": {"baseline_luts": 127, "candidate_luts": 127, "baseline_levels": 14, "candidate_levels": 14},
+    "g04": {"baseline_luts": 112, "candidate_luts": 112, "baseline_levels": 14, "candidate_levels": 14},
+    "g05": {"baseline_luts": 46, "candidate_luts": 46, "baseline_levels": 13, "candidate_levels": 13},
+    "g07": {"baseline_luts": 43, "candidate_luts": 43, "baseline_levels": 10, "candidate_levels": 10},
+    "g08": {"baseline_luts": 94, "candidate_luts": 94, "baseline_levels": 14, "candidate_levels": 14}
+  }
+}

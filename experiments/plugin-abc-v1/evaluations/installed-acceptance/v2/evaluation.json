@@ -1,0 +1,76 @@
+{
+  "document_type": "rtl-advisor.plugin-phase7-evaluation",
+  "efficiency_gate": {
+    "arms": {
+      "A": {
+        "mean_agent_message_bytes": 44331.5,
+        "mean_command_categories": {
+          "artifact_read": 1.0,
+          "eda": 45.0,
+          "hash": 1.5,
+          "other": 24.0
+        },
+        "mean_command_count": 71.5,
+        "mean_command_output_bytes": 442328.5,
+        "mean_command_wave_count": 51.5,
+        "mean_event_count": 154.0,
+        "mean_output_bytes": 486660.0,
+        "mean_total_tokens": 2238419.5,
+        "mean_uncached_token_volume": 144595.5,
+        "mean_wall_time_seconds": 688.369,
+        "run_count": 2,
+        "task_completion_percent": 100.0
+      },
+      "B": {
+        "mean_agent_message_bytes": 22710.5,
+        "mean_command_categories": {
+          "other": 5.5,
+          "rtl_advisor": 1.5,
+          "workflow_batch": 1.0
+        },
+        "mean_command_count": 8.0,
+        "mean_command_output_bytes": 45996.0,
+        "mean_command_wave_count": 8.0,
+        "mean_event_count": 23.5,
+        "mean_output_bytes": 68706.5,
+        "mean_total_tokens": 335642.5,
+        "mean_uncached_token_volume": 71898.5,
+        "mean_wall_time_seconds": 325.079,
+        "run_count": 2,
+        "task_completion_percent": 100.0
+      }
+    },
+    "decision_guardrails": {
+      "frozen_result_agreement_percent": 100.0,
+      "measured_repeat_agreement_percent": 100.0
+    },
+    "excluded_runs": [],
+    "minimum_latency_reduction_percent": 25.0,
+    "minimum_token_reduction_percent": 25.0,
+    "observed_latency_reduction_percent": 52.78,
+    "observed_token_reduction_percent": 85.01,
+    "observed_uncached_token_reduction_percent": 50.28,
+    "status": "passed",
+    "telemetry_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-acceptance/v2/telemetry.json"
+  },
+  "experiment_id": "plugin-abc-v1",
+  "quality_gate": {
+    "decision_reproducibility_percent": 100.0,
+    "evidence_completion_percent": 100.0,
+    "harmful_recommendations": 0,
+    "plugin_run_count": 2,
+    "status": "passed",
+    "unproven_recommendations": 0,
+    "validated_decision_accuracy_percent": 95.83
+  },
+  "release_ready": true,
+  "schema": "rtl-advisor-plugin-phase7-evaluation-v1",
+  "schema_version": 1,
+  "semantic_hash": "f8ecdac54c84386fd6d3196bbbf67b84925f504677b274575648d8c58f0f9454",
+  "sources": {
+    "repeat_comparison": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/repeat-comparison.json",
+    "scorecard": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/scorecard.json",
+    "telemetry": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/installed-acceptance/v2/telemetry.json"
+  },
+  "status": "passed"
+}

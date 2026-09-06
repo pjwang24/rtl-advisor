@@ -1,0 +1,15 @@
+--- corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv
++++ prim_count_candidate.sv
+@@ -139,8 +139,9 @@
+-  // The sum of both counters must always equal the counter maximum.
+-  logic [Width:0] sum;
+-  assign sum = (cnt_q[0] + cnt_q[1]);
++  // The two counters are valid exactly when every corresponding bit is complementary.
++  // This is equivalent to their unsigned sum being 2**Width-1, without a carry chain.
++  logic count_mismatch;
++  assign count_mismatch = (cnt_q[0] != ~cnt_q[1]);
+ 
+   // Register the error signal to avoid potential CDC issues downstream.
+   logic err_d, err_q;
+-  assign err_d = (sum != {1'b0, {Width{1'b1}}});
++  assign err_d = count_mismatch;

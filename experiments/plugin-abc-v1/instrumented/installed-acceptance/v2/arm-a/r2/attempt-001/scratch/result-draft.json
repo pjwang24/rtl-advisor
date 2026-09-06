@@ -1,0 +1,380 @@
+{
+  "schema": "rtl-advisor-plugin-abc-arm-result-v1",
+  "experiment_id": "plugin-abc-v1",
+  "arm": "A",
+  "repetition": 2,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "manifest_sha256": "9a66873f7cd820f2aa2e31a20d99d961e3aa80e8e735d9613a55bdb0e09f3dc2",
+  "cases": [
+    {
+      "case_id": "g01",
+      "source_sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+      "decision": "recommend_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv:5"],
+      "rationale": "Balance the four modulo-8-bit additions as (a+b)+(c+d). P1 equivalence passed. The simple-gate recipe held area at 102 cells and reduced topological depth from 18 to 16; the LUT4 recipe remained 46 cells at depth 6, so the measured change is a non-regressing timing improvement in the tested flows.",
+      "candidates": [
+        {
+          "candidate_id": "g01-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/candidates/g01_balanced.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "measured_improvement",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g01_formal.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g01_baseline_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g01_candidate_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g01_baseline_lut4.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g01_candidate_lut4.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g02",
+      "source_sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv:5"],
+      "rationale": "A balanced five-input association passed P1, but measurement did not establish a balanced win: the simple-gate result changed from 625 cells/depth 68 to 632/depth 66 while LUT4 stayed 293/depth 10. The area/timing tradeoff is flow-dependent, so it is not recommended.",
+      "candidates": [
+        {
+          "candidate_id": "g02-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/candidates/g02_balanced.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "flow_dependent",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g02_formal.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g02_baseline_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g02_candidate_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g02_baseline_lut4.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g02_candidate_lut4.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g03",
+      "source_sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv:7"],
+      "rationale": "Balancing only the independent sum cone passed P1 and left the selection logic unchanged, but simple-gate area rose from 346 to 352 cells while depth fell from 34 to 32; LUT4 was unchanged at 158 cells/depth 7. This is a flow-dependent tradeoff rather than a balanced improvement.",
+      "candidates": [
+        {
+          "candidate_id": "g03-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/candidates/g03_balanced.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "flow_dependent",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g03_formal.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g03_baseline_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g03_candidate_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g03_baseline_lut4.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g03_candidate_lut4.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g04",
+      "source_sha256": "d41c31a3112e798bd67ab057e52043949e3f0b0ed10526be7e62daaa74fa2dfc",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g04_mixed_procedural_add.sv:6-11"],
+      "rationale": "The balanced expression inside the non-bypass branch passed P1, but the simple-gate recipe traded 244 cells/depth 35 for 245/depth 33 and LUT4 remained 120/depth 8. Because the tested objective is balanced and the result is not Pareto-improving across area and timing, no change is recommended.",
+      "candidates": [
+        {
+          "candidate_id": "g04-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/candidates/g04_balanced.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "flow_dependent",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g04_formal.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g04_baseline_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g04_candidate_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g04_baseline_lut4.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g04_candidate_lut4.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g05",
+      "source_sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+      "decision": "recommend_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv:6"],
+      "rationale": "Factor the common addend to a+(sel?b:c). P1 equivalence passed. The simple-gate recipe improved from 184 cells/depth 33 to 93/depth 31, while LUT4 stayed 63 cells/depth 6; this is a measured area and timing improvement with no regression in the second recipe.",
+      "candidates": [
+        {
+          "candidate_id": "g05-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/candidates/g05_factor_common.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "measured_improvement",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g05_formal.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g05_baseline_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g05_candidate_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g05_baseline_lut4.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g05_candidate_lut4.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g06",
+      "source_sha256": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6-18"],
+      "rationale": "An ascending overwrite loop is P1-equivalent to the explicit highest-bit priority chain, but results conflict: simple gates move from 20 cells/depth 5 to 19/depth 7, while LUT4 remains 8 cells and depth improves from 3 to 2. The flow-dependent timing reversal does not support a balanced recommendation.",
+      "candidates": [
+        {
+          "candidate_id": "g06-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/candidates/g06_loop_priority.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "flow_dependent",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g06_formal.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g06_baseline_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g06_candidate_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g06_baseline_lut4.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g06_candidate_lut4.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g07",
+      "source_sha256": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv:5-7"],
+      "rationale": "The 8-bit partial assignment deliberately truncates a+b before the later additions. Reassociating across that boundary would change the 9-bit result, and balancing only the remaining three-term cone provides no clear structural benefit. No candidate was emitted.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g08",
+      "source_sha256": "b012fa81c56e0e2a101f605b9b8f00de337063c29d9217c8ffd020b767372d6d",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g08_signed_chain.sv:5"],
+      "rationale": "The balanced signed fixed-width addition passed P1, confirming modulo-bitvector equivalence, but simple-gate area increased from 223 to 229 cells while depth fell from 34 to 32 and LUT4 stayed 110/depth 7. The measured tradeoff is flow-dependent, so the candidate is not recommended.",
+      "candidates": [
+        {
+          "candidate_id": "g08-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/candidates/g08_balanced.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "flow_dependent",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g08_formal.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g08_baseline_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g08_candidate_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g08_baseline_lut4.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/g08_candidate_lut4.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g09",
+      "source_sha256": "c1bbfbc8ffc8ea0b18fdfa3ddaa621171e513d51a285aebde8181059ac7a1ff0",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g09_already_balanced.sv:5"],
+      "rationale": "The four-input unsigned sum is already expressed as a balanced two-level tree. Reassociation would not improve the source-level topology, so no candidate was emitted.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g10",
+      "source_sha256": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:5-15"],
+      "rationale": "Each function call saturates before feeding the next call. Saturating addition is not associative, so balancing or flattening the chain would change behavior. The function boundary is semantic, not merely syntactic; no candidate was emitted.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g11",
+      "source_sha256": "1c7e7a24c9db1fca9787798b355b2d9fca354646df1e056c229c658a3a8d36c6",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:13-22"],
+      "rationale": "This is already a minimal one-entry elastic register: ready is the canonical empty-or-consumed condition and data updates only on an accepted valid item. Retiming or changing storage would alter ready/valid latency or capacity and require a new architecture, so no local P2 candidate was justified.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g12",
+      "source_sha256": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:11-24"],
+      "rationale": "The first-stage a+b result is combined with the current-cycle c_i exactly as written, while valid_o is delayed through valid_q. Registering or reassociating c_i would change cycle-accurate behavior. No same-latency, same-state P2 optimization was identified.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o01",
+      "source_sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv:68-115"],
+      "rationale": "The normal case already delegates winner selection to a parallel-prefix leading-one primitive, uses one-hot selection for data, and preserves state under backpressure. Local Boolean rewrites would be synthesis-normalization changes without a defensible P2/PPA benefit, so no candidate was emitted.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o02",
+      "source_sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv:43-209"],
+      "rationale": "The source has distinct passthrough, singleton, and normal FIFO implementations plus secure duplicated-state behavior. The apparent simplifications are parameter constant-propagation or handshake/state rewrites; none supplied a bounded improvement while preserving all P2 queue semantics.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o03",
+      "source_sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb",
+      "decision": "recommend_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv:140-154"],
+      "rationale": "Replace the widened sum-equals-all-ones error check with a direct complement mismatch check. Exhaustive bitvector formal and temporal induction over the registered error cone passed. At Width=8 the simple/LUT4 cones improve from 48/20 cells at depths 9/5 to 16/5 at depths 5/2; at Width=32 they improve from 267/105 at depths 29/9 to 77/21 at depths 8/3, with the default Width=2 neutral in both recipes.",
+      "candidates": [
+        {
+          "candidate_id": "o03-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/candidates/o03_complement_check.diff",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "measured_improvement",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/o03_formal.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/o03_p2_formal.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/o03_w2_baseline_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/o03_w2_candidate_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/o03_w2_baseline_lut4.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/o03_w2_candidate_lut4.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/o03_w8_baseline_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/o03_w8_candidate_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/o03_w8_baseline_lut4.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/o03_w8_candidate_lut4.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/o03_w32_baseline_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/o03_w32_candidate_simple.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/o03_w32_baseline_lut4.log",
+            "experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/evidence/o03_w32_candidate_lut4.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o04",
+      "source_sha256": "99aeb7564474111dc6662488c9f4ca6b788723e449b128d08ac54f8fc2da5cd2",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:98-158"],
+      "rationale": "The mutually exclusive packing and unpacking branches encode width-ratio-dependent shifts, occupancy, clearing, and ready/valid sequencing. The remaining expressions are direct state equations or constant-foldable parameter logic; no localized P2 change with a measurable balanced benefit was found.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o05",
+      "source_sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/common_cells/src/spill_register.sv:17-44"],
+      "rationale": "This module is only a compatibility wrapper around spill_register_flushable with flush tied low. It contains no independent datapath or control cone to optimize without changing the wrapped implementation or interface.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o06",
+      "source_sha256": "2e0e5b6d09ce4ade0881938ee042dcbc78438638fa2592338a374f88a3c27304",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/common_cells/src/stream_register.sv:33-38"],
+      "rationale": "The module already uses the canonical ready_i OR empty equation, a single data-load enable, and load-enable flops for valid and data. Boolean restatement would synthesize identically; architectural changes would alter stream latency or capacity.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o07",
+      "source_sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/common_cells/src/fifo_v3.sv:51-139"],
+      "rationale": "Pointer wrapping, occupancy, simultaneous push/pop, fall-through, flushing, and gated memory updates are coupled queue semantics. The source already exposes constants for parameter pruning; no local rewrite demonstrated a P2-safe balanced gain.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o08",
+      "source_sha256": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/common_cells/src/rr_arb_tree.sv:192-297"],
+      "rationale": "The implementation already uses logarithmic arbitration/data trees and LZC-based fair-priority update, with separate parameterized lock and external-priority modes. Local selection-expression changes are synthesis handling; structural changes would need full protocol/state proof and offered no bounded gain.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o09",
+      "source_sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/common_cells/src/stream_mux.sv:33-38"],
+      "rationale": "The combinational module is already a direct indexed data/valid mux plus one-hot indexed ready decode. There is no duplicated data computation to factor and alternate case/loop forms merely restate the same mux and decoder.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o10",
+      "source_sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/verilog-axis/rtl/axis_register.v:91-274"],
+      "rationale": "The three generate modes deliberately implement skid-buffer, bubble-register, and bypass semantics. The early-ready equation and transfer controls are occupancy lookahead for the two-entry skid state; simplifying them without changing capacity/latency was not justified, and no P2 candidate was emitted.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o11",
+      "source_sha256": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:91-157"],
+      "rationale": "This is a parameterized structural cascade of axis_register instances with direct endpoint wiring. No local logic exists to optimize; changing stage count or register type changes transaction latency/capacity and would violate the P3 protocol boundary.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o12",
+      "source_sha256": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:103-258"],
+      "rationale": "The registered forward/ready pipeline feeds a pointer-based output FIFO whose half-full threshold prevents overflow under return-path latency. The apparent comparator and pointer rewrites are synthesis-normalization changes; architectural edits would change queue protocol behavior, so no bounded P2 candidate was justified.",
+      "candidates": [],
+      "evidence_complete": true
+    }
+  ]
+}

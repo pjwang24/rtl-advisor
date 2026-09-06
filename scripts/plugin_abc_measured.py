@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -91,12 +92,12 @@ def _phase7_source_pin(arm: str, phase: str) -> tuple[list[str], dict[str, str]]
     }
 
 
-def _phase7_candidate_config(experiment: Path) -> Path:
+def _phase7_candidate_config(experiment: Path, *, root: Path | None = None) -> Path:
     """Pin corrected B repetitions to one isolated cold-then-warm artifact root."""
     source_path = ROOT / "rtl-advisor.toml"
     with source_path.open("rb") as stream:
         source = tomllib.load(stream)
-    root = (
+    root = root or (
         experiment
         / "instrumented/phase7/release-candidate-jobs4-v1"
     ).resolve()
@@ -174,6 +175,17 @@ def _prompt(
         if arm == "B" and phase == "phase7"
         else "The packet access rule remains unchanged."
     )
+    if phase == "installed-acceptance" and arm == "B":
+        access_reminder += (
+            " This run explicitly prioritizes lower latency: execute the independent "
+            "batch workflows with --jobs 4. Review, first-eligible candidate preparation, "
+            "formal verification, and both pinned synthesis measurements are authorized. "
+            "The installed SKILL.md contains the complete command contract needed for this "
+            "run. Invoke its `python3 <skill-dir>/scripts/run_rtl_advisor.py --config ... "
+            "workflow batch ...` form exactly once and use its compact JSON digest directly. "
+            "Do not open cli-contract.md or inspect the runner source unless that invocation "
+            "returns a structured failure requiring diagnosis."
+        )
     config_scope = (
         f"Every RTL Advisor runner invocation must pass --config {candidate_config}. "
         "CLI-managed workflow artifacts may be written only under that config's "
@@ -208,6 +220,24 @@ object matching the packet's result schema, with its exact experiment_id, arm,
 repetition, model, reasoning_effort, manifest_sha256, and ordered case list.
 The final JSON will be stored at {result_path} by the harness.
 """
+
+
+def _instrumented_packet(packet: Mapping[str, Any], output_root: Path) -> Path:
+    """Materialize the frozen packet with only its conflicting path rules replaced."""
+    effective = dict(packet)
+    effective["isolation_rules"] = [
+        "Do not read experiments/plugin-abc-v1/oracle.json.",
+        "Do not read or write any experiments/plugin-abc-v1/runs/arm-* directory.",
+        "Do not read any other instrumented arm, repetition, or attempt.",
+        "Write all candidates, evidence, manifests, summaries, and scratch files "
+        f"only under {output_root}.",
+        "Do not mutate baseline RTL or any frozen packet.",
+        "Do not recommend any unproven candidate.",
+        "Report every case in manifest order, including unsupported and no-change outcomes.",
+    ]
+    path = output_root / "effective-packet.json"
+    path.write_text(json.dumps(effective, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return path
 
 
 def _parse_events(path: Path) -> tuple[dict[str, int], str | None]:
@@ -420,19 +450,34 @@ def run_measured(
     experiment: Path = DEFAULT_EXPERIMENT,
     codex_bin: str = "codex",
     phase: str = "phase6",
+    series: str = "v1",
 ) -> dict[str, Any]:
     if arm not in SUPPORTED_ARMS:
         raise MeasuredRunError(f"measured phase supports only Arms A and B, got {arm!r}")
     if repetition not in {1, 2}:
         raise MeasuredRunError("measured repetitions must be 1 or 2")
-    if phase not in {"phase6", "phase7"}:
-        raise MeasuredRunError("measured phase must be phase6 or phase7")
+    if phase not in {"phase6", "phase7", "installed-acceptance"}:
+        raise MeasuredRunError("unsupported measured phase")
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,63}", series):
+        raise MeasuredRunError("series must be a safe directory identifier")
+    run_phase = f"{phase}/{series}" if phase == "installed-acceptance" else phase
+    telemetry_path = (
+        experiment / "evaluations" / "telemetry.json" if phase == "phase6"
+        else experiment / "evaluations" / run_phase / "telemetry.json"
+    )
+    # Refuse duplicate samples before launching a costly model session.
+    if telemetry_path.is_file() and any(
+        row.get("arm") == arm and row.get("repetition") == repetition
+        and row.get("admitted_to_evaluation", True)
+        for row in _load(telemetry_path).get("runs", [])
+    ):
+        raise MeasuredRunError("sample already recorded; use a new series for a new experiment")
     packet_path = experiment / "packets" / f"arm-{arm.lower()}-r{repetition}.json"
     packet = _load(packet_path)
     if packet.get("arm") != arm or packet.get("repetition") != repetition:
         raise MeasuredRunError("packet identity does not match requested run")
     repetition_root = (
-        experiment / "instrumented" / phase / f"arm-{arm.lower()}" / f"r{repetition}"
+        experiment / "instrumented" / run_phase / f"arm-{arm.lower()}" / f"r{repetition}"
     ).resolve()
     attempt = 1
     while (repetition_root / f"attempt-{attempt:03d}").exists():
@@ -467,15 +512,29 @@ def run_measured(
         if arm == "B" and phase == "phase7"
         else None
     )
+    provenance = None
+    artifact_snapshot = {}
+    session_packet_path = packet_path
+    if phase == "installed-acceptance":
+        from scripts.plugin_installed_benchmark import preflight, snapshot_artifacts
+
+        series_root = experiment / "instrumented" / run_phase
+        provenance = preflight(experiment, series_root, arm, repetition, codex_bin)
+        if arm == "B":
+            candidate_config = _phase7_candidate_config(
+                experiment, root=(series_root / "candidate").resolve()
+            )
+            artifact_snapshot = snapshot_artifacts(candidate_config.parent / "artifacts")
+        session_packet_path = _instrumented_packet(packet, output_root)
     source_pin_arguments, source_pin = _phase7_source_pin(arm, phase)
     command.extend(source_pin_arguments)
     if arm == "A":
         command.append("--ignore-user-config")
-        if phase == "phase7":
+        if phase in {"phase7", "installed-acceptance"}:
             command.append("--strict-config")
     command.append(
         _prompt(
-            packet_path=packet_path.resolve(),
+            packet_path=session_packet_path.resolve(),
             output_root=output_root,
             result_path=result_path,
             arm=arm,
@@ -486,6 +545,21 @@ def run_measured(
     environment = dict(os.environ)
     if candidate_config is not None:
         environment["RTL_ADVISOR_CONFIG"] = str(candidate_config)
+    if phase == "installed-acceptance":
+        (output_root / "prompt.txt").write_text(command[-1], encoding="utf-8")
+        (output_root / "invocation.json").write_text(
+            json.dumps(
+                {
+                    "command": command,
+                    "frozen_packet": str(packet_path.resolve()),
+                    "frozen_packet_sha256": _sha256(packet_path),
+                    "provenance": provenance,
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
     started = time.monotonic()
     with events_path.open("w", encoding="utf-8") as events, stderr_path.open(
         "w", encoding="utf-8"
@@ -553,11 +627,17 @@ def run_measured(
     }
     if validation_error is not None:
         record["validation_error"] = validation_error
-    telemetry_path = (
-        experiment / "evaluations" / "telemetry.json"
-        if phase == "phase6"
-        else experiment / "evaluations" / phase / "telemetry.json"
-    )
+    if provenance is not None:
+        from scripts.plugin_installed_benchmark import audit_run
+
+        audit = audit_run(provenance, events_path, candidate_config, artifact_snapshot)
+        audit_path = output_root / "audit.json"
+        audit_path.write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        record["provenance_path"] = str(output_root / "invocation.json")
+        record["audit_path"] = str(audit_path)
+        if not audit["passed"]:
+            record["task_completed"] = False
+            record["validation_error"] = "installed benchmark audit failed; see audit_path"
     _write_telemetry(telemetry_path, record)
     return record
 
@@ -568,7 +648,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--repetition", type=int, choices=(1, 2), required=True)
     parser.add_argument("--experiment", type=Path, default=DEFAULT_EXPERIMENT)
     parser.add_argument("--codex-bin", default="codex")
-    parser.add_argument("--phase", choices=("phase6", "phase7"), default="phase6")
+    parser.add_argument("--phase", choices=("phase6", "phase7", "installed-acceptance"), default="phase6")
+    parser.add_argument("--series", default="v1", help="isolated installed-acceptance experiment identity")
     args = parser.parse_args(argv)
     try:
         record = run_measured(
@@ -577,6 +658,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             experiment=args.experiment.resolve(),
             codex_bin=args.codex_bin,
             phase=args.phase,
+            series=args.series,
         )
     except MeasuredRunError as exc:
         print(f"measured A/B run failed: {exc}", file=sys.stderr)

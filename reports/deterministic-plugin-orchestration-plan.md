@@ -1,7 +1,7 @@
 # Deterministic Plugin Orchestration Plan
 
 **Date:** 2026-09-01  
-**Status:** Phases 1–7 implemented; installed-plugin acceptance passed September 4, 2026
+**Status:** Phases 1–7 implemented; installed-plugin end-to-end acceptance passed September 5, 2026
 **Product goal:** Turn RTL optimization into a reproducible, evidence-backed workflow that proves correctness and exposes PPA regressions before they reach production.
 
 ## Decision
@@ -492,12 +492,13 @@ The architecture is ready when:
 10. Token usage is materially lower than the current multi-command orchestration
     baseline without reducing gate compliance or explanation accuracy.
 
-## Recommended next implementation slice
+## Completed next implementation slice
 
-The batch adapter and installed-plugin acceptance are complete. A future
-performance release should repeat the matched 24-case A/B protocol with two
-repetitions and the existing quality, token, latency, and agreement gates.
-The acceptance smoke below does not replace that release experiment.
+The batch adapter, representative installed-plugin smoke, and matched installed-
+plugin performance acceptance are complete. The 24-case acceptance repeated the
+Phase 7 protocol with two fresh repetitions and the existing quality, token,
+latency, completion, and agreement gates. The candidate arm used the normally
+installed plugin with no workspace skill injection.
 
 ## Installed-plugin fresh-thread acceptance — September 4, 2026
 
@@ -596,3 +597,112 @@ and evidence-exploration tests and four acceptance-recorder regression cases.
 The full slow integration suite was not rerun. Frozen Phase 6/7 evidence and
 the installed plugin were not modified; new work consists of the acceptance
 harness, its tests, new acceptance evidence, and this report update.
+
+## Installed-plugin end-to-end acceptance — September 5, 2026
+
+**Result: passed.** The accepted `v2` series executed four independent fresh
+threads in the fixed order A1, B1, A2, B2. Both controls used ordinary reasoning
+and raw EDA tools. Both candidate sessions discovered the normally enabled
+`rtl-advisor:analyze-rtl` skill from installed plugin
+`0.2.0-alpha.1+codex.20260903154742`; no skill text or workspace plugin path was
+injected into Codex configuration. The installed and repository plugin trees
+both had SHA-256
+`4ba2245bb4cae0b010f33bacff2a45ac9dcf3fa44e283c1bed1c0e4061906528`.
+The frozen sources, repository source tree, configuration, experiment manifest,
+harnesses, plugin, Codex 0.153.4, Yosys 0.63, and Verilator 5.046 were pinned for
+the complete measured series.
+
+Each candidate thread read the installed skill exactly once and issued exactly
+one installed `workflow batch` command with `--authorized-through measure`,
+`--first-eligible`, and `--jobs 4`. The returned object was the compact 24-item
+batch digest, not full stage artifacts. Neither thread opened `cli-contract.md`,
+inspected the runner implementation, or fell back to separate stage commands.
+The post-run audits confirmed complete batch evidence, formal pass before every
+measurement, unchanged installed runner bytes, and preservation of all prior
+immutable candidate evidence. B1 populated a cold store; B2 verified all 545
+pre-existing immutable file hashes before adding its new hash-addressed workflow
+records.
+
+Measured sessions:
+
+| Sample | Total tokens | Uncached volume | Wall time (s) | Commands / waves | Result |
+| --- | ---: | ---: | ---: | ---: | --- |
+| A1 | 2,330,122 | 154,506 | 721.966 | 95 / 55 | admitted |
+| B1, cold installed plugin | 283,271 | 76,679 | 282.568 | 7 / 7 | admitted |
+| A2 | 2,146,717 | 134,685 | 654.772 | 48 / 48 | admitted |
+| B2, immutable replay | 388,014 | 67,118 | 367.591 | 9 / 9 | admitted |
+
+The unchanged Phase 7 evaluator passed every release gate:
+
+| Gate or measurement | Checked-in Phase 7 | Installed acceptance `v2` | Change |
+| --- | ---: | ---: | ---: |
+| Total-token reduction | 77.48% | 85.01% | +7.53 points |
+| Uncached-token reduction | 46.86% | 50.28% | +3.42 points |
+| Latency reduction | 30.12% | 52.78% | +22.66 points |
+| Arm B mean total tokens | 448,552.5 | 335,642.5 | -25.17% |
+| Arm B mean uncached volume | 75,816.5 | 71,898.5 | -5.17% |
+| Arm B mean wall time | 445.519 s | 325.079 s | -27.03% |
+| Task completion | 100% | 100% | unchanged |
+| Frozen-result agreement | 100% | 100% | unchanged |
+| Measured repeat agreement | 100% | 100% | unchanged |
+
+The quality gate also remained passed: 95.83% validated decision accuracy,
+100% decision reproducibility, 100% evidence completion, and zero harmful or
+unproven recommendations. There is no token, latency, completion, agreement, or
+quality regression relative to the checked-in evaluation, so the measurements
+support no deterministic engine or plugin change.
+
+Operationally interrupted attempts remain separate from the four admitted
+samples: exploratory `v1` A1 and `v2` A2 encountered account limits without an
+authoritative completed-turn usage record, while `v2` A1 attempt 001 was blocked
+by the local sandbox before a model turn began. Each has a failure record and is
+excluded from telemetry; no token or latency value was inferred for it.
+
+Two harness observations did support scoped fixes. In exploratory `v1`, the B1
+audit counted read-only `rg`/`sed` commands mentioning the installed runner as
+runner executions and consequently tested authorization flags on the wrong
+command. The actual batch invocation was single and fully authorized, but that
+session also loaded the full CLI contract and runner excerpts unnecessarily.
+`v1` remains preserved and excluded. The corrected `v2` audit identifies only
+an actual `python3 <installed-runner> ... workflow batch` execution, validates
+the compact digest, and rejects redundant contract or implementation reads; the
+tighter prompt eliminated them in both accepted plugin sessions.
+
+After measurement, a worktree audit found that A2 had followed the frozen
+packet's original canonical write path despite the instrumented prompt override.
+The generated versions were quarantined with the attempt record, the 12 affected
+tracked logs were restored from benchmark-start `HEAD` (`b285ce6`), and the new
+`g06`/`g07` files were moved out of the canonical run tree. A clean diff verified
+byte-for-byte restoration. Future installed-acceptance runs receive an effective
+packet whose filesystem rules name only the attempt directory, while the frozen
+case/model/result contract remains unchanged. The harness also pins the complete
+canonical run-tree hash so any future mutation fails the audit. This baseline-
+isolation issue did not modify the plugin, installed-plugin results, frozen
+Phase 6/7 evaluation, or prior candidate-arm evidence.
+
+Evidence and reproduction:
+
+- [Installed acceptance evaluation](../experiments/plugin-abc-v1/evaluations/installed-acceptance/v2/evaluation.json)
+- [Installed acceptance telemetry](../experiments/plugin-abc-v1/evaluations/installed-acceptance/v2/telemetry.json)
+- [Pinned source and tool identity](../experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/source-pin.json)
+- [B1 cold-run audit](../experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-b/r1/attempt-001/audit.json)
+- [B2 replay audit](../experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-b/r2/attempt-001/audit.json)
+- [A2 canonical-write quarantine](../experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-002/canonical-write-quarantine/README.md)
+
+```bash
+.venv/bin/python scripts/plugin_abc_measured.py --phase installed-acceptance --series v2 --arm A --repetition 1
+.venv/bin/python scripts/plugin_abc_measured.py --phase installed-acceptance --series v2 --arm B --repetition 1
+.venv/bin/python scripts/plugin_abc_measured.py --phase installed-acceptance --series v2 --arm A --repetition 2
+.venv/bin/python scripts/plugin_abc_measured.py --phase installed-acceptance --series v2 --arm B --repetition 2
+.venv/bin/python scripts/plugin_phase7_eval.py \
+  --telemetry experiments/plugin-abc-v1/evaluations/installed-acceptance/v2/telemetry.json \
+  --output-json experiments/plugin-abc-v1/evaluations/installed-acceptance/v2/evaluation.json \
+  --output-markdown experiments/plugin-abc-v1/evaluations/installed-acceptance/v2/evaluation.md
+```
+
+Final validation passed 187 release-critical workflow, runner, plugin, parity,
+telemetry, evaluation, corpus, evidence, installed-acceptance, and release-
+metadata tests. Direct execution through the installed runner passed all 12
+deterministic transport-parity scenarios. The full slow integration suite was
+not rerun because the existing run was already time-capped in its known slow
+integration test with no observed failure.

@@ -1,0 +1,182 @@
+{
+  "after_immutable_file_count": 545,
+  "batch_results": [
+    {
+      "decision": "synthesis_handles",
+      "formal_status": "formal_passed",
+      "item_id": "g01",
+      "measurement_status": "completed"
+    },
+    {
+      "decision": "synthesis_handles",
+      "formal_status": "formal_passed",
+      "item_id": "g02",
+      "measurement_status": "completed"
+    },
+    {
+      "decision": "synthesis_handles",
+      "formal_status": "formal_passed",
+      "item_id": "g03",
+      "measurement_status": "completed"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g04",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g05",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g06",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g07",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g08",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g09",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g10",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g11",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g12",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o01",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o02",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o03",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o04",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o05",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o06",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o07",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o08",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o09",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o10",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o11",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o12",
+      "measurement_status": "not_run"
+    }
+  ],
+  "checks": {
+    "complete_batch_evidence": true,
+    "explicit_measure_authorization": false,
+    "formal_before_measurement": true,
+    "installed_runner_unchanged": true,
+    "installed_skill_read": true,
+    "one_installed_batch_call": false,
+    "prior_immutable_evidence_preserved": true,
+    "source_and_harness_unchanged": true
+  },
+  "commands": [
+    "/bin/zsh -lc \"wc -l /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/SKILL.md && sed -n '1,240p' /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/SKILL.md\"",
+    "/bin/zsh -lc \"wc -c experiments/plugin-abc-v1/packets/arm-b-r1.json && sed -n '1,260p' experiments/plugin-abc-v1/packets/arm-b-r1.json\"",
+    "/bin/zsh -lc \"sed -n '261,520p' experiments/plugin-abc-v1/packets/arm-b-r1.json\"",
+    "/bin/zsh -lc \"wc -l /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/references/cli-contract.md && sed -n '1,320p' /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/references/cli-contract.md\"",
+    "/bin/zsh -lc \"sed -n '1,240p' experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/candidate/rtl-advisor.toml\"",
+    "/bin/zsh -lc 'mkdir -p /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-b/r1/attempt-001'",
+    "/bin/zsh -lc \"jq -e . experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-b/r1/attempt-001/batch-manifest.json >/dev/null && jq -e --slurpfile packet experiments/plugin-abc-v1/packets/arm-b-r1.json '([.items[].item_id] == [\"'$packet[0].cases[].case_id]) and ([.items[].expected_source_sha256] == [$packet[0].cases[].source_sha256]) and ([.items[].input.top] == [$packet[0].cases[].top])'\"' experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-b/r1/attempt-001/batch-manifest.json\"",
+    "/bin/zsh -lc \"rg -n \\\"--config|ArgumentParser|workflow batch|add_parser\\\\(\\\\\\\"batch\\\\\\\"\\\" /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py\"",
+    "/bin/zsh -lc \"rg -n -e \\\"--config\\\" -e \\\"ArgumentParser\\\" -e \\\"add_parser\\\\(\\\\\\\"batch\\\\\\\"\\\" /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py\"",
+    "/bin/zsh -lc \"sed -n '145,180p' /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py && sed -n '330,380p' /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py && sed -n '840,875p' /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py\"",
+    "/bin/zsh -lc 'python3 /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py --config /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/candidate/rtl-advisor.toml workflow batch /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-b/r1/attempt-001/batch-manifest.json --authorized-through measure --prompt-file /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-b/r1/attempt-001/authorization.txt --first-eligible --jobs 4'",
+    "/bin/zsh -lc \"sed -n '1,320p' experiments/plugin-abc-v1/schemas/rtl-advisor-plugin-abc-arm-result-v1.schema.json\"",
+    "/bin/zsh -lc \"sed -n '1,320p' schemas/rtl-advisor-plugin-abc-arm-result-v1.schema.json\""
+  ],
+  "passed": false,
+  "prior_immutable_file_count": 0,
+  "runner_commands": [
+    "/bin/zsh -lc \"rg -n \\\"--config|ArgumentParser|workflow batch|add_parser\\\\(\\\\\\\"batch\\\\\\\"\\\" /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py\"",
+    "/bin/zsh -lc \"rg -n -e \\\"--config\\\" -e \\\"ArgumentParser\\\" -e \\\"add_parser\\\\(\\\\\\\"batch\\\\\\\"\\\" /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py\"",
+    "/bin/zsh -lc \"sed -n '145,180p' /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py && sed -n '330,380p' /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py && sed -n '840,875p' /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py\"",
+    "/bin/zsh -lc 'python3 /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py --config /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/candidate/rtl-advisor.toml workflow batch /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-b/r1/attempt-001/batch-manifest.json --authorized-through measure --prompt-file /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-b/r1/attempt-001/authorization.txt --first-eligible --jobs 4'"
+  ]
+}

@@ -48,7 +48,9 @@
           "skill_source": {"const": "workspace_path"},
           "skill_path": {"type": "string", "minLength": 1},
           "skill_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-          "validation_error": {"type": "string"}
+          "validation_error": {"type": "string"},
+          "provenance_path": {"type": "string", "minLength": 1},
+          "audit_path": {"type": "string", "minLength": 1}
         }
       }
     }

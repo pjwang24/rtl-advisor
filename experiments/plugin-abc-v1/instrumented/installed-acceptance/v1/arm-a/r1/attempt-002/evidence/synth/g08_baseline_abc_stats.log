@@ -1,0 +1,4 @@
+======== ABC command line "read_blif /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-a/r1/attempt-002/evidence/mapped/g08_baseline.blif; print_stats"
+Warning: Constant-0 drivers added to 3 non-driven nets in network "g08_signed_chain":
+$auto$maccmap.cc:114:fulladd$82.Y[0], $auto$maccmap.cc:114:fulladd$85.X[0], $auto$maccmap.cc:240:synth$86.CO[1]
+[1;37mg08_signed_chain              :[0m i/o =   64/   16  lat =    0  nd =   189  edge =    388  cube =   507  lev = 14
