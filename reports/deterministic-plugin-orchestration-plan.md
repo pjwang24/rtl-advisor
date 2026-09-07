@@ -706,3 +706,12 @@ metadata tests. Direct execution through the installed runner passed all 12
 deterministic transport-parity scenarios. The full slow integration suite was
 not rerun because the existing run was already time-capped in its known slow
 integration test with no observed failure.
+
+## Phase 8 follow-on
+
+The deterministic MVP is the frozen baseline for the
+[Phase 8 corpus and handoff plan](phase8-corpus-and-handoff-plan.md). That plan
+defines the next lineage-qualified expansion, explicit blocker dispositions,
+repository-isolated dataset splits, handoff gates, and ML-readiness boundary.
+It does not authorize a new source download, corpus registration, or
+qualification operation.

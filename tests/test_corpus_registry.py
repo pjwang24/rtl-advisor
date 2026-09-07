@@ -134,6 +134,29 @@ def test_repository_lineage_cannot_cross_dataset_splits(tmp_path: Path) -> None:
     assert error.value.code == "split_lineage_leakage"
 
 
+def test_containing_design_cannot_cross_dataset_splits(tmp_path: Path) -> None:
+    first = _reference_payload()
+    first["split"] = "development"
+    first_path = _write_json(tmp_path / "first.json", first)
+    second = deepcopy(first)
+    second["reference_id"] = "independent-second-design"
+    second["display_name"] = "Independent second design"
+    second["lineage"]["upstream_project_id"] = "independent-project"
+    second["lineage"]["repository_lineage_id"] = "independent-repository"
+    second["lineage"]["design_lineage_id"] = "independent-second-design"
+    second["compile_context"]["top"] = "second_top"
+    second["compile_context"]["sources"] = ["rtl/second_top.sv"]
+    second["split"] = "release_holdout"
+    second_path = _write_json(tmp_path / "second.json", second)
+    registry = CorpusRegistryV1(tmp_path / "registry")
+    registry.add(first_path)
+
+    with pytest.raises(CorpusRegistryError) as error:
+        registry.add(second_path)
+
+    assert error.value.code == "split_hierarchy_leakage"
+
+
 def test_source_pinned_state_requires_revision_and_all_source_hashes(
     tmp_path: Path,
 ) -> None:
