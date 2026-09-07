@@ -63,6 +63,7 @@ def _input(
     return write_hashed_json(tmp_path / "input.json", payload, exclusive=True)
 
 
+@pytest.mark.local_evidence
 @pytest.mark.parametrize(
     (
         "executor_id",
@@ -189,6 +190,7 @@ def test_p2_executor_blocks_before_unimplemented_miter_or_ppa(
     )
 
 
+@pytest.mark.local_evidence
 @pytest.mark.parametrize(
     ("executor_id", "reference_id", "extra_source", "configuration"),
     (
@@ -275,6 +277,7 @@ def test_pulp_p2_candidates_prepare_and_lint_before_pinned_formal(
     assert result["safe"] is False
 
 
+@pytest.mark.local_evidence
 def test_verilog_axis_p2_candidate_prepares_and_lints_before_pinned_formal(
     tmp_path: Path,
 ) -> None:
@@ -333,6 +336,7 @@ def test_verilog_axis_p2_candidate_prepares_and_lints_before_pinned_formal(
     assert result["safe"] is False
 
 
+@pytest.mark.local_evidence
 def test_verilog_axis_mux_p2_candidate_preserves_pipeline_and_lints(
     tmp_path: Path,
 ) -> None:
@@ -399,6 +403,7 @@ def test_verilog_axis_mux_p2_candidate_preserves_pipeline_and_lints(
     assert result["safe"] is False
 
 
+@pytest.mark.local_evidence
 @pytest.mark.parametrize(
     ("executor_id", "reference_id", "sources", "configuration"),
     (

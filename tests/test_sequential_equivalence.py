@@ -29,6 +29,7 @@ def _write_rehashed(path: Path, payload: dict) -> Path:
     return path
 
 
+@pytest.mark.local_evidence
 def test_p2_plan_freezes_same_cycle_contract_and_every_input_hash() -> None:
     plan = load_p2_proof_plan(POSITIVE_PLAN, project_root=ROOT)
 

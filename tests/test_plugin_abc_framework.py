@@ -20,6 +20,7 @@ def _framework():
     return module
 
 
+@pytest.mark.local_evidence
 def test_frozen_manifest_has_12_generated_and_12_open_hash_matched_cases() -> None:
     result = _framework().validate_manifest()
     assert result["ok"] is True
@@ -27,10 +28,12 @@ def test_frozen_manifest_has_12_generated_and_12_open_hash_matched_cases() -> No
     assert result["source_kinds"] == {"generated": 12, "open": 12}
 
 
+@pytest.mark.local_evidence
 def test_protocol_oracle_packets_and_schemas_are_hash_locked() -> None:
     assert _framework().validate_manifest()["ok"] is True
 
 
+@pytest.mark.local_evidence
 def test_arm_packets_exclude_the_hidden_oracle_and_freeze_access_rules() -> None:
     framework = _framework()
     packets = {arm: framework.make_packet(arm, 1) for arm in "ABC"}
@@ -41,6 +44,7 @@ def test_arm_packets_exclude_the_hidden_oracle_and_freeze_access_rules() -> None
     assert "Reason broadly" in packets["C"]["access_rule"]
 
 
+@pytest.mark.local_evidence
 def test_stale_or_incomplete_arm_result_is_rejected(tmp_path: Path) -> None:
     framework = _framework()
     path = tmp_path / "bad.json"
@@ -140,6 +144,7 @@ def test_repeat_compare_requires_two_results() -> None:
         framework.compare_repetitions([])
 
 
+@pytest.mark.local_evidence
 def test_third_packet_can_be_limited_to_decision_disagreements() -> None:
     framework = _framework()
     packet = framework.make_packet("A", 3, case_ids=["g01", "o01"])

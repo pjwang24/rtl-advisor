@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from rtl_advisor.config import load_config
 from rtl_advisor.frontend_api import FrontendDataStore
 
@@ -10,6 +12,7 @@ from rtl_advisor.frontend_api import FrontendDataStore
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.local_evidence
 def test_frontend_overview_exposes_frozen_v22_evidence() -> None:
     store = FrontendDataStore(load_config(ROOT / "rtl-advisor.toml"))
 
@@ -33,6 +36,7 @@ def test_frontend_overview_exposes_frozen_v22_evidence() -> None:
     }
 
 
+@pytest.mark.local_evidence
 def test_frontend_case_filters_and_detail_use_generated_rtl() -> None:
     store = FrontendDataStore(load_config(ROOT / "rtl-advisor.toml"))
 
@@ -73,6 +77,7 @@ def test_frontend_contract_is_read_only_and_versioned() -> None:
     assert {route["method"] for route in contract["routes"]} == {"GET"}
 
 
+@pytest.mark.local_evidence
 def test_frontend_payloads_are_json_serializable() -> None:
     store = FrontendDataStore(load_config(ROOT / "rtl-advisor.toml"))
 

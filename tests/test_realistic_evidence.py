@@ -41,6 +41,7 @@ def _reference_manifest() -> Path:
     raise AssertionError("qualified OpenTitan reference fixture is unavailable")
 
 
+@pytest.mark.local_evidence
 def test_reference_findings_freeze_all_four_configurations(tmp_path: Path) -> None:
     config = load_config(ROOT / "rtl-advisor.toml")
     reference = load_supported_reference(config, _reference_manifest())
@@ -68,6 +69,7 @@ def test_reference_findings_freeze_all_four_configurations(tmp_path: Path) -> No
     assert error.value.code == "stale_transformation_registry"
 
 
+@pytest.mark.local_evidence
 def test_arbiter_candidate_is_isolated_and_hash_bound(tmp_path: Path) -> None:
     config = load_config(ROOT / "rtl-advisor.toml")
     reference = load_supported_reference(config, _reference_manifest())
@@ -100,6 +102,7 @@ def test_arbiter_candidate_is_isolated_and_hash_bound(tmp_path: Path) -> None:
         assert path.read_bytes() == content
 
 
+@pytest.mark.local_evidence
 def test_agent_v2_exposes_reference_configurations_as_candidates(
     tmp_path: Path,
 ) -> None:

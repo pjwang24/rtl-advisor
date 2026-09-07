@@ -25,6 +25,7 @@ def _write_rehashed(path: Path, payload: dict) -> Path:
     return path
 
 
+@pytest.mark.local_evidence
 def test_behavior_plan_preserves_all_refs_and_honest_dispositions() -> None:
     lock = load_tranche_lock(LOCK_PATH)
     plan = load_behavior_plan(PLAN_PATH, project_root=ROOT, tranche_lock=lock)

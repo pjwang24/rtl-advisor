@@ -26,6 +26,7 @@ def _write_rehashed(path: Path, payload: dict) -> Path:
     return path
 
 
+@pytest.mark.local_evidence
 def test_p3_plan_freezes_transaction_contract_bounds_and_inputs() -> None:
     plan = load_p3_proof_plan(POSITIVE_PLAN, project_root=ROOT)
 

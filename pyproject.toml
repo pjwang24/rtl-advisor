@@ -39,3 +39,6 @@ name = "rtl_advisor"
 addopts = "-q"
 pythonpath = [".", "src"]
 testpaths = ["tests"]
+markers = [
+  "local_evidence: requires gitignored local corpus or frozen artifact inputs",
+]

@@ -38,7 +38,7 @@ jobs:
           uv sync --frozen --extra v2 --group dev
 
       - name: Run fast tests
-        run: uv run --frozen pytest
+        run: uv run --frozen pytest -m "not local_evidence"
 
       - name: Build wheel and source distribution
         run: uv build --offline --out-dir dist-ci
