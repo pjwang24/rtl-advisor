@@ -1,0 +1,38 @@
+{
+  "artifacts": {
+    "authorization": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/replay-validation/items/g06/authorizations/authorization-6c510caa71416622aec5.json",
+    "capabilities": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/replay-validation/items/g06/capabilities/75750a34bad7eabd40d7fdc3d7839fbe696192bd9bf41041fc4509645633960e.json",
+    "request": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/replay-validation/items/g06/request.json"
+  },
+  "authorization_semantic_hash": "5833ae5d2c843f0edd4fe5da7d08ecd1e36159e3605b0344b7c3ac6f0c335516",
+  "authorized_through": "measure",
+  "capabilities_semantic_hash": "75750a34bad7eabd40d7fdc3d7839fbe696192bd9bf41041fc4509645633960e",
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/Users/peter/Desktop/rtl-advisor/rtl-advisor.toml",
+    "agent",
+    "workflow",
+    "batch",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/attempt-001/batch-manifest.json",
+    "--authorized-through",
+    "measure",
+    "--prompt-file",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/attempt-001/prompt.txt",
+    "--output-dir",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/replay-validation",
+    "--first-eligible",
+    "--jobs",
+    "1",
+    "--schema-version",
+    "1",
+    "--json"
+  ],
+  "document_type": "rtl-advisor.workflow.preparation",
+  "request_semantic_hash": "c94531dec7152032b30e0e5a06839b3860299094f4a04c5b6e30ea760475e0f4",
+  "schema": "rtl-advisor-workflow-preparation-v1",
+  "schema_version": 1,
+  "semantic_hash": "3b3a9a7a0bfe9a88fe20f4e1fe1bff54053de5e6346e07fda3ff9e8e106114a3",
+  "status": "prepared",
+  "workflow_id": "workflow-83baa16b765a669d87a8"
+}

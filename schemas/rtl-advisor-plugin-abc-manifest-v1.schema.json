@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rtl-advisor-plugin-abc-manifest-v1",
+  "title": "RTL Advisor plugin A/B/C manifest V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "experiment_id", "frozen_at", "objective", "agent_contract", "open_tranche", "cases"],
+  "properties": {
+    "schema": {"const": "rtl-advisor-plugin-abc-manifest-v1"},
+    "experiment_id": {"type": "string", "minLength": 1},
+    "frozen_at": {"type": "string", "minLength": 1},
+    "objective": {"enum": ["timing", "area", "balanced"]},
+    "agent_contract": {"type": "object"},
+    "open_tranche": {"type": "object"},
+    "cases": {
+      "type": "array",
+      "minItems": 24,
+      "maxItems": 24,
+      "items": {
+        "type": "object",
+        "required": ["case_id", "source_kind", "category", "top", "sources", "source_sha256", "stateful", "proof_level"],
+        "properties": {
+          "case_id": {"type": "string", "pattern": "^[go][0-9]{2}$"},
+          "source_kind": {"enum": ["generated", "open"]},
+          "category": {"type": "string", "minLength": 1},
+          "reference_id": {"type": "string"},
+          "top": {"type": "string", "minLength": 1},
+          "sources": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "stateful": {"type": "boolean"},
+          "proof_level": {"enum": ["P1", "P2", "P3"]}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:g01_add8_left.sv",
+        "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+      }
+    ],
+    "top": "g01_add8_left"
+  },
+  "defines": [],
+  "design_hash": "1e49c90b185383b61191990bca48e0e214b7915eb5e5d2dfd228021f95f02ac5",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+      "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "76ab9daf38ac5573a37301cab938397c5fe0a99e47a73a8d080dc4dacba0928c",
+  "top": "g01_add8_left"
+}

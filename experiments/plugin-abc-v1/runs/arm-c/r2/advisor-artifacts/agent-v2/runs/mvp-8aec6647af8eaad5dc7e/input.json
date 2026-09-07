@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "b44aabdf2d2efea77bbd07d687070731c8339bbdb56dfdba60654e7dd4344ae8",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:spill_register.sv",
+        "sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec"
+      }
+    ],
+    "top": "spill_register"
+  },
+  "defines": [],
+  "design_hash": "25444919cc74c841875c727b02dba6a5de14ff302fbaca6d989ba40878633fd8",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/spill_register.sv",
+      "sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "e25eae2e882fbbd0eff2de7b6b17d3347033fc7f3ecda6a262be7b8d9beef8a5",
+  "top": "spill_register"
+}

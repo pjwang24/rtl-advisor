@@ -1,0 +1,14 @@
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g04_mixed_procedural_add.sv"
+prep -top g04_mixed_procedural_add
+flatten
+design -stash gold
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv"
+prep -top g04_mixed_procedural_add
+flatten
+design -stash gate
+design -copy-from gold -as gold g04_mixed_procedural_add
+design -copy-from gate -as gate g04_mixed_procedural_add
+equiv_make gold gate equiv
+prep -top equiv
+equiv_simple -seq 1
+equiv_status -assert

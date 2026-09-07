@@ -1,0 +1,14 @@
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g08_signed_chain.sv"
+prep -top g08_signed_chain
+flatten
+design -stash gold
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r2/candidates/g08/candidate_1.sv"
+prep -top g08_signed_chain
+flatten
+design -stash gate
+design -copy-from gold -as gold g08_signed_chain
+design -copy-from gate -as gate g08_signed_chain
+equiv_make gold gate equiv
+prep -top equiv
+equiv_simple -seq 1
+equiv_status -assert

@@ -1,0 +1,101 @@
+{
+  "cli_version": "0.2.0a1",
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "capabilities",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "document_type": "rtl-advisor.agent.v2.capabilities",
+  "flow_version": "rtl-advisor-agent-v2",
+  "limitations": [
+    "Only unsigned fixed-width combinational addition chains are supported.",
+    "Formal equivalence uses two-state RTL semantics.",
+    "Measurements describe the pinned Yosys/ABC recipes, not a target flow.",
+    "EQY, sequential proof, and technology-netlist LEC are deferred."
+  ],
+  "model": {
+    "affects_mvp_decision": false,
+    "id": "v22",
+    "release_status": "diagnostic_only"
+  },
+  "objectives": [
+    "timing",
+    "area",
+    "balanced"
+  ],
+  "operations": {
+    "candidate": {
+      "available": true
+    },
+    "measure": {
+      "available": true
+    },
+    "report": {
+      "available": true
+    },
+    "review": {
+      "available": true
+    },
+    "verify": {
+      "available": true,
+      "required_before_measure": true
+    }
+  },
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "8510e45edb740a4a3ac5aa318fcc192a317478d1d1f6d53b558fdf86156096cf",
+  "status": "ok",
+  "synthesis_profiles": [
+    "standard",
+    "stronger"
+  ],
+  "tools": {
+    "eqy": {
+      "path": null,
+      "status": "deferred"
+    },
+    "liberty": {
+      "expected_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+      "path": "/Users/peter/Desktop/CAD Stuff/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+      "sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+      "status": "available"
+    },
+    "pyslang": {
+      "path": "/Users/peter/Desktop/CAD Stuff/.venv/lib/python3.13/site-packages/pyslang.cpython-313-darwin.so",
+      "status": "available"
+    },
+    "verilator": {
+      "configured_command": "verilator",
+      "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+      "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+      "status": "available",
+      "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+    },
+    "yosys": {
+      "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+      "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+      "abc_status": "available",
+      "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+      "configured_command": "yosys",
+      "path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+      "required_abc_version": "1.01",
+      "required_version": "0.63",
+      "sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+      "status": "available",
+      "version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)",
+      "version_status": "matched"
+    }
+  },
+  "transformation": {
+    "analysis_supported": true,
+    "id": "adder_reduction_association",
+    "rewriter_available": true,
+    "sequential_supported": false,
+    "version": "balanced-unsigned-add-chain-v2"
+  }
+}

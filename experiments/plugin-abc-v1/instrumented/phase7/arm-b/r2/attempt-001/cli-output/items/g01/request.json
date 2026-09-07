@@ -1,0 +1,17 @@
+{
+  "document_type": "rtl-advisor.workflow.request",
+  "input": {
+    "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+    "defines": [],
+    "include_dirs": [],
+    "kind": "generated_rtl",
+    "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+    "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+    "top": "g01_add8_left"
+  },
+  "objective": "balanced",
+  "schema": "rtl-advisor-workflow-request-v1",
+  "schema_version": 1,
+  "semantic_hash": "d14b14d54ef4621df7ab6ddd7333f7c167cdf9df673583c835c38b75b8180019",
+  "workflow_id": "workflow-6eb04148ae3e719a40a5"
+}

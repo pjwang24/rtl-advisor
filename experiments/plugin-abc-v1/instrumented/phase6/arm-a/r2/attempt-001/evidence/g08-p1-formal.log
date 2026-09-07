@@ -1,0 +1,85 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv experiments/plugin-abc-v1/cases/generated/g08_signed_chain.sv; rename g08_signed_chain gold; read_verilog -sv experiments/plugin-abc-v1/instrumented/phase6/arm-a/r2/attempt-001/candidates/g08-c1-balanced.sv; rename g08_signed_chain gate; equiv_make gold gate equiv; hierarchy -top equiv; equiv_simple; equiv_status -assert' --
+
+1. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/cases/generated/g08_signed_chain.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/cases/generated/g08_signed_chain.sv' to AST representation.
+Generating RTLIL representation for module `\g08_signed_chain'.
+Successfully finished Verilog frontend.
+Renaming module \g08_signed_chain to \gold.
+
+2. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/instrumented/phase6/arm-a/r2/attempt-001/candidates/g08-c1-balanced.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/instrumented/phase6/arm-a/r2/attempt-001/candidates/g08-c1-balanced.sv' to AST representation.
+Generating RTLIL representation for module `\g08_signed_chain'.
+Successfully finished Verilog frontend.
+Renaming module \g08_signed_chain to \gate.
+
+3. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: y_gold ($add$experiments/plugin-abc-v1/cases/generated/g08_signed_chain.sv:5$3_Y_gold), y_gate ($add$experiments/plugin-abc-v1/instrumented/phase6/arm-a/r2/attempt-001/candidates/g08-c1-balanced.sv:5$6_Y_gate) -> y
+Presumably equivalent wires: d_gold (\d_gold), d_gate (\d_gate) -> d
+Presumably equivalent wires: c_gold (\c_gold), c_gate (\c_gate) -> c
+Presumably equivalent wires: b_gold (\b_gold), b_gate (\b_gate) -> b
+Presumably equivalent wires: a_gold (\a_gold), a_gate (\a_gate) -> a
+
+4. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+4.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+5. Executing EQUIV_SIMPLE pass.
+Found 16 unproven $equiv cells (1 groups) in equiv:
+ Grouping SAT models for \y:
+  Trying to prove $equiv for \y [0]:ezsat
+ success!
+  Trying to prove $equiv for \y [1]:ezsat
+ success!
+  Trying to prove $equiv for \y [2]:ezsat
+ success!
+  Trying to prove $equiv for \y [3]:ezsat
+ success!
+  Trying to prove $equiv for \y [4]:ezsat
+ success!
+  Trying to prove $equiv for \y [5]:ezsat
+ success!
+  Trying to prove $equiv for \y [6]:ezsat
+ success!
+  Trying to prove $equiv for \y [7]:ezsat
+ success!
+  Trying to prove $equiv for \y [8]:ezsat
+ success!
+  Trying to prove $equiv for \y [9]:ezsat
+ success!
+  Trying to prove $equiv for \y [10]:ezsat
+ success!
+  Trying to prove $equiv for \y [11]:ezsat
+ success!
+  Trying to prove $equiv for \y [12]:ezsat
+ success!
+  Trying to prove $equiv for \y [13]:ezsat
+ success!
+  Trying to prove $equiv for \y [14]:ezsat
+ success!
+  Trying to prove $equiv for \y [15]:ezsat
+ success!
+Proved 16 previously unproven $equiv cells.
+
+6. Executing EQUIV_STATUS pass.
+Found 16 $equiv cells in equiv:
+  Of those cells 16 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: 6c3e4844a3, CPU: user 0.04s system 0.01s, MEM: 14.03 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 91% 1x equiv_simple (0 sec), 5% 4x read_verilog (0 sec), ...

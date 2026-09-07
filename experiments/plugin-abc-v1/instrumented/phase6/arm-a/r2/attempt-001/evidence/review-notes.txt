@@ -1,0 +1,30 @@
+Frozen manifest hash verified: 9a66873f7cd820f2aa2e31a20d99d961e3aa80e8e735d9613a55bdb0e09f3dc2.
+All 24 source hashes matched the packet.
+
+Generated-case review:
+g01: left-associated equal-width unsigned chain; balanced candidate is associative modulo 2^8.
+g02: five-term equal-width unsigned chain; balanced candidate has a recipe-dependent area result.
+g03: only the isolated equal-width unsigned sum was regrouped; selection logic was preserved.
+g04: only the non-bypass equal-width unsigned sum was regrouped; bypass behavior was preserved.
+g05: factor common operand a across the two selected modular additions.
+g06: casez priority encoding is P1-equivalent for two-state inputs but maps worse in both recipes.
+g07: the explicit 8-bit partial truncation is a semantic boundary; do not reassociate across it.
+g08: equal-width signed addition is associative at the bit-vector level, but measured area/depth trade off.
+g09: expression is already balanced.
+g10: saturating addition is not associative, so the nested function calls must retain their order.
+g11: one-entry ready/valid state and reset behavior are already minimal and protocol-sensitive.
+g12: y_o deliberately combines prior-cycle sum_q with current-cycle c_i; retiming would change alignment.
+
+Open-case review:
+o01: stateful round-robin mask plus a dedicated parallel-prefix leading-one block; no local rewrite justified.
+o02: parameterized FIFO branches, pass-through behavior, secure state, and reset gating are coupled.
+o03: duplicated saturating counters and registered fault detection are security-sensitive state.
+o04: pack/unpack depth, pointer, clear, and data shifting behavior are cycle-coupled.
+o05: wrapper only; implementation resides in spill_register_flushable outside the assigned source.
+o06: canonical ready/valid register; control and data enables intentionally differ.
+o07: pointer, occupancy, fall-through, and simultaneous push/pop behavior are coupled.
+o08: arbitration datapath is already a logarithmic tree; fairness and lock behavior are stateful.
+o09: minimal combinational selected data/valid/ready routing; no redundant common logic identified.
+o10: skid/simple/bypass modes and temporary/output register controls are protocol-sensitive.
+o11: structural composition of parameterized axis_register stages; candidate would require P3 transaction proof.
+o12: pipeline and output FIFO pointer/backpressure state are cycle- and transaction-coupled.

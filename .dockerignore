@@ -1,0 +1,12 @@
+.git
+.github/workflows
+.pytest_cache
+.uv-cache
+.venv
+artifacts
+corpus
+dist
+dist-ci
+third_party
+**/__pycache__
+**/*.pyc

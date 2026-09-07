@@ -1,0 +1,84 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-ef79b9abebb1758a4160/input.json",
+    "review": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-ef79b9abebb1758a4160/review.json",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-ef79b9abebb1758a4160"
+  },
+  "candidate_generation_allowed": false,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv",
+    "--objective",
+    "balanced",
+    "--top",
+    "prim_arbiter_ppc",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 0,
+    "excluded_site_count": 1
+  },
+  "decision": "unsupported",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "35565f3b21b8789b790fedda2d2c01b374caac8375b140b72d535d02d9c80e4f",
+    "model_used": false,
+    "rules_only": true
+  },
+  "exclusions": [
+    {
+      "detail": "parameterized top modules are outside MVP scope",
+      "exclusion_id": "addexclude_cab99b96e87b1532",
+      "reason_code": "parameterized_top",
+      "source": {
+        "end_offset": 7413,
+        "file": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv",
+        "sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99",
+        "start_offset": 1126
+      },
+      "status": "excluded",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "findings": [],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "f3277d0937d41283ec32977c760f774a68c863819ff3288d2665ced130873ccb",
+    "defines": [],
+    "design_hash": "6934075bb12313cd9e89472624b3e480425ce13aacb61206be91f78d7d4340f2",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv",
+        "sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "prim_arbiter_ppc"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-ef79b9abebb1758a4160",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "8072c7c4ba19da444b97efada85206f8430c9b854b9f1f10434661a90e5f1095",
+  "status": "completed"
+}

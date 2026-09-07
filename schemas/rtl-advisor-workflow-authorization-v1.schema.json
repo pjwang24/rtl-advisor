@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-workflow-authorization-v1.schema.json",
+  "title": "RTL Advisor Workflow Authorization V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "schema",
+    "document_type",
+    "authorization_id",
+    "workflow_id",
+    "request_semantic_hash",
+    "authorized_through",
+    "basis",
+    "issued_at",
+    "semantic_hash"
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "directPrompt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "prompt_sha256"],
+      "properties": {
+        "kind": {"const": "direct_prompt"},
+        "prompt_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "confirmedProposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "proposal_id",
+        "proposal_semantic_hash",
+        "confirmation_prompt_sha256"
+      ],
+      "properties": {
+        "kind": {"const": "confirmed_proposal"},
+        "proposal_id": {
+          "type": "string",
+          "pattern": "^proposal-[0-9a-f]{20}$"
+        },
+        "proposal_semantic_hash": {"$ref": "#/$defs/sha256"},
+        "confirmation_prompt_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-workflow-authorization-v1"},
+    "document_type": {"const": "rtl-advisor.workflow.authorization"},
+    "authorization_id": {
+      "type": "string",
+      "pattern": "^authorization-[0-9a-f]{20}$"
+    },
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^workflow-[0-9a-f]{20}$"
+    },
+    "request_semantic_hash": {"$ref": "#/$defs/sha256"},
+    "authorized_through": {
+      "enum": ["review", "candidate", "verify", "measure"]
+    },
+    "basis": {
+      "oneOf": [
+        {"$ref": "#/$defs/directPrompt"},
+        {"$ref": "#/$defs/confirmedProposal"}
+      ]
+    },
+    "candidate_selection": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode"],
+          "properties": {"mode": {"const": "first_eligible"}}
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "finding_id"],
+          "properties": {
+            "mode": {"const": "finding_id"},
+            "finding_id": {"type": "string", "minLength": 1}
+          }
+        }
+      ]
+    },
+    "issued_at": {"type": "string", "format": "date-time"},
+    "semantic_hash": {"$ref": "#/$defs/sha256"}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "authorized_through": {"enum": ["candidate", "verify", "measure"]}
+        },
+        "required": ["authorized_through"]
+      },
+      "then": {"required": ["candidate_selection"]},
+      "else": {"not": {"required": ["candidate_selection"]}}
+    }
+  ]
+}

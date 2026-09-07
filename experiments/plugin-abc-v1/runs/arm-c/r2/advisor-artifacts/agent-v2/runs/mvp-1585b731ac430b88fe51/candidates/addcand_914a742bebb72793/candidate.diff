@@ -1,0 +1,9 @@
+--- /Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv
++++ /Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/design/sources/0000/g02_add32_five.sv
+@@ -2,5 +2,5 @@
+   input  logic [31:0] a, b, c, d, e,
+   output logic [31:0] y
+ );
+-  assign y = (((a + b) + c) + d) + e;
++  assign y = ((a + b) + (c + (d + e)));
+ endmodule

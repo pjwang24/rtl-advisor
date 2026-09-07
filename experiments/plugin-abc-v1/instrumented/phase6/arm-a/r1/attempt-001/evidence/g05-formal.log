@@ -1,0 +1,363 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv; prep -top g05_mux_common_logic; design -stash gold; read_verilog -sv experiments/plugin-abc-v1/instrumented/phase6/arm-a/r1/attempt-001/candidates/g05/candidate-1.sv; prep -top g05_mux_common_logic; design -stash gate; design -reset; design -copy-from gold -as gold g05_mux_common_logic; design -copy-from gate -as gate g05_mux_common_logic; equiv_make gold gate equiv; hierarchy -top equiv; equiv_simple; equiv_status -assert' --
+
+1. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv' to AST representation.
+Generating RTLIL representation for module `\g05_mux_common_logic'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \g05_mux_common_logic
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \g05_mux_common_logic
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+2.3. Executing FUTURE pass.
+
+2.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+2.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g05_mux_common_logic..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+2.6. Executing CHECK pass (checking for obvious problems).
+Checking module g05_mux_common_logic...
+Found and reported 0 problems.
+
+2.7. Executing OPT pass (performing simple optimizations).
+
+2.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+2.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g05_mux_common_logic'.
+Computing hashes of 3 cells of `\g05_mux_common_logic'.
+Finding duplicate cells in `\g05_mux_common_logic'.
+Removed a total of 0 cells.
+
+2.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g05_mux_common_logic..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+2.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g05_mux_common_logic.
+Performed a total of 0 changes.
+
+2.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g05_mux_common_logic'.
+Computing hashes of 3 cells of `\g05_mux_common_logic'.
+Finding duplicate cells in `\g05_mux_common_logic'.
+Removed a total of 0 cells.
+
+2.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g05_mux_common_logic..
+
+2.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+2.7.8. Finished fast OPT passes. (There is nothing left to do.)
+
+2.8. Executing WREDUCE pass (reducing word size of cells).
+
+2.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g05_mux_common_logic..
+
+2.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.11. Executing OPT pass (performing simple optimizations).
+
+2.11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+2.11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g05_mux_common_logic'.
+Computing hashes of 3 cells of `\g05_mux_common_logic'.
+Finding duplicate cells in `\g05_mux_common_logic'.
+Removed a total of 0 cells.
+
+2.11.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g05_mux_common_logic..
+
+2.11.4. Finished fast OPT passes.
+
+2.12. Executing SORT pass.
+
+2.13. Printing statistics.
+
+=== g05_mux_common_logic ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        7 wires
+       97 wire bits
+        5 public wires
+       65 public wire bits
+        5 ports
+       65 port bits
+        3 cells
+        2   $add
+        1   $mux
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module g05_mux_common_logic...
+Found and reported 0 problems.
+
+3. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/instrumented/phase6/arm-a/r1/attempt-001/candidates/g05/candidate-1.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/instrumented/phase6/arm-a/r1/attempt-001/candidates/g05/candidate-1.sv' to AST representation.
+Generating RTLIL representation for module `\g05_mux_common_logic'.
+Successfully finished Verilog frontend.
+
+4. Executing PREP pass.
+
+4.1. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1.1. Analyzing design hierarchy..
+Top module:  \g05_mux_common_logic
+
+4.1.2. Analyzing design hierarchy..
+Top module:  \g05_mux_common_logic
+Removed 0 unused modules.
+
+4.2. Executing PROC pass (convert processes to netlists).
+
+4.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+4.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+4.2.4. Executing PROC_INIT pass (extract init attributes).
+
+4.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+4.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+4.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+4.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+4.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+4.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+4.3. Executing FUTURE pass.
+
+4.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+4.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g05_mux_common_logic..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+4.6. Executing CHECK pass (checking for obvious problems).
+Checking module g05_mux_common_logic...
+Found and reported 0 problems.
+
+4.7. Executing OPT pass (performing simple optimizations).
+
+4.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+4.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g05_mux_common_logic'.
+Computing hashes of 2 cells of `\g05_mux_common_logic'.
+Finding duplicate cells in `\g05_mux_common_logic'.
+Removed a total of 0 cells.
+
+4.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g05_mux_common_logic..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g05_mux_common_logic.
+Performed a total of 0 changes.
+
+4.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g05_mux_common_logic'.
+Computing hashes of 2 cells of `\g05_mux_common_logic'.
+Finding duplicate cells in `\g05_mux_common_logic'.
+Removed a total of 0 cells.
+
+4.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g05_mux_common_logic..
+
+4.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+4.7.8. Finished fast OPT passes. (There is nothing left to do.)
+
+4.8. Executing WREDUCE pass (reducing word size of cells).
+
+4.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g05_mux_common_logic..
+
+4.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+4.11. Executing OPT pass (performing simple optimizations).
+
+4.11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g05_mux_common_logic.
+
+4.11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g05_mux_common_logic'.
+Computing hashes of 2 cells of `\g05_mux_common_logic'.
+Finding duplicate cells in `\g05_mux_common_logic'.
+Removed a total of 0 cells.
+
+4.11.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g05_mux_common_logic..
+
+4.11.4. Finished fast OPT passes.
+
+4.12. Executing SORT pass.
+
+4.13. Printing statistics.
+
+=== g05_mux_common_logic ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        6 wires
+       81 wire bits
+        5 public wires
+       65 public wire bits
+        5 ports
+       65 port bits
+        2 cells
+        1   $add
+        1   $mux
+
+4.14. Executing CHECK pass (checking for obvious problems).
+Checking module g05_mux_common_logic...
+Found and reported 0 problems.
+
+5. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: a_gold (\a_gold), a_gate (\a_gate) -> a
+Presumably equivalent wires: b_gold (\b_gold), b_gate (\b_gate) -> b
+Presumably equivalent wires: c_gold (\c_gold), c_gate (\c_gate) -> c
+Presumably equivalent wires: sel_gold (\sel_gold), sel_gate (\sel_gate) -> sel
+Presumably equivalent wires: y_gold (\y_gold), y_gate (\y_gate) -> y
+
+6. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+6.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+7. Executing EQUIV_SIMPLE pass.
+Found 16 unproven $equiv cells (1 groups) in equiv:
+ Grouping SAT models for \y:
+  Trying to prove $equiv for \y [0]:ezsat
+ success!
+  Trying to prove $equiv for \y [1]:ezsat
+ success!
+  Trying to prove $equiv for \y [2]:ezsat
+ success!
+  Trying to prove $equiv for \y [3]:ezsat
+ success!
+  Trying to prove $equiv for \y [4]:ezsat
+ success!
+  Trying to prove $equiv for \y [5]:ezsat
+ success!
+  Trying to prove $equiv for \y [6]:ezsat
+ success!
+  Trying to prove $equiv for \y [7]:ezsat
+ success!
+  Trying to prove $equiv for \y [8]:ezsat
+ success!
+  Trying to prove $equiv for \y [9]:ezsat
+ success!
+  Trying to prove $equiv for \y [10]:ezsat
+ success!
+  Trying to prove $equiv for \y [11]:ezsat
+ success!
+  Trying to prove $equiv for \y [12]:ezsat
+ success!
+  Trying to prove $equiv for \y [13]:ezsat
+ success!
+  Trying to prove $equiv for \y [14]:ezsat
+ success!
+  Trying to prove $equiv for \y [15]:ezsat
+ success!
+Proved 16 previously unproven $equiv cells.
+
+8. Executing EQUIV_STATUS pass.
+Found 16 $equiv cells in equiv:
+  Of those cells 16 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: a0d9ce1fdc, CPU: user 0.04s system 0.02s, MEM: 15.56 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 27% 1x equiv_simple (0 sec), 21% 10x opt_expr (0 sec), ...

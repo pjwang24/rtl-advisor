@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "b44aabdf2d2efea77bbd07d687070731c8339bbdb56dfdba60654e7dd4344ae8",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:spill_register.sv",
+        "sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec"
+      }
+    ],
+    "top": "spill_register"
+  },
+  "defines": [],
+  "design_hash": "b2e1a63d7a429f5954bc91e7de9a167cdadd5cefaffb956684bc73892ccf0b4d",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/common_cells/src/spill_register.sv",
+      "sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "189fc740e4e2999b1d4facd2759fd66918cc4bcb1047d6fb4965b6f86dbb0a0b",
+  "top": "spill_register"
+}

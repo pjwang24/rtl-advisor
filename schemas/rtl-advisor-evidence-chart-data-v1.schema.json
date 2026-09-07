@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-evidence-chart-data-v1.schema.json",
+  "title": "RTL Advisor Evidence Chart Data V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "schema",
+    "document_type",
+    "read_only",
+    "filters",
+    "metric_definitions",
+    "classification_policies",
+    "sources",
+    "measurements",
+    "invalid_sources",
+    "dataset_id",
+    "semantic_hash"
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-evidence-chart-data-v1"},
+    "document_type": {"const": "rtl-advisor.evidence.chart-data"},
+    "read_only": {"const": true},
+    "filters": {"type": "object"},
+    "metric_definitions": {"type": "object"},
+    "classification_policies": {"type": "object"},
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["semantic_hash", "artifact_path"],
+        "properties": {
+          "semantic_hash": {"$ref": "#/$defs/sha256"},
+          "artifact_path": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "measurements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "point_id",
+          "evidence_group_id",
+          "workflow_id",
+          "run_id",
+          "candidate_id",
+          "study_id",
+          "reference_id",
+          "configuration_id",
+          "top",
+          "objective",
+          "transformation_id",
+          "profile",
+          "recorded_profile",
+          "classification",
+          "classification_reason",
+          "decision",
+          "candidate_decision_reason",
+          "formal_status",
+          "safe",
+          "delay_improvement_percent",
+          "area_improvement_percent",
+          "cell_count_improvement_percent",
+          "recipe_hash",
+          "measurement_semantic_hash",
+          "artifact_path",
+          "source_kind",
+          "limitations"
+        ],
+        "properties": {
+          "point_id": {"type": "string", "minLength": 1},
+          "evidence_group_id": {"type": "string", "minLength": 1},
+          "workflow_id": {"type": ["string", "null"]},
+          "run_id": {"type": "string", "minLength": 1},
+          "candidate_id": {"type": "string", "minLength": 1},
+          "study_id": {"type": ["string", "null"]},
+          "reference_id": {"type": ["string", "null"]},
+          "configuration_id": {"type": ["string", "null"]},
+          "top": {"type": ["string", "null"]},
+          "objective": {"enum": ["timing", "area", "balanced"]},
+          "transformation_id": {"type": ["string", "null"]},
+          "profile": {"enum": ["standard", "stronger"]},
+          "recorded_profile": {"enum": ["standard", "stronger", "M0", "M1"]},
+          "classification": {"enum": ["improved", "neutral", "regressed"]},
+          "classification_reason": {"type": "string"},
+          "decision": {"enum": ["measured_improvement", "synthesis_handles", "flow_dependent", "regression"]},
+          "candidate_decision_reason": {"type": "string"},
+          "formal_status": {"const": "formal_passed"},
+          "safe": {"const": true},
+          "delay_improvement_percent": {"type": ["number", "null"]},
+          "area_improvement_percent": {"type": ["number", "null"]},
+          "cell_count_improvement_percent": {"type": ["number", "null"]},
+          "recipe_hash": {"type": ["string", "null"]},
+          "measurement_semantic_hash": {"$ref": "#/$defs/sha256"},
+          "artifact_path": {"type": "string", "minLength": 1},
+          "source_kind": {"enum": ["agent_v2_run", "family_study"]},
+          "limitations": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "invalid_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_kind", "source_id", "error_code", "message"],
+        "properties": {
+          "source_kind": {"type": "string", "minLength": 1},
+          "source_id": {"type": "string", "minLength": 1},
+          "error_code": {"type": "string", "minLength": 1},
+          "message": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "dataset_id": {"type": "string", "pattern": "^evidence-dataset-[0-9a-f]{20}$"},
+    "semantic_hash": {"$ref": "#/$defs/sha256"}
+  }
+}

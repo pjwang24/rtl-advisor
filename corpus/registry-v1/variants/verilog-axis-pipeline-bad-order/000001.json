@@ -1,0 +1,40 @@
+{
+  "artifact_hashes": {},
+  "display_name": "verilog-axis reordered-transaction negative control",
+  "document_type": "rtl-advisor.variant-manifest",
+  "expected_relation": "inequivalent_control",
+  "origin": {
+    "description": "Deliberately substitutes the second transaction tag at the first output to verify ordering checks.",
+    "generator": null,
+    "generator_version": null,
+    "kind": "negative_control"
+  },
+  "parent_reference_id": "verilog-axis-axis-pipeline-register",
+  "proof_contract": {
+    "assumptions": [
+      "both implementations receive the same three arbitrary tagged transactions",
+      "each implementation holds a transaction until its own input handshake completes",
+      "the shared output sink stalls for no more than two consecutive cycles",
+      "disabled AXI sideband outputs are outside the comparison"
+    ],
+    "kind": "bounded ready-valid transaction equivalence",
+    "latency_relation": "transaction_ordered",
+    "level": "P3",
+    "observables": [
+      "accepted output transaction count",
+      "accepted output data sequence",
+      "bounded completion after the final input"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "schema": "rtl-advisor-variant-v1",
+  "schema_version": 1,
+  "semantic_hash": "0b5cb429da1f981e0d0540c9f920015c7d391739e890f99a86e560b96f82ed98",
+  "source_changes": [],
+  "source_locations": [
+    "examples/formal/p3/verilog_axis_pipeline_p3_miter.sv"
+  ],
+  "state": "declared",
+  "variant_id": "verilog-axis-pipeline-bad-order",
+  "variant_lineage_id": "verilog-axis-pipeline-bad-order-v1"
+}

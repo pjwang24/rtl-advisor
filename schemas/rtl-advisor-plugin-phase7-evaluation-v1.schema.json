@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rtl-advisor-plugin-phase7-evaluation-v1.schema.json",
+  "title": "RTL Advisor Phase 7 evaluation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "schema", "document_type", "experiment_id", "status", "quality_gate", "efficiency_gate", "release_ready", "sources", "semantic_hash"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-plugin-phase7-evaluation-v1"},
+    "document_type": {"const": "rtl-advisor.plugin-phase7-evaluation"},
+    "experiment_id": {"const": "plugin-abc-v1"},
+    "status": {"enum": ["passed", "failed", "blocked"]},
+    "quality_gate": {"type": "object"},
+    "efficiency_gate": {"type": "object"},
+    "release_ready": {"type": "boolean"},
+    "sources": {"type": "object"},
+    "semantic_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

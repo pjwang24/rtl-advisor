@@ -1,0 +1,86 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-7af7932b778fb201bf5e/input.json",
+    "review": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-7af7932b778fb201bf5e/review.json",
+    "root": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-7af7932b778fb201bf5e"
+  },
+  "candidate_generation_allowed": false,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv",
+    "--objective",
+    "balanced",
+    "--top",
+    "g05_mux_common_logic",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 0,
+    "excluded_site_count": 1
+  },
+  "decision": "unsupported",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "3ae77c919df80e53b23f4dec9d5c0b7f20c094d1c6b2635847b21eb0a1308ba0",
+    "model_used": false,
+    "rules_only": true,
+    "transformation_registry_hash": "ede9d27234c7c826bf115798b8df00774cc3e987a73be174c190ef6f99c28370"
+  },
+  "exclusions": [
+    {
+      "detail": "this direct assignment contains addition but could not be parsed as a pure, side-effect-free addition expression",
+      "exclusion_id": "addexclude_da902f3d5fa90a8c",
+      "reason_code": "unsupported_assignment_expression",
+      "source": {
+        "end_offset": 150,
+        "file": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv",
+        "sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+        "start_offset": 116
+      },
+      "status": "excluded",
+      "target": "y",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "findings": [],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "870e06a3a6b9fe5d93194afc3f94a5c9957879281fb084bd4db7bfb1634f2336",
+    "defines": [],
+    "design_hash": "4430b970b14cb3992bab41b4666a50158aace923fd415630746a951e7d507dda",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv",
+        "sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "g05_mux_common_logic"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-7af7932b778fb201bf5e",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "bfada9d8a6357871b703516804ae99aa66fb104ae9410b32868e780dec435e60",
+  "status": "completed"
+}

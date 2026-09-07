@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-workflow-request-v1.schema.json",
+  "title": "RTL Advisor Workflow Request V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "schema",
+    "document_type",
+    "workflow_id",
+    "input",
+    "objective",
+    "semantic_hash"
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-workflow-request-v1"},
+    "document_type": {"const": "rtl-advisor.workflow.request"},
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^workflow-[0-9a-f]{20}$"
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "path",
+        "sha256",
+        "compile_context_hash",
+        "include_dirs",
+        "defines"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "generated_rtl",
+            "explicitly_approved_open_rtl",
+            "qualified_corpus_reference"
+          ]
+        },
+        "path": {"type": "string", "minLength": 1},
+        "top": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "compile_context_hash": {"$ref": "#/$defs/sha256"},
+        "include_dirs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "defines": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "objective": {"enum": ["timing", "area", "balanced"]},
+    "semantic_hash": {"$ref": "#/$defs/sha256"}
+  }
+}

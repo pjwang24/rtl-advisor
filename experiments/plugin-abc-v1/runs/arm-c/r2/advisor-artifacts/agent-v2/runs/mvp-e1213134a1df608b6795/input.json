@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "9536d8b3a9f8737f060268a9a604060672d9451f171dce66fcdeb115f4515f3e",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:g06_priority_decode.sv",
+        "sha256": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669"
+      }
+    ],
+    "top": "g06_priority_decode"
+  },
+  "defines": [],
+  "design_hash": "d9a18a4077a3e7b876a0cb1d14d8dd838bb960a9da3118b636f026145332534c",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv",
+      "sha256": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "a9c76d2a90019b82fb5f90fdbd9fe01a972b8f07f4ceb7b1a13210ba313a3d43",
+  "top": "g06_priority_decode"
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rtl-advisor-plugin-phase6-evaluation-v1.schema.json",
+  "title": "RTL Advisor Phase 6 evaluation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "schema",
+    "document_type",
+    "experiment_id",
+    "status",
+    "quality_gate",
+    "efficiency_gate",
+    "release_ready",
+    "sources",
+    "semantic_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-plugin-phase6-evaluation-v1"},
+    "document_type": {"const": "rtl-advisor.plugin-phase6-evaluation"},
+    "experiment_id": {"const": "plugin-abc-v1"},
+    "status": {"enum": ["passed", "failed", "blocked"]},
+    "release_ready": {"type": "boolean"},
+    "semantic_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "quality_gate": {
+      "type": "object",
+      "required": [
+        "status",
+        "plugin_run_count",
+        "validated_decision_accuracy_percent",
+        "evidence_completion_percent",
+        "decision_reproducibility_percent",
+        "harmful_recommendations",
+        "unproven_recommendations"
+      ],
+      "properties": {
+        "status": {"enum": ["passed", "failed"]},
+        "plugin_run_count": {"type": "integer", "minimum": 0},
+        "validated_decision_accuracy_percent": {"type": "number", "minimum": 0, "maximum": 100},
+        "evidence_completion_percent": {"type": "number", "minimum": 0, "maximum": 100},
+        "decision_reproducibility_percent": {"type": "number", "minimum": 0, "maximum": 100},
+        "harmful_recommendations": {"type": "integer", "minimum": 0},
+        "unproven_recommendations": {"type": "integer", "minimum": 0}
+      }
+    },
+    "efficiency_gate": {
+      "type": "object",
+      "required": ["status", "telemetry_path"],
+      "properties": {
+        "status": {"enum": ["passed", "failed", "blocked"]},
+        "telemetry_path": {"type": "string"},
+        "reason": {"type": "string"},
+        "required_fields": {"type": "array", "items": {"type": "string"}},
+        "minimum_token_reduction_percent": {"type": "number"},
+        "minimum_latency_reduction_percent": {"type": "number"},
+        "observed_token_reduction_percent": {"type": "number"},
+        "observed_uncached_token_reduction_percent": {"type": "number"},
+        "observed_latency_reduction_percent": {"type": "number"},
+        "decision_guardrails": {"type": "object"},
+        "arms": {"type": "object"}
+      }
+    },
+    "sources": {
+      "type": "object",
+      "required": ["scorecard", "repeat_comparison"],
+      "properties": {
+        "scorecard": {"type": "string"},
+        "repeat_comparison": {"type": "string"}
+      }
+    }
+  }
+}

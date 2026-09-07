@@ -1,0 +1,439 @@
+{
+  "schema": "rtl-advisor-plugin-abc-arm-result-v1",
+  "experiment_id": "plugin-abc-v1",
+  "arm": "B",
+  "repetition": 2,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "manifest_sha256": "9a66873f7cd820f2aa2e31a20d99d961e3aa80e8e735d9613a55bdb0e09f3dc2",
+  "cases": [
+    {
+      "case_id": "g01",
+      "source_sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv:5:14-5:31"
+      ],
+      "rationale": "The CLI offered one balanced unsigned-add-chain candidate. Current two-state combinational formal verification passed with safe=true and intact source hashes, but both pinned synthesis recipes were neutral; the terminal report decision is synthesis_handles, so no source change is supported.",
+      "candidates": [
+        {
+          "candidate_id": "addcand_5db95f9b35f13ff5",
+          "path": "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/design/sources/0000/g01_add8_left.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/candidate.diff",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/verification.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/measurement.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/report.json"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": [
+        "Formal evidence covers two-state combinational RTL semantics; X/Z behavior is not proved.",
+        "Measurements describe only the pinned standard and stronger Yosys/ABC recipes, not target-flow PPA."
+      ]
+    },
+    {
+      "case_id": "g02",
+      "source_sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv:5:14-5:37"
+      ],
+      "rationale": "The CLI offered one balanced unsigned-add-chain candidate. Current two-state combinational formal verification passed with safe=true and intact source hashes, but both pinned synthesis recipes were neutral; the terminal report decision is synthesis_handles, so no source change is supported.",
+      "candidates": [
+        {
+          "candidate_id": "addcand_914a742bebb72793",
+          "path": "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/design/sources/0000/g02_add32_five.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/candidate.diff",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/verification.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/report.json"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": [
+        "Formal evidence covers two-state combinational RTL semantics; X/Z behavior is not proved.",
+        "Measurements describe only the pinned standard and stronger Yosys/ABC recipes, not target-flow PPA."
+      ]
+    },
+    {
+      "case_id": "g03",
+      "source_sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv:7:16-7:33"
+      ],
+      "rationale": "The CLI offered one eligible direct-assignment add-chain candidate while excluding a separate procedural region. The candidate passed current two-state combinational formal verification with safe=true and intact hashes, but both pinned synthesis recipes were neutral; the terminal report decision is synthesis_handles for the finding only.",
+      "candidates": [
+        {
+          "candidate_id": "addcand_bd46a2a00b3c6dd3",
+          "path": "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/design/sources/0000/g03_mixed_safe_add.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/candidate.diff",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/verification.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/report.json"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": [
+        "The conclusion applies only to the eligible finding; a procedural region at bytes 183-332 was excluded.",
+        "Formal evidence covers two-state combinational RTL semantics; X/Z behavior is not proved.",
+        "Measurements describe only the pinned standard and stronger Yosys/ABC recipes, not target-flow PPA."
+      ]
+    },
+    {
+      "case_id": "g04",
+      "source_sha256": "d41c31a3112e798bd67ab057e52043949e3f0b0ed10526be7e62daaa74fa2dfc",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g04_mixed_procedural_add.sv:bytes126-216"
+      ],
+      "rationale": "RTL Advisor excluded the procedural region as procedural_or_generated_rtl; it found no eligible supported site and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released transformation does not rewrite procedural regions.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-a91a12bf77c67ad6c244/report.json"
+      ]
+    },
+    {
+      "case_id": "g05",
+      "source_sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv:bytes116-150"
+      ],
+      "rationale": "RTL Advisor classified the direct assignment as unsupported_assignment_expression because it could not parse it as a pure, side-effect-free addition expression; no candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "No rewrite is supported for the excluded assignment expression.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-df6da05d4cc811ccb508/report.json"
+      ]
+    },
+    {
+      "case_id": "g06",
+      "source_sha256": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:bytes118-528"
+      ],
+      "rationale": "RTL Advisor excluded the procedural region as procedural_or_generated_rtl; it found no eligible supported site and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released transformation does not rewrite procedural regions.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-e1213134a1df608b6795/report.json"
+      ]
+    },
+    {
+      "case_id": "g07",
+      "source_sha256": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv:bytes130-135",
+        "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv:bytes150-165"
+      ],
+      "rationale": "RTL Advisor excluded one expression for having fewer than three addends and another for width_or_truncation_risk because operand and target widths differ. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released transformation supports only equal-width unsigned chains with at least three operands.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-7b5ad31f5caa871222d7/report.json"
+      ]
+    },
+    {
+      "case_id": "g08",
+      "source_sha256": "b012fa81c56e0e2a101f605b9b8f00de337063c29d9217c8ffd020b767372d6d",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g08_signed_chain.sv:bytes113-130"
+      ],
+      "rationale": "RTL Advisor excluded the signed chain as unsupported_target_type because the target is not one unsigned output with an explicit fixed width. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Signed arithmetic is outside the released transformation scope.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-11cb038f51c806b94fb4/report.json"
+      ]
+    },
+    {
+      "case_id": "g09",
+      "source_sha256": "c1bbfbc8ffc8ea0b18fdfa3ddaa621171e513d51a285aebde8181059ac7a1ff0",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g09_already_balanced.sv:bytes103-120"
+      ],
+      "rationale": "RTL Advisor identified that the addition expression already has the deterministic balanced shape and preserved the terminal unsupported state. No candidate was offered or prepared.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The CLI emits no candidate for an already-balanced expression.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-821ca5bf68cadaf0f337/report.json"
+      ]
+    },
+    {
+      "case_id": "g10",
+      "source_sha256": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:bytes91-311"
+      ],
+      "rationale": "RTL Advisor excluded the function/declaration region as procedural_or_generated_rtl. No eligible site or candidate remained, and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Generated, function, task, and declaration regions are outside the released rewrite scope.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-d9d2f9d3e3638a978e9a/report.json"
+      ]
+    },
+    {
+      "case_id": "g11",
+      "source_sha256": "1c7e7a24c9db1fca9787798b355b2d9fca354646df1e056c229c658a3a8d36c6",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:bytes0-650"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized top because parameterized modules are outside the MVP scope. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Parameterized and stateful top modules are outside the released combinational candidate workflow.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0dad30fc2a06cac8173e/report.json"
+      ]
+    },
+    {
+      "case_id": "g12",
+      "source_sha256": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:bytes0-634"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized top because parameterized modules are outside the MVP scope. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Parameterized and stateful top modules are outside the released combinational candidate workflow.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-9af714316568e5492e44/report.json"
+      ]
+    },
+    {
+      "case_id": "o01",
+      "source_sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv:bytes1126-7413"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized top because parameterized modules are outside the MVP scope. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released workflow supports only self-contained non-parameterized combinational tops.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-ef79b9abebb1758a4160/report.json"
+      ]
+    },
+    {
+      "case_id": "o02",
+      "source_sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv:bytes585-7836"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized top because parameterized modules are outside the MVP scope. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released workflow supports only self-contained non-parameterized combinational tops.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-cb1348da7adf1be905f3/report.json"
+      ]
+    },
+    {
+      "case_id": "o03",
+      "source_sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv:bytes1533-12189"
+      ],
+      "rationale": "RTL Advisor classified the top module header as ambiguous (unsupported_module_header). No eligible site or candidate was available, and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released parser cannot establish a supported top-module boundary for this input.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-9552880e4f4f3fd95da6/report.json"
+      ]
+    },
+    {
+      "case_id": "o04",
+      "source_sha256": "99aeb7564474111dc6662488c9f4ca6b788723e449b128d08ac54f8fc2da5cd2",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:bytes2308-6382"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized top because parameterized modules are outside the MVP scope. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released workflow supports only self-contained non-parameterized combinational tops.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-5a6d634e6151f74582b2/report.json"
+      ]
+    },
+    {
+      "case_id": "o05",
+      "source_sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/spill_register.sv:bytes807-1380"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized top because parameterized modules are outside the MVP scope. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released workflow supports only self-contained non-parameterized combinational tops.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-8aec6647af8eaad5dc7e/report.json"
+      ]
+    },
+    {
+      "case_id": "o06",
+      "source_sha256": "2e0e5b6d09ce4ade0881938ee042dcbc78438638fa2592338a374f88a3c27304",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/stream_register.sv:bytes901-1762"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized top because parameterized modules are outside the MVP scope. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released workflow supports only self-contained non-parameterized combinational tops.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-8b44a344060d5afc3fb1/report.json"
+      ]
+    },
+    {
+      "case_id": "o07",
+      "source_sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/fifo_v3.sv:bytes759-6296"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized top because parameterized modules are outside the MVP scope. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released workflow supports only self-contained non-parameterized combinational tops.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-e96288c78a20b0b79a21/report.json"
+      ]
+    },
+    {
+      "case_id": "o08",
+      "source_sha256": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/rr_arb_tree.sv:bytes3458-14543"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized top because parameterized modules are outside the MVP scope. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released workflow supports only self-contained non-parameterized combinational tops.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-6d6872bfb227f86bd0f8/report.json"
+      ]
+    },
+    {
+      "case_id": "o09",
+      "source_sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/stream_mux.sv:bytes817-1767"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized top because parameterized modules are outside the MVP scope. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released workflow supports only self-contained non-parameterized combinational tops.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-62956b8cd7f8b41b1f4e/report.json"
+      ]
+    },
+    {
+      "case_id": "o10",
+      "source_sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/corpus/upstream/verilog-axis/rtl/axis_register.v:bytes1183-10286"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized top because parameterized modules are outside the MVP scope. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released workflow supports only self-contained non-parameterized combinational tops.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-6781b6963b6582ef005a/report.json"
+      ]
+    },
+    {
+      "case_id": "o11",
+      "source_sha256": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:bytes1187-5316"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized top because parameterized modules are outside the MVP scope. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released workflow supports only self-contained non-parameterized combinational tops.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-1ef5ab6d5e9235b52730/report.json"
+      ]
+    },
+    {
+      "case_id": "o12",
+      "source_sha256": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "/Users/peter/Desktop/CAD Stuff/corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:bytes1188-10352"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized top because parameterized modules are outside the MVP scope. No candidate was allowed and the complete report decision is unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "The released workflow supports only self-contained non-parameterized combinational tops.",
+        "Evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-4812fb8cbe9b94451e22/report.json"
+      ]
+    }
+  ]
+}

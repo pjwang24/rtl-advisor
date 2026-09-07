@@ -1,0 +1,331 @@
+{
+  "schema_version": 1,
+  "document_type": "rtl-advisor-family-study-v1",
+  "study_id": "arbiter-family-credibility-v1",
+  "family_id": "same-cycle-arbiter-topology-v1",
+  "transformation_id": "same_cycle_arbiter_topology",
+  "freeze_policy": {
+    "candidate_ppa_inspected": false,
+    "replacement_after_ppa": false,
+    "corrections_before_ppa": [
+      "source qualification",
+      "compile",
+      "lint",
+      "formal"
+    ],
+    "parameter_configurations_are_distinct_pairs": false
+  },
+  "primary_cohort": [
+    {
+      "order": 1,
+      "pair_id": "pair-01-opentitan-ppc-tree",
+      "reference_id": "opentitan-prim-arbiter-ppc",
+      "variant_id": "opentitan-prim-arbiter-tree-alternative",
+      "upstream_project_id": "lowrisc-opentitan",
+      "revision": "99fb7bd3b2330a1bda61b1d3382198d0c7fee8d7",
+      "source_path": "hw/ip/prim/rtl/prim_arbiter_ppc.sv",
+      "source_hash": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99",
+      "license_hash": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "candidate_origin": "upstream_alternative",
+      "candidate_version": "opentitan-tree-v5",
+      "candidate_architecture": "OpenTitan prim_arbiter_tree from the same pinned revision",
+      "executor_id": "opentitan-ppc-tree",
+      "executor_version": "1",
+      "proof_level": "P2",
+      "parameter_matrix": [
+        {"configuration_id": "n01-dw32", "N": 1, "DW": 32, "EnDataPort": 1},
+        {"configuration_id": "n04-dw32", "N": 4, "DW": 32, "EnDataPort": 1},
+        {"configuration_id": "n08-dw32", "N": 8, "DW": 32, "EnDataPort": 1},
+        {"configuration_id": "n16-dw32", "N": 16, "DW": 32, "EnDataPort": 1}
+      ]
+    },
+    {
+      "order": 2,
+      "pair_id": "pair-02-opentitan-fixed-flat",
+      "reference_id": "opentitan-prim-arbiter-fixed",
+      "variant_id": "opentitan-prim-arbiter-fixed-flat-prefix",
+      "upstream_project_id": "lowrisc-opentitan",
+      "revision": "99fb7bd3b2330a1bda61b1d3382198d0c7fee8d7",
+      "source_path": "hw/ip/prim/rtl/prim_arbiter_fixed.sv",
+      "source_hash": "17cc878a5e7846d7c558c49da2fd45cecdd1014c389b0e50741f523ca62fe582",
+      "license_hash": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "candidate_origin": "reviewed_codex_candidate",
+      "candidate_version": "flat-prefix-v1",
+      "candidate_architecture": "Flat prefix and one-hot fixed-priority selector",
+      "executor_id": "opentitan-fixed-flat-prefix",
+      "executor_version": "1",
+      "proof_level": "P1",
+      "parameter_matrix": [
+        {"configuration_id": "n01-dw32", "N": 1, "DW": 32, "EnDataPort": 1},
+        {"configuration_id": "n04-dw32", "N": 4, "DW": 32, "EnDataPort": 1},
+        {"configuration_id": "n08-dw32", "N": 8, "DW": 32, "EnDataPort": 1},
+        {"configuration_id": "n16-dw32", "N": 16, "DW": 32, "EnDataPort": 1}
+      ]
+    },
+    {
+      "order": 3,
+      "pair_id": "pair-03-pulp-rr-tree-mask",
+      "reference_id": "pulp-common-cells-rr-arb-tree",
+      "variant_id": "pulp-rr-arb-tree-rotated-mask",
+      "upstream_project_id": "pulp-common-cells",
+      "revision": "1281545696eb3fcba50ec5b4275993476a3c710e",
+      "source_path": "src/rr_arb_tree.sv",
+      "source_hash": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e",
+      "license_hash": "6527a46225891b976fa94f634f6ee0cd22e1c7129d6f11c5c98c997627625fc7",
+      "candidate_origin": "reviewed_codex_candidate",
+      "candidate_version": "rotated-mask-v1",
+      "candidate_architecture": "Rotated-mask priority selection with the same fair and lock state",
+      "executor_id": "pulp-rr-tree-rotated-mask",
+      "executor_version": "1",
+      "proof_level": "P2",
+      "parameter_matrix": [
+        {"configuration_id": "numin01-dw32", "NumIn": 1, "DataWidth": 32, "FairArb": 1, "LockIn": 1},
+        {"configuration_id": "numin04-dw32", "NumIn": 4, "DataWidth": 32, "FairArb": 1, "LockIn": 1},
+        {"configuration_id": "numin08-dw32", "NumIn": 8, "DataWidth": 32, "FairArb": 1, "LockIn": 1},
+        {"configuration_id": "numin16-dw32", "NumIn": 16, "DataWidth": 32, "FairArb": 1, "LockIn": 1}
+      ]
+    },
+    {
+      "order": 4,
+      "pair_id": "pair-04-pulp-stream-arbiter",
+      "reference_id": "pulp-common-cells-stream-arbiter-flushable",
+      "variant_id": "pulp-stream-arbiter-alternative-cone",
+      "upstream_project_id": "pulp-common-cells",
+      "revision": "1281545696eb3fcba50ec5b4275993476a3c710e",
+      "source_path": "src/stream_arbiter_flushable.sv",
+      "source_hash": "e84cc7246b72cb7a6f0157b0b3cdc7cb0756fee323aeb16defa5f88d8db5dc77",
+      "license_hash": "6527a46225891b976fa94f634f6ee0cd22e1c7129d6f11c5c98c997627625fc7",
+      "candidate_origin": "reviewed_codex_candidate",
+      "candidate_version": "selection-cone-v1",
+      "candidate_architecture": "Same wrapper and lock state with an alternative arbitration and payload-selection cone",
+      "executor_id": "pulp-stream-arbiter-alternative-cone",
+      "executor_version": "1",
+      "proof_level": "P2",
+      "parameter_matrix": [
+        {"configuration_id": "nin01-dw32", "N_INP": 1, "DATA_WIDTH": 32, "ARBITER": "rr"},
+        {"configuration_id": "nin04-dw32", "N_INP": 4, "DATA_WIDTH": 32, "ARBITER": "rr"},
+        {"configuration_id": "nin08-dw32", "N_INP": 8, "DATA_WIDTH": 32, "ARBITER": "rr"},
+        {"configuration_id": "nin16-dw32", "N_INP": 16, "DATA_WIDTH": 32, "ARBITER": "rr"}
+      ]
+    },
+    {
+      "order": 5,
+      "pair_id": "pair-05-verilog-axis-arbiter",
+      "reference_id": "verilog-axis-arbiter",
+      "variant_id": "verilog-axis-arbiter-hierarchical",
+      "upstream_project_id": "alexforencich-verilog-axis",
+      "revision": "48ff7a7e2ef782cf778d47910cf85835c64b1bce",
+      "source_path": "rtl/arbiter.v",
+      "source_hash": "d54d337db4812f927b2e9b5788dfa39f9bd578ad01b7846c5fa7f2610b0923fa",
+      "license_hash": "8ea57f95365e9b16a5b516f422b71269183a1ae53bab5878ae6d69039e58fe77",
+      "candidate_origin": "reviewed_codex_candidate",
+      "candidate_version": "hierarchical-encoder-v1",
+      "candidate_architecture": "Hierarchical cyclic-priority encoder replacing the dual flat encoders",
+      "executor_id": "verilog-axis-arbiter-hierarchical",
+      "executor_version": "1",
+      "proof_level": "P2",
+      "parameter_matrix": [
+        {"configuration_id": "ports02", "PORTS": 2, "ARB_TYPE_ROUND_ROBIN": 1, "ARB_BLOCK": 1, "ARB_BLOCK_ACK": 1},
+        {"configuration_id": "ports04", "PORTS": 4, "ARB_TYPE_ROUND_ROBIN": 1, "ARB_BLOCK": 1, "ARB_BLOCK_ACK": 1},
+        {"configuration_id": "ports08", "PORTS": 8, "ARB_TYPE_ROUND_ROBIN": 1, "ARB_BLOCK": 1, "ARB_BLOCK_ACK": 1},
+        {"configuration_id": "ports16", "PORTS": 16, "ARB_TYPE_ROUND_ROBIN": 1, "ARB_BLOCK": 1, "ARB_BLOCK_ACK": 1}
+      ]
+    },
+    {
+      "order": 6,
+      "pair_id": "pair-06-verilog-axis-arb-mux",
+      "reference_id": "verilog-axis-axis-arb-mux",
+      "variant_id": "verilog-axis-axis-arb-mux-balanced",
+      "upstream_project_id": "alexforencich-verilog-axis",
+      "revision": "48ff7a7e2ef782cf778d47910cf85835c64b1bce",
+      "source_path": "rtl/axis_arb_mux.v",
+      "source_hash": "bee8d11f32f7fb1c5afdd6cdad872cd7de9dc94bcb4787f9aa119f2ebbc489a6",
+      "license_hash": "8ea57f95365e9b16a5b516f422b71269183a1ae53bab5878ae6d69039e58fe77",
+      "candidate_origin": "reviewed_codex_candidate",
+      "candidate_version": "balanced-selection-v1",
+      "candidate_architecture": "Formally matched alternative arbiter and balanced 32-bit payload selection with registers preserved",
+      "executor_id": "verilog-axis-arb-mux-balanced",
+      "executor_version": "1",
+      "proof_level": "P2",
+      "parameter_matrix": [
+        {"configuration_id": "scount02-dw32", "S_COUNT": 2, "DATA_WIDTH": 32, "ARB_TYPE_ROUND_ROBIN": 1},
+        {"configuration_id": "scount04-dw32", "S_COUNT": 4, "DATA_WIDTH": 32, "ARB_TYPE_ROUND_ROBIN": 1},
+        {"configuration_id": "scount08-dw32", "S_COUNT": 8, "DATA_WIDTH": 32, "ARB_TYPE_ROUND_ROBIN": 1},
+        {"configuration_id": "scount16-dw32", "S_COUNT": 16, "DATA_WIDTH": 32, "ARB_TYPE_ROUND_ROBIN": 1}
+      ]
+    },
+    {
+      "order": 7,
+      "pair_id": "pair-07-basejump-fixed",
+      "reference_id": "basejump-bsg-arb-fixed",
+      "variant_id": "basejump-bsg-arb-fixed-balanced",
+      "upstream_project_id": "basejump-stl",
+      "revision": "b48037e28544425839dbd617d45b1a82631bc1a9",
+      "source_path": "bsg_misc/bsg_arb_fixed.sv",
+      "source_hash": "3de768f8ee5fc148ea6ce62f0f9db32e3f836d1c6603ce112b2dfcd994196024",
+      "license_hash": "2e77070466e0c6d653e29ae4dfbc1a549cf1aa0b320237de0421db176dff87c0",
+      "candidate_origin": "reviewed_codex_candidate",
+      "candidate_version": "balanced-fixed-v1",
+      "candidate_architecture": "Balanced fixed-priority tree",
+      "executor_id": "basejump-fixed-balanced-tree",
+      "executor_version": "1",
+      "proof_level": "P1",
+      "parameter_matrix": [
+        {"configuration_id": "width02", "width_p": 2, "lo_to_hi_p": 0},
+        {"configuration_id": "width04", "width_p": 4, "lo_to_hi_p": 0},
+        {"configuration_id": "width08", "width_p": 8, "lo_to_hi_p": 0},
+        {"configuration_id": "width16", "width_p": 16, "lo_to_hi_p": 0}
+      ]
+    },
+    {
+      "order": 8,
+      "pair_id": "pair-08-basejump-round-robin",
+      "reference_id": "basejump-bsg-arb-round-robin",
+      "variant_id": "basejump-bsg-arb-round-robin-rotated-mask",
+      "upstream_project_id": "basejump-stl",
+      "revision": "b48037e28544425839dbd617d45b1a82631bc1a9",
+      "source_path": "bsg_misc/bsg_arb_round_robin.sv",
+      "source_hash": "1314e4baf2831030b2f217dbadfe5a95843ce3c3111d74baa3440da3e3b20a08",
+      "license_hash": "2e77070466e0c6d653e29ae4dfbc1a549cf1aa0b320237de0421db176dff87c0",
+      "candidate_origin": "reviewed_codex_candidate",
+      "candidate_version": "rotated-mask-v1",
+      "candidate_architecture": "Rotated-mask priority selection replacing the thermometer scan",
+      "executor_id": "basejump-round-robin-rotated-mask",
+      "executor_version": "1",
+      "proof_level": "P2",
+      "parameter_matrix": [
+        {"configuration_id": "width02", "width_p": 2},
+        {"configuration_id": "width04", "width_p": 4},
+        {"configuration_id": "width08", "width_p": 8},
+        {"configuration_id": "width16", "width_p": 16}
+      ]
+    },
+    {
+      "order": 9,
+      "pair_id": "pair-09-basejump-locking-fixed",
+      "reference_id": "basejump-bsg-locking-arb-fixed",
+      "variant_id": "basejump-bsg-locking-arb-fixed-alternative",
+      "upstream_project_id": "basejump-stl",
+      "revision": "b48037e28544425839dbd617d45b1a82631bc1a9",
+      "source_path": "bsg_misc/bsg_locking_arb_fixed.sv",
+      "source_hash": "c8960bb8d5f08eb8c1eeda1211473e9f575d38341bce7c4871854ac56f4af414",
+      "license_hash": "2e77070466e0c6d653e29ae4dfbc1a549cf1aa0b320237de0421db176dff87c0",
+      "candidate_origin": "reviewed_codex_candidate",
+      "candidate_version": "locking-cone-v1",
+      "candidate_architecture": "Upstream locking state retained with an alternative fixed-priority cone",
+      "executor_id": "basejump-locking-fixed-alternative-cone",
+      "executor_version": "1",
+      "proof_level": "P2",
+      "parameter_matrix": [
+        {"configuration_id": "width02", "width_p": 2, "lo_to_hi_p": 0},
+        {"configuration_id": "width04", "width_p": 4, "lo_to_hi_p": 0},
+        {"configuration_id": "width08", "width_p": 8, "lo_to_hi_p": 0},
+        {"configuration_id": "width16", "width_p": 16, "lo_to_hi_p": 0}
+      ]
+    },
+    {
+      "order": 10,
+      "pair_id": "pair-10-basejump-n-to-1",
+      "reference_id": "basejump-bsg-round-robin-n-to-1",
+      "variant_id": "basejump-bsg-round-robin-n-to-1-scan",
+      "upstream_project_id": "basejump-stl",
+      "revision": "b48037e28544425839dbd617d45b1a82631bc1a9",
+      "source_path": "bsg_dataflow/bsg_round_robin_n_to_1.sv",
+      "source_hash": "a04498565503c174d90bc08a7a710859e9220f08c605c732cff3fae40d6557b6",
+      "license_hash": "2e77070466e0c6d653e29ae4dfbc1a549cf1aa0b320237de0421db176dff87c0",
+      "candidate_origin": "upstream_alternative",
+      "candidate_version": "use-scan-parameter-v1",
+      "candidate_architecture": "Pinned upstream use_scan_p=1 implementation replacing use_scan_p=0",
+      "executor_id": "basejump-n-to-1-upstream-parameter",
+      "executor_version": "1",
+      "proof_level": "P2",
+      "parameter_matrix": [
+        {"configuration_id": "width02-dw32", "num_in_p": 2, "width_p": 32, "strict_p": 0},
+        {"configuration_id": "width04-dw32", "num_in_p": 4, "width_p": 32, "strict_p": 0},
+        {"configuration_id": "width08-dw32", "num_in_p": 8, "width_p": 32, "strict_p": 0},
+        {"configuration_id": "width16-dw32", "num_in_p": 16, "width_p": 32, "strict_p": 0}
+      ]
+    }
+  ],
+  "reserve_cohort": [
+    {
+      "order": 1,
+      "reference_id": "pulp-common-cells-prioarbiter",
+      "upstream_project_id": "pulp-common-cells",
+      "replacement_condition": "A primary pair fails source qualification or formal proof before any PPA is run"
+    },
+    {
+      "order": 2,
+      "reference_id": "pulp-common-cells-rrarbiter",
+      "upstream_project_id": "pulp-common-cells",
+      "replacement_condition": "The prior reserve is unavailable and a primary pair failed before PPA"
+    },
+    {
+      "order": 3,
+      "reference_id": "basejump-bsg-round-robin-arb",
+      "upstream_project_id": "basejump-stl",
+      "replacement_condition": "Both earlier reserves are unavailable and a primary pair failed before PPA"
+    }
+  ],
+  "m2_selection": {
+    "primary": [
+      {"order": 1, "pair_id": "pair-01-opentitan-ppc-tree", "configuration_id": "n08-dw32"},
+      {"order": 2, "pair_id": "pair-02-opentitan-fixed-flat", "configuration_id": "n16-dw32"},
+      {"order": 3, "pair_id": "pair-03-pulp-rr-tree-mask", "configuration_id": "numin16-dw32"},
+      {"order": 4, "pair_id": "pair-06-verilog-axis-arb-mux", "configuration_id": "scount08-dw32"},
+      {"order": 5, "pair_id": "pair-08-basejump-round-robin", "configuration_id": "width16"}
+    ],
+    "fallback": [
+      {"order": 1, "pair_id": "pair-04-pulp-stream-arbiter", "configuration_id": "nin16-dw32"},
+      {"order": 2, "pair_id": "pair-05-verilog-axis-arbiter", "configuration_id": "ports16"},
+      {"order": 3, "pair_id": "pair-09-basejump-locking-fixed", "configuration_id": "width16"},
+      {"order": 4, "pair_id": "pair-10-basejump-n-to-1", "configuration_id": "width16-dw32"}
+    ],
+    "replacement_policy": "Fallbacks are used only for source-qualification or formal failure before any PPA is run"
+  },
+  "proof_contract": {
+    "P1": {
+      "latency_relation": "combinational",
+      "semantics": "two-state bit-vector RTL equivalence"
+    },
+    "P2": {
+      "latency_relation": "same_cycle",
+      "reset": "assert initially, release after one clock, never reassert",
+      "traffic": "arbitrary protocol-legal requests; blocked requests and payloads remain stable",
+      "ready_ack_yumi": "unconstrained except where the upstream protocol requires stability",
+      "observables": "valid, grant, acknowledge, and ready every cycle; index and payload when semantically valid"
+    }
+  },
+  "measurement_profiles": {
+    "M0": "pinned Yosys/ABC standard",
+    "M1": "pinned Yosys/ABC stronger",
+    "M2": "pinned Nangate45 OpenROAD, 10 ns, fixed die, 35 percent utilization"
+  },
+  "frozen_hashes": {
+    "tool_hash": "c020554d753cc041da4813790d4666ec4016f0c8a7808dbad7d335f0ef92c035",
+    "liberty_hash": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+    "constraint_hash": "183f746d5ff163b6a16962cbe250dd16ec10f1ece6eeebefdbeda791ac34bac2",
+    "transformation_registry_hash": "ede9d27234c7c826bf115798b8df00774cc3e987a73be174c190ef6f99c28370",
+    "executor_registry_hash": "a600fdb1904a21f72853b3194a6996695c735d3af697a4bd8fe63578b21abc43"
+  },
+  "gates": {
+    "minimum_pairs": 10,
+    "minimum_lineages": 3,
+    "minimum_m2_samples": 5,
+    "minimum_reproducibility": 0.95,
+    "requires_confirmed_improvement": true,
+    "allows_recommended_formal_failure": false,
+    "allows_recommended_regression": false,
+    "promotion": {
+      "minimum_improved_pairs": 2,
+      "minimum_improved_lineages": 2,
+      "minimum_m2_confirmations": 2,
+      "minimum_m2_lineages": 2,
+      "allows_m0_m1_recommended_regression": false,
+      "requires_current_hash_linked_formal": true
+    }
+  },
+  "claim_scope": "Pinned Yosys/ABC and OpenROAD evidence only; no Genus, production-PPA, or general unseen-RTL claim",
+  "manifest_hash": "89efd960421162c0ad4431baf09743d60148df23c52acc831c5e47bf0cc24041",
+  "semantic_hash": "7a58c98435112d2223668f93cd187925647811f8d52bf919bc89f686b1c34bb4"
+}

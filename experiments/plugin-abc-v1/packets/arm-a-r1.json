@@ -1,0 +1,323 @@
+{
+  "schema": "rtl-advisor-plugin-abc-packet-v1",
+  "experiment_id": "plugin-abc-v1",
+  "arm": "A",
+  "repetition": 1,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "manifest_sha256": "9a66873f7cd820f2aa2e31a20d99d961e3aa80e8e735d9613a55bdb0e09f3dc2",
+  "objective": "balanced",
+  "access_rule": "Use ordinary reasoning and EDA tools. Do not inspect or invoke RTL Advisor skills, source code, artifacts, or other arm outputs.",
+  "isolation_rules": [
+    "Do not read experiments/plugin-abc-v1/oracle.json.",
+    "Do not read any experiments/plugin-abc-v1/runs/arm-* directory except your assigned arm directory.",
+    "Do not mutate baseline RTL; create isolated candidates under your assigned run directory.",
+    "Do not recommend any unproven candidate.",
+    "Report every case in manifest order, including unsupported and no-change outcomes."
+  ],
+  "max_candidates_per_case": 3,
+  "case_time_budget_minutes": 20,
+  "result_schema": "schemas/rtl-advisor-plugin-abc-arm-result-v1.schema.json",
+  "cases": [
+    {
+      "case_id": "g01",
+      "source_kind": "generated",
+      "category": "unsigned_arithmetic",
+      "top": "g01_add8_left",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv"
+      ],
+      "source_sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "g02",
+      "source_kind": "generated",
+      "category": "unsigned_arithmetic",
+      "top": "g02_add32_five",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv"
+      ],
+      "source_sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "g03",
+      "source_kind": "generated",
+      "category": "mixed_logic",
+      "top": "g03_mixed_safe_add",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv"
+      ],
+      "source_sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "g04",
+      "source_kind": "generated",
+      "category": "mixed_logic",
+      "top": "g04_mixed_procedural_add",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g04_mixed_procedural_add.sv"
+      ],
+      "source_sha256": "d41c31a3112e798bd67ab057e52043949e3f0b0ed10526be7e62daaa74fa2dfc",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "g05",
+      "source_kind": "generated",
+      "category": "selection_decode",
+      "top": "g05_mux_common_logic",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv"
+      ],
+      "source_sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "g06",
+      "source_kind": "generated",
+      "category": "selection_decode",
+      "top": "g06_priority_decode",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv"
+      ],
+      "source_sha256": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "g07",
+      "source_kind": "generated",
+      "category": "semantic_boundary",
+      "top": "g07_width_truncation",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv"
+      ],
+      "source_sha256": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "g08",
+      "source_kind": "generated",
+      "category": "semantic_boundary",
+      "top": "g08_signed_chain",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g08_signed_chain.sv"
+      ],
+      "source_sha256": "b012fa81c56e0e2a101f605b9b8f00de337063c29d9217c8ffd020b767372d6d",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "g09",
+      "source_kind": "generated",
+      "category": "no_change_trap",
+      "top": "g09_already_balanced",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g09_already_balanced.sv"
+      ],
+      "source_sha256": "c1bbfbc8ffc8ea0b18fdfa3ddaa621171e513d51a285aebde8181059ac7a1ff0",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "g10",
+      "source_kind": "generated",
+      "category": "no_change_trap",
+      "top": "g10_function_boundary",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv"
+      ],
+      "source_sha256": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "g11",
+      "source_kind": "generated",
+      "category": "pipeline_boundary",
+      "top": "g11_one_stage_stream",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv"
+      ],
+      "source_sha256": "1c7e7a24c9db1fca9787798b355b2d9fca354646df1e056c229c658a3a8d36c6",
+      "stateful": true,
+      "proof_level": "P2"
+    },
+    {
+      "case_id": "g12",
+      "source_kind": "generated",
+      "category": "pipeline_boundary",
+      "top": "g12_two_stage_pipeline",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv"
+      ],
+      "source_sha256": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+      "stateful": true,
+      "proof_level": "P2"
+    },
+    {
+      "case_id": "o01",
+      "source_kind": "open",
+      "category": "selection_decode",
+      "reference_id": "opentitan-prim-arbiter-ppc",
+      "top": "prim_arbiter_ppc",
+      "sources": [
+        "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv"
+      ],
+      "source_sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99",
+      "stateful": true,
+      "proof_level": "P2"
+    },
+    {
+      "case_id": "o02",
+      "source_kind": "open",
+      "category": "state_control_queue",
+      "reference_id": "opentitan-prim-fifo-sync",
+      "top": "prim_fifo_sync",
+      "sources": [
+        "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv"
+      ],
+      "source_sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630",
+      "stateful": true,
+      "proof_level": "P2"
+    },
+    {
+      "case_id": "o03",
+      "source_kind": "open",
+      "category": "state_control_queue",
+      "reference_id": "opentitan-prim-count",
+      "top": "prim_count",
+      "sources": [
+        "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv"
+      ],
+      "source_sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb",
+      "stateful": true,
+      "proof_level": "P2"
+    },
+    {
+      "case_id": "o04",
+      "source_kind": "open",
+      "category": "state_control_queue",
+      "reference_id": "opentitan-prim-packer-fifo",
+      "top": "prim_packer_fifo",
+      "sources": [
+        "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv"
+      ],
+      "source_sha256": "99aeb7564474111dc6662488c9f4ca6b788723e449b128d08ac54f8fc2da5cd2",
+      "stateful": true,
+      "proof_level": "P2"
+    },
+    {
+      "case_id": "o05",
+      "source_kind": "open",
+      "category": "pipeline_boundary",
+      "reference_id": "pulp-common-cells-spill-register",
+      "top": "spill_register",
+      "sources": [
+        "corpus/upstream/common_cells/src/spill_register.sv"
+      ],
+      "source_sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec",
+      "stateful": true,
+      "proof_level": "P2"
+    },
+    {
+      "case_id": "o06",
+      "source_kind": "open",
+      "category": "pipeline_boundary",
+      "reference_id": "pulp-common-cells-stream-register",
+      "top": "stream_register",
+      "sources": [
+        "corpus/upstream/common_cells/src/stream_register.sv"
+      ],
+      "source_sha256": "2e0e5b6d09ce4ade0881938ee042dcbc78438638fa2592338a374f88a3c27304",
+      "stateful": true,
+      "proof_level": "P2"
+    },
+    {
+      "case_id": "o07",
+      "source_kind": "open",
+      "category": "state_control_queue",
+      "reference_id": "pulp-common-cells-fifo-v3",
+      "top": "fifo_v3",
+      "sources": [
+        "corpus/upstream/common_cells/src/fifo_v3.sv"
+      ],
+      "source_sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc",
+      "stateful": true,
+      "proof_level": "P2"
+    },
+    {
+      "case_id": "o08",
+      "source_kind": "open",
+      "category": "selection_decode",
+      "reference_id": "pulp-common-cells-rr-arb-tree",
+      "top": "rr_arb_tree",
+      "sources": [
+        "corpus/upstream/common_cells/src/rr_arb_tree.sv"
+      ],
+      "source_sha256": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e",
+      "stateful": true,
+      "proof_level": "P2"
+    },
+    {
+      "case_id": "o09",
+      "source_kind": "open",
+      "category": "selection_decode",
+      "reference_id": "pulp-common-cells-stream-mux",
+      "top": "stream_mux",
+      "sources": [
+        "corpus/upstream/common_cells/src/stream_mux.sv"
+      ],
+      "source_sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "o10",
+      "source_kind": "open",
+      "category": "pipeline_boundary",
+      "reference_id": "verilog-axis-axis-register",
+      "top": "axis_register",
+      "sources": [
+        "corpus/upstream/verilog-axis/rtl/axis_register.v"
+      ],
+      "source_sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39",
+      "stateful": true,
+      "proof_level": "P2"
+    },
+    {
+      "case_id": "o11",
+      "source_kind": "open",
+      "category": "pipeline_boundary",
+      "reference_id": "verilog-axis-axis-pipeline-register",
+      "top": "axis_pipeline_register",
+      "sources": [
+        "corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v"
+      ],
+      "source_sha256": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc",
+      "stateful": true,
+      "proof_level": "P3"
+    },
+    {
+      "case_id": "o12",
+      "source_kind": "open",
+      "category": "pipeline_boundary",
+      "reference_id": "verilog-axis-axis-pipeline-fifo",
+      "top": "axis_pipeline_fifo",
+      "sources": [
+        "corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v"
+      ],
+      "source_sha256": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02",
+      "stateful": true,
+      "proof_level": "P2"
+    }
+  ]
+}

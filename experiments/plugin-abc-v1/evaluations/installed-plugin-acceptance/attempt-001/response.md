@@ -1,0 +1,1 @@
+{"action":"failed","decision":"candidate_not_prepared","error":{"code":"top_required","message":"--top is required for RTL or filelist input"},"formal_status":"not_run","measurement_status":"not_run"}

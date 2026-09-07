@@ -1,0 +1,84 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-d9d2f9d3e3638a978e9a/input.json",
+    "review": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-d9d2f9d3e3638a978e9a/review.json",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-d9d2f9d3e3638a978e9a"
+  },
+  "candidate_generation_allowed": false,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv",
+    "--objective",
+    "balanced",
+    "--top",
+    "g10_function_boundary",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 0,
+    "excluded_site_count": 1
+  },
+  "decision": "unsupported",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "b0afd5c53beabe5cd3357370974e7f712fa56d39c2d6f9b402ab6e507fb48893",
+    "model_used": false,
+    "rules_only": true
+  },
+  "exclusions": [
+    {
+      "detail": "this generated, function, task, or declaration region is outside the MVP rewrite scope",
+      "exclusion_id": "addexclude_9665cecab0a235a5",
+      "reason_code": "procedural_or_generated_rtl",
+      "source": {
+        "end_offset": 311,
+        "file": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv",
+        "sha256": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+        "start_offset": 91
+      },
+      "status": "excluded",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "findings": [],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "12ccfed416dc0ea5e9bd99473a1ae81315e07053bea97782380f0d4dba798fbf",
+    "defines": [],
+    "design_hash": "88c50f8ed20b2bde730e873e2d5af8f094625c3842755d802b75f8149e7c78dc",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv",
+        "sha256": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "g10_function_boundary"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-d9d2f9d3e3638a978e9a",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "65c2da5b1acd40c47be54d5662b8fbbed8adfa3d1a1b9491657dda6ee0a8abe0",
+  "status": "completed"
+}

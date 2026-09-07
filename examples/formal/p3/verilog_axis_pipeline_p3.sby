@@ -1,0 +1,26 @@
+[tasks]
+positive
+bad_drop
+bad_duplicate
+bad_order
+
+[options]
+mode prove
+depth 24
+expect pass
+
+[engines]
+abc pdr
+
+[script]
+positive: read_verilog -formal -sv verilog_axis_pipeline_p3_miter.sv
+bad_drop: read_verilog -formal -sv -D MUTATION_KIND=1 verilog_axis_pipeline_p3_miter.sv
+bad_duplicate: read_verilog -formal -sv -D MUTATION_KIND=2 verilog_axis_pipeline_p3_miter.sv
+bad_order: read_verilog -formal -sv -D MUTATION_KIND=3 verilog_axis_pipeline_p3_miter.sv
+read_verilog -formal axis_register.v axis_pipeline_register.v
+prep -top verilog_axis_pipeline_p3_miter
+
+[files]
+corpus/upstream/verilog-axis/rtl/axis_register.v
+corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v
+examples/formal/p3/verilog_axis_pipeline_p3_miter.sv

@@ -1,0 +1,193 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/scratch/o03_error_equiv.sv; prep -top o03_error_equiv; chformal -lower; sat -verify -prove-asserts -show-all' --
+
+1. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/scratch/o03_error_equiv.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/scratch/o03_error_equiv.sv' to AST representation.
+Generating RTLIL representation for module `\o03_error_equiv'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \o03_error_equiv
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \o03_error_equiv
+Removed 0 unused modules.
+Module o03_error_equiv directly or indirectly contains formal properties -> setting "keep" attribute.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 1 assignment to connection.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\o03_error_equiv.$proc$experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/scratch/o03_error_equiv.sv:12$5'.
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `o03_error_equiv.$proc$experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/scratch/o03_error_equiv.sv:12$5'.
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module o03_error_equiv.
+
+2.3. Executing FUTURE pass.
+
+2.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module o03_error_equiv.
+
+2.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \o03_error_equiv..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+2.6. Executing CHECK pass (checking for obvious problems).
+Checking module o03_error_equiv...
+Found and reported 0 problems.
+
+2.7. Executing OPT pass (performing simple optimizations).
+
+2.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module o03_error_equiv.
+
+2.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\o03_error_equiv'.
+Computing hashes of 6 cells of `\o03_error_equiv'.
+Finding duplicate cells in `\o03_error_equiv'.
+Removed a total of 0 cells.
+
+2.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \o03_error_equiv..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \o03_error_equiv.
+Performed a total of 0 changes.
+
+2.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\o03_error_equiv'.
+Computing hashes of 6 cells of `\o03_error_equiv'.
+Finding duplicate cells in `\o03_error_equiv'.
+Removed a total of 0 cells.
+
+2.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \o03_error_equiv..
+
+2.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module o03_error_equiv.
+
+2.7.8. Finished fast OPT passes. (There is nothing left to do.)
+
+2.8. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 33) from port B of cell o03_error_equiv.$ne$experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/scratch/o03_error_equiv.sv:10$2 ($ne).
+
+2.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \o03_error_equiv..
+
+2.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.11. Executing OPT pass (performing simple optimizations).
+
+2.11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module o03_error_equiv.
+
+2.11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\o03_error_equiv'.
+Computing hashes of 6 cells of `\o03_error_equiv'.
+Finding duplicate cells in `\o03_error_equiv'.
+Removed a total of 0 cells.
+
+2.11.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \o03_error_equiv..
+
+2.11.4. Finished fast OPT passes.
+
+2.12. Executing SORT pass.
+
+2.13. Printing statistics.
+
+=== o03_error_equiv ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        7 wires
+      132 wire bits
+        5 public wires
+       99 public wire bits
+        2 ports
+       64 port bits
+        6 cells
+        1   $add
+        1   $check
+        1   $eq
+        2   $ne
+        1   $not
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module o03_error_equiv...
+Found and reported 0 problems.
+
+3. Executing SAT pass (solving SAT problems in the circuit).
+Using SAT solver `minisat`.
+
+Setting up SAT problem:
+Final constraint equation: { } = { }
+Imported 8 cells to SAT database.
+Import proof for assert: $eq$experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/scratch/o03_error_equiv.sv:12$7_Y when 1'1.
+Import show expression: $auto$rtlil.cc:3386:And$12
+Import show expression: $auto$rtlil.cc:3339:Not$10
+Import show expression: $eq$experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/scratch/o03_error_equiv.sv:12$7_Y
+Import show expression: $not$experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r2/attempt-001/scratch/o03_error_equiv.sv:11$3_Y
+Import show expression: \new_err
+Import show expression: \old_err
+Import show expression: \primary_count
+Import show expression: \secondary_count
+Import show expression: \sum
+
+Solving problem with 798 variables and 2121 clauses..
+SAT proof finished - no model found: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$    
+                 /$$__  $$    | $$_____/    | $$__  $$   
+                | $$  \ $$    | $$          | $$  \ $$   
+                | $$  | $$    | $$$$$       | $$  | $$   
+                | $$  | $$    | $$__/       | $$  | $$   
+                | $$/$$ $$    | $$          | $$  | $$   
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/                              
+
+End of script. Logfile hash: ddfbe5b834, CPU: user 0.05s system 0.02s, MEM: 14.12 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 41% 1x sat (0 sec), 18% 5x opt_expr (0 sec), ...

@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "2d5ee98e8f2e1ddfa5bed6d01466193b834843a014326261230ffb7d56ff7c67",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:axis_pipeline_register.v",
+        "sha256": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc"
+      }
+    ],
+    "top": "axis_pipeline_register"
+  },
+  "defines": [],
+  "design_hash": "563a2ce0ce83b8d31a3c70cfd8cc1cabf11b2fe9a21f6d0e85c5aea5e2f274d1",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v",
+      "sha256": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "7d2ac5a833064d6a7d0ef0c4bf87e4a8b119157f0e2b36c43233066f14a3f56a",
+  "top": "axis_pipeline_register"
+}

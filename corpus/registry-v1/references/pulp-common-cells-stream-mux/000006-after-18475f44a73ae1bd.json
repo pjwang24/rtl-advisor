@@ -1,0 +1,112 @@
+{
+  "behavioral_basis": [
+    {
+      "description": "Pre-registered upstream evidence location; reproduction is pending.",
+      "kind": "specification",
+      "location": "Bender.yml"
+    }
+  ],
+  "categories": [
+    "selection_arbitration",
+    "bus_adapter_interconnect"
+  ],
+  "compile_context": {
+    "black_boxes": [],
+    "build_commands": [
+      "yosys -m /opt/oss-cad-suite/share/yosys/plugins/slang.so -Q -p 'read_slang --top stream_mux -G N_INP=4 -D SYNTHESIS -I corpus/upstream/common_cells/include corpus/upstream/common_cells/src/cf_math_pkg.sv corpus/upstream/common_cells/src/stream_mux.sv; hierarchy -check -top stream_mux; proc; check'"
+    ],
+    "clocks": [],
+    "defines": [
+      "SYNTHESIS"
+    ],
+    "filelist": null,
+    "frontend": "verilator+yosys-slang",
+    "frontend_version": "Verilator 5.047 devel rev v5.046-58-gb89d29cab (mod); Yosys 0.63+49 (git sha1 95d738edc, clang++ 18.1.8 -fPIC -O3)",
+    "generated_inputs": [],
+    "include_dirs": [
+      "include"
+    ],
+    "lint_commands": [
+      "verilator --lint-only --language 1800-2017 --Wall --Wno-fatal -DSYNTHESIS -Icorpus/upstream/common_cells/include -GN_INP=4 --top-module stream_mux corpus/upstream/common_cells/src/cf_math_pkg.sv corpus/upstream/common_cells/src/stream_mux.sv"
+    ],
+    "memories": [],
+    "parameters": {
+      "N_INP": 4
+    },
+    "resets": [],
+    "sources": [
+      "src/cf_math_pkg.sv",
+      "src/stream_mux.sv"
+    ],
+    "test_commands": [],
+    "top": "stream_mux"
+  },
+  "compile_context_hashes": {
+    "compile_context_hash": "396e7f603dd49d1e2effdcc7d56848595ba84293d351504a80b736312569dfe5",
+    "filelist_sha256": null,
+    "generated_input_hashes": [],
+    "include_tree_hashes": [
+      {
+        "path": "include",
+        "sha256": "ff612d5da4c2ed1d69a99729d3ffb78939bd609c9a600e64306dce3f817e5cc5"
+      }
+    ]
+  },
+  "display_name": "PULP common_cells stream_mux",
+  "document_type": "rtl-advisor.reference-manifest",
+  "lineage": {
+    "containing_design_ids": [
+      "pulp-common-cells"
+    ],
+    "design_lineage_id": "pulp-common-cells-stream-mux",
+    "repository_lineage_id": "pulp-common-cells",
+    "upstream_project_id": "pulp-common-cells"
+  },
+  "proof_contract": {
+    "assumptions": [],
+    "kind": "combinational_equivalence",
+    "latency_relation": "combinational",
+    "level": "P1",
+    "observables": [
+      "all top-level outputs"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "provenance": {
+    "canonical_url": "https://github.com/pulp-platform/common_cells",
+    "license": {
+      "disposition": "conditional",
+      "expression": "SHL-0.51 OR Apache-2.0",
+      "sha256": "6527a46225891b976fa94f634f6ee0cd22e1c7129d6f11c5c98c997627625fc7",
+      "url": "https://github.com/pulp-platform/common_cells/blob/1281545696eb3fcba50ec5b4275993476a3c710e/LICENSE"
+    },
+    "project": "pulp-common-cells",
+    "revision": "1281545696eb3fcba50ec5b4275993476a3c710e",
+    "revision_kind": "commit"
+  },
+  "qualification": {
+    "reason": "The pinned source builds and synthesizes, but no independent behavioral test or property set was reproduced in Wave 2.",
+    "state": "build_reproduced",
+    "status": "blocked"
+  },
+  "reference_id": "pulp-common-cells-stream-mux",
+  "schema": "rtl-advisor-reference-v1",
+  "schema_version": 1,
+  "semantic_hash": "462b47b4253f22df612c9b8ecc93d07c4b507e9b6b8d6dd37b32317e926d2933",
+  "source_hashes": [
+    {
+      "path": "src/cf_math_pkg.sv",
+      "sha256": "bbf0614771ceb9526356bb8e5234787324ef215884bc11b4aa27e91fc3cc8910"
+    },
+    {
+      "path": "src/stream_mux.sv",
+      "sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f"
+    }
+  ],
+  "split": "development",
+  "synthesis_profiles": [
+    "standard",
+    "stronger"
+  ],
+  "tier": "A"
+}

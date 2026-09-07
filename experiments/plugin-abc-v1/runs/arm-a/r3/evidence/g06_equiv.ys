@@ -1,0 +1,10 @@
+read_verilog -sv ../../../../cases/generated/g06_priority_decode.sv
+rename g06_priority_decode gold
+read_verilog -sv ../candidates/g06_priority_decode_candidate.sv
+rename g06_priority_decode_candidate gate
+proc
+opt_clean
+equiv_make gold gate equiv
+prep -top equiv
+equiv_simple
+equiv_status -assert

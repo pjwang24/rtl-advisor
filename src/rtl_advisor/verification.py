@@ -136,7 +136,10 @@ def lint_case(
 
 
 def _yosys_quote(path: Path) -> str:
-    return '"' + str(path).replace("\\", "\\\\").replace('"', '\\"') + '"'
+    raw = str(path)
+    if any(character in raw for character in ("\x00", "\r", "\n")):
+        raise VerificationError("Yosys arguments may not contain control characters")
+    return '"' + raw.replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
 def _equivalence_script(

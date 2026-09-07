@@ -8,6 +8,7 @@ from rtl_advisor.benchmark_v22 import BenchmarkV22Error, create_benchmark_lock_v
 from rtl_advisor.config import load_config
 
 
+@pytest.mark.local_evidence
 def test_v22_failed_calibration_forbids_blind_lock() -> None:
     lock = Path("artifacts/benchmarks/v22/benchmark-lock.json")
     assert not lock.exists()

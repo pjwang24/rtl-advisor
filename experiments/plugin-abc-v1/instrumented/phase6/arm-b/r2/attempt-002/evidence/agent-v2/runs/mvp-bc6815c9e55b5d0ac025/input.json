@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "956b42af0e190b626e27ce831b9a6d63a8290bfaec1f3e5321099f1f87a8acd8",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:g07_width_truncation.sv",
+        "sha256": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2"
+      }
+    ],
+    "top": "g07_width_truncation"
+  },
+  "defines": [],
+  "design_hash": "0c21d3757e1ece9bd67cd8ae9c99dfd967a3b5b3e42bd5ea0051874a3c58d984",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv",
+      "sha256": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "f3d61b0cc4545e9f20a85f2021acdc0be8d68df90409c159462119c59962e33f",
+  "top": "g07_width_truncation"
+}

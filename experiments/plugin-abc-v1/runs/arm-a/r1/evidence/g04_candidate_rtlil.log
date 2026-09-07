@@ -1,0 +1,189 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv; prep -top g04_mixed_procedural_add; ltp; stat' --
+
+1. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv' to AST representation.
+Generating RTLIL representation for module `\g04_mixed_procedural_add'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \g04_mixed_procedural_add
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \g04_mixed_procedural_add
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv:6$1 in module g04_mixed_procedural_add.
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 1 assignment to connection.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~1 debug messages>
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\g04_mixed_procedural_add.$proc$experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv:6$1'.
+     1/1: $1\y[15:0]
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\g04_mixed_procedural_add.\y' from process `\g04_mixed_procedural_add.$proc$experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv:6$1'.
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\g04_mixed_procedural_add.$proc$experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv:6$1'.
+Removing empty process `g04_mixed_procedural_add.$proc$experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv:6$1'.
+Cleaned up 1 empty switch.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g04_mixed_procedural_add.
+
+2.3. Executing FUTURE pass.
+
+2.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g04_mixed_procedural_add.
+
+2.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g04_mixed_procedural_add..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+2.6. Executing CHECK pass (checking for obvious problems).
+Checking module g04_mixed_procedural_add...
+Found and reported 0 problems.
+
+2.7. Executing OPT pass (performing simple optimizations).
+
+2.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g04_mixed_procedural_add.
+
+2.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g04_mixed_procedural_add'.
+Computing hashes of 4 cells of `\g04_mixed_procedural_add'.
+Finding duplicate cells in `\g04_mixed_procedural_add'.
+Removed a total of 0 cells.
+
+2.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g04_mixed_procedural_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+2.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g04_mixed_procedural_add.
+Performed a total of 0 changes.
+
+2.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g04_mixed_procedural_add'.
+Computing hashes of 4 cells of `\g04_mixed_procedural_add'.
+Finding duplicate cells in `\g04_mixed_procedural_add'.
+Removed a total of 0 cells.
+
+2.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g04_mixed_procedural_add..
+
+2.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g04_mixed_procedural_add.
+
+2.7.8. Finished fast OPT passes. (There is nothing left to do.)
+
+2.8. Executing WREDUCE pass (reducing word size of cells).
+
+2.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g04_mixed_procedural_add..
+
+2.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.11. Executing OPT pass (performing simple optimizations).
+
+2.11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g04_mixed_procedural_add.
+
+2.11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g04_mixed_procedural_add'.
+Computing hashes of 4 cells of `\g04_mixed_procedural_add'.
+Finding duplicate cells in `\g04_mixed_procedural_add'.
+Removed a total of 0 cells.
+
+2.11.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g04_mixed_procedural_add..
+
+2.11.4. Finished fast OPT passes.
+
+2.12. Executing SORT pass.
+
+2.13. Printing statistics.
+
+=== g04_mixed_procedural_add ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        9 wires
+      129 wire bits
+        6 public wires
+       81 public wire bits
+        6 ports
+       81 port bits
+        4 cells
+        3   $add
+        1   $mux
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module g04_mixed_procedural_add...
+Found and reported 0 problems.
+
+3. Executing LTP pass (find longest path).
+
+Longest topological path in g04_mixed_procedural_add (length=3):
+    0: \d [15]
+    1: $add$experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv:10$3_Y [0] (via $add$experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv:10$3)
+    2: $add$experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv:10$4_Y [0] (via $add$experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g04_c1.sv:10$4)
+    3: \y [0] (via $procmux$6)
+
+4. Printing statistics.
+
+=== g04_mixed_procedural_add ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        9 wires
+      129 wire bits
+        6 public wires
+       81 public wire bits
+        6 ports
+       81 port bits
+        4 cells
+        3   $add
+        1   $mux
+
+End of script. Logfile hash: 754febc9be, CPU: user 0.03s system 0.01s, MEM: 13.09 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 30% 5x opt_expr (0 sec), 28% 4x opt_clean (0 sec), ...

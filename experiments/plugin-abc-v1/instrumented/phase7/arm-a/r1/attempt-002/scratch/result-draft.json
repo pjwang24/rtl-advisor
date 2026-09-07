@@ -1,0 +1,342 @@
+{
+  "schema": "rtl-advisor-plugin-abc-arm-result-v1",
+  "experiment_id": "plugin-abc-v1",
+  "arm": "A",
+  "repetition": 1,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "manifest_sha256": "9a66873f7cd820f2aa2e31a20d99d961e3aa80e8e735d9613a55bdb0e09f3dc2",
+  "cases": [
+    {
+      "case_id": "g01",
+      "source_sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv:5"],
+      "rationale": "The balanced-tree rewrite is P1-equivalent, but baseline and candidate both map to 100 simple gates with topological depth 18; the synthesis flow already reassociates the chain, so no RTL change is justified.",
+      "candidates": [
+        {
+          "candidate_id": "g01-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g01/g01_add8_left.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/formal/g01.log",
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/measurement/g01_baseline.log",
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/measurement/g01_candidate.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g02",
+      "source_sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv:5"],
+      "rationale": "A depth-balanced five-operand tree is P1-equivalent, but both versions map to 626 simple gates with topological depth 68; synthesis already performs the useful reassociation.",
+      "candidates": [
+        {
+          "candidate_id": "g02-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/formal/g02.log",
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/measurement/g02_baseline.log",
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/measurement/g02_candidate.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g03",
+      "source_sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv:7"],
+      "rationale": "Balancing only the independent sum is P1-equivalent and leaves the selection logic untouched, but baseline and candidate both map to 340 simple gates at depth 34; synthesis handles it.",
+      "candidates": [
+        {
+          "candidate_id": "g03-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g03/g03_mixed_safe_add.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/formal/g03.log",
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/measurement/g03_baseline.log",
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/measurement/g03_candidate.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g04",
+      "source_sha256": "d41c31a3112e798bd67ab057e52043949e3f0b0ed10526be7e62daaa74fa2dfc",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g04_mixed_procedural_add.sv:6"],
+      "rationale": "The procedural add can be balanced without changing bypass behavior and the candidate passes P1, but both versions map to 239 simple gates with depth 35; no implementation benefit was measured.",
+      "candidates": [
+        {
+          "candidate_id": "g04-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g04/g04_mixed_procedural_add.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/formal/g04.log",
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/measurement/g04_baseline.log",
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/measurement/g04_candidate.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g05",
+      "source_sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv:6"],
+      "rationale": "Factoring the common operand to place the mux before one adder passes P1, yet baseline and candidate both map to 93 simple gates at depth 31; logic sharing is already recovered by synthesis.",
+      "candidates": [
+        {
+          "candidate_id": "g05-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g05/g05_mux_common_logic.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/formal/g05.log",
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/measurement/g05_baseline.log",
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/measurement/g05_candidate.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g06",
+      "source_sha256": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6"],
+      "rationale": "The defaults and ordered branches fully specify the priority encoder. Alternative casez or loop encodings do not establish a QoR gain and can alter unknown-state simulation semantics, so no candidate is warranted.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g07",
+      "source_sha256": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv:5"],
+      "rationale": "A regrouped candidate explicitly retains the eight-bit partial truncation and passes P1, but both versions map to 107 simple gates with depth 19; synthesis already produces the same implementation.",
+      "candidates": [
+        {
+          "candidate_id": "g07-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g07/g07_width_truncation.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/formal/g07.log",
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/measurement/g07_baseline.log",
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/measurement/g07_candidate.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g08",
+      "source_sha256": "b012fa81c56e0e2a101f605b9b8f00de337063c29d9217c8ffd020b767372d6d",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g08_signed_chain.sv:5"],
+      "rationale": "The fixed-width signed regrouping is P1-equivalent, but baseline and candidate both map to 221 simple gates with topological depth 34; synthesis handles the modular add reassociation.",
+      "candidates": [
+        {
+          "candidate_id": "g08-c1",
+          "path": "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g08/g08_signed_chain.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/formal/g08.log",
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/measurement/g08_baseline.log",
+            "experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/evidence/measurement/g08_candidate.log"
+          ]
+        }
+      ],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g09",
+      "source_sha256": "c1bbfbc8ffc8ea0b18fdfa3ddaa621171e513d51a285aebde8181059ac7a1ff0",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g09_already_balanced.sv:5"],
+      "rationale": "The four equal-width operands are already expressed as a balanced binary tree; no function-preserving structural improvement is present.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g10",
+      "source_sha256": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:5", "experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15"],
+      "rationale": "sat_add clamps after every call and is not associative. Rebalancing the call tree would change results, while the existing function boundary has no independently provable QoR rewrite.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g11",
+      "source_sha256": "1c7e7a24c9db1fca9787798b355b2d9fca354646df1e056c229c658a3a8d36c6",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:13"],
+      "rationale": "This is the canonical one-entry elastic ready/valid register. Its ready equation, valid hold behavior, conditional data capture, latency, and asynchronous reset are already minimal and cycle-sensitive.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g12",
+      "source_sha256": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:13"],
+      "rationale": "The current cycle-exact behavior combines the prior-cycle sum_q with the current c_i and delays valid by two registers. Aligning or reassociating operands would alter observable temporal behavior, so no P2-safe optimization is available.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o01",
+      "source_sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv:74", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv:88"],
+      "rationale": "The arbitration decision already uses a parallel-prefix leading-one primitive, and mask updates encode grant and stall history. Local mux or Boolean rewrites are synthesis-level changes; altering the state logic would require a P2 behavioral change.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o02",
+      "source_sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv:43", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv:139"],
+      "rationale": "Depth-zero, singleton, and normal FIFO modes are already elaboration-time specializations, with pass-through, reset suppression, secure counting, and output-zero behavior intertwined. No local cross-configuration change has a proven P2 QoR benefit.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o03",
+      "source_sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv:83", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv:140"],
+      "rationale": "The duplicated opposing counters, saturation checks, priority muxes, commit gate, and registered integrity error are security semantics rather than redundant logic. Simplifying them would weaken or change the hardened P2 behavior.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o04",
+      "source_sha256": "99aeb7564474111dc6662488c9f4ca6b788723e449b128d08ac54f8fc2da5cd2",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:98", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:119"],
+      "rationale": "Pack and unpack modes are statically selected and their shifts are driven by bounded state with constant parameter scale factors. Pointer, clear-on-read, and stale-data semantics make local rewrites configuration-sensitive; no P2-proven benefit was identified.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o05",
+      "source_sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/common_cells/src/spill_register.sv:31"],
+      "rationale": "The module is only a compatibility wrapper that forwards all ports and parameters to spill_register_flushable while tying flush low. It contains no local datapath or control logic to optimize.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o06",
+      "source_sha256": "2e0e5b6d09ce4ade0881938ee042dcbc78438638fa2592338a374f88a3c27304",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/common_cells/src/stream_register.sv:33"],
+      "rationale": "The ready equation and separate valid/data load enables implement a minimal single-entry stream register; the register macros preserve clear, reset, and test-mode semantics. No P2-safe local reduction is present.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o07",
+      "source_sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/common_cells/src/fifo_v3.sv:53", "corpus/upstream/common_cells/src/fifo_v3.sv:62"],
+      "rationale": "The arbitrary-depth pointer wrap, simultaneous push/pop accounting, fall-through bypass, flush, and reset memory value are coupled cycle semantics. A memory-write style rewrite may be flow-dependent and has no demonstrated P2 QoR improvement here.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o08",
+      "source_sha256": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/common_cells/src/rr_arb_tree.sv:192", "corpus/upstream/common_cells/src/rr_arb_tree.sv:243"],
+      "rationale": "The implementation is already a logarithmic arbitration and data tree, with optional fair-priority LZCs and explicit lock behavior. Local select expressions are mapped within that balanced structure; no proven structural improvement was found.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o09",
+      "source_sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/common_cells/src/stream_mux.sv:33"],
+      "rationale": "The module is a direct indexed data/valid mux plus a one-hot indexed ready assignment. This is already the concise synthesis-recognizable implementation and has no redundant local logic.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o10",
+      "source_sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/verilog-axis/rtl/axis_register.v:91", "corpus/upstream/verilog-axis/rtl/axis_register.v:197", "corpus/upstream/verilog-axis/rtl/axis_register.v:261"],
+      "rationale": "REG_TYPE statically selects skid, simple, or bypass behavior, and feature-enable constants allow unused sideband logic to be pruned. The skid control preserves two-entry backpressure semantics, so no P2-safe common rewrite is justified.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o11",
+      "source_sha256": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:91", "corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:121"],
+      "rationale": "The top is a regular generate-chain of axis_register stages with direct endpoint wiring. Any flattening or constant propagation is a synthesis task; changing stage count or handshake wiring would violate the P3 latency and backpressure contract.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o12",
+      "source_sha256": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:103", "corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:151"],
+      "rationale": "The registered ready pipeline is paired with an output FIFO sized to absorb in-flight transfers. Reducing registers, FIFO capacity, or half-full control would change latency or lossless backpressure behavior; no P2-proven local QoR change was found.",
+      "candidates": [],
+      "evidence_complete": true
+    }
+  ]
+}

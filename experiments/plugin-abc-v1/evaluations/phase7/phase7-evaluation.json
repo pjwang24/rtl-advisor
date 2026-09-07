@@ -1,0 +1,99 @@
+{
+  "document_type": "rtl-advisor.plugin-phase7-evaluation",
+  "efficiency_gate": {
+    "arms": {
+      "A": {
+        "mean_agent_message_bytes": 18451.5,
+        "mean_command_categories": {
+          "artifact_read": 3.0,
+          "eda": 44.0,
+          "hash": 1.0,
+          "other": 30.5
+        },
+        "mean_command_count": 78.5,
+        "mean_command_output_bytes": 252988.5,
+        "mean_command_wave_count": 47.5,
+        "mean_event_count": 166.0,
+        "mean_output_bytes": 271440.0,
+        "mean_total_tokens": 1991760.5,
+        "mean_uncached_token_volume": 142672.5,
+        "mean_wall_time_seconds": 637.565,
+        "run_count": 2,
+        "task_completion_percent": 100.0
+      },
+      "B": {
+        "mean_agent_message_bytes": 26750.5,
+        "mean_command_categories": {
+          "artifact_read": 1.5,
+          "other": 7.5,
+          "rtl_advisor": 0.5,
+          "workflow_batch": 1.0
+        },
+        "mean_command_count": 10.5,
+        "mean_command_output_bytes": 49490.0,
+        "mean_command_wave_count": 9.0,
+        "mean_event_count": 30.5,
+        "mean_output_bytes": 76240.5,
+        "mean_total_tokens": 448552.5,
+        "mean_uncached_token_volume": 75816.5,
+        "mean_wall_time_seconds": 445.519,
+        "run_count": 2,
+        "task_completion_percent": 100.0
+      }
+    },
+    "decision_guardrails": {
+      "frozen_result_agreement_percent": 100.0,
+      "measured_repeat_agreement_percent": 100.0
+    },
+    "excluded_runs": [
+      {
+        "arm": "B",
+        "attempt": 1,
+        "events_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r1/attempt-001/codex-events.jsonl",
+        "reason": "superseded by the explicit bounded-parallel --jobs 4 latency route requested for the Phase 7 performance workflow",
+        "repetition": 1
+      },
+      {
+        "arm": "B",
+        "attempt": 1,
+        "events_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/attempt-001/codex-events.jsonl",
+        "reason": "workflow batch replay called start instead of validated resume, producing 24 authorization_resume_required failures; superseded after the deterministic replay fix",
+        "repetition": 2
+      },
+      {
+        "arm": "B",
+        "attempt": 2,
+        "events_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-b/r2/attempt-002/codex-events.jsonl",
+        "reason": "superseded by the explicit bounded-parallel --jobs 4 latency route requested for the Phase 7 performance workflow",
+        "repetition": 2
+      }
+    ],
+    "minimum_latency_reduction_percent": 25.0,
+    "minimum_token_reduction_percent": 25.0,
+    "observed_latency_reduction_percent": 30.12,
+    "observed_token_reduction_percent": 77.48,
+    "observed_uncached_token_reduction_percent": 46.86,
+    "status": "passed",
+    "telemetry_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/phase7/telemetry.json"
+  },
+  "experiment_id": "plugin-abc-v1",
+  "quality_gate": {
+    "decision_reproducibility_percent": 100.0,
+    "evidence_completion_percent": 100.0,
+    "harmful_recommendations": 0,
+    "plugin_run_count": 2,
+    "status": "passed",
+    "unproven_recommendations": 0,
+    "validated_decision_accuracy_percent": 95.83
+  },
+  "release_ready": true,
+  "schema": "rtl-advisor-plugin-phase7-evaluation-v1",
+  "schema_version": 1,
+  "semantic_hash": "aeb4bf3658b8166b12d654eb42256c54237feef3a75436f55328c95a35d0e6b9",
+  "sources": {
+    "repeat_comparison": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/repeat-comparison.json",
+    "scorecard": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/scorecard.json",
+    "telemetry": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/evaluations/phase7/telemetry.json"
+  },
+  "status": "passed"
+}

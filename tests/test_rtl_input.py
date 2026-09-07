@@ -56,3 +56,38 @@ def test_design_hash_changes_with_source_content(tmp_path: Path) -> None:
     second = normalize_design_input(top="top", files=(source,), base=tmp_path)
 
     assert first.design_hash != second.design_hash
+
+
+@pytest.mark.parametrize(
+    "definition",
+    (
+        "SAFE=1; delete_all",
+        "SAFE=1\nread_verilog attacker.sv",
+        "SAFE=hello world",
+        "SAFE=1\\payload",
+    ),
+)
+def test_normalize_design_input_rejects_unsafe_define_text(
+    tmp_path: Path, definition: str
+) -> None:
+    source = tmp_path / "top.sv"
+    source.write_text("module top; endmodule\n", encoding="utf-8")
+
+    with pytest.raises(RTLInputError, match="invalid preprocessor definition"):
+        normalize_design_input(
+            top="top", files=(source,), defines=(definition,), base=tmp_path
+        )
+
+
+def test_normalize_design_input_accepts_safe_verilog_define_tokens(tmp_path: Path) -> None:
+    source = tmp_path / "top.sv"
+    source.write_text("module top; endmodule\n", encoding="utf-8")
+
+    design = normalize_design_input(
+        top="top",
+        files=(source,),
+        defines=("WIDTH=8", "RESET_VALUE=8'h00", "FEATURE"),
+        base=tmp_path,
+    )
+
+    assert design.defines == ("WIDTH=8", "RESET_VALUE=8'h00", "FEATURE")

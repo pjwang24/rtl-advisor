@@ -85,7 +85,10 @@ def _read_json(path: Path) -> dict[str, Any]:
 
 
 def _yosys_quote(value: str | Path) -> str:
-    return '"' + str(value).replace("\\", "\\\\").replace('"', '\\"') + '"'
+    raw = str(value)
+    if any(character in raw for character in ("\x00", "\r", "\n")):
+        raise CandidateV2Error("Yosys arguments may not contain control characters")
+    return '"' + raw.replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
 def _design_from_artifact(path: Path) -> DesignInputV2:
@@ -206,7 +209,7 @@ def _write_candidate_diff(
 def _read_command(design: DesignInputV2) -> str:
     parts = ["read_verilog", "-sv"]
     parts.extend(f"-I{_yosys_quote(path)}" for path in design.include_dirs)
-    parts.extend(f"-D{definition}" for definition in design.defines)
+    parts.extend(f"-D{_yosys_quote(definition)}" for definition in design.defines)
     parts.extend(_yosys_quote(source.path) for source in design.files)
     return " ".join(parts)
 

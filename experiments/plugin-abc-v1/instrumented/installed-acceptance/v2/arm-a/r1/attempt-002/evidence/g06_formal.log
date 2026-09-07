@@ -1,0 +1,160 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -formal -sv experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv; proc; rename g06_priority_decode gold; read_verilog -formal -sv experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r1/attempt-002/candidates/g06/balanced_priority.sv; proc; rename g06_priority_decode gate; equiv_make gold gate equiv; hierarchy -top equiv; equiv_simple; equiv_status -assert' --
+
+1. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv
+Parsing formal SystemVerilog input from `experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv' to AST representation.
+Generating RTLIL representation for module `\g06_priority_decode'.
+Successfully finished Verilog frontend.
+
+2. Executing PROC pass (convert processes to netlists).
+
+2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 8 switch rules as full_case in process $proc$experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6$1 in module g06_priority_decode.
+Removed a total of 0 dead cases.
+
+2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 2 assignments to connections.
+
+2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~8 debug messages>
+
+2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\g06_priority_decode.$proc$experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6$1'.
+     1/16: $8\index[2:0]
+     2/16: $8\valid[0:0]
+     3/16: $7\index[2:0]
+     4/16: $7\valid[0:0]
+     5/16: $6\index[2:0]
+     6/16: $6\valid[0:0]
+     7/16: $5\index[2:0]
+     8/16: $5\valid[0:0]
+     9/16: $4\index[2:0]
+    10/16: $4\valid[0:0]
+    11/16: $3\index[2:0]
+    12/16: $3\valid[0:0]
+    13/16: $2\index[2:0]
+    14/16: $2\valid[0:0]
+    15/16: $1\index[2:0]
+    16/16: $1\valid[0:0]
+
+2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\g06_priority_decode.\index' from process `\g06_priority_decode.$proc$experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6$1'.
+No latch inferred for signal `\g06_priority_decode.\valid' from process `\g06_priority_decode.$proc$experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6$1'.
+
+2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 8 empty switches in `\g06_priority_decode.$proc$experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6$1'.
+Removing empty process `g06_priority_decode.$proc$experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6$1'.
+Cleaned up 8 empty switches.
+
+2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g06_priority_decode.
+Renaming module \g06_priority_decode to \gold.
+
+3. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r1/attempt-002/candidates/g06/balanced_priority.sv
+Parsing formal SystemVerilog input from `experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r1/attempt-002/candidates/g06/balanced_priority.sv' to AST representation.
+Generating RTLIL representation for module `\g06_priority_decode'.
+Successfully finished Verilog frontend.
+
+4. Executing PROC pass (convert processes to netlists).
+
+4.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 4 switch rules as full_case in process $proc$experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r1/attempt-002/candidates/g06/balanced_priority.sv:6$217 in module g06_priority_decode.
+Removed a total of 0 dead cases.
+
+4.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 2 assignments to connections.
+
+4.4. Executing PROC_INIT pass (extract init attributes).
+
+4.5. Executing PROC_ARST pass (detect async resets in processes).
+
+4.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~4 debug messages>
+
+4.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\g06_priority_decode.$proc$experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r1/attempt-002/candidates/g06/balanced_priority.sv:6$217'.
+     1/4: $4\index[2:0]
+     2/4: $3\index[2:0]
+     3/4: $2\index[2:0]
+     4/4: $1\index[2:0]
+
+4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\g06_priority_decode.\index' from process `\g06_priority_decode.$proc$experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r1/attempt-002/candidates/g06/balanced_priority.sv:6$217'.
+No latch inferred for signal `\g06_priority_decode.\valid' from process `\g06_priority_decode.$proc$experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r1/attempt-002/candidates/g06/balanced_priority.sv:6$217'.
+
+4.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+4.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 4 empty switches in `\g06_priority_decode.$proc$experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r1/attempt-002/candidates/g06/balanced_priority.sv:6$217'.
+Removing empty process `g06_priority_decode.$proc$experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r1/attempt-002/candidates/g06/balanced_priority.sv:6$217'.
+Cleaned up 4 empty switches.
+
+4.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g06_priority_decode.
+Optimizing module gold.
+Renaming module \g06_priority_decode to \gate.
+
+5. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: valid_gold ($procmux$215_Y_gold), valid_gate ($reduce_or$experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-a/r1/attempt-002/candidates/g06/balanced_priority.sv:7$218_Y_gate) -> valid
+Presumably equivalent wires: index_gold ($procmux$212_Y_gold), index_gate ($procmux$249_Y_gate) -> index
+Presumably equivalent wires: request_gold (\request_gold), request_gate (\request_gate) -> request
+
+6. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+6.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+7. Executing EQUIV_SIMPLE pass.
+Found 4 unproven $equiv cells (2 groups) in equiv:
+ Grouping SAT models for \index:
+  Trying to prove $equiv for \index [0]:ezsat
+ success!
+  Trying to prove $equiv for \index [1]:ezsat
+ success!
+  Trying to prove $equiv for \index [2]:ezsat
+ success!
+  Trying to prove $equiv for \valid:ezsat
+ success!
+Proved 4 previously unproven $equiv cells.
+
+8. Executing EQUIV_STATUS pass.
+Found 4 $equiv cells in equiv:
+  Of those cells 4 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: 69ad169cf7, CPU: user 0.04s system 0.01s, MEM: 13.45 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 42% 1x equiv_simple (0 sec), 15% 4x read_verilog (0 sec), ...

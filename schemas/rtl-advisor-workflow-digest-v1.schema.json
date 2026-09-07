@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-workflow-digest-v1.schema.json",
+  "title": "RTL Advisor Workflow Digest V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "schema", "document_type", "workflow_id", "status", "decision", "action", "scope", "source", "source_locations", "rationale", "finding", "candidate_id", "formal_status", "measurement_status", "profile_results", "safe", "evidence_complete", "next_action", "parent", "artifacts", "reproduce", "semantic_hash"],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "file": {"type": "string", "minLength": 1},
+        "line": {"type": "integer", "minimum": 1},
+        "column": {"type": "integer", "minimum": 1},
+        "end_line": {"type": "integer", "minimum": 1},
+        "end_column": {"type": "integer", "minimum": 1}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-workflow-digest-v1"},
+    "document_type": {"const": "rtl-advisor.workflow.digest"},
+    "workflow_id": {"type": "string", "pattern": "^workflow-[0-9a-f]{20}$"},
+    "status": {"enum": ["ready", "running", "waiting_authorization", "blocked", "failed", "completed", "untrusted"]},
+    "decision": {"enum": ["pending", "candidate_available", "no_change", "unsupported", "candidate_prepared", "formal_passed", "formal_failed", "formal_inconclusive", "measured_improvement", "synthesis_handles", "flow_dependent", "regression", "evidence_incomplete"]},
+    "action": {"enum": ["recommend_change", "no_change", "unsupported", "inconclusive"]},
+    "scope": {"enum": ["finding_only", "whole_input", "partial_or_pending"]},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "path", "sha256"],
+      "properties": {
+        "kind": {"enum": ["generated_rtl", "explicitly_approved_open_rtl", "qualified_corpus_reference"]},
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "source_locations": {"type": "array", "items": {"$ref": "#/$defs/location"}},
+    "rationale": {"type": "string", "minLength": 1},
+    "finding": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "finding_id": {"type": "string", "minLength": 1},
+        "transformation_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "candidate_id": {"type": ["string", "null"]},
+    "formal_status": {"type": "string", "minLength": 1},
+    "measurement_status": {"type": "string", "minLength": 1},
+    "profile_results": {"type": "object", "additionalProperties": {"enum": ["improved", "neutral", "regressed"]}},
+    "safe": {"type": "boolean"},
+    "evidence_complete": {"type": "boolean"},
+    "next_action": {"type": "string", "minLength": 1},
+    "parent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary_semantic_hash", "state_semantic_hash"],
+      "properties": {
+        "summary_semantic_hash": {"$ref": "#/$defs/sha256"},
+        "state_semantic_hash": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "artifacts": {"type": "object", "additionalProperties": {"type": "string", "minLength": 1}},
+    "reproduce": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "semantic_hash": {"$ref": "#/$defs/sha256"}
+  }
+}

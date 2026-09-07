@@ -1,0 +1,20 @@
+{
+  "schema": "rtl-advisor-plugin-abc-lock-v1",
+  "experiment_id": "plugin-abc-v1",
+  "locked_at": "2026-07-20T00:00:00-07:00",
+  "files": [
+    {"path":"experiments/plugin-abc-v1/manifest.json","sha256":"9a66873f7cd820f2aa2e31a20d99d961e3aa80e8e735d9613a55bdb0e09f3dc2"},
+    {"path":"experiments/plugin-abc-v1/oracle.json","sha256":"8c6faecfe8796a92936dcd6033f82c9598aa5b99809c6cb1e9edef1dadf1e310"},
+    {"path":"experiments/plugin-abc-v1/packets/arm-a-r1.json","sha256":"4c7894fbb266ec47c71377a5c615ac3fafb42ed0060046b4469dfee886db898c"},
+    {"path":"experiments/plugin-abc-v1/packets/arm-b-r1.json","sha256":"06db2c69385ba3dffa7bf91827670cb439325dfe4fa64e64a115932e0fe41825"},
+    {"path":"experiments/plugin-abc-v1/packets/arm-c-r1.json","sha256":"d0c562596698c88691d071dcf257d57d286bcfe199a9c11d2d7fcd5d8c67ae5a"},
+    {"path":"experiments/plugin-abc-v1/packets/arm-a-r2.json","sha256":"448f324f048380cc3749864f5a92f85251808ba6025737a124e0b9a40d1240ea"},
+    {"path":"experiments/plugin-abc-v1/packets/arm-b-r2.json","sha256":"c89893f16c2a29333d862fda823eea8af714d6521ac2b345ed138d20b18801c9"},
+    {"path":"experiments/plugin-abc-v1/packets/arm-c-r2.json","sha256":"7cb9981f116fdc36dac7672e50e3440a1fea3d8d8a81cf6544e6bd619c894a05"},
+    {"path":"experiments/plugin-abc-v1/packets/arm-a-r3.json","sha256":"a67f03df51cd716f406f6835fe2058fd363ea66857abb30a07b8a7a620116e15"},
+    {"path":"experiments/plugin-abc-v1/packets/arm-c-r3.json","sha256":"b710444065821505d9385261c4c4a0abac9156b6869454e4870b41afcade2f60"},
+    {"path":"schemas/rtl-advisor-plugin-abc-arm-result-v1.schema.json","sha256":"9fad7d0891a87ec20839c06c469c84988038b7ce3610542c17bd0f273d75fdd1"},
+    {"path":"schemas/rtl-advisor-plugin-abc-manifest-v1.schema.json","sha256":"bed7c698a1c6b84c944cca5a59b5dc0bc51ae94e0768530eae4747b147546cc2"},
+    {"path":"implementation plan/A-B-C Testing Framework V1.md","sha256":"6b2690e8bd5e32158d1525ab40c127bad351ed760b7c3717b07abdf78e15c081"}
+  ]
+}

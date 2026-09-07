@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "2f73300ad9e6979c385c8d058a9c6e339c45603c78ddd3b43cc4b8960371b753",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:fifo_v3.sv",
+        "sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc"
+      }
+    ],
+    "top": "fifo_v3"
+  },
+  "defines": [],
+  "design_hash": "b9860ee9bd3153429e2474071fe75640a887641a8d46600c53340a2adf7a9bbd",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/fifo_v3.sv",
+      "sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "48f1a30b5bc139ce4517a268f528cf9fbd3e74744747941d7cd18bde5f2851b7",
+  "top": "fifo_v3"
+}

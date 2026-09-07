@@ -1,0 +1,1099 @@
+{
+  "artifacts": {
+    "measurement": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/measurement.json",
+    "root": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5"
+  },
+  "baseline_design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+  "candidate_design_hash": "2475f778cbe664233a357ca0c2aa24653f2c243590660194b493cdf11d7398df",
+  "compile_context": {
+    "baseline": {
+      "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+      "defines": [],
+      "filelists": [],
+      "include_trees": [],
+      "schema_version": 1,
+      "sources": [
+        {
+          "logical_id": "source:0000:g01_add8_left.sv",
+          "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+        }
+      ],
+      "top": "g01_add8_left"
+    },
+    "candidate": {
+      "compile_context_hash": "2de30f999a4b45a464f998a3e3d3686061f37881c68151893752b26c39cd60e6",
+      "defines": [],
+      "filelists": [],
+      "include_trees": [],
+      "schema_version": 1,
+      "sources": [
+        {
+          "logical_id": "source:0000:g01_add8_left.sv",
+          "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+        }
+      ],
+      "top": "g01_add8_left"
+    }
+  },
+  "decision": "synthesis_handles",
+  "document_type": "rtl-advisor.measurement",
+  "environment": {
+    "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+    "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+    "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+    "abc_version_token": "1.01",
+    "liberty_name": "Nangate45 typical",
+    "liberty_path": "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+    "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+    "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+    "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+    "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+    "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+  },
+  "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+  "formal": {
+    "baseline_design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+    "candidate_design_hash": "2475f778cbe664233a357ca0c2aa24653f2c243590660194b493cdf11d7398df",
+    "proof_semantic_hash": "7ecf9f8291ad407226676959704fbc1d336950570e9e4611d3b236fd588a5ce8",
+    "status": "passed"
+  },
+  "frontend": {
+    "kind": "read_verilog",
+    "plugin_path": null,
+    "plugin_sha256": null
+  },
+  "limitations": [
+    "Results apply only to the pinned Yosys/ABC recipes and Liberty file.",
+    "Delay is an ABC constrained combinational estimate, not routed timing.",
+    "This evidence does not predict Genus, Design Compiler, or physical PPA."
+  ],
+  "measurement_id": "8350fbec16a082130bfc4aa5",
+  "measurements": {
+    "standard": {
+      "baseline": {
+        "constraints": {
+          "driving_cell": "BUF_X1",
+          "output_load_ff": 10.0,
+          "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+        },
+        "design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+        "metrics": {
+          "abc_area_combinational": 147.63,
+          "abc_gate_count": 94,
+          "area_combinational": 147.63,
+          "area_sequential": 0.0,
+          "area_total": 147.63,
+          "cell_count": 94,
+          "cells_by_type": {
+            "AND2_X1": 8,
+            "AND3_X1": 5,
+            "AOI21_X1": 9,
+            "AOI21_X2": 4,
+            "AOI21_X4": 2,
+            "INV_X1": 1,
+            "NAND2_X1": 7,
+            "NAND3_X1": 3,
+            "NOR2_X1": 3,
+            "NOR2_X2": 1,
+            "NOR3_X4": 2,
+            "OAI21_X1": 1,
+            "OAI21_X4": 2,
+            "OR2_X1": 7,
+            "OR3_X1": 1,
+            "XNOR2_X1": 17,
+            "XNOR2_X2": 7,
+            "XOR2_X1": 10,
+            "XOR2_X2": 4
+          },
+          "critical_delay_ps": 442.21,
+          "raw_cell_count": 94
+        },
+        "netlist": {
+          "cell_signature": "3a4d4970ccdfe6b1f6668cbe5cbbc3d54e76c773fa327f940eadc94df87b11f3",
+          "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/mapped.v",
+          "sha256": "bbd189e44ff668eae0ac30f92cea9686d04d34be21189560e9fa43dbeeef2cf9"
+        },
+        "provenance": {
+          "abc": {
+            "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+            "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+            "provider": "Yosys abc pass with explicit -exe",
+            "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+            "transcript_sha256": "2ca1b346e6b1d6d994c7f3cd9e2174d4a365d59c31823199e547f26d9e39daaf",
+            "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+          },
+          "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+          "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+          "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+          "command": [
+            "yosys",
+            "-Q",
+            "-s",
+            "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/synthesis.ys"
+          ],
+          "constraints_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/abc.constr",
+          "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+          "frontend": "read_verilog",
+          "frontend_plugin_path": null,
+          "frontend_plugin_sha256": null,
+          "liberty_name": "Nangate45 typical",
+          "liberty_path": "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+          "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+          "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+          "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/synthesis.log",
+          "log_sha256": "b8826f33ad0787aed51f6330e368b74effad059be60bb0dad3724ead44fd3372",
+          "profile": "standard",
+          "recipe_hash": "60078c22befb2b96ea7534dc573800f631ed3be6c8410c483db7e41234c19c01",
+          "script_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/synthesis.ys",
+          "script_sha256": "2e4332300318a9670a99336626d41499eba43172bf1e6828aee5088d99e3f60a",
+          "stat_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/stat.json",
+          "stat_sha256": "a088052dd96f53439374352fac468c709fe7682a1dd7e50a02c834aef39dcec5",
+          "warnings": {
+            "count": 2,
+            "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+          },
+          "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+          "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+          "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+        },
+        "role": "baseline",
+        "source_hashes": {
+          "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+        },
+        "status": "passed",
+        "top": "g01_add8_left"
+      },
+      "candidate": {
+        "constraints": {
+          "driving_cell": "BUF_X1",
+          "output_load_ff": 10.0,
+          "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+        },
+        "design_hash": "2475f778cbe664233a357ca0c2aa24653f2c243590660194b493cdf11d7398df",
+        "metrics": {
+          "abc_area_combinational": 147.63,
+          "abc_gate_count": 94,
+          "area_combinational": 147.63,
+          "area_sequential": 0.0,
+          "area_total": 147.63,
+          "cell_count": 94,
+          "cells_by_type": {
+            "AND2_X1": 8,
+            "AND3_X1": 5,
+            "AOI21_X1": 9,
+            "AOI21_X2": 4,
+            "AOI21_X4": 2,
+            "INV_X1": 1,
+            "NAND2_X1": 7,
+            "NAND3_X1": 3,
+            "NOR2_X1": 3,
+            "NOR2_X2": 1,
+            "NOR3_X4": 2,
+            "OAI21_X1": 1,
+            "OAI21_X4": 2,
+            "OR2_X1": 7,
+            "OR3_X1": 1,
+            "XNOR2_X1": 17,
+            "XNOR2_X2": 7,
+            "XOR2_X1": 10,
+            "XOR2_X2": 4
+          },
+          "critical_delay_ps": 442.21,
+          "raw_cell_count": 94
+        },
+        "netlist": {
+          "cell_signature": "3a4d4970ccdfe6b1f6668cbe5cbbc3d54e76c773fa327f940eadc94df87b11f3",
+          "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/mapped.v",
+          "sha256": "bbd189e44ff668eae0ac30f92cea9686d04d34be21189560e9fa43dbeeef2cf9"
+        },
+        "provenance": {
+          "abc": {
+            "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+            "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+            "provider": "Yosys abc pass with explicit -exe",
+            "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+            "transcript_sha256": "2ca1b346e6b1d6d994c7f3cd9e2174d4a365d59c31823199e547f26d9e39daaf",
+            "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+          },
+          "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+          "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+          "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+          "command": [
+            "yosys",
+            "-Q",
+            "-s",
+            "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/synthesis.ys"
+          ],
+          "constraints_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/abc.constr",
+          "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+          "frontend": "read_verilog",
+          "frontend_plugin_path": null,
+          "frontend_plugin_sha256": null,
+          "liberty_name": "Nangate45 typical",
+          "liberty_path": "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+          "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+          "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+          "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/synthesis.log",
+          "log_sha256": "60ef685979390d1c351bb3d2e296d28c9a5c544658cbeea43f8335980b863a47",
+          "profile": "standard",
+          "recipe_hash": "60078c22befb2b96ea7534dc573800f631ed3be6c8410c483db7e41234c19c01",
+          "script_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/synthesis.ys",
+          "script_sha256": "a45c6a91b055402225e489972b583790e7109a0bc39cb83cea2d48f746666a98",
+          "stat_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/stat.json",
+          "stat_sha256": "a088052dd96f53439374352fac468c709fe7682a1dd7e50a02c834aef39dcec5",
+          "warnings": {
+            "count": 2,
+            "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+          },
+          "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+          "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+          "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+        },
+        "role": "candidate",
+        "source_hashes": {
+          "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/design/sources/0000/g01_add8_left.sv": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+        },
+        "status": "passed",
+        "top": "g01_add8_left"
+      },
+      "classification": "neutral",
+      "comparison": {
+        "area_total": {
+          "baseline": 147.63,
+          "candidate": 147.63,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        },
+        "cell_count": {
+          "baseline": 94.0,
+          "candidate": 94.0,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        },
+        "critical_delay_ps": {
+          "baseline": 442.21,
+          "candidate": 442.21,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        }
+      },
+      "recipe": {
+        "abc_provider": "explicit adjacent yosys-abc",
+        "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+        "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+        "driving_cell": "BUF_X1",
+        "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+        "frontend": "read_verilog",
+        "frontend_plugin_path": null,
+        "frontend_plugin_sha256": null,
+        "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+        "output_load_ff": 10.0,
+        "passes": [
+          "hierarchy -check",
+          "synth -flatten -noabc",
+          "dfflibmap",
+          "abc -exe -liberty -constr",
+          "clean",
+          "check -assert"
+        ],
+        "profile": "standard",
+        "recipe_hash": "60078c22befb2b96ea7534dc573800f631ed3be6c8410c483db7e41234c19c01",
+        "script_template": [
+          "read_liberty -lib <LIBERTY>",
+          "read_verilog -sv <INCLUDE_DIRS> <DEFINES> <SOURCES>",
+          "hierarchy -check -top g01_add8_left",
+          "synth -top g01_add8_left -flatten -noabc",
+          "dfflibmap -liberty <LIBERTY>",
+          "abc -exe <ABC> -liberty <LIBERTY> -constr <CONSTRAINTS>",
+          "clean",
+          "check -assert",
+          "stat -top g01_add8_left -liberty <LIBERTY> -json",
+          "write_verilog -noattr -noexpr <NETLIST>"
+        ],
+        "script_template_sha256": "6103bbb7ae173a3500d1c53477bec61b29ba67aba2a6d56fcc709927f4f74bcf",
+        "top": "g01_add8_left",
+        "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+        "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+      }
+    },
+    "stronger": {
+      "baseline": {
+        "constraints": {
+          "driving_cell": "BUF_X1",
+          "output_load_ff": 10.0,
+          "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+        },
+        "design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+        "metrics": {
+          "abc_area_combinational": 147.63,
+          "abc_gate_count": 94,
+          "area_combinational": 147.63,
+          "area_sequential": 0.0,
+          "area_total": 147.63,
+          "cell_count": 94,
+          "cells_by_type": {
+            "AND2_X1": 8,
+            "AND3_X1": 5,
+            "AOI21_X1": 9,
+            "AOI21_X2": 4,
+            "AOI21_X4": 2,
+            "INV_X1": 1,
+            "NAND2_X1": 7,
+            "NAND3_X1": 3,
+            "NOR2_X1": 3,
+            "NOR2_X2": 1,
+            "NOR3_X4": 2,
+            "OAI21_X1": 1,
+            "OAI21_X4": 2,
+            "OR2_X1": 7,
+            "OR3_X1": 1,
+            "XNOR2_X1": 17,
+            "XNOR2_X2": 7,
+            "XOR2_X1": 10,
+            "XOR2_X2": 4
+          },
+          "critical_delay_ps": 442.21,
+          "raw_cell_count": 94
+        },
+        "netlist": {
+          "cell_signature": "3a4d4970ccdfe6b1f6668cbe5cbbc3d54e76c773fa327f940eadc94df87b11f3",
+          "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/mapped.v",
+          "sha256": "bbd189e44ff668eae0ac30f92cea9686d04d34be21189560e9fa43dbeeef2cf9"
+        },
+        "provenance": {
+          "abc": {
+            "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+            "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+            "provider": "Yosys abc pass with explicit -exe",
+            "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+            "transcript_sha256": "650c2c049c03a7925eedae3abaad82eb3c3bc35e0e7556ccd0ee646cf5c887f9",
+            "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+          },
+          "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+          "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+          "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+          "command": [
+            "yosys",
+            "-Q",
+            "-s",
+            "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/synthesis.ys"
+          ],
+          "constraints_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/abc.constr",
+          "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+          "frontend": "read_verilog",
+          "frontend_plugin_path": null,
+          "frontend_plugin_sha256": null,
+          "liberty_name": "Nangate45 typical",
+          "liberty_path": "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+          "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+          "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+          "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/synthesis.log",
+          "log_sha256": "f30c0850fc90ee4f3faff5c11ae7ccd9a02766f90cf0e701d510e436dce5d4e2",
+          "profile": "stronger",
+          "recipe_hash": "f07ec727c38629e023c3f0c3c8d7aa4e43dfce16b795c3be60a4889521ef2732",
+          "script_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/synthesis.ys",
+          "script_sha256": "964383cbf2dfd4fac004198b43128ddc9a149ba1f3768a7f5cb8e6015af6f5dc",
+          "stat_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/stat.json",
+          "stat_sha256": "a088052dd96f53439374352fac468c709fe7682a1dd7e50a02c834aef39dcec5",
+          "warnings": {
+            "count": 2,
+            "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+          },
+          "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+          "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+          "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+        },
+        "role": "baseline",
+        "source_hashes": {
+          "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+        },
+        "status": "passed",
+        "top": "g01_add8_left"
+      },
+      "candidate": {
+        "constraints": {
+          "driving_cell": "BUF_X1",
+          "output_load_ff": 10.0,
+          "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+        },
+        "design_hash": "2475f778cbe664233a357ca0c2aa24653f2c243590660194b493cdf11d7398df",
+        "metrics": {
+          "abc_area_combinational": 147.63,
+          "abc_gate_count": 94,
+          "area_combinational": 147.63,
+          "area_sequential": 0.0,
+          "area_total": 147.63,
+          "cell_count": 94,
+          "cells_by_type": {
+            "AND2_X1": 8,
+            "AND3_X1": 5,
+            "AOI21_X1": 9,
+            "AOI21_X2": 4,
+            "AOI21_X4": 2,
+            "INV_X1": 1,
+            "NAND2_X1": 7,
+            "NAND3_X1": 3,
+            "NOR2_X1": 3,
+            "NOR2_X2": 1,
+            "NOR3_X4": 2,
+            "OAI21_X1": 1,
+            "OAI21_X4": 2,
+            "OR2_X1": 7,
+            "OR3_X1": 1,
+            "XNOR2_X1": 17,
+            "XNOR2_X2": 7,
+            "XOR2_X1": 10,
+            "XOR2_X2": 4
+          },
+          "critical_delay_ps": 442.21,
+          "raw_cell_count": 94
+        },
+        "netlist": {
+          "cell_signature": "3a4d4970ccdfe6b1f6668cbe5cbbc3d54e76c773fa327f940eadc94df87b11f3",
+          "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/mapped.v",
+          "sha256": "bbd189e44ff668eae0ac30f92cea9686d04d34be21189560e9fa43dbeeef2cf9"
+        },
+        "provenance": {
+          "abc": {
+            "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+            "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+            "provider": "Yosys abc pass with explicit -exe",
+            "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+            "transcript_sha256": "650c2c049c03a7925eedae3abaad82eb3c3bc35e0e7556ccd0ee646cf5c887f9",
+            "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+          },
+          "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+          "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+          "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+          "command": [
+            "yosys",
+            "-Q",
+            "-s",
+            "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/synthesis.ys"
+          ],
+          "constraints_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/abc.constr",
+          "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+          "frontend": "read_verilog",
+          "frontend_plugin_path": null,
+          "frontend_plugin_sha256": null,
+          "liberty_name": "Nangate45 typical",
+          "liberty_path": "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+          "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+          "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+          "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/synthesis.log",
+          "log_sha256": "53733af8b31ef19aba59c5372913d0619fa6b34b54ea9c77c41f843b88da5c46",
+          "profile": "stronger",
+          "recipe_hash": "f07ec727c38629e023c3f0c3c8d7aa4e43dfce16b795c3be60a4889521ef2732",
+          "script_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/synthesis.ys",
+          "script_sha256": "3f8be65aadb4c11dc52ef6aaaf7faffa0c4ad72fbedefe7a80f41116906b346b",
+          "stat_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/stat.json",
+          "stat_sha256": "a088052dd96f53439374352fac468c709fe7682a1dd7e50a02c834aef39dcec5",
+          "warnings": {
+            "count": 2,
+            "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+          },
+          "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+          "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+          "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+        },
+        "role": "candidate",
+        "source_hashes": {
+          "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/design/sources/0000/g01_add8_left.sv": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+        },
+        "status": "passed",
+        "top": "g01_add8_left"
+      },
+      "classification": "neutral",
+      "comparison": {
+        "area_total": {
+          "baseline": 147.63,
+          "candidate": 147.63,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        },
+        "cell_count": {
+          "baseline": 94.0,
+          "candidate": 94.0,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        },
+        "critical_delay_ps": {
+          "baseline": 442.21,
+          "candidate": 442.21,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        }
+      },
+      "recipe": {
+        "abc_provider": "explicit adjacent yosys-abc",
+        "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+        "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+        "driving_cell": "BUF_X1",
+        "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+        "frontend": "read_verilog",
+        "frontend_plugin_path": null,
+        "frontend_plugin_sha256": null,
+        "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+        "output_load_ff": 10.0,
+        "passes": [
+          "hierarchy -check",
+          "synth -flatten -noabc -run begin:fine",
+          "share -aggressive",
+          "opt -full",
+          "clean",
+          "synth -flatten -noabc -run fine:check",
+          "dfflibmap",
+          "abc -exe -liberty -constr",
+          "clean",
+          "check -assert"
+        ],
+        "profile": "stronger",
+        "recipe_hash": "f07ec727c38629e023c3f0c3c8d7aa4e43dfce16b795c3be60a4889521ef2732",
+        "script_template": [
+          "read_liberty -lib <LIBERTY>",
+          "read_verilog -sv <INCLUDE_DIRS> <DEFINES> <SOURCES>",
+          "hierarchy -check -top g01_add8_left",
+          "synth -top g01_add8_left -flatten -noabc -run begin:fine",
+          "share -aggressive",
+          "opt -full",
+          "clean",
+          "synth -top g01_add8_left -flatten -noabc -run fine:check",
+          "dfflibmap -liberty <LIBERTY>",
+          "abc -exe <ABC> -liberty <LIBERTY> -constr <CONSTRAINTS>",
+          "clean",
+          "check -assert",
+          "stat -top g01_add8_left -liberty <LIBERTY> -json",
+          "write_verilog -noattr -noexpr <NETLIST>"
+        ],
+        "script_template_sha256": "ffd73c827dda433080ff27dbdb912a2a6d0c9b800601d7ad6c10fe70d865af92",
+        "top": "g01_add8_left",
+        "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+        "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+      }
+    }
+  },
+  "objective": "balanced",
+  "profiles": {
+    "standard": {
+      "baseline": {
+        "constraints": {
+          "driving_cell": "BUF_X1",
+          "output_load_ff": 10.0,
+          "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+        },
+        "design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+        "metrics": {
+          "abc_area_combinational": 147.63,
+          "abc_gate_count": 94,
+          "area_combinational": 147.63,
+          "area_sequential": 0.0,
+          "area_total": 147.63,
+          "cell_count": 94,
+          "cells_by_type": {
+            "AND2_X1": 8,
+            "AND3_X1": 5,
+            "AOI21_X1": 9,
+            "AOI21_X2": 4,
+            "AOI21_X4": 2,
+            "INV_X1": 1,
+            "NAND2_X1": 7,
+            "NAND3_X1": 3,
+            "NOR2_X1": 3,
+            "NOR2_X2": 1,
+            "NOR3_X4": 2,
+            "OAI21_X1": 1,
+            "OAI21_X4": 2,
+            "OR2_X1": 7,
+            "OR3_X1": 1,
+            "XNOR2_X1": 17,
+            "XNOR2_X2": 7,
+            "XOR2_X1": 10,
+            "XOR2_X2": 4
+          },
+          "critical_delay_ps": 442.21,
+          "raw_cell_count": 94
+        },
+        "netlist": {
+          "cell_signature": "3a4d4970ccdfe6b1f6668cbe5cbbc3d54e76c773fa327f940eadc94df87b11f3",
+          "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/mapped.v",
+          "sha256": "bbd189e44ff668eae0ac30f92cea9686d04d34be21189560e9fa43dbeeef2cf9"
+        },
+        "provenance": {
+          "abc": {
+            "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+            "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+            "provider": "Yosys abc pass with explicit -exe",
+            "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+            "transcript_sha256": "2ca1b346e6b1d6d994c7f3cd9e2174d4a365d59c31823199e547f26d9e39daaf",
+            "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+          },
+          "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+          "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+          "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+          "command": [
+            "yosys",
+            "-Q",
+            "-s",
+            "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/synthesis.ys"
+          ],
+          "constraints_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/abc.constr",
+          "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+          "frontend": "read_verilog",
+          "frontend_plugin_path": null,
+          "frontend_plugin_sha256": null,
+          "liberty_name": "Nangate45 typical",
+          "liberty_path": "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+          "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+          "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+          "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/synthesis.log",
+          "log_sha256": "b8826f33ad0787aed51f6330e368b74effad059be60bb0dad3724ead44fd3372",
+          "profile": "standard",
+          "recipe_hash": "60078c22befb2b96ea7534dc573800f631ed3be6c8410c483db7e41234c19c01",
+          "script_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/synthesis.ys",
+          "script_sha256": "2e4332300318a9670a99336626d41499eba43172bf1e6828aee5088d99e3f60a",
+          "stat_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/baseline/stat.json",
+          "stat_sha256": "a088052dd96f53439374352fac468c709fe7682a1dd7e50a02c834aef39dcec5",
+          "warnings": {
+            "count": 2,
+            "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+          },
+          "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+          "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+          "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+        },
+        "role": "baseline",
+        "source_hashes": {
+          "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+        },
+        "status": "passed",
+        "top": "g01_add8_left"
+      },
+      "candidate": {
+        "constraints": {
+          "driving_cell": "BUF_X1",
+          "output_load_ff": 10.0,
+          "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+        },
+        "design_hash": "2475f778cbe664233a357ca0c2aa24653f2c243590660194b493cdf11d7398df",
+        "metrics": {
+          "abc_area_combinational": 147.63,
+          "abc_gate_count": 94,
+          "area_combinational": 147.63,
+          "area_sequential": 0.0,
+          "area_total": 147.63,
+          "cell_count": 94,
+          "cells_by_type": {
+            "AND2_X1": 8,
+            "AND3_X1": 5,
+            "AOI21_X1": 9,
+            "AOI21_X2": 4,
+            "AOI21_X4": 2,
+            "INV_X1": 1,
+            "NAND2_X1": 7,
+            "NAND3_X1": 3,
+            "NOR2_X1": 3,
+            "NOR2_X2": 1,
+            "NOR3_X4": 2,
+            "OAI21_X1": 1,
+            "OAI21_X4": 2,
+            "OR2_X1": 7,
+            "OR3_X1": 1,
+            "XNOR2_X1": 17,
+            "XNOR2_X2": 7,
+            "XOR2_X1": 10,
+            "XOR2_X2": 4
+          },
+          "critical_delay_ps": 442.21,
+          "raw_cell_count": 94
+        },
+        "netlist": {
+          "cell_signature": "3a4d4970ccdfe6b1f6668cbe5cbbc3d54e76c773fa327f940eadc94df87b11f3",
+          "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/mapped.v",
+          "sha256": "bbd189e44ff668eae0ac30f92cea9686d04d34be21189560e9fa43dbeeef2cf9"
+        },
+        "provenance": {
+          "abc": {
+            "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+            "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+            "provider": "Yosys abc pass with explicit -exe",
+            "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+            "transcript_sha256": "2ca1b346e6b1d6d994c7f3cd9e2174d4a365d59c31823199e547f26d9e39daaf",
+            "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+          },
+          "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+          "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+          "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+          "command": [
+            "yosys",
+            "-Q",
+            "-s",
+            "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/synthesis.ys"
+          ],
+          "constraints_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/abc.constr",
+          "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+          "frontend": "read_verilog",
+          "frontend_plugin_path": null,
+          "frontend_plugin_sha256": null,
+          "liberty_name": "Nangate45 typical",
+          "liberty_path": "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+          "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+          "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+          "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/synthesis.log",
+          "log_sha256": "60ef685979390d1c351bb3d2e296d28c9a5c544658cbeea43f8335980b863a47",
+          "profile": "standard",
+          "recipe_hash": "60078c22befb2b96ea7534dc573800f631ed3be6c8410c483db7e41234c19c01",
+          "script_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/synthesis.ys",
+          "script_sha256": "a45c6a91b055402225e489972b583790e7109a0bc39cb83cea2d48f746666a98",
+          "stat_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/standard/candidate/stat.json",
+          "stat_sha256": "a088052dd96f53439374352fac468c709fe7682a1dd7e50a02c834aef39dcec5",
+          "warnings": {
+            "count": 2,
+            "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+          },
+          "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+          "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+          "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+        },
+        "role": "candidate",
+        "source_hashes": {
+          "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/design/sources/0000/g01_add8_left.sv": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+        },
+        "status": "passed",
+        "top": "g01_add8_left"
+      },
+      "classification": "neutral",
+      "comparison": {
+        "area_total": {
+          "baseline": 147.63,
+          "candidate": 147.63,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        },
+        "cell_count": {
+          "baseline": 94.0,
+          "candidate": 94.0,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        },
+        "critical_delay_ps": {
+          "baseline": 442.21,
+          "candidate": 442.21,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        }
+      },
+      "recipe": {
+        "abc_provider": "explicit adjacent yosys-abc",
+        "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+        "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+        "driving_cell": "BUF_X1",
+        "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+        "frontend": "read_verilog",
+        "frontend_plugin_path": null,
+        "frontend_plugin_sha256": null,
+        "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+        "output_load_ff": 10.0,
+        "passes": [
+          "hierarchy -check",
+          "synth -flatten -noabc",
+          "dfflibmap",
+          "abc -exe -liberty -constr",
+          "clean",
+          "check -assert"
+        ],
+        "profile": "standard",
+        "recipe_hash": "60078c22befb2b96ea7534dc573800f631ed3be6c8410c483db7e41234c19c01",
+        "script_template": [
+          "read_liberty -lib <LIBERTY>",
+          "read_verilog -sv <INCLUDE_DIRS> <DEFINES> <SOURCES>",
+          "hierarchy -check -top g01_add8_left",
+          "synth -top g01_add8_left -flatten -noabc",
+          "dfflibmap -liberty <LIBERTY>",
+          "abc -exe <ABC> -liberty <LIBERTY> -constr <CONSTRAINTS>",
+          "clean",
+          "check -assert",
+          "stat -top g01_add8_left -liberty <LIBERTY> -json",
+          "write_verilog -noattr -noexpr <NETLIST>"
+        ],
+        "script_template_sha256": "6103bbb7ae173a3500d1c53477bec61b29ba67aba2a6d56fcc709927f4f74bcf",
+        "top": "g01_add8_left",
+        "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+        "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+      }
+    },
+    "stronger": {
+      "baseline": {
+        "constraints": {
+          "driving_cell": "BUF_X1",
+          "output_load_ff": 10.0,
+          "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+        },
+        "design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+        "metrics": {
+          "abc_area_combinational": 147.63,
+          "abc_gate_count": 94,
+          "area_combinational": 147.63,
+          "area_sequential": 0.0,
+          "area_total": 147.63,
+          "cell_count": 94,
+          "cells_by_type": {
+            "AND2_X1": 8,
+            "AND3_X1": 5,
+            "AOI21_X1": 9,
+            "AOI21_X2": 4,
+            "AOI21_X4": 2,
+            "INV_X1": 1,
+            "NAND2_X1": 7,
+            "NAND3_X1": 3,
+            "NOR2_X1": 3,
+            "NOR2_X2": 1,
+            "NOR3_X4": 2,
+            "OAI21_X1": 1,
+            "OAI21_X4": 2,
+            "OR2_X1": 7,
+            "OR3_X1": 1,
+            "XNOR2_X1": 17,
+            "XNOR2_X2": 7,
+            "XOR2_X1": 10,
+            "XOR2_X2": 4
+          },
+          "critical_delay_ps": 442.21,
+          "raw_cell_count": 94
+        },
+        "netlist": {
+          "cell_signature": "3a4d4970ccdfe6b1f6668cbe5cbbc3d54e76c773fa327f940eadc94df87b11f3",
+          "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/mapped.v",
+          "sha256": "bbd189e44ff668eae0ac30f92cea9686d04d34be21189560e9fa43dbeeef2cf9"
+        },
+        "provenance": {
+          "abc": {
+            "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+            "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+            "provider": "Yosys abc pass with explicit -exe",
+            "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+            "transcript_sha256": "650c2c049c03a7925eedae3abaad82eb3c3bc35e0e7556ccd0ee646cf5c887f9",
+            "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+          },
+          "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+          "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+          "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+          "command": [
+            "yosys",
+            "-Q",
+            "-s",
+            "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/synthesis.ys"
+          ],
+          "constraints_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/abc.constr",
+          "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+          "frontend": "read_verilog",
+          "frontend_plugin_path": null,
+          "frontend_plugin_sha256": null,
+          "liberty_name": "Nangate45 typical",
+          "liberty_path": "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+          "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+          "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+          "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/synthesis.log",
+          "log_sha256": "f30c0850fc90ee4f3faff5c11ae7ccd9a02766f90cf0e701d510e436dce5d4e2",
+          "profile": "stronger",
+          "recipe_hash": "f07ec727c38629e023c3f0c3c8d7aa4e43dfce16b795c3be60a4889521ef2732",
+          "script_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/synthesis.ys",
+          "script_sha256": "964383cbf2dfd4fac004198b43128ddc9a149ba1f3768a7f5cb8e6015af6f5dc",
+          "stat_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/baseline/stat.json",
+          "stat_sha256": "a088052dd96f53439374352fac468c709fe7682a1dd7e50a02c834aef39dcec5",
+          "warnings": {
+            "count": 2,
+            "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+          },
+          "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+          "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+          "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+        },
+        "role": "baseline",
+        "source_hashes": {
+          "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+        },
+        "status": "passed",
+        "top": "g01_add8_left"
+      },
+      "candidate": {
+        "constraints": {
+          "driving_cell": "BUF_X1",
+          "output_load_ff": 10.0,
+          "sha256": "57947f140a2ab2795e7318aa70cae726825234738d67366df3b0a149660efb22"
+        },
+        "design_hash": "2475f778cbe664233a357ca0c2aa24653f2c243590660194b493cdf11d7398df",
+        "metrics": {
+          "abc_area_combinational": 147.63,
+          "abc_gate_count": 94,
+          "area_combinational": 147.63,
+          "area_sequential": 0.0,
+          "area_total": 147.63,
+          "cell_count": 94,
+          "cells_by_type": {
+            "AND2_X1": 8,
+            "AND3_X1": 5,
+            "AOI21_X1": 9,
+            "AOI21_X2": 4,
+            "AOI21_X4": 2,
+            "INV_X1": 1,
+            "NAND2_X1": 7,
+            "NAND3_X1": 3,
+            "NOR2_X1": 3,
+            "NOR2_X2": 1,
+            "NOR3_X4": 2,
+            "OAI21_X1": 1,
+            "OAI21_X4": 2,
+            "OR2_X1": 7,
+            "OR3_X1": 1,
+            "XNOR2_X1": 17,
+            "XNOR2_X2": 7,
+            "XOR2_X1": 10,
+            "XOR2_X2": 4
+          },
+          "critical_delay_ps": 442.21,
+          "raw_cell_count": 94
+        },
+        "netlist": {
+          "cell_signature": "3a4d4970ccdfe6b1f6668cbe5cbbc3d54e76c773fa327f940eadc94df87b11f3",
+          "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/mapped.v",
+          "sha256": "bbd189e44ff668eae0ac30f92cea9686d04d34be21189560e9fa43dbeeef2cf9"
+        },
+        "provenance": {
+          "abc": {
+            "command_line": "======== ABC command line \"source <abc-temp-dir>/abc.script\"",
+            "executable": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+            "provider": "Yosys abc pass with explicit -exe",
+            "sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+            "transcript_sha256": "650c2c049c03a7925eedae3abaad82eb3c3bc35e0e7556ccd0ee646cf5c887f9",
+            "version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)"
+          },
+          "abc_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys-abc",
+          "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+          "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+          "command": [
+            "yosys",
+            "-Q",
+            "-s",
+            "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/synthesis.ys"
+          ],
+          "constraints_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/abc.constr",
+          "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+          "frontend": "read_verilog",
+          "frontend_plugin_path": null,
+          "frontend_plugin_sha256": null,
+          "liberty_name": "Nangate45 typical",
+          "liberty_path": "/Users/peter/Desktop/rtl-advisor/third_party/nangate45/NangateOpenCellLibrary_typical.lib",
+          "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+          "liberty_source_commit": "036d106273e66855cd5214d49518fd0f0df7de61",
+          "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/synthesis.log",
+          "log_sha256": "53733af8b31ef19aba59c5372913d0619fa6b34b54ea9c77c41f843b88da5c46",
+          "profile": "stronger",
+          "recipe_hash": "f07ec727c38629e023c3f0c3c8d7aa4e43dfce16b795c3be60a4889521ef2732",
+          "script_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/synthesis.ys",
+          "script_sha256": "3f8be65aadb4c11dc52ef6aaaf7faffa0c4ad72fbedefe7a80f41116906b346b",
+          "stat_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/measurement/measurements/8350fbec16a082130bfc4aa5/stronger/candidate/stat.json",
+          "stat_sha256": "a088052dd96f53439374352fac468c709fe7682a1dd7e50a02c834aef39dcec5",
+          "warnings": {
+            "count": 2,
+            "sha256": "6b404da943f2c0db37e93108abe763a0ccdca9b757a48667c8900b240beece13"
+          },
+          "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+          "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+          "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+        },
+        "role": "candidate",
+        "source_hashes": {
+          "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/design/sources/0000/g01_add8_left.sv": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+        },
+        "status": "passed",
+        "top": "g01_add8_left"
+      },
+      "classification": "neutral",
+      "comparison": {
+        "area_total": {
+          "baseline": 147.63,
+          "candidate": 147.63,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        },
+        "cell_count": {
+          "baseline": 94.0,
+          "candidate": 94.0,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        },
+        "critical_delay_ps": {
+          "baseline": 442.21,
+          "candidate": 442.21,
+          "delta": 0.0,
+          "improvement_percent": 0.0
+        }
+      },
+      "recipe": {
+        "abc_provider": "explicit adjacent yosys-abc",
+        "abc_sha256": "57c9685f75253a3b03cc3716d70f49f6bc0f24bd00c1e41575d06478c0d8ae81",
+        "abc_version": "UC Berkeley, ABC 1.01 (compiled Mar  4 2026 06:46:57)",
+        "driving_cell": "BUF_X1",
+        "flow_version": "rtl-advisor-mvp-yosys-abc-v1",
+        "frontend": "read_verilog",
+        "frontend_plugin_path": null,
+        "frontend_plugin_sha256": null,
+        "liberty_sha256": "8d540a4d4cf6d09d27c87ad067857a9c0c2eeb023ab7a56e058cd3113db4e9b1",
+        "output_load_ff": 10.0,
+        "passes": [
+          "hierarchy -check",
+          "synth -flatten -noabc -run begin:fine",
+          "share -aggressive",
+          "opt -full",
+          "clean",
+          "synth -flatten -noabc -run fine:check",
+          "dfflibmap",
+          "abc -exe -liberty -constr",
+          "clean",
+          "check -assert"
+        ],
+        "profile": "stronger",
+        "recipe_hash": "f07ec727c38629e023c3f0c3c8d7aa4e43dfce16b795c3be60a4889521ef2732",
+        "script_template": [
+          "read_liberty -lib <LIBERTY>",
+          "read_verilog -sv <INCLUDE_DIRS> <DEFINES> <SOURCES>",
+          "hierarchy -check -top g01_add8_left",
+          "synth -top g01_add8_left -flatten -noabc -run begin:fine",
+          "share -aggressive",
+          "opt -full",
+          "clean",
+          "synth -top g01_add8_left -flatten -noabc -run fine:check",
+          "dfflibmap -liberty <LIBERTY>",
+          "abc -exe <ABC> -liberty <LIBERTY> -constr <CONSTRAINTS>",
+          "clean",
+          "check -assert",
+          "stat -top g01_add8_left -liberty <LIBERTY> -json",
+          "write_verilog -noattr -noexpr <NETLIST>"
+        ],
+        "script_template_sha256": "ffd73c827dda433080ff27dbdb912a2a6d0c9b800601d7ad6c10fe70d865af92",
+        "top": "g01_add8_left",
+        "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+        "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+      }
+    }
+  },
+  "schema_version": 1,
+  "semantic_hash": "338c067410b1b3fcbaa91fecb4263633dcdf5b31862530e4d3d5f3cce7180106",
+  "source_integrity": {
+    "baseline": {
+      "mismatches": [],
+      "ok": true
+    },
+    "candidate": {
+      "mismatches": [],
+      "ok": true
+    }
+  },
+  "status": "synthesis_handles",
+  "thresholds": {
+    "area_delay_guardrail_percent": -2.0,
+    "area_improvement_percent": 5.0,
+    "timing_area_guardrail_percent": -10.0,
+    "timing_improvement_percent": 3.0
+  }
+}

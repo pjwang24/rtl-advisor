@@ -1,0 +1,110 @@
+{
+  "schema": "rtl-advisor-plugin-abc-packet-v1",
+  "experiment_id": "plugin-abc-v1",
+  "arm": "C",
+  "repetition": 3,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "manifest_sha256": "9a66873f7cd820f2aa2e31a20d99d961e3aa80e8e735d9613a55bdb0e09f3dc2",
+  "objective": "balanced",
+  "access_rule": "Reason broadly and use ordinary tools, but delegate every released-family candidate, proof, and measurement to RTL Advisor. Never override its formal or synthesis result.",
+  "isolation_rules": [
+    "Do not read experiments/plugin-abc-v1/oracle.json.",
+    "Do not read any experiments/plugin-abc-v1/runs/arm-* directory except your assigned arm directory.",
+    "For repetition 3, do not read any prior repetition; write only under runs/arm-c/r3.",
+    "Do not mutate baseline RTL; create isolated candidates under your assigned run directory.",
+    "Do not recommend any unproven candidate.",
+    "Report every case in manifest order, including unsupported and no-change outcomes."
+  ],
+  "max_candidates_per_case": 3,
+  "case_time_budget_minutes": 20,
+  "result_schema": "schemas/rtl-advisor-plugin-abc-arm-result-v1.schema.json",
+  "case_selection": "decision_disagreements_only",
+  "cases": [
+    {
+      "case_id": "g05",
+      "source_kind": "generated",
+      "category": "selection_decode",
+      "top": "g05_mux_common_logic",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv"
+      ],
+      "source_sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "g06",
+      "source_kind": "generated",
+      "category": "selection_decode",
+      "top": "g06_priority_decode",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv"
+      ],
+      "source_sha256": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "g07",
+      "source_kind": "generated",
+      "category": "semantic_boundary",
+      "top": "g07_width_truncation",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv"
+      ],
+      "source_sha256": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "g10",
+      "source_kind": "generated",
+      "category": "no_change_trap",
+      "top": "g10_function_boundary",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv"
+      ],
+      "source_sha256": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+      "stateful": false,
+      "proof_level": "P1"
+    },
+    {
+      "case_id": "g11",
+      "source_kind": "generated",
+      "category": "pipeline_boundary",
+      "top": "g11_one_stage_stream",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv"
+      ],
+      "source_sha256": "1c7e7a24c9db1fca9787798b355b2d9fca354646df1e056c229c658a3a8d36c6",
+      "stateful": true,
+      "proof_level": "P2"
+    },
+    {
+      "case_id": "g12",
+      "source_kind": "generated",
+      "category": "pipeline_boundary",
+      "top": "g12_two_stage_pipeline",
+      "sources": [
+        "experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv"
+      ],
+      "source_sha256": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+      "stateful": true,
+      "proof_level": "P2"
+    },
+    {
+      "case_id": "o09",
+      "source_kind": "open",
+      "category": "selection_decode",
+      "reference_id": "pulp-common-cells-stream-mux",
+      "top": "stream_mux",
+      "sources": [
+        "corpus/upstream/common_cells/src/stream_mux.sv"
+      ],
+      "source_sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+      "stateful": false,
+      "proof_level": "P1"
+    }
+  ]
+}

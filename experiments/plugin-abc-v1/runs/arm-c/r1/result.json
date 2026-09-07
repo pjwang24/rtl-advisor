@@ -1,0 +1,464 @@
+{
+  "schema": "rtl-advisor-plugin-abc-arm-result-v1",
+  "experiment_id": "plugin-abc-v1",
+  "arm": "C",
+  "repetition": 1,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "manifest_sha256": "9a66873f7cd820f2aa2e31a20d99d961e3aa80e8e735d9613a55bdb0e09f3dc2",
+  "cases": [
+    {
+      "case_id": "g01",
+      "source_sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv:5"
+      ],
+      "rationale": "RTL Advisor isolated the supported balanced-tree reassociation, proved two-state combinational equivalence, and measured identical area, cell count, and critical delay in both pinned recipes. Its immutable final decision is synthesis_handles, so the candidate is not recommended.",
+      "candidates": [
+        {
+          "candidate_id": "addcand_5db95f9b35f13ff5",
+          "path": "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/design/sources/0000/g01_add8_left.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/review.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/candidate.diff",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/verification.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/measurement.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/report.json"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": [
+        "Formal evidence is two-state combinational RTL equivalence and does not prove X/Z behavior.",
+        "Measurements apply only to the recorded standard and stronger Yosys/ABC recipes, not a target implementation flow."
+      ]
+    },
+    {
+      "case_id": "g02",
+      "source_sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv:5"
+      ],
+      "rationale": "RTL Advisor prepared and formally proved the deterministic balanced reassociation, then found exactly neutral area, cell count, and critical delay in both pinned synthesis recipes. The stored synthesis_handles decision is preserved and no change is recommended.",
+      "candidates": [
+        {
+          "candidate_id": "addcand_914a742bebb72793",
+          "path": "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/design/sources/0000/g02_add32_five.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/review.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/candidate.diff",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/verification.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/candidates/addcand_914a742bebb72793/measurement.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-1585b731ac430b88fe51/report.json"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": [
+        "Formal evidence is two-state combinational RTL equivalence and does not prove X/Z behavior.",
+        "Measurements are recipe-specific and are not target-flow PPA."
+      ]
+    },
+    {
+      "case_id": "g03",
+      "source_sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv:7",
+        "experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv:8"
+      ],
+      "rationale": "For the direct sum assignment, RTL Advisor generated the supported reassociation, formally proved it, and measured identical mapped results in both recipes, yielding synthesis_handles. The procedural selection region was explicitly excluded, so the completed evidence supports no change only for the measured finding.",
+      "candidates": [
+        {
+          "candidate_id": "addcand_bd46a2a00b3c6dd3",
+          "path": "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/design/sources/0000/g03_mixed_safe_add.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/review.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/candidate.diff",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/verification.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/measurement.json",
+            "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/report.json"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": [
+        "Coverage is partial: one eligible direct assignment and one excluded procedural region.",
+        "Formal evidence is two-state combinational equivalence; the synthesis conclusion is limited to two pinned recipes."
+      ]
+    },
+    {
+      "case_id": "g04",
+      "source_sha256": "d41c31a3112e798bd67ab057e52043949e3f0b0ed10526be7e62daaa74fa2dfc",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g04_mixed_procedural_add.sv:6",
+        "experiments/plugin-abc-v1/cases/generated/g04_mixed_procedural_add.sv:10"
+      ],
+      "rationale": "RTL Advisor classified the addition inside always_comb as a procedural region outside the released rewrite scope and disallowed candidate generation. Because this is still the released adder-reassociation family, Arm C did not replace the plugin's blocked result with an independently authored candidate.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-a91a12bf77c67ad6c244/review.json.",
+        "No formal or synthesis evidence exists because candidate generation was unavailable."
+      ]
+    },
+    {
+      "case_id": "g05",
+      "source_sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+      "decision": "inconclusive",
+      "scope_claim": "none",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv:6"
+      ],
+      "rationale": "RTL Advisor excluded the conditional-add expression as not being a pure supported addition chain. Hybrid reasoning identifies mux/add factoring as a broader PPA hypothesis, but no isolated candidate, P1 proof, or identical baseline/candidate synthesis measurement was completed; therefore the hypothesis is not recommended.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-df6da05d4cc811ccb508/review.json.",
+        "The broader hypothesis remains unproven and unmeasured."
+      ]
+    },
+    {
+      "case_id": "g06",
+      "source_sha256": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+      "decision": "inconclusive",
+      "scope_claim": "none",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6",
+        "experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:9"
+      ],
+      "rationale": "RTL Advisor excluded the procedural priority encoder. Hybrid reasoning notes that the linear priority structure could invite a balanced decode implementation, but without an isolated P1-equivalent candidate and identical synthesis comparison there is no evidence-backed recommendation.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-e1213134a1df608b6795/review.json.",
+        "No ordinary-tool candidate, proof, or measurement was completed."
+      ]
+    },
+    {
+      "case_id": "g07",
+      "source_sha256": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2",
+      "decision": "no_change",
+      "scope_claim": "none",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv:6",
+        "experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv:7"
+      ],
+      "rationale": "RTL Advisor excluded the first two-addend assignment and the later chain because operand and target widths differ. Hybrid reasoning confirms that the explicit 8-bit partial value creates an early modulo-256 truncation boundary, so reassociating across it could change the 9-bit result; no change is recommended.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-7b5ad31f5caa871222d7/review.json.",
+        "No candidate was prepared because the semantic-width preconditions fail."
+      ]
+    },
+    {
+      "case_id": "g08",
+      "source_sha256": "b012fa81c56e0e2a101f605b9b8f00de337063c29d9217c8ffd020b767372d6d",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g08_signed_chain.sv:5"
+      ],
+      "rationale": "The released transformation supports only unsigned fixed-width targets. RTL Advisor rejected the signed output type and disallowed candidate generation, and Arm C preserves that family decision rather than substituting an independent reassociation.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-11cb038f51c806b94fb4/review.json.",
+        "Signed overflow and expression-sizing semantics were not formally checked."
+      ]
+    },
+    {
+      "case_id": "g09",
+      "source_sha256": "c1bbfbc8ffc8ea0b18fdfa3ddaa621171e513d51a285aebde8181059ac7a1ff0",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g09_already_balanced.sv:5"
+      ],
+      "rationale": "RTL Advisor found that the only addition expression already has its deterministic balanced shape and produced no candidate. No broader structure in this single-expression case justifies a change.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-821ca5bf68cadaf0f337/review.json."
+      ]
+    },
+    {
+      "case_id": "g10",
+      "source_sha256": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+      "decision": "no_change",
+      "scope_claim": "none",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:5",
+        "experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15"
+      ],
+      "rationale": "RTL Advisor excluded the function region. Hybrid reasoning observes that sat_add clamps after each operation and is not generally associative, so regrouping the nested calls is not a behavior-preserving adder-tree rewrite; the source should remain unchanged.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-d9d2f9d3e3638a978e9a/review.json.",
+        "No candidate was created across the saturating-function boundary."
+      ]
+    },
+    {
+      "case_id": "g11",
+      "source_sha256": "1c7e7a24c9db1fca9787798b355b2d9fca354646df1e056c229c658a3a8d36c6",
+      "decision": "no_change",
+      "scope_claim": "none",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:13",
+        "experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:14"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized top and does not support sequential transformations. Hybrid inspection found a one-entry ready/valid stage whose timing, storage, or bypass changes would require the declared P2 temporal contract; no such isolated candidate and proof were run, so no change is recommended.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-0dad30fc2a06cac8173e/review.json.",
+        "No P2 sequential proof or matched synthesis comparison was completed."
+      ]
+    },
+    {
+      "case_id": "g12",
+      "source_sha256": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+      "decision": "no_change",
+      "scope_claim": "none",
+      "source_locations": [
+        "experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:13",
+        "experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:20"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized sequential top. Hybrid reasoning identifies cycle alignment and two-stage latency as observable behavior; any retiming or arithmetic redistribution requires a P2 temporal proof and matched measurement, neither of which was completed, so no change is recommended.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-9af714316568e5492e44/review.json.",
+        "No P2 proof was run and no latency-changing candidate is supported."
+      ]
+    },
+    {
+      "case_id": "o01",
+      "source_sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv:27",
+        "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv:74"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized arbiter top. Its arbitration state, round-robin mask, and ready/grant behavior are sequential and protocol-visible; no P2 candidate, proof, and matched synthesis pair was completed, so no change can be recommended.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-ef79b9abebb1758a4160/review.json.",
+        "The released plugin supports neither parameterized tops nor sequential equivalence."
+      ]
+    },
+    {
+      "case_id": "o02",
+      "source_sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv:14",
+        "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv:181"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized FIFO top. Hybrid reasoning found state, reset, pass-through, and pointer/occupancy behavior that require the declared P2 relation; without an isolated candidate, sequential proof, and identical synthesis comparison, the case remains unsupported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-cb1348da7adf1be905f3/review.json.",
+        "No P2 candidate or proof was completed."
+      ]
+    },
+    {
+      "case_id": "o03",
+      "source_sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv:28",
+        "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv:100",
+        "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv:147"
+      ],
+      "rationale": "RTL Advisor reported an ambiguous module header and produced no candidate. The counter includes generated instances, saturation/error logic, and sequential state; Arm C did not produce the required P2-isolated candidate and evidence, so no change is supported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-9552880e4f4f3fd95da6/review.json.",
+        "No P2 proof or matched synthesis measurement exists."
+      ]
+    },
+    {
+      "case_id": "o04",
+      "source_sha256": "99aeb7564474111dc6662488c9f4ca6b788723e449b128d08ac54f8fc2da5cd2",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:44",
+        "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:142"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized packer FIFO. Width-dependent shifts, occupancy/pointer state, clearing, and handshake behavior require a P2 proof for any structural change; no such candidate and matched measurement were completed.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-5a6d634e6151f74582b2/review.json.",
+        "No sequential formal evidence is available."
+      ]
+    },
+    {
+      "case_id": "o05",
+      "source_sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "corpus/upstream/common_cells/src/spill_register.sv:17"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized spill register. Its state and ready/valid behavior are temporal, and no P2 candidate, proof, and matched synthesis measurement was completed; therefore no change is supported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-8aec6647af8eaad5dc7e/review.json.",
+        "Sequential behavior is outside the released plugin."
+      ]
+    },
+    {
+      "case_id": "o06",
+      "source_sha256": "2e0e5b6d09ce4ade0881938ee042dcbc78438638fa2592338a374f88a3c27304",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "corpus/upstream/common_cells/src/stream_register.sv:16",
+        "corpus/upstream/common_cells/src/stream_register.sv:34"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized stream register. Changing its combinational ready path or storage behavior would affect a P2 ready/valid contract; without a proven and measured isolated candidate, no change is supported.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-8b44a344060d5afc3fb1/review.json.",
+        "No P2 proof or matched measurement exists."
+      ]
+    },
+    {
+      "case_id": "o07",
+      "source_sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "corpus/upstream/common_cells/src/fifo_v3.sv:15",
+        "corpus/upstream/common_cells/src/fifo_v3.sv:63",
+        "corpus/upstream/common_cells/src/fifo_v3.sv:116"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized FIFO. Hybrid inspection confirms that pointer, occupancy, fall-through, and memory state make structural changes P2-sensitive; no isolated sequential candidate and evidence were completed.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-e96288c78a20b0b79a21/review.json.",
+        "No P2 proof or identical synthesis comparison was run."
+      ]
+    },
+    {
+      "case_id": "o08",
+      "source_sha256": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "corpus/upstream/common_cells/src/rr_arb_tree.sv:49",
+        "corpus/upstream/common_cells/src/rr_arb_tree.sv:197",
+        "corpus/upstream/common_cells/src/rr_arb_tree.sv:244"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized round-robin arbiter tree. Its generated selection tree, locking, and arbitration state are protocol-visible and need P2 evidence; no isolated candidate, sequential proof, and matched synthesis comparison were completed.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-6d6872bfb227f86bd0f8/review.json.",
+        "The released plugin cannot verify this parameterized sequential design."
+      ]
+    },
+    {
+      "case_id": "o09",
+      "source_sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+      "decision": "inconclusive",
+      "scope_claim": "none",
+      "source_locations": [
+        "corpus/upstream/common_cells/src/stream_mux.sv:16",
+        "corpus/upstream/common_cells/src/stream_mux.sv:33",
+        "corpus/upstream/common_cells/src/stream_mux.sv:37"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized combinational stream mux. Hybrid reasoning can identify decode and indexed-mux implementation choices, but no specialized candidate, P1 proof across the selected configuration, or identical synthesis measurement was completed, so the broader PPA question remains inconclusive.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-62956b8cd7f8b41b1f4e/review.json.",
+        "Parameterized coverage and matched PPA evidence are absent."
+      ]
+    },
+    {
+      "case_id": "o10",
+      "source_sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "corpus/upstream/verilog-axis/rtl/axis_register.v:34",
+        "corpus/upstream/verilog-axis/rtl/axis_register.v:89",
+        "corpus/upstream/verilog-axis/rtl/axis_register.v:159"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized AXI-stream register. Its selectable register types and ready/valid state require the declared P2 protocol relation for any structural change; no isolated candidate and required evidence were completed.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-6781b6963b6582ef005a/review.json.",
+        "No P2 sequential proof or matched synthesis measurement was run."
+      ]
+    },
+    {
+      "case_id": "o11",
+      "source_sha256": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:34",
+        "corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:118",
+        "corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:121"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized generated pipeline. Stage-count and register-type changes are latency- and protocol-visible and require the declared P3 contract; no P3-isolated candidate, proof, and matched synthesis comparison were completed.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-1ef5ab6d5e9235b52730/review.json.",
+        "No latency-aware P3 proof exists."
+      ]
+    },
+    {
+      "case_id": "o12",
+      "source_sha256": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02",
+      "decision": "unsupported",
+      "scope_claim": "none",
+      "source_locations": [
+        "corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:34",
+        "corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:99",
+        "corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:132"
+      ],
+      "rationale": "RTL Advisor excluded the parameterized AXI-stream pipeline FIFO. Generated stages, output FIFO occupancy, backpressure, and register state require the declared P2 temporal relation; no isolated candidate, sequential proof, and identical synthesis measurement were completed.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": [
+        "Immutable review evidence: /Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-4812fb8cbe9b94451e22/review.json.",
+        "No P2 proof or matched measurement exists."
+      ]
+    }
+  ]
+}

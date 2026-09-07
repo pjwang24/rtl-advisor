@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-workflow-state-v1.schema.json",
+  "title": "RTL Advisor Workflow State V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "schema",
+    "document_type",
+    "workflow_id",
+    "request_semantic_hash",
+    "authorization_semantic_hash",
+    "revision",
+    "status",
+    "input_identity",
+    "completed_stages",
+    "stage_results",
+    "semantic_hash"
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "stage": {
+      "enum": ["capabilities", "review", "candidate", "verify", "measure"]
+    },
+    "failureStage": {
+      "enum": [
+        "capabilities",
+        "review",
+        "candidate",
+        "verify",
+        "measure",
+        "report"
+      ]
+    },
+    "stageResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "document_type",
+        "semantic_hash",
+        "artifact_path",
+        "facts"
+      ],
+      "properties": {
+        "status": {"type": "string", "minLength": 1},
+        "document_type": {"type": "string", "minLength": 1},
+        "semantic_hash": {"$ref": "#/$defs/sha256"},
+        "artifact_path": {"type": "string", "minLength": 1},
+        "facts": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "candidate_generation_allowed": {"type": "boolean"},
+            "safe": {"type": "boolean"},
+            "decision": {"type": "string", "minLength": 1},
+            "source_sha256": {"$ref": "#/$defs/sha256"},
+            "compile_context_hash": {"$ref": "#/$defs/sha256"}
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-workflow-state-v1"},
+    "document_type": {"const": "rtl-advisor.workflow.state"},
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^workflow-[0-9a-f]{20}$"
+    },
+    "request_semantic_hash": {"$ref": "#/$defs/sha256"},
+    "authorization_semantic_hash": {"$ref": "#/$defs/sha256"},
+    "revision": {"type": "integer", "minimum": 0},
+    "status": {
+      "enum": [
+        "ready",
+        "running",
+        "waiting_authorization",
+        "blocked",
+        "failed",
+        "completed",
+        "untrusted"
+      ]
+    },
+    "input_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "compile_context_hash"],
+      "properties": {
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "compile_context_hash": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "completed_stages": {
+      "type": "array",
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/stage"}
+    },
+    "stage_results": {
+      "type": "object",
+      "propertyNames": {"$ref": "#/$defs/stage"},
+      "additionalProperties": {"$ref": "#/$defs/stageResult"}
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "code", "message"],
+      "properties": {
+        "stage": {"$ref": "#/$defs/failureStage"},
+        "code": {"type": "string", "minLength": 1},
+        "message": {"type": "string", "minLength": 1},
+        "artifact_path": {"type": "string", "minLength": 1}
+      }
+    },
+    "semantic_hash": {"$ref": "#/$defs/sha256"}
+  }
+}

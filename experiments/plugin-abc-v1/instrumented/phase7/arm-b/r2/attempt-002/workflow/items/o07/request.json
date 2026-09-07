@@ -1,0 +1,17 @@
+{
+  "document_type": "rtl-advisor.workflow.request",
+  "input": {
+    "compile_context_hash": "2f73300ad9e6979c385c8d058a9c6e339c45603c78ddd3b43cc4b8960371b753",
+    "defines": [],
+    "include_dirs": [],
+    "kind": "explicitly_approved_open_rtl",
+    "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/common_cells/src/fifo_v3.sv",
+    "sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc",
+    "top": "fifo_v3"
+  },
+  "objective": "balanced",
+  "schema": "rtl-advisor-workflow-request-v1",
+  "schema_version": 1,
+  "semantic_hash": "0b8115938c2665ea0163f4645af675912b8ebc2b6b1c02179b448dc59ebe9877",
+  "workflow_id": "workflow-ad53085d17c6939c4a85"
+}

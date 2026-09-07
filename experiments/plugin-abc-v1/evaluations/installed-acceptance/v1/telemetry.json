@@ -1,0 +1,68 @@
+{
+  "experiment_id": "plugin-abc-v1",
+  "runs": [
+    {
+      "agent_message_bytes": 20763,
+      "arm": "A",
+      "attempt": 2,
+      "audit_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-a/r1/attempt-002/audit.json",
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 2036864,
+      "command_categories": {
+        "eda": 10,
+        "hash": 2,
+        "other": 22
+      },
+      "command_count": 34,
+      "command_output_bytes": 188134,
+      "command_wave_count": 34,
+      "events_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-a/r1/attempt-002/codex-events.jsonl",
+      "exit_code": 0,
+      "input_tokens": 2133335,
+      "output_bytes": 208897,
+      "output_tokens": 19559,
+      "packet_sha256": "4c7894fbb266ec47c71377a5c615ac3fafb42ed0060046b4469dfee886db898c",
+      "provenance_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-a/r1/attempt-002/invocation.json",
+      "reasoning_output_tokens": 6984,
+      "repetition": 1,
+      "result_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-a/r1/attempt-002/result.json",
+      "task_completed": true,
+      "thread_id": "01a07360-8d34-7612-81f3-86464b11b580",
+      "total_tokens": 2152894,
+      "wall_time_seconds": 465.095
+    },
+    {
+      "agent_message_bytes": 23482,
+      "arm": "B",
+      "attempt": 1,
+      "audit_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-b/r1/attempt-001/audit.json",
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 445184,
+      "command_categories": {
+        "artifact_read": 1,
+        "other": 8,
+        "rtl_advisor": 2,
+        "workflow_batch": 2
+      },
+      "command_count": 13,
+      "command_output_bytes": 54147,
+      "command_wave_count": 13,
+      "events_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-b/r1/attempt-001/codex-events.jsonl",
+      "exit_code": 0,
+      "input_tokens": 493493,
+      "output_bytes": 77629,
+      "output_tokens": 16090,
+      "packet_sha256": "06db2c69385ba3dffa7bf91827670cb439325dfe4fa64e64a115932e0fe41825",
+      "provenance_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-b/r1/attempt-001/invocation.json",
+      "reasoning_output_tokens": 3877,
+      "repetition": 1,
+      "result_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-b/r1/attempt-001/result.json",
+      "task_completed": false,
+      "thread_id": "01a07367-d261-7a81-a0d3-29ee3dfcc4c8",
+      "total_tokens": 509583,
+      "validation_error": "installed benchmark audit failed; see audit_path",
+      "wall_time_seconds": 333.912
+    }
+  ],
+  "schema": "rtl-advisor-plugin-abc-telemetry-v1"
+}

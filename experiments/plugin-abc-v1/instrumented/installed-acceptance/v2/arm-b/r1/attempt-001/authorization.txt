@@ -1,0 +1,20 @@
+Execute the frozen A/B benchmark packet at /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/packets/arm-b-r1.json.
+
+Read the packet completely and obey its cases, access rule, model contract,
+decision vocabulary, proof rules, and manifest order. The packet access rule remains unchanged.
+Use the installed rtl-advisor:analyze-rtl skill and its released CLI exactly; do not invent unsupported transformations. This run explicitly prioritizes lower latency: execute the independent batch workflows with --jobs 4. Review, first-eligible candidate preparation, formal verification, and both pinned synthesis measurements are authorized. The installed SKILL.md contains the complete command contract needed for this run. Invoke its `python3 <skill-dir>/scripts/run_rtl_advisor.py --config ... workflow batch ...` form exactly once and use its compact JSON digest directly. Do not open cli-contract.md or inspect the runner source unless that invocation returns a structured failure requiring diagnosis.
+Every RTL Advisor runner invocation must pass --config /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/candidate/rtl-advisor.toml. CLI-managed workflow artifacts may be written only under that config's artifacts_dir; write all model-created session files under the run directory.
+
+For this instrumented repetition only, the packet's run-directory isolation
+sentence is replaced by these stricter paths:
+- Do not read any existing experiments/plugin-abc-v1/runs/arm-* directory.
+- Do not read any other instrumented arm or repetition.
+- Write model-created manifests, authorization evidence, summaries, and scratch files only under /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-b/r1/attempt-001.
+- Do not mutate any baseline source or frozen packet.
+
+All generated cases and the packet's pinned open-source cases are explicitly
+authorized for this local benchmark. Do not read the oracle or any evaluation
+artifact. Complete every assigned case in one session. Return only one JSON
+object matching the packet's result schema, with its exact experiment_id, arm,
+repetition, model, reasoning_effort, manifest_sha256, and ordered case list.
+The final JSON will be stored at /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-b/r1/attempt-001/result.json by the harness.

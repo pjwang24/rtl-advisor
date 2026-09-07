@@ -1,0 +1,106 @@
+{
+  "behavioral_basis": [
+    {
+      "description": "Pre-registered upstream evidence location; reproduction is pending.",
+      "kind": "upstream_tests",
+      "location": "hw/ip/prim/fpv/prim_fifo_sync_fpv.core"
+    }
+  ],
+  "categories": [
+    "buffering_flow_control",
+    "state_control_queue"
+  ],
+  "compile_context": {
+    "black_boxes": [],
+    "build_commands": [],
+    "clocks": [
+      {
+        "edge": "rising",
+        "name": "clk_i",
+        "period_ns": null
+      }
+    ],
+    "defines": [],
+    "filelist": null,
+    "frontend": null,
+    "frontend_version": null,
+    "generated_inputs": [],
+    "include_dirs": [],
+    "lint_commands": [],
+    "memories": [],
+    "parameters": {},
+    "resets": [
+      {
+        "name": "rst_ni",
+        "polarity": "active_low",
+        "synchronous": false
+      }
+    ],
+    "sources": [
+      "hw/ip/prim/rtl/prim_fifo_sync.sv"
+    ],
+    "test_commands": [],
+    "top": "prim_fifo_sync"
+  },
+  "compile_context_hashes": {
+    "compile_context_hash": null,
+    "filelist_sha256": null,
+    "generated_input_hashes": [],
+    "include_tree_hashes": []
+  },
+  "display_name": "OpenTitan prim_fifo_sync",
+  "document_type": "rtl-advisor.reference-manifest",
+  "lineage": {
+    "containing_design_ids": [
+      "lowrisc-opentitan"
+    ],
+    "design_lineage_id": "opentitan-prim-fifo-sync",
+    "repository_lineage_id": "lowrisc-opentitan",
+    "upstream_project_id": "lowrisc-opentitan"
+  },
+  "proof_contract": {
+    "assumptions": [
+      "Reset and protocol assumptions will be frozen before proof."
+    ],
+    "kind": "cycle_aligned_sequential_equivalence",
+    "latency_relation": "same_cycle",
+    "level": "P2",
+    "observables": [
+      "all top-level outputs"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "provenance": {
+    "canonical_url": "https://github.com/lowRISC/opentitan",
+    "license": {
+      "disposition": "conditional",
+      "expression": "Apache-2.0",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://github.com/lowRISC/opentitan/blob/99fb7bd3b2330a1bda61b1d3382198d0c7fee8d7/LICENSE"
+    },
+    "project": "lowrisc-opentitan",
+    "revision": "99fb7bd3b2330a1bda61b1d3382198d0c7fee8d7",
+    "revision_kind": "commit"
+  },
+  "qualification": {
+    "reason": null,
+    "state": "license_reviewed",
+    "status": "active"
+  },
+  "reference_id": "opentitan-prim-fifo-sync",
+  "schema": "rtl-advisor-reference-v1",
+  "schema_version": 1,
+  "semantic_hash": "c7157c12dd541cdf6c16eed15b3e9da8c1120f3493d15c4a7980fa55e6a42cba",
+  "source_hashes": [
+    {
+      "path": "hw/ip/prim/rtl/prim_fifo_sync.sv",
+      "sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630"
+    }
+  ],
+  "split": "development",
+  "synthesis_profiles": [
+    "standard",
+    "stronger"
+  ],
+  "tier": "A"
+}

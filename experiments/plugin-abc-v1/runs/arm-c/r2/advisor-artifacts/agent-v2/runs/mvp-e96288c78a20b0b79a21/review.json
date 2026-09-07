@@ -1,0 +1,84 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-e96288c78a20b0b79a21/input.json",
+    "review": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-e96288c78a20b0b79a21/review.json",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-e96288c78a20b0b79a21"
+  },
+  "candidate_generation_allowed": false,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/fifo_v3.sv",
+    "--objective",
+    "balanced",
+    "--top",
+    "fifo_v3",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 0,
+    "excluded_site_count": 1
+  },
+  "decision": "unsupported",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "48f1a30b5bc139ce4517a268f528cf9fbd3e74744747941d7cd18bde5f2851b7",
+    "model_used": false,
+    "rules_only": true
+  },
+  "exclusions": [
+    {
+      "detail": "parameterized top modules are outside MVP scope",
+      "exclusion_id": "addexclude_976d88ce258baf74",
+      "reason_code": "parameterized_top",
+      "source": {
+        "end_offset": 6296,
+        "file": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/fifo_v3.sv",
+        "sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc",
+        "start_offset": 759
+      },
+      "status": "excluded",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "findings": [],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "2f73300ad9e6979c385c8d058a9c6e339c45603c78ddd3b43cc4b8960371b753",
+    "defines": [],
+    "design_hash": "b9860ee9bd3153429e2474071fe75640a887641a8d46600c53340a2adf7a9bbd",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/fifo_v3.sv",
+        "sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/fifo_v3.sv",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "fifo_v3"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-e96288c78a20b0b79a21",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "ec57acb588882dc6521ece9825ab541b0a80c3e85822a5afb700ca78b267ac56",
+  "status": "completed"
+}

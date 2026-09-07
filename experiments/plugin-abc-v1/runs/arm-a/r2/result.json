@@ -1,0 +1,353 @@
+{
+  "schema": "rtl-advisor-plugin-abc-arm-result-v1",
+  "experiment_id": "plugin-abc-v1",
+  "arm": "A",
+  "repetition": 2,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "manifest_sha256": "9a66873f7cd820f2aa2e31a20d99d961e3aa80e8e735d9613a55bdb0e09f3dc2",
+  "cases": [
+    {
+      "case_id": "g01",
+      "source_sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv:5"],
+      "rationale": "Balancing the four-input modular add is formally equivalent, but the fixed Yosys/ABC recipe mapped baseline and candidate identically to 100 gates (38 AND, 18 OR, 44 XOR), so there is no measured PPA basis for a change.",
+      "candidates": [
+        {
+          "candidate_id": "g01_candidate_1",
+          "path": "experiments/plugin-abc-v1/runs/arm-a/r2/candidates/g01/candidate_1.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g01_formal.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g01_baseline_measure.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g01_candidate_measure.log"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": ["The mapping recipe reports generic gate counts, not placed timing or power."]
+    },
+    {
+      "case_id": "g02",
+      "source_sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv:5"],
+      "rationale": "A depth-balanced five-input modular add passed formal equivalence, but baseline and candidate both mapped to 626 gates (243 AND, 132 OR, 251 XOR); the raw synthesis flow already removes the RTL grouping difference.",
+      "candidates": [
+        {
+          "candidate_id": "g02_candidate_1",
+          "path": "experiments/plugin-abc-v1/runs/arm-a/r2/candidates/g02/candidate_1.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g02_formal.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g02_baseline_measure.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g02_candidate_measure.log"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": ["The mapping recipe reports generic gate counts, not placed timing or power."]
+    },
+    {
+      "case_id": "g03",
+      "source_sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv:7"],
+      "rationale": "Reassociation of only the independent sum output passed formal equivalence, while both versions mapped to the same 340-gate network (154 AND, 2 NOT, 92 OR, 92 XOR).",
+      "candidates": [
+        {
+          "candidate_id": "g03_candidate_1",
+          "path": "experiments/plugin-abc-v1/runs/arm-a/r2/candidates/g03/candidate_1.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g03_formal.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g03_baseline_measure.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g03_candidate_measure.log"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": ["The finding covers the add expression only; the selection logic was preserved unchanged."]
+    },
+    {
+      "case_id": "g04",
+      "source_sha256": "d41c31a3112e798bd67ab057e52043949e3f0b0ed10526be7e62daaa74fa2dfc",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g04_mixed_procedural_add.sv:10"],
+      "rationale": "Balancing the non-bypass add passed formal equivalence, but baseline and candidate each mapped to 239 gates (86 AND, 16 MUX, 45 OR, 92 XOR), so the source rewrite has no measured benefit in this flow.",
+      "candidates": [
+        {
+          "candidate_id": "g04_candidate_1",
+          "path": "experiments/plugin-abc-v1/runs/arm-a/r2/candidates/g04/candidate_1.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g04_formal.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g04_baseline_measure.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g04_candidate_measure.log"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": ["The finding covers the arithmetic branch only; generic mapping does not estimate routed timing or power."]
+    },
+    {
+      "case_id": "g05",
+      "source_sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv:6"],
+      "rationale": "Factoring the common add operand to place the mux before one adder passed formal equivalence, but ABC produced the same 93-gate result for baseline and candidate (29 AND, 16 MUX, 17 OR, 31 XOR), demonstrating synthesis handling in the measured flow.",
+      "candidates": [
+        {
+          "candidate_id": "g05_candidate_1",
+          "path": "experiments/plugin-abc-v1/runs/arm-a/r2/candidates/g05/candidate_1.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g05_formal.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g05_baseline_measure.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g05_candidate_measure.log"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": ["The mapping recipe reports generic gate counts, not placed timing or power."]
+    },
+    {
+      "case_id": "g06",
+      "source_sha256": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+      "decision": "inconclusive",
+      "scope_claim": "finding_only",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g06_priority_decode.sv:6"],
+      "rationale": "The source is a deliberate highest-index-first priority chain. A tree or casez rewrite could change priority or X behavior, and no bounded candidate was proven and measured, so no change is recommended.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["Static review only; no candidate, formal proof, or mapped comparison was run."]
+    },
+    {
+      "case_id": "g07",
+      "source_sha256": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv:5", "experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv:7"],
+      "rationale": "The named 8-bit partial sum intentionally truncates carry before the later expression; reassociating across that boundary is not generally equivalent to a widened total, so no safe optimization was proposed.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["No candidate was created because the apparent arithmetic rewrite crosses an explicit width boundary."]
+    },
+    {
+      "case_id": "g08",
+      "source_sha256": "b012fa81c56e0e2a101f605b9b8f00de337063c29d9217c8ffd020b767372d6d",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g08_signed_chain.sv:5"],
+      "rationale": "Fixed-width signed reassociation passed bit-vector formal equivalence, but both forms mapped to 221 gates (86 AND, 43 OR, 92 XOR); the measured synthesis flow eliminates the grouping difference.",
+      "candidates": [
+        {
+          "candidate_id": "g08_candidate_1",
+          "path": "experiments/plugin-abc-v1/runs/arm-a/r2/candidates/g08/candidate_1.sv",
+          "formal_status": "formal_passed",
+          "measurement_status": "measured",
+          "final_state": "synthesis_handles",
+          "evidence_paths": [
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g08_formal.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g08_baseline_measure.log",
+            "experiments/plugin-abc-v1/runs/arm-a/r2/evidence/g08_candidate_measure.log"
+          ]
+        }
+      ],
+      "evidence_complete": true,
+      "limitations": ["Formal proof is two-state bit-vector equivalence; the mapping recipe does not estimate routed timing or power."]
+    },
+    {
+      "case_id": "g09",
+      "source_sha256": "c1bbfbc8ffc8ea0b18fdfa3ddaa621171e513d51a285aebde8181059ac7a1ff0",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g09_already_balanced.sv:5"],
+      "rationale": "The four-input modular sum is already expressed as a balanced two-level tree; no local RTL change offers a lower arithmetic depth.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["Static structural review was sufficient; no candidate existed to prove or measure."]
+    },
+    {
+      "case_id": "g10",
+      "source_sha256": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:5", "experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15"],
+      "rationale": "Each function call saturates before the next addition, so sat_add is non-associative and the nested call order is semantically significant. No safe reassociation is available.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["No candidate was created because changing the function-call tree would alter saturation points."]
+    },
+    {
+      "case_id": "g11",
+      "source_sha256": "1c7e7a24c9db1fca9787798b355b2d9fca354646df1e056c229c658a3a8d36c6",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:13", "experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:14"],
+      "rationale": "The ready/valid equation and gated payload update implement the canonical one-entry elastic register; changing control placement risks handshake behavior and no local PPA candidate was identified.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["Static protocol review only; no alternate implementation was formally compared."]
+    },
+    {
+      "case_id": "g12",
+      "source_sha256": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:20", "experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:22"],
+      "rationale": "The register boundary makes sum_q a previous-cycle value while c_i is sampled in the output stage; moving arithmetic across the boundary would change cycle alignment and latency, so no safe local rewrite was proposed.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["No sequential candidate was created because preserving the observed cycle alignment was mandatory."]
+    },
+    {
+      "case_id": "o01",
+      "source_sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv:67", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv:77", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv:88"],
+      "rationale": "The arbiter already delegates selection to a parallel-prefix leading-one primitive and keeps explicit round-robin/lock state. No isolated change in this source is both locally provable and plausibly lower cost.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["Static review only; the packet source depends on prim_util_pkg, prim_leading_one_ppc, and assertion infrastructure not listed as case sources."]
+    },
+    {
+      "case_id": "o02",
+      "source_sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630",
+      "decision": "inconclusive",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv:64", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv:139"],
+      "rationale": "The module contains three parameter-specialized FIFO implementations with security and pass-through behavior. Static review found no bounded rewrite that could be validated without the missing counter/flop dependencies, so no change is recommended.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["No candidate or elaborated P2 comparison; prim_util_pkg, prim_fifo_sync_cnt, prim_flop, and assertion includes are external to the listed source."]
+    },
+    {
+      "case_id": "o03",
+      "source_sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb",
+      "decision": "inconclusive",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv:83", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv:140"],
+      "rationale": "The duplicated up/down counters, saturation, commit gating, and registered integrity check are security-sensitive state logic. No safe local PPA candidate was identified from the single listed source.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["No P2 candidate was tested; prim_count_pkg, prim_flop, and assertion infrastructure are external dependencies."]
+    },
+    {
+      "case_id": "o04",
+      "source_sha256": "99aeb7564474111dc6662488c9f4ca6b788723e449b128d08ac54f8fc2da5cd2",
+      "decision": "inconclusive",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:98", "corpus/upstream/opentitan/hw/ip/prim/rtl/prim_packer_fifo.sv:119"],
+      "rationale": "Packing and unpacking are separate stateful elaboration branches with width-ratio-dependent shifts and pointer/depth updates. Static review did not produce a bounded equivalence-safe optimization.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["No sequential candidate, formal proof, or parameter sweep was run."]
+    },
+    {
+      "case_id": "o05",
+      "source_sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/common_cells/src/spill_register.sv:31"],
+      "rationale": "This source is only a compatibility wrapper around spill_register_flushable with a constant flush input; it contains no local datapath or control implementation to optimize.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["The wrapped spill_register_flushable implementation is not among this case's listed sources."]
+    },
+    {
+      "case_id": "o06",
+      "source_sha256": "2e0e5b6d09ce4ade0881938ee042dcbc78438638fa2592338a374f88a3c27304",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/common_cells/src/stream_register.sv:33", "corpus/upstream/common_cells/src/stream_register.sv:37"],
+      "rationale": "The module is a minimal one-entry ready/valid register: one readiness equation and two load-enable flops. No redundant local logic or safe lower-depth alternative is evident.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["Static review only; the FFLARNC macro definition is external to the listed source."]
+    },
+    {
+      "case_id": "o07",
+      "source_sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc",
+      "decision": "inconclusive",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/common_cells/src/fifo_v3.sv:62", "corpus/upstream/common_cells/src/fifo_v3.sv:115"],
+      "rationale": "Pointer wrap, simultaneous push/pop handling, fall-through behavior, and memory clock-enable logic are interdependent. No isolated candidate was sufficiently bounded for P2 proof and measurement.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["Static review only; no parameterized sequential equivalence or memory mapping comparison was run."]
+    },
+    {
+      "case_id": "o08",
+      "source_sha256": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/common_cells/src/rr_arb_tree.sv:192", "corpus/upstream/common_cells/src/rr_arb_tree.sv:243"],
+      "rationale": "The design already uses logarithmic arbitration/data trees, with an optional fair-priority path implemented by masks and leading-zero counters. A local rewrite would either duplicate established tree logic or alter fairness/lock semantics.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["Static review only; lzc and assertion dependencies are external to the listed source."]
+    },
+    {
+      "case_id": "o09",
+      "source_sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/common_cells/src/stream_mux.sv:33", "corpus/upstream/common_cells/src/stream_mux.sv:37"],
+      "rationale": "The implementation is already the direct indexed data/valid mux plus one-hot ready decode required by the interface; no common logic or avoidable selection depth is present in the source.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["Static review only; cf_math_pkg and assertion infrastructure are external dependencies."]
+    },
+    {
+      "case_id": "o10",
+      "source_sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39",
+      "decision": "inconclusive",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/verilog-axis/rtl/axis_register.v:91", "corpus/upstream/verilog-axis/rtl/axis_register.v:197", "corpus/upstream/verilog-axis/rtl/axis_register.v:261"],
+      "rationale": "Three REG_TYPE branches intentionally trade bypass, bubble-buffer, and skid-buffer behavior. No single local rewrite was shown to improve PPA while preserving all parameterized AXI-stream semantics.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["Static review only; no multi-configuration sequential proof or mapped comparison was run."]
+    },
+    {
+      "case_id": "o11",
+      "source_sha256": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc",
+      "decision": "no_change",
+      "scope_claim": "whole_case",
+      "source_locations": ["corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:91", "corpus/upstream/verilog-axis/rtl/axis_pipeline_register.v:121"],
+      "rationale": "The source is a structural parameterized chain of axis_register instances with direct endpoint wiring; it contains no local combinational transformation independent of the instantiated stage implementation.",
+      "candidates": [],
+      "evidence_complete": true,
+      "limitations": ["The axis_register dependency is not among this case's listed sources; no P3 multi-stage equivalence run was performed."]
+    },
+    {
+      "case_id": "o12",
+      "source_sha256": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02",
+      "decision": "inconclusive",
+      "scope_claim": "finding_only",
+      "source_locations": ["corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:103", "corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:151", "corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v:212"],
+      "rationale": "The registered pipeline and output FIFO jointly implement backpressure decoupling, occupancy thresholds, and ordered payload transfer. No bounded local candidate was established as both protocol-equivalent and lower cost.",
+      "candidates": [],
+      "evidence_complete": false,
+      "limitations": ["Static review only; no parameterized P2 sequential proof, RAM inference comparison, or timing measurement was run."]
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "behavioral_basis": [
+    {
+      "description": "Pinned upstream cocotb regression covers FIFO pipeline traffic, stress, reset behavior, and sideband handling. Evidence hash: 3d9186d7e7de1408d9ffaf130f6ea6b5a0b69558d15cebe56c28d881ee30e959.",
+      "kind": "upstream_tests",
+      "location": "artifacts/corpus-behavior/wave2-tier-a-12-v1/2a8ffc172c406c0e9482feef28372204409041e2fe3532475a778a6ae400a4b7/verilog-axis-axis-pipeline-fifo/result.json"
+    }
+  ],
+  "categories": [
+    "buffering_flow_control",
+    "pipeline_register_placement",
+    "state_control_queue"
+  ],
+  "compile_context": {
+    "black_boxes": [],
+    "build_commands": [
+      "yosys -m /opt/oss-cad-suite/share/yosys/plugins/slang.so -Q -p 'read_slang --top axis_pipeline_fifo corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v; hierarchy -check -top axis_pipeline_fifo; proc; check'"
+    ],
+    "clocks": [
+      {
+        "edge": "rising",
+        "name": "clk",
+        "period_ns": null
+      }
+    ],
+    "defines": [],
+    "filelist": null,
+    "frontend": "verilator+yosys-slang",
+    "frontend_version": "Verilator 5.047 devel rev v5.046-58-gb89d29cab (mod); Yosys 0.63+49 (git sha1 95d738edc, clang++ 18.1.8 -fPIC -O3)",
+    "generated_inputs": [],
+    "include_dirs": [],
+    "lint_commands": [
+      "verilator --lint-only --language 1800-2017 --Wall --Wno-fatal --top-module axis_pipeline_fifo corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v"
+    ],
+    "memories": [],
+    "parameters": {},
+    "resets": [
+      {
+        "name": "rst",
+        "polarity": "active_high",
+        "synchronous": true
+      }
+    ],
+    "sources": [
+      "rtl/axis_pipeline_fifo.v"
+    ],
+    "test_commands": [],
+    "top": "axis_pipeline_fifo"
+  },
+  "compile_context_hashes": {
+    "compile_context_hash": "94c80df569a904682fbd52b7dbc50ad027345e83cdd0c785d31ec8bfa1e059a8",
+    "filelist_sha256": null,
+    "generated_input_hashes": [],
+    "include_tree_hashes": []
+  },
+  "display_name": "verilog-axis axis_pipeline_fifo",
+  "document_type": "rtl-advisor.reference-manifest",
+  "lineage": {
+    "containing_design_ids": [
+      "alexforencich-verilog-axis"
+    ],
+    "design_lineage_id": "verilog-axis-axis-pipeline-fifo",
+    "repository_lineage_id": "alexforencich-verilog-axis",
+    "upstream_project_id": "alexforencich-verilog-axis"
+  },
+  "proof_contract": {
+    "assumptions": [
+      "Reset and protocol assumptions will be frozen before proof."
+    ],
+    "kind": "cycle_aligned_sequential_equivalence",
+    "latency_relation": "same_cycle",
+    "level": "P2",
+    "observables": [
+      "all top-level outputs"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "provenance": {
+    "canonical_url": "https://github.com/alexforencich/verilog-axis",
+    "license": {
+      "disposition": "conditional",
+      "expression": "MIT",
+      "sha256": "8ea57f95365e9b16a5b516f422b71269183a1ae53bab5878ae6d69039e58fe77",
+      "url": "https://github.com/alexforencich/verilog-axis/blob/48ff7a7e2ef782cf778d47910cf85835c64b1bce/COPYING"
+    },
+    "project": "alexforencich-verilog-axis",
+    "revision": "48ff7a7e2ef782cf778d47910cf85835c64b1bce",
+    "revision_kind": "commit"
+  },
+  "qualification": {
+    "reason": null,
+    "state": "behavior_baselined",
+    "status": "active"
+  },
+  "reference_id": "verilog-axis-axis-pipeline-fifo",
+  "schema": "rtl-advisor-reference-v1",
+  "schema_version": 1,
+  "semantic_hash": "f659f7d2e967c25b70c8212da021edf196f1cd3ed37415292d6a77cd38bb1ed4",
+  "source_hashes": [
+    {
+      "path": "rtl/axis_pipeline_fifo.v",
+      "sha256": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02"
+    }
+  ],
+  "split": "development",
+  "synthesis_profiles": [
+    "standard",
+    "stronger"
+  ],
+  "tier": "A"
+}

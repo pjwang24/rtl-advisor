@@ -1,0 +1,106 @@
+{
+  "behavioral_basis": [
+    {
+      "description": "Pre-registered upstream evidence location; reproduction is pending.",
+      "kind": "specification",
+      "location": "Bender.yml"
+    }
+  ],
+  "categories": [
+    "buffering_flow_control",
+    "pipeline_register_placement"
+  ],
+  "compile_context": {
+    "black_boxes": [],
+    "build_commands": [],
+    "clocks": [
+      {
+        "edge": "rising",
+        "name": "clk_i",
+        "period_ns": null
+      }
+    ],
+    "defines": [],
+    "filelist": null,
+    "frontend": null,
+    "frontend_version": null,
+    "generated_inputs": [],
+    "include_dirs": [],
+    "lint_commands": [],
+    "memories": [],
+    "parameters": {},
+    "resets": [
+      {
+        "name": "rst_ni",
+        "polarity": "active_low",
+        "synchronous": false
+      }
+    ],
+    "sources": [
+      "src/spill_register.sv"
+    ],
+    "test_commands": [],
+    "top": "spill_register"
+  },
+  "compile_context_hashes": {
+    "compile_context_hash": null,
+    "filelist_sha256": null,
+    "generated_input_hashes": [],
+    "include_tree_hashes": []
+  },
+  "display_name": "PULP common_cells spill_register",
+  "document_type": "rtl-advisor.reference-manifest",
+  "lineage": {
+    "containing_design_ids": [
+      "pulp-common-cells"
+    ],
+    "design_lineage_id": "pulp-common-cells-spill-register",
+    "repository_lineage_id": "pulp-common-cells",
+    "upstream_project_id": "pulp-common-cells"
+  },
+  "proof_contract": {
+    "assumptions": [
+      "Reset and protocol assumptions will be frozen before proof."
+    ],
+    "kind": "cycle_aligned_sequential_equivalence",
+    "latency_relation": "same_cycle",
+    "level": "P2",
+    "observables": [
+      "all top-level outputs"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "provenance": {
+    "canonical_url": "https://github.com/pulp-platform/common_cells",
+    "license": {
+      "disposition": "conditional",
+      "expression": "SHL-0.51 OR Apache-2.0",
+      "sha256": "6527a46225891b976fa94f634f6ee0cd22e1c7129d6f11c5c98c997627625fc7",
+      "url": "https://github.com/pulp-platform/common_cells/blob/1281545696eb3fcba50ec5b4275993476a3c710e/LICENSE"
+    },
+    "project": "pulp-common-cells",
+    "revision": "1281545696eb3fcba50ec5b4275993476a3c710e",
+    "revision_kind": "commit"
+  },
+  "qualification": {
+    "reason": null,
+    "state": "license_reviewed",
+    "status": "active"
+  },
+  "reference_id": "pulp-common-cells-spill-register",
+  "schema": "rtl-advisor-reference-v1",
+  "schema_version": 1,
+  "semantic_hash": "6aef6436a8b0a4ea1693da7889684b7a9dd39d43416c5385ab0744b8b5912b90",
+  "source_hashes": [
+    {
+      "path": "src/spill_register.sv",
+      "sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec"
+    }
+  ],
+  "split": "development",
+  "synthesis_profiles": [
+    "standard",
+    "stronger"
+  ],
+  "tier": "A"
+}

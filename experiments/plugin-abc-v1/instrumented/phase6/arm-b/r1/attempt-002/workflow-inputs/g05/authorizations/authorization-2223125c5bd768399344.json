@@ -1,0 +1,18 @@
+{
+  "authorization_id": "authorization-2223125c5bd768399344",
+  "authorized_through": "measure",
+  "basis": {
+    "kind": "direct_prompt",
+    "prompt_sha256": "2921a1f207133d5210ec84cf93931f9374bb1c3b697185082e72cb1bbf459832"
+  },
+  "candidate_selection": {
+    "mode": "first_eligible"
+  },
+  "document_type": "rtl-advisor.workflow.authorization",
+  "issued_at": "2026-09-02T05:15:34.705633Z",
+  "request_semantic_hash": "dbb4f32fb4ee80ca6d32b6a29d042d2744e5a681d29330ec5bd3e35365d5fa25",
+  "schema": "rtl-advisor-workflow-authorization-v1",
+  "schema_version": 1,
+  "semantic_hash": "cd299b5e1cd7e75a0a1d96a21403a66ab8796db1bfa00b6966e75e88a03f0aaa",
+  "workflow_id": "workflow-016afd9b69d6512c99c5"
+}

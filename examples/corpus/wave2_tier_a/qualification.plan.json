@@ -1,0 +1,138 @@
+{
+  "semantic_hash": "a85b09843f5233c86c336f14610cda51bca46006f2fbc25aa3589d1afabf4953",
+  "schema_version": 1,
+  "schema": "rtl-advisor-qualification-plan-v1",
+  "document_type": "rtl-advisor.qualification-plan",
+  "plan_id": "wave2-tier-a-qualification-v2",
+  "tranche_id": "wave2-tier-a-12-v1",
+  "tranche_semantic_hash": "ac85240050ea6045e033a7d2fdcf1ce125efa1e19cd6527688a1eb0571c6b475",
+  "tool_contract": {
+    "container_recipe": ".github/docker/mvp-tools.Dockerfile",
+    "container_tag": "rtl-advisor-mvp-tools:local",
+    "verilator_version": "5.046",
+    "yosys_version": "0.63+49",
+    "yosys_slang_plugin": "/opt/oss-cad-suite/share/yosys/plugins/slang.so",
+    "runner_path_mode": "workspace_relative",
+    "resume_blocked_after_tool_fix": true,
+    "build_passes": ["hierarchy -check", "proc", "check"],
+    "candidate_synthesis_enabled": false
+  },
+  "upstream_roots": {
+    "lowrisc-opentitan": "corpus/upstream/opentitan",
+    "pulp-common-cells": "corpus/upstream/common_cells",
+    "alexforencich-verilog-axis": "corpus/upstream/verilog-axis"
+  },
+  "references": [
+    {
+      "reference_id": "opentitan-prim-arbiter-ppc",
+      "top": "prim_arbiter_ppc",
+      "sources": [
+        "hw/ip/prim/rtl/prim_util_pkg.sv",
+        "hw/ip/prim/rtl/prim_leading_one_ppc.sv",
+        "hw/ip/prim/rtl/prim_arbiter_ppc.sv"
+      ],
+      "include_dirs": ["hw/ip/prim/rtl"],
+      "defines": ["SYNTHESIS"],
+      "parameters": {"N": 4}
+    },
+    {
+      "reference_id": "opentitan-prim-fifo-sync",
+      "top": "prim_fifo_sync",
+      "sources": [
+        "hw/ip/prim/rtl/prim_util_pkg.sv",
+        "hw/ip/prim/rtl/prim_count_pkg.sv",
+        "hw/ip/prim_generic/rtl/prim_flop.sv",
+        "hw/ip/prim/rtl/prim_count.sv",
+        "hw/ip/prim/rtl/prim_fifo_sync_cnt.sv",
+        "hw/ip/prim/rtl/prim_fifo_sync.sv"
+      ],
+      "include_dirs": ["hw/ip/prim/rtl"],
+      "defines": ["SYNTHESIS"],
+      "parameters": {}
+    },
+    {
+      "reference_id": "opentitan-prim-count",
+      "top": "prim_count",
+      "sources": [
+        "hw/ip/prim/rtl/prim_count_pkg.sv",
+        "hw/ip/prim_generic/rtl/prim_flop.sv",
+        "hw/ip/prim/rtl/prim_count.sv"
+      ],
+      "include_dirs": ["hw/ip/prim/rtl"],
+      "defines": ["SYNTHESIS"],
+      "parameters": {}
+    },
+    {
+      "reference_id": "opentitan-prim-packer-fifo",
+      "top": "prim_packer_fifo",
+      "sources": ["hw/ip/prim/rtl/prim_packer_fifo.sv"],
+      "include_dirs": ["hw/ip/prim/rtl"],
+      "defines": ["SYNTHESIS"],
+      "parameters": {}
+    },
+    {
+      "reference_id": "pulp-common-cells-spill-register",
+      "top": "spill_register",
+      "sources": ["src/spill_register_flushable.sv", "src/spill_register.sv"],
+      "include_dirs": ["include"],
+      "defines": ["SYNTHESIS"],
+      "parameters": {}
+    },
+    {
+      "reference_id": "pulp-common-cells-stream-register",
+      "top": "stream_register",
+      "sources": ["src/stream_register.sv"],
+      "include_dirs": ["include"],
+      "defines": ["SYNTHESIS"],
+      "parameters": {}
+    },
+    {
+      "reference_id": "pulp-common-cells-fifo-v3",
+      "top": "fifo_v3",
+      "sources": ["src/fifo_v3.sv"],
+      "include_dirs": ["include"],
+      "defines": ["SYNTHESIS"],
+      "parameters": {}
+    },
+    {
+      "reference_id": "pulp-common-cells-rr-arb-tree",
+      "top": "rr_arb_tree",
+      "sources": ["src/cf_math_pkg.sv", "src/lzc.sv", "src/rr_arb_tree.sv"],
+      "include_dirs": ["include"],
+      "defines": ["SYNTHESIS"],
+      "parameters": {"NumIn": 4}
+    },
+    {
+      "reference_id": "pulp-common-cells-stream-mux",
+      "top": "stream_mux",
+      "sources": ["src/cf_math_pkg.sv", "src/stream_mux.sv"],
+      "include_dirs": ["include"],
+      "defines": ["SYNTHESIS"],
+      "parameters": {"N_INP": 4}
+    },
+    {
+      "reference_id": "verilog-axis-axis-register",
+      "top": "axis_register",
+      "sources": ["rtl/axis_register.v"],
+      "include_dirs": [],
+      "defines": [],
+      "parameters": {}
+    },
+    {
+      "reference_id": "verilog-axis-axis-pipeline-register",
+      "top": "axis_pipeline_register",
+      "sources": ["rtl/axis_pipeline_register.v", "rtl/axis_register.v"],
+      "include_dirs": [],
+      "defines": [],
+      "parameters": {}
+    },
+    {
+      "reference_id": "verilog-axis-axis-pipeline-fifo",
+      "top": "axis_pipeline_fifo",
+      "sources": ["rtl/axis_pipeline_fifo.v"],
+      "include_dirs": [],
+      "defines": [],
+      "parameters": {}
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+   "creator": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)",
+   "invocation": "stat -json -tech cmos ",
+   "modules": {
+      "\\g05_mux_common_logic": {
+         "num_wires":         202,
+         "num_wire_bits":     262,
+         "num_pub_wires":     5,
+         "num_pub_wire_bits": 65,
+         "num_ports":         5,
+         "num_port_bits":     65,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         213,
+         "num_submodules":       0,
+         "num_cells_by_type": {
+            "$_AND_": 90,
+            "$_MUX_": 16,
+            "$_NOT_": 1,
+            "$_OR_": 44,
+            "$_XOR_": 62
+         },
+         "estimated_num_transistors": "1742"
+      }
+   },
+      "design": {
+         "num_wires":         202,
+         "num_wire_bits":     262,
+         "num_pub_wires":     5,
+         "num_pub_wire_bits": 65,
+         "num_ports":         5,
+         "num_port_bits":     65,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         213,
+         "num_submodules":       0,
+         "num_cells_by_type": {
+            "$_AND_": 90,
+            "$_MUX_": 16,
+            "$_NOT_": 1,
+            "$_OR_": 44,
+            "$_XOR_": 62
+         },
+         "estimated_num_transistors": "1742"
+      }
+}
+

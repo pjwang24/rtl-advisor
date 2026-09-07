@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from rtl_advisor.config import load_config
 from rtl_advisor.corpus import load_manifest
 from rtl_advisor.features_v21 import (
@@ -18,6 +20,7 @@ from rtl_advisor.rules_v21 import analyze_rules_v21
 MISS_MANIFEST = Path("corpus/heldout-v2/v2_dac48735a0bde7f3/manifest.json")
 
 
+@pytest.mark.local_evidence
 def test_v21_features_elaborate_kernel_and_preserve_zero_equality() -> None:
     config = load_config("rtl-advisor.toml")
     manifest = load_manifest(MISS_MANIFEST)
@@ -29,6 +32,7 @@ def test_v21_features_elaborate_kernel_and_preserve_zero_equality() -> None:
     assert extraction["feature_schema_hash"] == FEATURE_SCHEMA_HASH_V21
 
 
+@pytest.mark.local_evidence
 def test_v21_syntax_rule_recovers_frozen_comparator_miss() -> None:
     config = load_config("rtl-advisor.toml")
     manifest = load_manifest(MISS_MANIFEST)
@@ -43,6 +47,7 @@ def test_v21_syntax_rule_recovers_frozen_comparator_miss() -> None:
     assert findings[0]["rule_id"] == "comparator_selection.equality_to_zero_syntax.v21"
 
 
+@pytest.mark.local_evidence
 def test_v21_syntax_facts_recognize_signed_zero_casts() -> None:
     path = Path("corpus/calibration-v21/v21_2d5654156e2ca1fa/rtl/v0.sv")
     facts = extract_syntax_facts(

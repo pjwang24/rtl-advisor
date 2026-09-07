@@ -88,7 +88,10 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
 
 
 def _yosys_quote(path: Path) -> str:
-    return '"' + str(path).replace("\\", "\\\\").replace('"', '\\"') + '"'
+    raw = str(path)
+    if any(character in raw for character in ("\x00", "\r", "\n")):
+        raise SynthesisError("Yosys arguments may not contain control characters")
+    return '"' + raw.replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
 def _yosys_version(config: ProjectConfig) -> str:

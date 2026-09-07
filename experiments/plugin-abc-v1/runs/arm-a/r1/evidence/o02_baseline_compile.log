@@ -1,0 +1,14 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv; hierarchy -check -top prim_fifo_sync; synth -top prim_fifo_sync; check -assert; stat' --
+
+1. Executing Verilog-2005 frontend: corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv
+Parsing SystemVerilog input from `corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv' to AST representation.
+Generating RTLIL representation for module `\prim_fifo_sync'.
+corpus/upstream/opentitan/hw/ip/prim/rtl/prim_fifo_sync.sv:22: ERROR: Can't resolve function name `\prim_util_pkg::vbits'.

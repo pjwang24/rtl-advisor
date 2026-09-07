@@ -1,0 +1,217 @@
+{
+  "artifact_dir": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/formal",
+  "baseline_design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+  "candidate_design_hash": "2475f778cbe664233a357ca0c2aa24653f2c243590660194b493cdf11d7398df",
+  "candidate_id": "addcand_8f83706addf00e0d",
+  "compile_context": {
+    "baseline": {
+      "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+      "defines": [],
+      "filelists": [],
+      "include_trees": [],
+      "schema_version": 1,
+      "sources": [
+        {
+          "logical_id": "source:0000:g01_add8_left.sv",
+          "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+        }
+      ],
+      "top": "g01_add8_left"
+    },
+    "candidate": {
+      "compile_context_hash": "2de30f999a4b45a464f998a3e3d3686061f37881c68151893752b26c39cd60e6",
+      "defines": [],
+      "filelists": [],
+      "include_trees": [],
+      "schema_version": 1,
+      "sources": [
+        {
+          "logical_id": "source:0000:g01_add8_left.sv",
+          "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+        }
+      ],
+      "top": "g01_add8_left"
+    }
+  },
+  "document_type": "rtl-advisor.formal-result",
+  "finding_id": "addsite_9067dfe8e174e103",
+  "formal": {
+    "backend": "yosys-combinational-equiv-v1",
+    "command": [
+      "yosys",
+      "-Q",
+      "-s",
+      "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/formal/equivalence.ys"
+    ],
+    "detail": null,
+    "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/formal/equivalence.log",
+    "log_sha256": "147c1dac061089e03248cc769e6b83818f560b8037bbcbdbc4f93b9e4939b3f0",
+    "returncode": 0,
+    "script_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/formal/equivalence.ys",
+    "script_sha256": "f36fe027a848ebc6daa9119e05b071cfff18b250d90de5dbed4b7aac6b4422ac",
+    "semantics": "Yosys two-state bit-vector RTL equivalence for a self-contained combinational top; X/Z behavior is not proved",
+    "status": "passed",
+    "success_marker_seen": true,
+    "tool_identity": {
+      "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+      "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+      "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+    },
+    "tool_identity_after": {
+      "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+      "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+      "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+    },
+    "tool_identity_before": {
+      "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+      "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+      "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+    },
+    "tool_identity_error": null,
+    "yosys_path": "/opt/homebrew/Cellar/yosys/0.63/bin/yosys",
+    "yosys_sha256": "f50ea141ffe87aafd040010206f58360481b5edfb7252590bc4fa8322630a9e2",
+    "yosys_version": "Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)"
+  },
+  "limitations": [
+    "Yosys two-state bit-vector RTL equivalence for a self-contained combinational top; X/Z behavior is not proved"
+  ],
+  "lint": {
+    "pyslang": {
+      "baseline": {
+        "diagnostics": [],
+        "ok": true,
+        "status": "passed",
+        "version": "9.1.0"
+      },
+      "candidate": {
+        "diagnostics": [],
+        "ok": true,
+        "status": "passed",
+        "version": "9.1.0"
+      }
+    },
+    "status": "passed",
+    "verilator": {
+      "baseline": {
+        "blocking_warnings": [],
+        "command": [
+          "verilator",
+          "--lint-only",
+          "--language",
+          "1800-2017",
+          "--Wall",
+          "--Wno-fatal",
+          "--Wno-DECLFILENAME",
+          "--top-module",
+          "g01_add8_left",
+          "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv"
+        ],
+        "detail": null,
+        "identity": {
+          "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+          "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+          "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+        },
+        "identity_after": {
+          "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+          "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+          "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+        },
+        "identity_before": {
+          "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+          "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+          "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+        },
+        "identity_error": null,
+        "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/formal/baseline-verilator.log",
+        "log_sha256": "202adbe0ce7895aed7d659729d3d49e1b5dac1798df0470ded2f24f996e4dcf1",
+        "returncode": 0,
+        "status": "passed"
+      },
+      "candidate": {
+        "blocking_warnings": [],
+        "command": [
+          "verilator",
+          "--lint-only",
+          "--language",
+          "1800-2017",
+          "--Wall",
+          "--Wno-fatal",
+          "--Wno-DECLFILENAME",
+          "--top-module",
+          "g01_add8_left",
+          "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/design/sources/0000/g01_add8_left.sv"
+        ],
+        "detail": null,
+        "identity": {
+          "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+          "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+          "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+        },
+        "identity_after": {
+          "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+          "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+          "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+        },
+        "identity_before": {
+          "path": "/opt/homebrew/Cellar/verilator/5.046/bin/verilator",
+          "sha256": "93dde63802d895d64675984a6a8268a287211ed1abace90b3e0bc4320ed22bdb",
+          "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+        },
+        "identity_error": null,
+        "log_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/formal/candidate-verilator.log",
+        "log_sha256": "2c0487b4c64fba86c22031f4d2fdc7ce75d4b37dd17610146b0387ac6de58d9a",
+        "returncode": 0,
+        "status": "passed"
+      },
+      "version": "Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228"
+    }
+  },
+  "record_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/formal/formal.json",
+  "run_schema": "rtl-advisor-run-v1",
+  "safe": true,
+  "schema_version": 1,
+  "semantic_hash": "5510f3ecfc62b99acf163afce58f9a8b5f37eb3397e31917497292f06dca9ceb",
+  "source_integrity": {
+    "candidate": {
+      "compile_context": {
+        "compile_context_hash": "2de30f999a4b45a464f998a3e3d3686061f37881c68151893752b26c39cd60e6",
+        "defines": [],
+        "filelists": [],
+        "include_trees": [],
+        "schema_version": 1,
+        "sources": [
+          {
+            "logical_id": "source:0000:g01_add8_left.sv",
+            "sha256": "8ce49d843f5ae048eec561195361108f9ee60c67a810f6c5a36b6d0d88c486ca"
+          }
+        ],
+        "top": "g01_add8_left"
+      },
+      "mismatches": [],
+      "ok": true
+    },
+    "diff": {
+      "ok": true
+    },
+    "original": {
+      "compile_context": {
+        "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+        "defines": [],
+        "filelists": [],
+        "include_trees": [],
+        "schema_version": 1,
+        "sources": [
+          {
+            "logical_id": "source:0000:g01_add8_left.sv",
+            "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+          }
+        ],
+        "top": "g01_add8_left"
+      },
+      "mismatches": [],
+      "ok": true
+    }
+  },
+  "status": "formal_passed"
+}

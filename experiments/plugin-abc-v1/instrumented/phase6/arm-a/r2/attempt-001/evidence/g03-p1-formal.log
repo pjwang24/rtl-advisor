@@ -1,0 +1,365 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv; proc; opt; rename g03_mixed_safe_add gold; read_verilog -sv experiments/plugin-abc-v1/instrumented/phase6/arm-a/r2/attempt-001/candidates/g03-c1-balanced.sv; proc; opt; rename g03_mixed_safe_add gate; equiv_make gold gate equiv; hierarchy -top equiv; equiv_simple; equiv_status -assert' --
+
+1. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv' to AST representation.
+Generating RTLIL representation for module `\g03_mixed_safe_add'.
+Successfully finished Verilog frontend.
+
+2. Executing PROC pass (convert processes to netlists).
+
+2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv:8$4 in module g03_mixed_safe_add.
+Removed a total of 0 dead cases.
+
+2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 1 assignment to connection.
+
+2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~1 debug messages>
+
+2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\g03_mixed_safe_add.$proc$experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv:8$4'.
+     1/1: $1\picked[15:0]
+
+2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\g03_mixed_safe_add.\picked' from process `\g03_mixed_safe_add.$proc$experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv:8$4'.
+
+2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\g03_mixed_safe_add.$proc$experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv:8$4'.
+Removing empty process `g03_mixed_safe_add.$proc$experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv:8$4'.
+Cleaned up 1 empty switch.
+
+2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g03_mixed_safe_add.
+<suppressed ~1 debug messages>
+
+3. Executing OPT pass (performing simple optimizations).
+
+3.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g03_mixed_safe_add.
+
+3.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g03_mixed_safe_add'.
+Computing hashes of 7 cells of `\g03_mixed_safe_add'.
+Finding duplicate cells in `\g03_mixed_safe_add'.
+Removed a total of 0 cells.
+
+3.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g03_mixed_safe_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+3.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g03_mixed_safe_add.
+Performed a total of 0 changes.
+
+3.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g03_mixed_safe_add'.
+Computing hashes of 7 cells of `\g03_mixed_safe_add'.
+Finding duplicate cells in `\g03_mixed_safe_add'.
+Removed a total of 0 cells.
+
+3.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g03_mixed_safe_add..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+3.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g03_mixed_safe_add.
+
+3.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g03_mixed_safe_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+3.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g03_mixed_safe_add.
+Performed a total of 0 changes.
+
+3.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g03_mixed_safe_add'.
+Computing hashes of 7 cells of `\g03_mixed_safe_add'.
+Finding duplicate cells in `\g03_mixed_safe_add'.
+Removed a total of 0 cells.
+
+3.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g03_mixed_safe_add..
+
+3.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g03_mixed_safe_add.
+
+3.16. Finished fast OPT passes. (There is nothing left to do.)
+Renaming module \g03_mixed_safe_add to \gold.
+
+4. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/instrumented/phase6/arm-a/r2/attempt-001/candidates/g03-c1-balanced.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/instrumented/phase6/arm-a/r2/attempt-001/candidates/g03-c1-balanced.sv' to AST representation.
+Generating RTLIL representation for module `\g03_mixed_safe_add'.
+Successfully finished Verilog frontend.
+
+5. Executing PROC pass (convert processes to netlists).
+
+5.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$experiments/plugin-abc-v1/instrumented/phase6/arm-a/r2/attempt-001/candidates/g03-c1-balanced.sv:8$13 in module g03_mixed_safe_add.
+Removed a total of 0 dead cases.
+
+5.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 1 assignment to connection.
+
+5.4. Executing PROC_INIT pass (extract init attributes).
+
+5.5. Executing PROC_ARST pass (detect async resets in processes).
+
+5.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~1 debug messages>
+
+5.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\g03_mixed_safe_add.$proc$experiments/plugin-abc-v1/instrumented/phase6/arm-a/r2/attempt-001/candidates/g03-c1-balanced.sv:8$13'.
+     1/1: $1\picked[15:0]
+
+5.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\g03_mixed_safe_add.\picked' from process `\g03_mixed_safe_add.$proc$experiments/plugin-abc-v1/instrumented/phase6/arm-a/r2/attempt-001/candidates/g03-c1-balanced.sv:8$13'.
+
+5.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+5.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+5.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\g03_mixed_safe_add.$proc$experiments/plugin-abc-v1/instrumented/phase6/arm-a/r2/attempt-001/candidates/g03-c1-balanced.sv:8$13'.
+Removing empty process `g03_mixed_safe_add.$proc$experiments/plugin-abc-v1/instrumented/phase6/arm-a/r2/attempt-001/candidates/g03-c1-balanced.sv:8$13'.
+Cleaned up 1 empty switch.
+
+5.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g03_mixed_safe_add.
+<suppressed ~1 debug messages>
+Optimizing module gold.
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g03_mixed_safe_add.
+Optimizing module gold.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g03_mixed_safe_add'.
+Computing hashes of 7 cells of `\g03_mixed_safe_add'.
+Finding duplicate cells in `\g03_mixed_safe_add'.
+Finding identical cells in module `\gold'.
+Computing hashes of 7 cells of `\gold'.
+Finding duplicate cells in `\gold'.
+Removed a total of 0 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g03_mixed_safe_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \gold..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g03_mixed_safe_add.
+  Optimizing cells in module \gold.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g03_mixed_safe_add'.
+Computing hashes of 7 cells of `\g03_mixed_safe_add'.
+Finding duplicate cells in `\g03_mixed_safe_add'.
+Finding identical cells in module `\gold'.
+Computing hashes of 7 cells of `\gold'.
+Finding duplicate cells in `\gold'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g03_mixed_safe_add..
+Finding unused cells or wires in module \gold..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g03_mixed_safe_add.
+Optimizing module gold.
+
+6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g03_mixed_safe_add..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \gold..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g03_mixed_safe_add.
+  Optimizing cells in module \gold.
+Performed a total of 0 changes.
+
+6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g03_mixed_safe_add'.
+Computing hashes of 7 cells of `\g03_mixed_safe_add'.
+Finding duplicate cells in `\g03_mixed_safe_add'.
+Finding identical cells in module `\gold'.
+Computing hashes of 7 cells of `\gold'.
+Finding duplicate cells in `\gold'.
+Removed a total of 0 cells.
+
+6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g03_mixed_safe_add..
+Finding unused cells or wires in module \gold..
+
+6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g03_mixed_safe_add.
+Optimizing module gold.
+
+6.16. Finished fast OPT passes. (There is nothing left to do.)
+Renaming module \g03_mixed_safe_add to \gate.
+
+7. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: picked_gold (\picked_gold), picked_gate (\picked_gate) -> picked
+Presumably equivalent wires: sum_gold (\sum_gold), sum_gate (\sum_gate) -> sum
+Presumably equivalent wires: sel_gold (\sel_gold), sel_gate (\sel_gate) -> sel
+Presumably equivalent wires: d_gold (\d_gold), d_gate (\d_gate) -> d
+Presumably equivalent wires: c_gold (\c_gold), c_gate (\c_gate) -> c
+Presumably equivalent wires: b_gold (\b_gold), b_gate (\b_gate) -> b
+Presumably equivalent wires: a_gold (\a_gold), a_gate (\a_gate) -> a
+
+8. Executing HIERARCHY pass (managing design hierarchy).
+
+8.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+8.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+9. Executing EQUIV_SIMPLE pass.
+Found 32 unproven $equiv cells (2 groups) in equiv:
+ Grouping SAT models for \sum:
+  Trying to prove $equiv for \sum [0]:ezsat
+ success!
+  Trying to prove $equiv for \sum [1]:ezsat
+ success!
+  Trying to prove $equiv for \sum [2]:ezsat
+ success!
+  Trying to prove $equiv for \sum [3]:ezsat
+ success!
+  Trying to prove $equiv for \sum [4]:ezsat
+ success!
+  Trying to prove $equiv for \sum [5]:ezsat
+ success!
+  Trying to prove $equiv for \sum [6]:ezsat
+ success!
+  Trying to prove $equiv for \sum [7]:ezsat
+ success!
+  Trying to prove $equiv for \sum [8]:ezsat
+ success!
+  Trying to prove $equiv for \sum [9]:ezsat
+ success!
+  Trying to prove $equiv for \sum [10]:ezsat
+ success!
+  Trying to prove $equiv for \sum [11]:ezsat
+ success!
+  Trying to prove $equiv for \sum [12]:ezsat
+ success!
+  Trying to prove $equiv for \sum [13]:ezsat
+ success!
+  Trying to prove $equiv for \sum [14]:ezsat
+ success!
+  Trying to prove $equiv for \sum [15]:ezsat
+ success!
+ Grouping SAT models for \picked:
+  Trying to prove $equiv for \picked [0]:ezsat
+ success!
+  Trying to prove $equiv for \picked [1]:ezsat
+ success!
+  Trying to prove $equiv for \picked [2]:ezsat
+ success!
+  Trying to prove $equiv for \picked [3]:ezsat
+ success!
+  Trying to prove $equiv for \picked [4]:ezsat
+ success!
+  Trying to prove $equiv for \picked [5]:ezsat
+ success!
+  Trying to prove $equiv for \picked [6]:ezsat
+ success!
+  Trying to prove $equiv for \picked [7]:ezsat
+ success!
+  Trying to prove $equiv for \picked [8]:ezsat
+ success!
+  Trying to prove $equiv for \picked [9]:ezsat
+ success!
+  Trying to prove $equiv for \picked [10]:ezsat
+ success!
+  Trying to prove $equiv for \picked [11]:ezsat
+ success!
+  Trying to prove $equiv for \picked [12]:ezsat
+ success!
+  Trying to prove $equiv for \picked [13]:ezsat
+ success!
+  Trying to prove $equiv for \picked [14]:ezsat
+ success!
+  Trying to prove $equiv for \picked [15]:ezsat
+ success!
+Proved 32 previously unproven $equiv cells.
+
+10. Executing EQUIV_STATUS pass.
+Found 32 $equiv cells in equiv:
+  Of those cells 32 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: bbd86936a2, CPU: user 0.05s system 0.01s, MEM: 15.42 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 54% 1x equiv_simple (0 sec), 18% 8x opt_expr (0 sec), ...

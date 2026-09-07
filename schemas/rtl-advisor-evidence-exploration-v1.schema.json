@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-evidence-exploration-v1.schema.json",
+  "title": "RTL Advisor Evidence Exploration V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "schema",
+    "document_type",
+    "exploration_id",
+    "status",
+    "read_only",
+    "dataset_semantic_hash",
+    "filters",
+    "summary",
+    "charts",
+    "classification_authority",
+    "dashboard",
+    "artifacts",
+    "limitations",
+    "command",
+    "semantic_hash"
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "countRows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["category", "count"],
+        "properties": {
+          "category": {"type": "string", "minLength": 1},
+          "count": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workflow_ids",
+        "run_ids",
+        "profiles",
+        "objectives",
+        "classifications",
+        "decisions",
+        "transformations",
+        "source_kinds"
+      ],
+      "properties": {
+        "workflow_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "run_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "profiles": {"type": "array", "uniqueItems": true, "items": {"enum": ["standard", "stronger"]}},
+        "objectives": {"type": "array", "uniqueItems": true, "items": {"enum": ["timing", "area", "balanced"]}},
+        "classifications": {"type": "array", "uniqueItems": true, "items": {"enum": ["improved", "neutral", "regressed"]}},
+        "decisions": {"type": "array", "uniqueItems": true, "items": {"enum": ["measured_improvement", "synthesis_handles", "flow_dependent", "regression"]}},
+        "transformations": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "source_kinds": {"type": "array", "uniqueItems": true, "items": {"enum": ["agent_v2_run", "family_study"]}}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-evidence-exploration-v1"},
+    "document_type": {"const": "rtl-advisor.evidence.exploration"},
+    "exploration_id": {"type": "string", "pattern": "^exploration-[0-9a-f]{20}$"},
+    "status": {"enum": ["ready", "empty", "partial"]},
+    "read_only": {"const": true},
+    "dataset_semantic_hash": {"$ref": "#/$defs/sha256"},
+    "filters": {"$ref": "#/$defs/filters"},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_group_count",
+        "workflow_count",
+        "run_count",
+        "measured_candidate_count",
+        "profile_observation_count",
+        "formal_safe_observation_count",
+        "invalid_source_count",
+        "decision_counts",
+        "classification_counts"
+      ],
+      "properties": {
+        "evidence_group_count": {"type": "integer", "minimum": 0},
+        "workflow_count": {"type": "integer", "minimum": 0},
+        "run_count": {"type": "integer", "minimum": 0},
+        "measured_candidate_count": {"type": "integer", "minimum": 0},
+        "profile_observation_count": {"type": "integer", "minimum": 0},
+        "formal_safe_observation_count": {"type": "integer", "minimum": 0},
+        "invalid_source_count": {"type": "integer", "minimum": 0},
+        "decision_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 1}},
+        "classification_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 1}}
+      }
+    },
+    "charts": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["chart_id", "family", "type", "title"],
+        "properties": {
+          "chart_id": {"type": "string", "minLength": 1},
+          "family": {"enum": ["relationship", "comparison"]},
+          "type": {"enum": ["scatter", "bar"]},
+          "title": {"type": "string", "minLength": 1},
+          "point_count": {"type": "integer", "minimum": 0},
+          "data_ref": {"type": "object"},
+          "encoding": {"type": "object"},
+          "units": {"type": "object"},
+          "rows": {"$ref": "#/$defs/countRows"},
+          "unit": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "classification_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile", "candidate"],
+      "properties": {
+        "profile": {"const": "rtl_advisor.mvp_measure.classify_recipe"},
+        "candidate": {"const": "rtl_advisor.mvp_measure.aggregate_measurements"}
+      }
+    },
+    "dashboard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["route", "api"],
+      "properties": {
+        "route": {"const": "/?view=explore"},
+        "api": {"const": "/api/analytics/v1"}
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exploration", "dataset", "dashboard_index"],
+      "properties": {
+        "exploration": {"type": "string", "minLength": 1},
+        "dataset": {"type": "string", "minLength": 1},
+        "dashboard_index": {"type": "string", "minLength": 1}
+      }
+    },
+    "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "command": {"type": "array", "items": {"type": "string"}},
+    "semantic_hash": {"$ref": "#/$defs/sha256"}
+  }
+}

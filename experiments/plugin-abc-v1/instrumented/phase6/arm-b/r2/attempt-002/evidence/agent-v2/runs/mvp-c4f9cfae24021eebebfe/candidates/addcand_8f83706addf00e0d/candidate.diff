@@ -1,0 +1,9 @@
+--- /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv
++++ /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/design/sources/0000/g01_add8_left.sv
+@@ -2,5 +2,5 @@
+   input  logic [7:0] a, b, c, d,
+   output logic [7:0] y
+ );
+-  assign y = ((a + b) + c) + d;
++  assign y = ((a + b) + (c + d));
+ endmodule

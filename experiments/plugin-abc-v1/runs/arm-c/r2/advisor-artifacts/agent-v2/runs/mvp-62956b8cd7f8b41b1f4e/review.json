@@ -1,0 +1,84 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-62956b8cd7f8b41b1f4e/input.json",
+    "review": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-62956b8cd7f8b41b1f4e/review.json",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-62956b8cd7f8b41b1f4e"
+  },
+  "candidate_generation_allowed": false,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/stream_mux.sv",
+    "--objective",
+    "balanced",
+    "--top",
+    "stream_mux",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 0,
+    "excluded_site_count": 1
+  },
+  "decision": "unsupported",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "ef1713a6b7daee15e13c85d2ed4172870481bc33e2f07281076411be6d5b5c41",
+    "model_used": false,
+    "rules_only": true
+  },
+  "exclusions": [
+    {
+      "detail": "parameterized top modules are outside MVP scope",
+      "exclusion_id": "addexclude_ef972fecc44ebc78",
+      "reason_code": "parameterized_top",
+      "source": {
+        "end_offset": 1767,
+        "file": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/stream_mux.sv",
+        "sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+        "start_offset": 817
+      },
+      "status": "excluded",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "findings": [],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "e8e0ced43c060a7742d7943037dd4ef758960e92c4d7b56395ec2cb3f096d385",
+    "defines": [],
+    "design_hash": "2f4bc9a1375a730ef9e4bae052fd2fcd0a570c6ee72d73548d2d56b0f83027f0",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/stream_mux.sv",
+        "sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/stream_mux.sv",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "stream_mux"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-62956b8cd7f8b41b1f4e",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "7e0173acb09442fcad4cf366dca489244dd30f6b10a6ca7e3af32f5679dfc22d",
+  "status": "completed"
+}

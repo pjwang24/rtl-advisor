@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "e5228080ef1412fa1f6690443198cb343578c2a6113fb47ccfbc04cdaf693d92",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:g01_add8_left.sv",
+        "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+      }
+    ],
+    "top": "g01_add8_left"
+  },
+  "defines": [],
+  "design_hash": "bfc26cde16c2a9ca11c00ebc9512edc62b743ec63fdac39377d95ac9d7b0d640",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv",
+      "sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "45cda69cc2e269e07c5747fad9ea23368c3025054ddd2b4154c53bba755b9929",
+  "top": "g01_add8_left"
+}

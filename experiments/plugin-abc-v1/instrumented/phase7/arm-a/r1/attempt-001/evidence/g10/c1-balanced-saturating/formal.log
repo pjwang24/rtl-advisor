@@ -1,0 +1,320 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv; rename g10_function_boundary gold; read_verilog -sv candidates/g10/c1-balanced-saturating/g10_function_boundary.sv; rename g10_function_boundary gate; proc; equiv_make gold gate equiv; hierarchy -top equiv; prep -top equiv; equiv_simple -undef; equiv_status -assert' --
+
+1. Executing Verilog-2005 frontend: /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv
+Parsing SystemVerilog input from `/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv' to AST representation.
+Generating RTLIL representation for module `\g10_function_boundary'.
+Successfully finished Verilog frontend.
+Renaming module \g10_function_boundary to \gold.
+
+2. Executing Verilog-2005 frontend: candidates/g10/c1-balanced-saturating/g10_function_boundary.sv
+Parsing SystemVerilog input from `candidates/g10/c1-balanced-saturating/g10_function_boundary.sv' to AST representation.
+Generating RTLIL representation for module `\g10_function_boundary'.
+Successfully finished Verilog frontend.
+Renaming module \g10_function_boundary to \gate.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 30 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$53'.
+Creating decoders for process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$45'.
+Creating decoders for process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$37'.
+Creating decoders for process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$23'.
+Creating decoders for process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$15'.
+Creating decoders for process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$7'.
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$33.$result' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$53'.
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$36.$result' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$53'.
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$36.lhs' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$53'.
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$36.rhs' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$53'.
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$36.wide' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$53'.
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$32.$result' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$45'.
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$35.$result' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$45'.
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$35.lhs' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$45'.
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$35.rhs' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$45'.
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$35.wide' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$45'.
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$31.$result' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$37'.
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$34.$result' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$37'.
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$34.lhs' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$37'.
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$34.rhs' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$37'.
+No latch inferred for signal `\gate.\sat_add$func$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$34.wide' from process `\gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$37'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$3.$result' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$23'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$6.$result' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$23'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$6.lhs' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$23'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$6.rhs' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$23'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$6.wide' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$23'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$2.$result' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$15'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$5.$result' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$15'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$5.lhs' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$15'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$5.rhs' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$15'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$5.wide' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$15'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$1.$result' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$7'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$4.$result' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$7'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$4.lhs' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$7'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$4.rhs' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$7'.
+No latch inferred for signal `\gold.\sat_add$func$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$4.wide' from process `\gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$7'.
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$53'.
+Removing empty process `gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$45'.
+Removing empty process `gate.$proc$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:15$37'.
+Removing empty process `gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$23'.
+Removing empty process `gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$15'.
+Removing empty process `gold.$proc$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:15$7'.
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module gate.
+Optimizing module gold.
+
+4. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: y_gold ($ternary$/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv:12$30_Y_gold), y_gate ($ternary$candidates/g10/c1-balanced-saturating/g10_function_boundary.sv:12$60_Y_gate) -> y
+Presumably equivalent wires: d_gold (\d_gold), d_gate (\d_gate) -> d
+Presumably equivalent wires: c_gold (\c_gold), c_gate (\c_gate) -> c
+Presumably equivalent wires: b_gold (\b_gold), b_gate (\b_gate) -> b
+Presumably equivalent wires: a_gold (\a_gold), a_gate (\a_gate) -> a
+
+5. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+5.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+6. Executing PREP pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+6.3. Executing FUTURE pass.
+
+6.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+6.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \equiv..
+Removed 0 unused cells and 44 unused wires.
+<suppressed ~1 debug messages>
+
+6.6. Executing CHECK pass (checking for obvious problems).
+Checking module equiv...
+Found and reported 0 problems.
+
+6.7. Executing OPT pass (performing simple optimizations).
+
+6.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+6.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\equiv'.
+Computing hashes of 20 cells of `\equiv'.
+Finding duplicate cells in `\equiv'.
+Computing hashes of 19 cells of `\equiv'.
+Finding duplicate cells in `\equiv'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+6.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \equiv..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~12 debug messages>
+
+6.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \equiv.
+Performed a total of 0 changes.
+
+6.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\equiv'.
+Computing hashes of 19 cells of `\equiv'.
+Finding duplicate cells in `\equiv'.
+Computing hashes of 18 cells of `\equiv'.
+Finding duplicate cells in `\equiv'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+6.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \equiv..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+6.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+6.7.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.7.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \equiv..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~10 debug messages>
+
+6.7.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \equiv.
+Performed a total of 0 changes.
+
+6.7.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\equiv'.
+Computing hashes of 18 cells of `\equiv'.
+Finding duplicate cells in `\equiv'.
+Removed a total of 0 cells.
+
+6.7.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \equiv..
+
+6.7.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+6.7.14. Finished fast OPT passes. (There is nothing left to do.)
+
+6.8. Executing WREDUCE pass (reducing word size of cells).
+
+6.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \equiv..
+
+6.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.11. Executing OPT pass (performing simple optimizations).
+
+6.11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module equiv.
+
+6.11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\equiv'.
+Computing hashes of 18 cells of `\equiv'.
+Finding duplicate cells in `\equiv'.
+Removed a total of 0 cells.
+
+6.11.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \equiv..
+
+6.11.4. Finished fast OPT passes.
+
+6.12. Executing SORT pass.
+
+6.13. Printing statistics.
+
+=== equiv ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       41 wires
+      339 wire bits
+       36 public wires
+      294 public wire bits
+        5 ports
+       40 port bits
+       18 cells
+        5   $add
+        8   $equiv
+        5   $mux
+
+6.14. Executing CHECK pass (checking for obvious problems).
+Checking module equiv...
+Found and reported 0 problems.
+
+7. Executing EQUIV_SIMPLE pass.
+Found 8 unproven $equiv cells (1 groups) in equiv:
+ Grouping SAT models for \y:
+  Trying to prove $equiv for \y [0]:ezsat
+ success!
+  Trying to prove $equiv for \y [1]:ezsat
+ success!
+  Trying to prove $equiv for \y [2]:ezsat
+ success!
+  Trying to prove $equiv for \y [3]:ezsat
+ success!
+  Trying to prove $equiv for \y [4]:ezsat
+ success!
+  Trying to prove $equiv for \y [5]:ezsat
+ success!
+  Trying to prove $equiv for \y [6]:ezsat
+ success!
+  Trying to prove $equiv for \y [7]:ezsat
+ success!
+Proved 8 previously unproven $equiv cells.
+
+8. Executing EQUIV_STATUS pass.
+Found 8 $equiv cells in equiv:
+  Of those cells 8 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: fd76d759ac, CPU: user 0.15s system 0.15s, MEM: 15.11 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 61% 1x equiv_simple (0 sec), 9% 7x opt_expr (0 sec), ...

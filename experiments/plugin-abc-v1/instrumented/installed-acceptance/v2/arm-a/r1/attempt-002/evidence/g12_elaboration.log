@@ -1,0 +1,81 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv; hierarchy -top g12_two_stage_pipeline; proc; check' --
+
+1. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv' to AST representation.
+Generating RTLIL representation for module `\g12_two_stage_pipeline'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \g12_two_stage_pipeline
+
+2.2. Analyzing design hierarchy..
+Top module:  \g12_two_stage_pipeline
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:13$1 in module g12_two_stage_pipeline.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 4 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\g12_two_stage_pipeline.$proc$experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:13$1'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\g12_two_stage_pipeline.$proc$experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:13$1'.
+     1/4: $0\valid_o[0:0]
+     2/4: $0\y_o[15:0]
+     3/4: $0\valid_q[0:0]
+     4/4: $0\sum_q[15:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\g12_two_stage_pipeline.\valid_o' using process `\g12_two_stage_pipeline.$proc$experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:13$1'.
+  created $adff cell `$procdff$9' with positive edge clock and positive level reset.
+Creating register for signal `\g12_two_stage_pipeline.\y_o' using process `\g12_two_stage_pipeline.$proc$experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:13$1'.
+  created $adff cell `$procdff$14' with positive edge clock and positive level reset.
+Creating register for signal `\g12_two_stage_pipeline.\sum_q' using process `\g12_two_stage_pipeline.$proc$experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:13$1'.
+  created $adff cell `$procdff$19' with positive edge clock and positive level reset.
+Creating register for signal `\g12_two_stage_pipeline.\valid_q' using process `\g12_two_stage_pipeline.$proc$experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:13$1'.
+  created $adff cell `$procdff$24' with positive edge clock and positive level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `g12_two_stage_pipeline.$proc$experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv:13$1'.
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g12_two_stage_pipeline.
+<suppressed ~8 debug messages>
+
+4. Executing CHECK pass (checking for obvious problems).
+Checking module g12_two_stage_pipeline...
+Found and reported 0 problems.
+
+End of script. Logfile hash: 102c49758e, CPU: user 0.03s system 0.01s, MEM: 12.33 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 36% 2x read_verilog (0 sec), 27% 1x opt_expr (0 sec), ...

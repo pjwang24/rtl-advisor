@@ -1,0 +1,34 @@
+[tasks]
+positive
+bad_reset
+bad_state
+bad_grant
+
+[options]
+mode prove
+depth 16
+expect pass
+
+[engines]
+abc pdr
+
+[script]
+plugin -i /opt/oss-cad-suite/share/yosys/plugins/slang.so
+read_slang --top prim_arbiter_ppc -G N=4 -G DW=8 -D SYNTHESIS -I . prim_util_pkg.sv prim_leading_one_ppc.sv prim_arbiter_ppc.sv
+read_slang --top prim_arbiter_tree -G N=4 -G DW=8 -D SYNTHESIS -I . prim_arbiter_tree.sv
+positive: read_verilog -formal -sv opentitan_arbiter_p2_miter.sv
+bad_reset: read_verilog -formal -sv -D MUTATION_KIND=1 opentitan_arbiter_p2_miter.sv
+bad_state: read_verilog -formal -sv -D MUTATION_KIND=2 opentitan_arbiter_p2_miter.sv
+bad_grant: read_verilog -formal -sv -D MUTATION_KIND=3 opentitan_arbiter_p2_miter.sv
+prep -top opentitan_arbiter_p2_miter
+
+[files]
+corpus/upstream/opentitan/hw/ip/prim/rtl/prim_assert.sv
+corpus/upstream/opentitan/hw/ip/prim/rtl/prim_assert_dummy_macros.svh
+corpus/upstream/opentitan/hw/ip/prim/rtl/prim_assert_sec_cm.svh
+corpus/upstream/opentitan/hw/ip/prim/rtl/prim_flop_macros.sv
+corpus/upstream/opentitan/hw/ip/prim/rtl/prim_util_pkg.sv
+corpus/upstream/opentitan/hw/ip/prim/rtl/prim_leading_one_ppc.sv
+corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_ppc.sv
+corpus/upstream/opentitan/hw/ip/prim/rtl/prim_arbiter_tree.sv
+examples/formal/p2/opentitan_arbiter_p2_miter.sv

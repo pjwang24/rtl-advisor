@@ -1,0 +1,4 @@
+======== ABC command line "read_blif /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-a/r1/attempt-002/evidence/mapped/g04_candidate.blif; print_stats"
+Warning: Constant-0 drivers added to 5 non-driven nets in network "g04_mixed_procedural_add":
+$auto$maccmap.cc:114:fulladd$89.Y[0], $auto$maccmap.cc:240:synth$90.P[1], $auto$maccmap.cc:114:fulladd$86.Y[0], $auto$maccmap.cc:114:fulladd$89.X[0] ...
+[1;37mg04_mixed_procedural_add      :[0m i/o =   65/   16  lat =    0  nd =   210  edge =    441  cube =   571  lev = 14

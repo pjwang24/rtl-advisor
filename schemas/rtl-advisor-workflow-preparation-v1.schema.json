@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-workflow-preparation-v1.schema.json",
+  "title": "RTL Advisor Workflow Preparation V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "schema",
+    "document_type",
+    "status",
+    "workflow_id",
+    "request_semantic_hash",
+    "authorization_semantic_hash",
+    "capabilities_semantic_hash",
+    "authorized_through",
+    "artifacts",
+    "command",
+    "semantic_hash"
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-workflow-preparation-v1"},
+    "document_type": {"const": "rtl-advisor.workflow.preparation"},
+    "status": {"const": "prepared"},
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^workflow-[0-9a-f]{20}$"
+    },
+    "request_semantic_hash": {"$ref": "#/$defs/sha256"},
+    "authorization_semantic_hash": {"$ref": "#/$defs/sha256"},
+    "capabilities_semantic_hash": {"$ref": "#/$defs/sha256"},
+    "authorized_through": {
+      "enum": ["review", "candidate", "verify", "measure"]
+    },
+    "artifacts": {
+      "type": "object",
+      "required": ["request", "authorization", "capabilities"],
+      "propertyNames": {"pattern": "^[a-z][a-z0-9_]*$"},
+      "additionalProperties": {"type": "string", "minLength": 1}
+    },
+    "command": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "semantic_hash": {"$ref": "#/$defs/sha256"}
+  }
+}

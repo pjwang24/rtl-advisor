@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-corpus-tranche-validation-v1.schema.json",
+  "title": "RTL Advisor Corpus Tranche Validation V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "schema", "document_type", "validation_id", "status", "read_only", "tranche", "artifacts", "command", "semantic_hash"],
+  "$defs": {"sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-corpus-tranche-validation-v1"},
+    "document_type": {"const": "rtl-advisor.corpus.tranche-validation"},
+    "validation_id": {"type": "string", "pattern": "^tranche-validation-[0-9a-f]{20}$"},
+    "status": {"const": "passed"},
+    "read_only": {"const": true},
+    "tranche": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tranche_id", "semantic_hash", "tier", "reference_count", "upstream_project_count", "category_count", "candidate_ppa_inspected_before_freeze"],
+      "properties": {
+        "tranche_id": {"type": "string", "minLength": 1},
+        "semantic_hash": {"$ref": "#/$defs/sha256"},
+        "tier": {"enum": ["A", "B", "C", "D"]},
+        "reference_count": {"type": "integer", "minimum": 1},
+        "upstream_project_count": {"type": "integer", "minimum": 1},
+        "category_count": {"type": "integer", "minimum": 1},
+        "candidate_ppa_inspected_before_freeze": {"const": false}
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["validation", "tranche_lock"],
+      "properties": {
+        "validation": {"type": "string", "minLength": 1},
+        "tranche_lock": {"type": "string", "minLength": 1}
+      }
+    },
+    "command": {"type": "array", "items": {"type": "string"}},
+    "semantic_hash": {"$ref": "#/$defs/sha256"}
+  }
+}

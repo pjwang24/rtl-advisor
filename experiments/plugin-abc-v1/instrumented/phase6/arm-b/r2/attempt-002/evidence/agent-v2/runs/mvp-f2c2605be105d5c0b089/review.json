@@ -1,0 +1,85 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-f2c2605be105d5c0b089/input.json",
+    "review": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-f2c2605be105d5c0b089/review.json",
+    "root": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-f2c2605be105d5c0b089"
+  },
+  "candidate_generation_allowed": false,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/rtl-advisor/corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v",
+    "--objective",
+    "balanced",
+    "--top",
+    "axis_pipeline_fifo",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 0,
+    "excluded_site_count": 1
+  },
+  "decision": "unsupported",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "e8c8481a0b785117998a9d58d52c377830069d5146db96fe5d2db4967ba8d0fa",
+    "model_used": false,
+    "rules_only": true,
+    "transformation_registry_hash": "ede9d27234c7c826bf115798b8df00774cc3e987a73be174c190ef6f99c28370"
+  },
+  "exclusions": [
+    {
+      "detail": "parameterized top modules are outside MVP scope",
+      "exclusion_id": "addexclude_75e737a142f65926",
+      "reason_code": "parameterized_top",
+      "source": {
+        "end_offset": 10352,
+        "file": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v",
+        "sha256": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02",
+        "start_offset": 1188
+      },
+      "status": "excluded",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "findings": [],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "2d5fd630730b60c42a41d58061dcf4e261edb07163f66044ab031448e59896a0",
+    "defines": [],
+    "design_hash": "73ff44054916235c47a5893bba3477419fb780377f73298820291aee3d5283c3",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v",
+        "sha256": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/verilog-axis/rtl/axis_pipeline_fifo.v",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "axis_pipeline_fifo"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-f2c2605be105d5c0b089",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "3ba071f4f79a4dd586f0be40a31f3b799a2169e9074d84f4e4b29324e11a0621",
+  "status": "completed"
+}

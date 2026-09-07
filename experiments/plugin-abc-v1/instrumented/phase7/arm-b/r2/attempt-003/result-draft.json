@@ -1,0 +1,272 @@
+{
+  "schema": "rtl-advisor-plugin-abc-arm-result-v1",
+  "experiment_id": "plugin-abc-v1",
+  "arm": "B",
+  "repetition": 2,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "manifest_sha256": "9a66873f7cd820f2aa2e31a20d99d961e3aa80e8e735d9613a55bdb0e09f3dc2",
+  "cases": [
+    {
+      "case_id": "g01",
+      "source_sha256": "6d0567dc6d51a61a375d96afb0318456aed98864fe8b97ffb0ae739163389f68",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv:5:14-5:31"],
+      "rationale": "action=no_change; final_state=synthesis_handles; unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree; formal_status=formal_passed; measurement_status=measured; profiles: standard=neutral, stronger=neutral.",
+      "candidates": [{
+        "candidate_id": "addcand_8f83706addf00e0d",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/release-candidate-jobs4-v1/artifacts/workflows-v1/workflow-6eb04148ae3e719a40a5/digests/b28b20faa42959fd9e9fb2c4084622921106e57f60bb9adf5b75b50f0f86a39a.json",
+        "formal_status": "formal_passed",
+        "measurement_status": "measured",
+        "final_state": "synthesis_handles",
+        "evidence_paths": ["/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/release-candidate-jobs4-v1/artifacts/workflows-v1/workflow-6eb04148ae3e719a40a5/digests/b28b20faa42959fd9e9fb2c4084622921106e57f60bb9adf5b75b50f0f86a39a.json"]
+      }],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g02",
+      "source_sha256": "6b6a194bed066969259d9b93a18469c0bba26a7d89ff2a803f820294289c854c",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g02_add32_five.sv:5:14-5:37"],
+      "rationale": "action=no_change; final_state=synthesis_handles; unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree; formal_status=formal_passed; measurement_status=measured; profiles: standard=neutral, stronger=neutral.",
+      "candidates": [{
+        "candidate_id": "addcand_e03c7a8ef495a458",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/release-candidate-jobs4-v1/artifacts/workflows-v1/workflow-33b20e7be45a7b3e3091/digests/7807af9149299acb3384e3d5e5b810eecb434427a32998c4ec6b8107d6b2dd77.json",
+        "formal_status": "formal_passed",
+        "measurement_status": "measured",
+        "final_state": "synthesis_handles",
+        "evidence_paths": ["/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/release-candidate-jobs4-v1/artifacts/workflows-v1/workflow-33b20e7be45a7b3e3091/digests/7807af9149299acb3384e3d5e5b810eecb434427a32998c4ec6b8107d6b2dd77.json"]
+      }],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g03",
+      "source_sha256": "30162d495549647c477decd0b691b5e2dcb18b9b56edd3bd000851e511097998",
+      "decision": "no_change",
+      "scope_claim": "finding_only",
+      "source_locations": ["/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv:7:16-7:33"],
+      "rationale": "action=no_change; final_state=synthesis_handles; unsigned equal-width combinational addition chain can be rewritten as a deterministic balanced tree; formal_status=formal_passed; measurement_status=measured; profiles: standard=neutral, stronger=neutral.",
+      "candidates": [{
+        "candidate_id": "addcand_a0f170b7a9ad761e",
+        "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/release-candidate-jobs4-v1/artifacts/workflows-v1/workflow-361b33a05a7b99dc3d0d/digests/acb55b88d9a3e28b2aada258612671b7801e366d7e0aad320fdf98737fb6f35d.json",
+        "formal_status": "formal_passed",
+        "measurement_status": "measured",
+        "final_state": "synthesis_handles",
+        "evidence_paths": ["/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/release-candidate-jobs4-v1/artifacts/workflows-v1/workflow-361b33a05a7b99dc3d0d/digests/acb55b88d9a3e28b2aada258612671b7801e366d7e0aad320fdf98737fb6f35d.json"]
+      }],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g04",
+      "source_sha256": "d41c31a3112e798bd67ab057e52043949e3f0b0ed10526be7e62daaa74fa2dfc",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g05",
+      "source_sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g06",
+      "source_sha256": "66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g07",
+      "source_sha256": "fb0edeead88d4382e1ccb2d1fe79bc76dc62a7c6c6d7f57540c5a6033f7f93a2",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g08",
+      "source_sha256": "b012fa81c56e0e2a101f605b9b8f00de337063c29d9217c8ffd020b767372d6d",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g09",
+      "source_sha256": "c1bbfbc8ffc8ea0b18fdfa3ddaa621171e513d51a285aebde8181059ac7a1ff0",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g10",
+      "source_sha256": "1c6e1897b1d3edb5da2142d414fe3991523a6159dfa6228512c6acbd09342ca5",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g11",
+      "source_sha256": "1c7e7a24c9db1fca9787798b355b2d9fca354646df1e056c229c658a3a8d36c6",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "g12",
+      "source_sha256": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o01",
+      "source_sha256": "20c831d4b8b8d7d9ef87bcd24f1b6dd0c5a4db95acc8ce1feb0ac75505016e99",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o02",
+      "source_sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o03",
+      "source_sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o04",
+      "source_sha256": "99aeb7564474111dc6662488c9f4ca6b788723e449b128d08ac54f8fc2da5cd2",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o05",
+      "source_sha256": "97bf85128f538c54c749896b8eee5fcfe4b27c16845d2a17990979a63b09f2ec",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o06",
+      "source_sha256": "2e0e5b6d09ce4ade0881938ee042dcbc78438638fa2592338a374f88a3c27304",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o07",
+      "source_sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o08",
+      "source_sha256": "f72bc188ea8253230a722bfb6436ab31b6e41c26020fa4ba4eebd93025984f7e",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o09",
+      "source_sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o10",
+      "source_sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o11",
+      "source_sha256": "89bcac460e3822dbbed3f2dbd4d9902faac1262d9dcad867b39c97a6f4402fcc",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    },
+    {
+      "case_id": "o12",
+      "source_sha256": "a7cdccbf905c3f95d4a626fe77d84879a09c3f472dffc5ea2eb7acc9ba113c02",
+      "decision": "unsupported",
+      "scope_claim": "whole_case",
+      "source_locations": [],
+      "rationale": "action=unsupported; final_state=unsupported; The requested input is outside the supported deterministic rules; formal_status=not_run; measurement_status=not_run; profiles: none.",
+      "candidates": [],
+      "evidence_complete": true
+    }
+  ]
+}

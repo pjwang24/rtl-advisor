@@ -1,0 +1,14 @@
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g07_width_truncation.sv"
+prep -top g07_width_truncation
+flatten
+design -stash gold
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-a/r1/candidates/g07_c1.sv"
+prep -top g07_width_truncation
+flatten
+design -stash gate
+design -copy-from gold -as gold g07_width_truncation
+design -copy-from gate -as gate g07_width_truncation
+equiv_make gold gate equiv
+prep -top equiv
+equiv_simple -seq 1
+equiv_status -assert

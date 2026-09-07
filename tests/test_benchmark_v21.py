@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from rtl_advisor.benchmark_v21 import (
     aggregate_scores_v21,
     benchmark_run_plan,
@@ -85,6 +87,7 @@ def test_v21_direction_coverage_denominator_is_recommended_metric_slots() -> Non
     assert metrics["micro"]["direction"]["coverage"] == 1 / 3
 
 
+@pytest.mark.local_evidence
 def test_v21_run_and_model_call_counts_remain_frozen() -> None:
     suite = json.loads(Path("corpus/heldout-v21/suite.json").read_text())
     assert len(benchmark_run_plan(suite)) == 480

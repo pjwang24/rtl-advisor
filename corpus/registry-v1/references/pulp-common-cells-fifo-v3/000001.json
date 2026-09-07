@@ -1,0 +1,106 @@
+{
+  "behavioral_basis": [
+    {
+      "description": "Pre-registered upstream evidence location; reproduction is pending.",
+      "kind": "upstream_tests",
+      "location": "formal/fifo_v3.sby"
+    }
+  ],
+  "categories": [
+    "buffering_flow_control",
+    "state_control_queue"
+  ],
+  "compile_context": {
+    "black_boxes": [],
+    "build_commands": [],
+    "clocks": [
+      {
+        "edge": "rising",
+        "name": "clk_i",
+        "period_ns": null
+      }
+    ],
+    "defines": [],
+    "filelist": null,
+    "frontend": null,
+    "frontend_version": null,
+    "generated_inputs": [],
+    "include_dirs": [],
+    "lint_commands": [],
+    "memories": [],
+    "parameters": {},
+    "resets": [
+      {
+        "name": "rst_ni",
+        "polarity": "active_low",
+        "synchronous": false
+      }
+    ],
+    "sources": [
+      "src/fifo_v3.sv"
+    ],
+    "test_commands": [],
+    "top": "fifo_v3"
+  },
+  "compile_context_hashes": {
+    "compile_context_hash": null,
+    "filelist_sha256": null,
+    "generated_input_hashes": [],
+    "include_tree_hashes": []
+  },
+  "display_name": "PULP common_cells fifo_v3",
+  "document_type": "rtl-advisor.reference-manifest",
+  "lineage": {
+    "containing_design_ids": [
+      "pulp-common-cells"
+    ],
+    "design_lineage_id": "pulp-common-cells-fifo-v3",
+    "repository_lineage_id": "pulp-common-cells",
+    "upstream_project_id": "pulp-common-cells"
+  },
+  "proof_contract": {
+    "assumptions": [
+      "Reset and protocol assumptions will be frozen before proof."
+    ],
+    "kind": "cycle_aligned_sequential_equivalence",
+    "latency_relation": "same_cycle",
+    "level": "P2",
+    "observables": [
+      "all top-level outputs"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "provenance": {
+    "canonical_url": "https://github.com/pulp-platform/common_cells",
+    "license": {
+      "disposition": "conditional",
+      "expression": "SHL-0.51 OR Apache-2.0",
+      "sha256": "6527a46225891b976fa94f634f6ee0cd22e1c7129d6f11c5c98c997627625fc7",
+      "url": "https://github.com/pulp-platform/common_cells/blob/1281545696eb3fcba50ec5b4275993476a3c710e/LICENSE"
+    },
+    "project": "pulp-common-cells",
+    "revision": "1281545696eb3fcba50ec5b4275993476a3c710e",
+    "revision_kind": "commit"
+  },
+  "qualification": {
+    "reason": null,
+    "state": "license_reviewed",
+    "status": "active"
+  },
+  "reference_id": "pulp-common-cells-fifo-v3",
+  "schema": "rtl-advisor-reference-v1",
+  "schema_version": 1,
+  "semantic_hash": "f95b1b072ad89eb84f606c2116ebf8f9616966243df86225691cdcfc3b94daa7",
+  "source_hashes": [
+    {
+      "path": "src/fifo_v3.sv",
+      "sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc"
+    }
+  ],
+  "split": "development",
+  "synthesis_profiles": [
+    "standard",
+    "stronger"
+  ],
+  "tier": "A"
+}

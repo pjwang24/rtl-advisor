@@ -1,0 +1,16 @@
+Raw EDA: Yosys 0.63, ABC LUT4 mapping.
+
+Structure-preserving flow: read_verilog; hierarchy; proc; flatten; opt; techmap; opt; abc -lut 4; clean; stat; ltp.
+Aggressive arithmetic flow: read_verilog; synth -flatten -noabc; abc -lut 4; clean; stat; ltp.
+
+Columns are baseline LUTs/depth -> candidate LUTs/depth.
+g01 structure 45/8 -> 44/7; aggressive 40/6 -> 40/6.
+g02 structure 312/25 -> 307/24; aggressive 275/23 -> 275/23.
+g03 structure 139/13 -> 135/12; aggressive 127/12 -> 127/12.
+g04 structure 121/14 -> 121/13; aggressive 112/12 -> 112/12.
+g05 structure 78/12 -> 46/11; aggressive 46/11 -> 46/11.
+g06 structure 7/2 -> 7/2; aggressive 6/2 -> 7/2.
+g07 structure 48/8 -> 51/7; aggressive 43/8 -> 43/8.
+g08 structure 105/13 -> 108/12; aggressive 94/12 -> 94/12.
+
+All eight candidate equivalence runs passed. Recommendations are limited to g01-g05 because each is Pareto-better in the structure-preserving flow and neutral in the aggressive flow. g06 regresses area. g07 and g08 exchange area for depth and therefore are not changes under the balanced objective.

@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-corpus-coverage-v1.schema.json",
+  "title": "RTL Advisor Corpus Coverage V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "schema",
+    "document_type",
+    "coverage_id",
+    "status",
+    "read_only",
+    "counting_unit",
+    "registry",
+    "filters",
+    "population",
+    "breakdowns",
+    "coverage_gaps",
+    "quality_flags",
+    "limitations",
+    "artifacts",
+    "command",
+    "semantic_hash"
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "countRows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["category", "count"],
+        "properties": {
+          "category": {"type": "string", "minLength": 1},
+          "count": {"type": "integer", "minimum": 0}
+        }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-corpus-coverage-v1"},
+    "document_type": {"const": "rtl-advisor.corpus.coverage"},
+    "coverage_id": {"type": "string", "pattern": "^coverage-[0-9a-f]{20}$"},
+    "status": {"enum": ["ready", "empty"]},
+    "read_only": {"const": true},
+    "counting_unit": {"const": "independent_design_lineage"},
+    "registry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root", "schema", "snapshot_semantic_hash"],
+      "properties": {
+        "root": {"type": "string", "minLength": 1},
+        "schema": {"const": "rtl-advisor-corpus-v1"},
+        "snapshot_semantic_hash": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "filters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tiers", "categories", "splits", "qualification_states", "qualification_statuses"],
+      "properties": {
+        "tiers": {"type": "array", "uniqueItems": true, "items": {"enum": ["A", "B", "C", "D"]}},
+        "categories": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "splits": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "qualification_states": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "qualification_statuses": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+      }
+    },
+    "population": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "independent_design_lineage_count",
+        "repository_lineage_count",
+        "containing_design_count",
+        "reference_record_count",
+        "qualified_design_lineage_count",
+        "variant_record_count",
+        "parameter_variant_count",
+        "naive_reference_plus_variant_count",
+        "naive_to_lineage_ratio"
+      ],
+      "properties": {
+        "independent_design_lineage_count": {"type": "integer", "minimum": 0},
+        "repository_lineage_count": {"type": "integer", "minimum": 0},
+        "containing_design_count": {"type": "integer", "minimum": 0},
+        "reference_record_count": {"type": "integer", "minimum": 0},
+        "qualified_design_lineage_count": {"type": "integer", "minimum": 0},
+        "variant_record_count": {"type": "integer", "minimum": 0},
+        "parameter_variant_count": {"type": "integer", "minimum": 0},
+        "naive_reference_plus_variant_count": {"type": "integer", "minimum": 0},
+        "naive_to_lineage_ratio": {"type": ["number", "null"], "minimum": 0}
+      }
+    },
+    "breakdowns": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tiers", "categories", "splits", "qualification_states", "qualification_statuses", "proof_levels", "upstream_projects", "variant_origins"],
+      "properties": {
+        "tiers": {"$ref": "#/$defs/countRows"},
+        "categories": {"$ref": "#/$defs/countRows"},
+        "splits": {"$ref": "#/$defs/countRows"},
+        "qualification_states": {"$ref": "#/$defs/countRows"},
+        "qualification_statuses": {"$ref": "#/$defs/countRows"},
+        "proof_levels": {"$ref": "#/$defs/countRows"},
+        "upstream_projects": {"$ref": "#/$defs/countRows"},
+        "variant_origins": {"$ref": "#/$defs/countRows"}
+      }
+    },
+    "coverage_gaps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["missing_tiers", "missing_categories", "unassigned_split_count", "not_reference_qualified_count"],
+      "properties": {
+        "missing_tiers": {"type": "array", "uniqueItems": true, "items": {"enum": ["A", "B", "C", "D"]}},
+        "missing_categories": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "unassigned_split_count": {"type": "integer", "minimum": 0},
+        "not_reference_qualified_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "quality_flags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "severity", "count", "message"],
+        "properties": {
+          "code": {"type": "string", "minLength": 1},
+          "severity": {"enum": ["low", "medium", "high", "critical"]},
+          "count": {"type": "integer", "minimum": 0},
+          "message": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coverage"],
+      "properties": {"coverage": {"type": "string", "minLength": 1}}
+    },
+    "command": {"type": "array", "items": {"type": "string"}},
+    "semantic_hash": {"$ref": "#/$defs/sha256"}
+  }
+}

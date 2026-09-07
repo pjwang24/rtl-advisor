@@ -1,0 +1,24 @@
+Case: g06
+Baseline SHA-256: 66994157674f3bfdecb558a82d23c677e36747ea6524cfb643254207141d4669
+Candidate SHA-256: 08d8220b573b11587e8237c04c921c3fb6b31a09c7cae972988508cdd219828e
+Tools: Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2)
+
+Formal equivalence:
+  Command: yosys -s g06_equiv.ys
+  Result: PASS
+  Proven outputs: index[2:0], valid
+  Yosys result: 4 proven $equiv cells, 0 unproven; equivalence successfully proven.
+
+Generic two-input-gate mapping:
+  Commands: yosys -s g06_measure_original.ys; yosys -s g06_measure_candidate.ys
+  Mapping script: strash; dc2; map; print_stats
+  Gate set: AND, OR, XOR, MUX, and automatically included NOT
+
+  Baseline:  area 80.00, delay 5.00, levels 5, nodes 22, edges 40
+             6 AND, 4 NOT, 12 OR
+  Candidate: area 86.00, delay 7.00, levels 7, nodes 24, edges 43
+             8 AND, 5 NOT, 11 OR
+
+Disposition: candidate is equivalent but regresses both generic area and delay;
+keep the baseline RTL. These generic units are suitable for the tie-break only
+and are not a substitute for target-library PPA.

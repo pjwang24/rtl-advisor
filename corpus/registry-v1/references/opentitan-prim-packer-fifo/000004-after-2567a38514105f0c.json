@@ -1,0 +1,115 @@
+{
+  "behavioral_basis": [
+    {
+      "description": "Pre-registered upstream evidence location; reproduction is pending.",
+      "kind": "upstream_tests",
+      "location": "hw/ip/prim/fpv/prim_packer_fpv.core"
+    }
+  ],
+  "categories": [
+    "buffering_flow_control",
+    "state_control_queue"
+  ],
+  "compile_context": {
+    "black_boxes": [],
+    "build_commands": [],
+    "clocks": [
+      {
+        "edge": "rising",
+        "name": "clk_i",
+        "period_ns": null
+      }
+    ],
+    "defines": [
+      "SYNTHESIS"
+    ],
+    "filelist": null,
+    "frontend": null,
+    "frontend_version": null,
+    "generated_inputs": [],
+    "include_dirs": [
+      "hw/ip/prim/rtl"
+    ],
+    "lint_commands": [],
+    "memories": [],
+    "parameters": {},
+    "resets": [
+      {
+        "name": "rst_ni",
+        "polarity": "active_low",
+        "synchronous": false
+      }
+    ],
+    "sources": [
+      "hw/ip/prim/rtl/prim_packer_fifo.sv"
+    ],
+    "test_commands": [],
+    "top": "prim_packer_fifo"
+  },
+  "compile_context_hashes": {
+    "compile_context_hash": "edd602647d7188d91bbb63e5dd2f2dc1cefcc75b381741b1e83980aeaa962395",
+    "filelist_sha256": null,
+    "generated_input_hashes": [],
+    "include_tree_hashes": [
+      {
+        "path": "hw/ip/prim/rtl",
+        "sha256": "8da7012ae4918319b3156552e22a5eea7c199dc7c5e203067d67fc93226d3bff"
+      }
+    ]
+  },
+  "display_name": "OpenTitan prim_packer_fifo",
+  "document_type": "rtl-advisor.reference-manifest",
+  "lineage": {
+    "containing_design_ids": [
+      "lowrisc-opentitan"
+    ],
+    "design_lineage_id": "opentitan-prim-packer-fifo",
+    "repository_lineage_id": "lowrisc-opentitan",
+    "upstream_project_id": "lowrisc-opentitan"
+  },
+  "proof_contract": {
+    "assumptions": [
+      "Reset and protocol assumptions will be frozen before proof."
+    ],
+    "kind": "cycle_aligned_sequential_equivalence",
+    "latency_relation": "same_cycle",
+    "level": "P2",
+    "observables": [
+      "all top-level outputs"
+    ],
+    "schema": "rtl-advisor-proof-v1"
+  },
+  "provenance": {
+    "canonical_url": "https://github.com/lowRISC/opentitan",
+    "license": {
+      "disposition": "conditional",
+      "expression": "Apache-2.0",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://github.com/lowRISC/opentitan/blob/99fb7bd3b2330a1bda61b1d3382198d0c7fee8d7/LICENSE"
+    },
+    "project": "lowrisc-opentitan",
+    "revision": "99fb7bd3b2330a1bda61b1d3382198d0c7fee8d7",
+    "revision_kind": "commit"
+  },
+  "qualification": {
+    "reason": null,
+    "state": "source_pinned",
+    "status": "active"
+  },
+  "reference_id": "opentitan-prim-packer-fifo",
+  "schema": "rtl-advisor-reference-v1",
+  "schema_version": 1,
+  "semantic_hash": "206fbea6d284b0f3b0654846fc76c26e88b68bfd017dbfaca5df100932893bd9",
+  "source_hashes": [
+    {
+      "path": "hw/ip/prim/rtl/prim_packer_fifo.sv",
+      "sha256": "99aeb7564474111dc6662488c9f4ca6b788723e449b128d08ac54f8fc2da5cd2"
+    }
+  ],
+  "split": "development",
+  "synthesis_profiles": [
+    "standard",
+    "stronger"
+  ],
+  "tier": "A"
+}

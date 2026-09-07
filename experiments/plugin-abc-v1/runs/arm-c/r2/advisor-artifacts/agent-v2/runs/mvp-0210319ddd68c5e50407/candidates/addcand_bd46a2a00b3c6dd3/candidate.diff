@@ -1,0 +1,11 @@
+--- /Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv
++++ /Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/design/sources/0000/g03_mixed_safe_add.sv
+@@ -4,7 +4,7 @@
+   output logic [15:0] sum,
+   output logic [15:0] picked
+ );
+-  assign sum = ((a + b) + c) + d;
++  assign sum = ((a + b) + (c + d));
+   always_comb begin
+     case (sel)
+       2'd0: picked = a;

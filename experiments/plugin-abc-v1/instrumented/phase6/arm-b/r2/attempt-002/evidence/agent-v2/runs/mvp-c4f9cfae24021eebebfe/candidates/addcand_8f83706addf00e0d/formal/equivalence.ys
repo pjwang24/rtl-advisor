@@ -1,0 +1,14 @@
+read_verilog -sv "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv"
+prep -top g01_add8_left
+design -stash baseline_design
+design -reset
+read_verilog -sv "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-c4f9cfae24021eebebfe/candidates/addcand_8f83706addf00e0d/design/sources/0000/g01_add8_left.sv"
+prep -top g01_add8_left
+design -stash candidate_design
+design -reset
+design -copy-from baseline_design -as gold g01_add8_left
+design -copy-from candidate_design -as gate g01_add8_left
+equiv_make gold gate equiv
+hierarchy -check -top equiv
+equiv_simple
+equiv_status -assert

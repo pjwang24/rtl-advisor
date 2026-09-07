@@ -1,0 +1,39 @@
+{
+  "artifacts": {
+    "events": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/source-pin-canary/attempt-004/codex-events.jsonl",
+    "result": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/source-pin-canary/attempt-004/result.json",
+    "stderr": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/source-pin-canary/attempt-004/codex-stderr.log"
+  },
+  "attempt": 4,
+  "diagnostics": {
+    "agent_message_bytes": 72,
+    "command_categories": {},
+    "command_count": 0,
+    "command_output_bytes": 0,
+    "command_wave_count": 0,
+    "output_bytes": 72
+  },
+  "document_type": "rtl-advisor.plugin-source-pin-canary",
+  "provenance": {
+    "skill_path": "/Users/peter/Desktop/rtl-advisor/plugins/rtl-advisor/skills/analyze-rtl",
+    "skill_sha256": "508e5f39d943cb1997c7c487739a8cbdb56e9666d3a9b3c51d36f5efd48387f9",
+    "skill_source": "workspace_path"
+  },
+  "result": {
+    "batch_supported": true,
+    "skill_name": "analyze-rtl",
+    "source_pin_ok": true
+  },
+  "schema": "rtl-advisor-plugin-source-pin-canary-result-v1",
+  "schema_version": 1,
+  "status": "passed",
+  "thread_id": "01a067f4-31c6-7ea3-b0d7-9128d884ddf9",
+  "usage": {
+    "cache_write_input_tokens": 0,
+    "cached_input_tokens": 0,
+    "input_tokens": 15670,
+    "output_tokens": 30,
+    "reasoning_output_tokens": 0
+  },
+  "wall_time_seconds": 6.519
+}

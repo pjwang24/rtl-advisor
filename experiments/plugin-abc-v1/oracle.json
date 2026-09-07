@@ -1,0 +1,31 @@
+{
+  "schema": "rtl-advisor-plugin-abc-oracle-v1",
+  "experiment_id": "plugin-abc-v1",
+  "note": "Evaluator-only. Do not expose to arm agents.",
+  "cases": [
+    {"case_id":"g01","expected_scope":"mvp_supported","known_action":"evaluate_candidate","reason":"Unbalanced unsigned equal-width continuous addition chain."},
+    {"case_id":"g02","expected_scope":"mvp_supported","known_action":"evaluate_candidate","reason":"Unbalanced unsigned equal-width continuous addition chain."},
+    {"case_id":"g03","expected_scope":"mvp_supported","known_action":"evaluate_candidate","reason":"Eligible continuous addition is independent of the procedural mux."},
+    {"case_id":"g04","expected_scope":"broader_codex_only","known_action":"no_unproven_recommendation","reason":"Adder is inside procedural logic and outside the MVP rewriter."},
+    {"case_id":"g05","expected_scope":"broader_codex_only","known_action":"evaluate_candidate","reason":"Common addend can be factored across the mux; candidate still requires proof and synthesis."},
+    {"case_id":"g06","expected_scope":"broader_codex_only","known_action":"no_unproven_recommendation","reason":"Priority encoding is outside the MVP and no pre-approved rewrite is supplied."},
+    {"case_id":"g07","expected_scope":"semantic_trap","known_action":"no_change","reason":"The explicit 8-bit partial sum is a truncation boundary."},
+    {"case_id":"g08","expected_scope":"semantic_trap","known_action":"no_change","reason":"Signed arithmetic is outside the released width-safe family."},
+    {"case_id":"g09","expected_scope":"no_change","known_action":"no_change","reason":"The four-term tree is already balanced."},
+    {"case_id":"g10","expected_scope":"semantic_trap","known_action":"no_change","reason":"Saturating addition is not associative."},
+    {"case_id":"g11","expected_scope":"sequential_boundary","known_action":"no_unproven_recommendation","reason":"A stateful ready-valid stage requires a sequential contract."},
+    {"case_id":"g12","expected_scope":"sequential_boundary","known_action":"no_unproven_recommendation","reason":"Pipeline changes require latency-aware sequential proof."},
+    {"case_id":"o01","expected_scope":"sequential_boundary","known_action":"no_unproven_recommendation","behavior_disposition":"qualify"},
+    {"case_id":"o02","expected_scope":"sequential_boundary","known_action":"no_unproven_recommendation","behavior_disposition":"blocked"},
+    {"case_id":"o03","expected_scope":"sequential_boundary","known_action":"no_unproven_recommendation","behavior_disposition":"blocked"},
+    {"case_id":"o04","expected_scope":"sequential_boundary","known_action":"no_unproven_recommendation","behavior_disposition":"blocked"},
+    {"case_id":"o05","expected_scope":"sequential_boundary","known_action":"no_unproven_recommendation","behavior_disposition":"qualify"},
+    {"case_id":"o06","expected_scope":"sequential_boundary","known_action":"no_unproven_recommendation","behavior_disposition":"qualify"},
+    {"case_id":"o07","expected_scope":"sequential_boundary","known_action":"no_unproven_recommendation","behavior_disposition":"qualify"},
+    {"case_id":"o08","expected_scope":"sequential_boundary","known_action":"no_unproven_recommendation","behavior_disposition":"qualify"},
+    {"case_id":"o09","expected_scope":"broader_codex_only","known_action":"no_unproven_recommendation","behavior_disposition":"blocked"},
+    {"case_id":"o10","expected_scope":"sequential_boundary","known_action":"no_unproven_recommendation","behavior_disposition":"qualify"},
+    {"case_id":"o11","expected_scope":"sequential_boundary","known_action":"no_unproven_recommendation","behavior_disposition":"qualify"},
+    {"case_id":"o12","expected_scope":"sequential_boundary","known_action":"no_unproven_recommendation","behavior_disposition":"qualify"}
+  ]
+}

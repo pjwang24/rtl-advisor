@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "e8e0ced43c060a7742d7943037dd4ef758960e92c4d7b56395ec2cb3f096d385",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:stream_mux.sv",
+        "sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f"
+      }
+    ],
+    "top": "stream_mux"
+  },
+  "defines": [],
+  "design_hash": "2f4bc9a1375a730ef9e4bae052fd2fcd0a570c6ee72d73548d2d56b0f83027f0",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/common_cells/src/stream_mux.sv",
+      "sha256": "865fe908c738eb54ad1721666d877a1cccb698f975fbd3385f71b948426d245f"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "ef1713a6b7daee15e13c85d2ed4172870481bc33e2f07281076411be6d5b5c41",
+  "top": "stream_mux"
+}

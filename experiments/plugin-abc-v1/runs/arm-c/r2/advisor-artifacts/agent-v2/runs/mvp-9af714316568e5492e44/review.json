@@ -1,0 +1,84 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-9af714316568e5492e44/input.json",
+    "review": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-9af714316568e5492e44/review.json",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-9af714316568e5492e44"
+  },
+  "candidate_generation_allowed": false,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv",
+    "--objective",
+    "balanced",
+    "--top",
+    "g12_two_stage_pipeline",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 0,
+    "excluded_site_count": 1
+  },
+  "decision": "unsupported",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "07cb41a9c3e38c942a5eb2256bfb0495eaf48110c47d6f611e38632da72c4fde",
+    "model_used": false,
+    "rules_only": true
+  },
+  "exclusions": [
+    {
+      "detail": "parameterized top modules are outside MVP scope",
+      "exclusion_id": "addexclude_287302896db925ad",
+      "reason_code": "parameterized_top",
+      "source": {
+        "end_offset": 634,
+        "file": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv",
+        "sha256": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d",
+        "start_offset": 0
+      },
+      "status": "excluded",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "findings": [],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "c1cf8e87ccd526279ef688a24b6c0aebf7dc064dcfeeed89821da269a928f177",
+    "defines": [],
+    "design_hash": "91dc53e790e22fb7d603eeb2d5771d9f9072f4a456ea17ab5520186b95040262",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv",
+        "sha256": "c20e3160ee51844f00d6ac50b71817dfe21e9d1bb9672e72210885fbf880d58d"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g12_two_stage_pipeline.sv",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "g12_two_stage_pipeline"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-9af714316568e5492e44",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "d32a4ba92e0e285e2a28ac4dc5bacb0f3dd66a67e9c55e6f8b1ce35eb4144d70",
+  "status": "completed"
+}

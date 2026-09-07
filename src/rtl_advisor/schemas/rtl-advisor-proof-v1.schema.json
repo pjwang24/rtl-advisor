@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-proof-v1.schema.json",
+  "title": "RTL Advisor Proof Contract V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "level",
+    "kind",
+    "latency_relation",
+    "assumptions",
+    "observables"
+  ],
+  "properties": {
+    "schema": {"const": "rtl-advisor-proof-v1"},
+    "level": {"enum": ["P0", "P1", "P2", "P3", "P4", "P5", "P6"]},
+    "kind": {"type": "string", "minLength": 1},
+    "latency_relation": {
+      "enum": [
+        "not_applicable",
+        "combinational",
+        "same_cycle",
+        "fixed_offset",
+        "transaction_ordered",
+        "structural_partition"
+      ]
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "observables": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    }
+  }
+}

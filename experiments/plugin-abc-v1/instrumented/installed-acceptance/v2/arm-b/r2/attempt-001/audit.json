@@ -1,0 +1,179 @@
+{
+  "after_immutable_file_count": 765,
+  "batch_commands": [
+    "/bin/zsh -lc 'python3 /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py --config /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/candidate/rtl-advisor.toml workflow batch /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-b/r2/attempt-001/batch-manifest.json --authorized-through measure --prompt-file /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-b/r2/attempt-001/prompt.txt --first-eligible --jobs 4'"
+  ],
+  "batch_results": [
+    {
+      "decision": "synthesis_handles",
+      "formal_status": "formal_passed",
+      "item_id": "g01",
+      "measurement_status": "completed"
+    },
+    {
+      "decision": "synthesis_handles",
+      "formal_status": "formal_passed",
+      "item_id": "g02",
+      "measurement_status": "completed"
+    },
+    {
+      "decision": "synthesis_handles",
+      "formal_status": "formal_passed",
+      "item_id": "g03",
+      "measurement_status": "completed"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g04",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g05",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g06",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g07",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g08",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g09",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g10",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g11",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "g12",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o01",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o02",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o03",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o04",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o05",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o06",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o07",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o08",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o09",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o10",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o11",
+      "measurement_status": "not_run"
+    },
+    {
+      "decision": "unsupported",
+      "formal_status": "not_run",
+      "item_id": "o12",
+      "measurement_status": "not_run"
+    }
+  ],
+  "checks": {
+    "compact_batch_digest": true,
+    "complete_batch_evidence": true,
+    "explicit_measure_authorization": true,
+    "formal_before_measurement": true,
+    "installed_runner_unchanged": true,
+    "installed_skill_loaded_once": true,
+    "no_redundant_plugin_artifact_loading": true,
+    "one_installed_batch_call": true,
+    "prior_immutable_evidence_preserved": true,
+    "source_and_harness_unchanged": true
+  },
+  "commands": [
+    "/bin/zsh -lc \"wc -l /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/SKILL.md /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/packets/arm-b-r2.json && sed -n '1,260p' /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/SKILL.md && sed -n '1,320p' /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/packets/arm-b-r2.json\"",
+    "/bin/zsh -lc \"sed -n '321,380p' /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/packets/arm-b-r2.json\"",
+    "/bin/zsh -lc 'find /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl -maxdepth 3 -type f -print'",
+    "/bin/zsh -lc 'find /Users/peter/Desktop/rtl-advisor -maxdepth 1 -mindepth 1 -not -name .git -print'",
+    "/bin/zsh -lc 'find /Users/peter/Desktop/rtl-advisor/schemas -maxdepth 2 -type f -print'",
+    "/bin/zsh -lc \"sed -n '1,260p' /Users/peter/Desktop/rtl-advisor/schemas/rtl-advisor-workflow-batch-manifest-v1.schema.json && sed -n '1,320p' /Users/peter/Desktop/rtl-advisor/schemas/rtl-advisor-plugin-abc-arm-result-v1.schema.json\"",
+    "/bin/zsh -lc 'mkdir -p /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-b/r2/attempt-001'",
+    "/bin/zsh -lc \"jq -e '(.schema_version == 1) and (.schema == \\\"rtl-advisor-workflow-batch-manifest-v1\\\") and (.document_type == \\\"rtl-advisor.workflow.batch-manifest\\\") and (.items | length == 24)' /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-b/r2/attempt-001/batch-manifest.json && jq -e --slurpfile packet /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/packets/arm-b-r2.json '[.items[].item_id] == [\"'$packet[0].cases[].case_id] and [.items[].expected_source_sha256] == [$packet[0].cases[].source_sha256]'\"' /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-b/r2/attempt-001/batch-manifest.json\"",
+    "/bin/zsh -lc 'python3 /Users/peter/.codex/plugins/cache/personal/rtl-advisor/0.2.0-alpha.1+codex.20260903154742/skills/analyze-rtl/scripts/run_rtl_advisor.py --config /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/candidate/rtl-advisor.toml workflow batch /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-b/r2/attempt-001/batch-manifest.json --authorized-through measure --prompt-file /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v2/arm-b/r2/attempt-001/prompt.txt --first-eligible --jobs 4'"
+  ],
+  "contract_reads": [],
+  "passed": true,
+  "prior_immutable_file_count": 545,
+  "runner_inspections": []
+}

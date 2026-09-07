@@ -1,0 +1,77 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+
+-- Running command `read_verilog -sv experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv; hierarchy -top g11_one_stage_stream; proc; check' --
+
+1. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv' to AST representation.
+Generating RTLIL representation for module `\g11_one_stage_stream'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \g11_one_stage_stream
+
+2.2. Analyzing design hierarchy..
+Top module:  \g11_one_stage_stream
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:14$3 in module g11_one_stage_stream.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\g11_one_stage_stream.$proc$experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:14$3'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~2 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\g11_one_stage_stream.$proc$experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:14$3'.
+     1/2: $0\out_data[15:0]
+     2/2: $0\out_valid[0:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\g11_one_stage_stream.\out_valid' using process `\g11_one_stage_stream.$proc$experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:14$3'.
+  created $adff cell `$procdff$15' with positive edge clock and positive level reset.
+Creating register for signal `\g11_one_stage_stream.\out_data' using process `\g11_one_stage_stream.$proc$experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:14$3'.
+  created $adff cell `$procdff$20' with positive edge clock and positive level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 2 empty switches in `\g11_one_stage_stream.$proc$experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:14$3'.
+Removing empty process `g11_one_stage_stream.$proc$experiments/plugin-abc-v1/cases/generated/g11_one_stage_stream.sv:14$3'.
+Cleaned up 2 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g11_one_stage_stream.
+<suppressed ~4 debug messages>
+
+4. Executing CHECK pass (checking for obvious problems).
+Checking module g11_one_stage_stream...
+Found and reported 0 problems.
+
+End of script. Logfile hash: 638b53307f, CPU: user 0.03s system 0.01s, MEM: 12.44 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 35% 2x read_verilog (0 sec), 31% 1x opt_expr (0 sec), ...

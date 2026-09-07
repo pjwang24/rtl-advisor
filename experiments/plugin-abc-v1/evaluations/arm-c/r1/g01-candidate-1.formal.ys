@@ -1,0 +1,14 @@
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g01_add8_left.sv"
+prep -top g01_add8_left
+flatten
+design -stash gold
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/artifacts/agent-v2/runs/mvp-5c42987cbc59419709cb/candidates/addcand_5db95f9b35f13ff5/design/sources/0000/g01_add8_left.sv"
+prep -top g01_add8_left
+flatten
+design -stash gate
+design -copy-from gold -as gold g01_add8_left
+design -copy-from gate -as gate g01_add8_left
+equiv_make gold gate equiv
+prep -top equiv
+equiv_simple -seq 1
+equiv_status -assert

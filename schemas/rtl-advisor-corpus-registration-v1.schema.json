@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rtl-advisor.local/schemas/rtl-advisor-corpus-registration-v1.schema.json",
+  "title": "RTL Advisor Corpus Registration V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "schema", "document_type", "registration_id", "status", "read_only", "registry_mutation", "tranche_id", "tranche_semantic_hash", "registered_count", "record_semantic_hashes", "artifacts", "command", "semantic_hash"],
+  "$defs": {"sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+  "properties": {
+    "schema_version": {"const": 1},
+    "schema": {"const": "rtl-advisor-corpus-registration-v1"},
+    "document_type": {"const": "rtl-advisor.corpus.registration"},
+    "registration_id": {"type": "string", "pattern": "^registration-[0-9a-f]{20}$"},
+    "status": {"const": "registered"},
+    "read_only": {"const": false},
+    "registry_mutation": {"const": "append_only"},
+    "tranche_id": {"type": "string", "minLength": 1},
+    "tranche_semantic_hash": {"$ref": "#/$defs/sha256"},
+    "registered_count": {"type": "integer", "minimum": 1},
+    "record_semantic_hashes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/sha256"}},
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registration", "tranche_lock", "registry"],
+      "properties": {
+        "registration": {"type": "string", "minLength": 1},
+        "tranche_lock": {"type": "string", "minLength": 1},
+        "registry": {"type": "string", "minLength": 1}
+      }
+    },
+    "command": {"type": "array", "items": {"type": "string"}},
+    "semantic_hash": {"$ref": "#/$defs/sha256"}
+  }
+}

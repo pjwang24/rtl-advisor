@@ -1,0 +1,27 @@
+{
+  "agent_message_bytes": 76238,
+  "arm": "A",
+  "attempt": 1,
+  "command_categories": {
+    "eda": 21,
+    "hash": 2,
+    "other": 17
+  },
+  "command_count": 40,
+  "command_output_bytes": 150906,
+  "command_wave_count": 27,
+  "events_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-001/codex-events.jsonl",
+  "exit_code": 1,
+  "output_bytes": 227144,
+  "parse_error": "Codex JSONL has no completed turn with usage",
+  "repetition": 1,
+  "schema": "rtl-advisor-plugin-abc-attempt-failure-v1",
+  "stderr_path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-001/codex-stderr.log",
+  "terminal_event": {
+    "event_type": "turn.failed",
+    "message": "You've hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at 7:24 PM."
+  },
+  "thread_id": "01a0649c-529c-7813-b25d-644ef75fad95",
+  "usage_available": false,
+  "wall_time_seconds": 763.0
+}

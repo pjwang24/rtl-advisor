@@ -1,0 +1,41 @@
+{
+  "schema": "rtl-advisor-raw-eda-measurement-summary-v1",
+  "tool": "Yosys 0.63 with internal ABC",
+  "metric": "post-ABC generic CMOS transistor estimate",
+  "recipes": {
+    "full": "proc; flatten; opt; techmap; opt; abc -g simple; opt_clean; stat -json -tech cmos",
+    "fast": "proc; flatten; opt; techmap; opt; abc -g simple -fast; opt_clean; stat -json -tech cmos"
+  },
+  "cases": {
+    "g01": {
+      "full": {"baseline_cells": 102, "candidate_cells": 102, "baseline_transistors": 882, "candidate_transistors": 882},
+      "fast": {"baseline_cells": 147, "candidate_cells": 139, "baseline_transistors": 1044, "candidate_transistors": 1048},
+      "classification": "synthesis_handles"
+    },
+    "g02": {
+      "full": {"baseline_cells": 625, "candidate_cells": 632, "baseline_transistors": 5262, "candidate_transistors": 5304},
+      "fast": {"baseline_cells": 1062, "candidate_cells": 999, "baseline_transistors": 7156, "candidate_transistors": 7040},
+      "classification": "flow_dependent"
+    },
+    "g03": {
+      "full": {"baseline_cells": 346, "candidate_cells": 352, "baseline_transistors": 2626, "candidate_transistors": 2662},
+      "fast": {"baseline_cells": 453, "candidate_cells": 426, "baseline_transistors": 3136, "candidate_transistors": 3102},
+      "classification": "flow_dependent"
+    },
+    "g04": {
+      "full": {"baseline_cells": 244, "candidate_cells": 245, "baseline_transistors": 2118, "candidate_transistors": 2124},
+      "fast": {"baseline_cells": 367, "candidate_cells": 340, "baseline_transistors": 2628, "candidate_transistors": 2594},
+      "classification": "flow_dependent"
+    },
+    "g05": {
+      "full": {"baseline_cells": 184, "candidate_cells": 93, "baseline_transistors": 1536, "candidate_transistors": 840},
+      "fast": {"baseline_cells": 213, "candidate_cells": 114, "baseline_transistors": 1742, "candidate_transistors": 966},
+      "classification": "measured_improvement"
+    },
+    "g08": {
+      "full": {"baseline_cells": 223, "candidate_cells": 229, "baseline_transistors": 1896, "candidate_transistors": 1932},
+      "fast": {"baseline_cells": 351, "candidate_cells": 324, "baseline_transistors": 2436, "candidate_transistors": 2402},
+      "classification": "flow_dependent"
+    }
+  }
+}

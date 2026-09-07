@@ -1,0 +1,14 @@
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv"
+prep -top g03_mixed_safe_add
+flatten
+design -stash gold
+read_verilog -sv "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-0210319ddd68c5e50407/candidates/addcand_bd46a2a00b3c6dd3/design/sources/0000/g03_mixed_safe_add.sv"
+prep -top g03_mixed_safe_add
+flatten
+design -stash gate
+design -copy-from gold -as gold g03_mixed_safe_add
+design -copy-from gate -as gate g03_mixed_safe_add
+equiv_make gold gate equiv
+prep -top equiv
+equiv_simple -seq 1
+equiv_status -assert

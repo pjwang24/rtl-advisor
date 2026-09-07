@@ -1,0 +1,20 @@
+Execute the frozen A/B benchmark packet at /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/packets/arm-a-r1.json.
+
+Read the packet completely and obey its cases, access rule, model contract,
+decision vocabulary, proof rules, and manifest order. The packet access rule remains unchanged.
+RTL Advisor plugins are disabled for this invocation. Use ordinary RTL reasoning and raw EDA tools only.
+
+
+For this instrumented repetition only, the packet's run-directory isolation
+sentence is replaced by these stricter paths:
+- Do not read any existing experiments/plugin-abc-v1/runs/arm-* directory.
+- Do not read any other instrumented arm or repetition.
+- Write candidates, evidence, and scratch files only under /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-a/r1/attempt-002.
+- Do not mutate any baseline source or frozen packet.
+
+All generated cases and the packet's pinned open-source cases are explicitly
+authorized for this local benchmark. Do not read the oracle or any evaluation
+artifact. Complete every assigned case in one session. Return only one JSON
+object matching the packet's result schema, with its exact experiment_id, arm,
+repetition, model, reasoning_effort, manifest_sha256, and ordered case list.
+The final JSON will be stored at /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/installed-acceptance/v1/arm-a/r1/attempt-002/result.json by the harness.

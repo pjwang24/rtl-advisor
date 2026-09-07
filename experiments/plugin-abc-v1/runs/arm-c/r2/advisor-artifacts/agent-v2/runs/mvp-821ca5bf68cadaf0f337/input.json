@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "a94aaef571a4b11dfcfa1d0b9e7c0af662ab8ae1ebc8428c1fd2ebc700179def",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:g09_already_balanced.sv",
+        "sha256": "c1bbfbc8ffc8ea0b18fdfa3ddaa621171e513d51a285aebde8181059ac7a1ff0"
+      }
+    ],
+    "top": "g09_already_balanced"
+  },
+  "defines": [],
+  "design_hash": "24b9fb2556ad5948ed85ca638ae3c099a8adf5857cbfe5631138ed3fa7ae9df6",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/cases/generated/g09_already_balanced.sv",
+      "sha256": "c1bbfbc8ffc8ea0b18fdfa3ddaa621171e513d51a285aebde8181059ac7a1ff0"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "e83fa5114de31ed994cabcc4112a40c1f740c11c656f1b8585e0965880b2e125",
+  "top": "g09_already_balanced"
+}

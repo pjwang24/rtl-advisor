@@ -1,0 +1,31 @@
+{
+  "compile_context": {
+    "compile_context_hash": "870e06a3a6b9fe5d93194afc3f94a5c9957879281fb084bd4db7bfb1634f2336",
+    "defines": [],
+    "filelists": [],
+    "include_trees": [],
+    "schema_version": 1,
+    "sources": [
+      {
+        "logical_id": "source:0000:g05_mux_common_logic.sv",
+        "sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac"
+      }
+    ],
+    "top": "g05_mux_common_logic"
+  },
+  "defines": [],
+  "design_hash": "4430b970b14cb3992bab41b4666a50158aace923fd415630746a951e7d507dda",
+  "design_input_schema_version": 2,
+  "document_type": "rtl-advisor.run.design-input",
+  "filelists": [],
+  "files": [
+    {
+      "path": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g05_mux_common_logic.sv",
+      "sha256": "62594ad1604fbb46bf32eb1b875af6325effb07ca9f9357994a567172e6a0dac"
+    }
+  ],
+  "include_dirs": [],
+  "schema_version": 1,
+  "semantic_hash": "3ae77c919df80e53b23f4dec9d5c0b7f20c094d1c6b2635847b21eb0a1308ba0",
+  "top": "g05_mux_common_logic"
+}

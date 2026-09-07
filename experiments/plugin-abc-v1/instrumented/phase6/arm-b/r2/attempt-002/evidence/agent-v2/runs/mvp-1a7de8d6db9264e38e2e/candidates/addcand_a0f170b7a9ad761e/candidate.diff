@@ -1,0 +1,11 @@
+--- /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g03_mixed_safe_add.sv
++++ /Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r2/attempt-002/evidence/agent-v2/runs/mvp-1a7de8d6db9264e38e2e/candidates/addcand_a0f170b7a9ad761e/design/sources/0000/g03_mixed_safe_add.sv
+@@ -4,7 +4,7 @@
+   output logic [15:0] sum,
+   output logic [15:0] picked
+ );
+-  assign sum = ((a + b) + c) + d;
++  assign sum = ((a + b) + (c + d));
+   always_comb begin
+     case (sel)
+       2'd0: picked = a;

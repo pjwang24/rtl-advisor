@@ -1,0 +1,564 @@
+
+-- Running command `read_verilog -sv experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv; synth -top g02_add32_five -noabc; abc -g simple; clean; stat; ltp' --
+
+1. Executing Verilog-2005 frontend: experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv
+Parsing SystemVerilog input from `experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv' to AST representation.
+Generating RTLIL representation for module `\g02_add32_five'.
+Successfully finished Verilog frontend.
+
+2. Executing SYNTH pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \g02_add32_five
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \g02_add32_five
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+2.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+2.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+2.5. Executing CHECK pass (checking for obvious problems).
+Checking module g02_add32_five...
+Found and reported 0 problems.
+
+2.6. Executing OPT pass (performing simple optimizations).
+
+2.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+2.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 4 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+2.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g02_add32_five..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g02_add32_five.
+Performed a total of 0 changes.
+
+2.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 4 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+2.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+
+2.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+2.6.9. Finished fast OPT passes. (There is nothing left to do.)
+
+2.7. Executing FSM pass (extract and optimize FSM).
+
+2.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+2.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+2.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+2.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+
+2.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+2.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+2.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+2.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+2.8. Executing OPT pass (performing simple optimizations).
+
+2.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+2.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 4 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+2.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g02_add32_five..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g02_add32_five.
+Performed a total of 0 changes.
+
+2.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 4 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+2.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+
+2.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+2.8.9. Finished fast OPT passes. (There is nothing left to do.)
+
+2.9. Executing WREDUCE pass (reducing word size of cells).
+
+2.10. Executing PEEPOPT pass (run peephole optimizers).
+
+2.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+
+2.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module g02_add32_five:
+  creating $macc model for $add$experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv:5$4 ($add).
+  creating $macc model for $add$experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv:5$3 ($add).
+  creating $macc model for $add$experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv:5$2 ($add).
+  creating $macc model for $add$experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv:5$1 ($add).
+  merging $macc model for $add$experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv:5$1 into $add$experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv:5$3.
+  merging $macc model for $add$experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv:5$2 into $add$experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv:5$3.
+  merging $macc model for $add$experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv:5$3 into $add$experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv:5$4.
+  creating $macc cell for $add$experiments/plugin-abc-v1/instrumented/phase7/arm-a/r1/attempt-002/candidates/g02/g02_add32_five.sv:5$4: $auto$alumacc.cc:382:replace_macc$5
+  created 0 $alu and 1 $macc cells.
+
+2.13. Executing SHARE pass (SAT-based resource sharing).
+
+2.14. Executing OPT pass (performing simple optimizations).
+
+2.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+2.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 4 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+2.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g02_add32_five..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g02_add32_five.
+Performed a total of 0 changes.
+
+2.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 4 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+2.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+Removed 3 unused cells and 3 unused wires.
+<suppressed ~4 debug messages>
+
+2.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+2.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+2.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g02_add32_five..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g02_add32_five.
+Performed a total of 0 changes.
+
+2.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 1 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+2.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+
+2.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+2.14.16. Finished fast OPT passes. (There is nothing left to do.)
+
+2.15. Executing MEMORY pass.
+
+2.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+2.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+2.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+2.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+2.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+2.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+
+2.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+2.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+2.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+
+2.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+
+2.17. Executing OPT pass (performing simple optimizations).
+
+2.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+2.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 1 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+2.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+
+2.17.5. Finished fast OPT passes.
+
+2.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+2.19. Executing OPT pass (performing simple optimizations).
+
+2.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+2.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 1 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+2.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \g02_add32_five..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \g02_add32_five.
+Performed a total of 0 changes.
+
+2.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 1 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+2.19.6. Executing OPT_SHARE pass.
+
+2.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+
+2.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+
+2.19.10. Finished fast OPT passes. (There is nothing left to do.)
+
+2.20. Executing TECHMAP pass (map to technology primitives).
+
+2.20.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+2.20.2. Continuing TECHMAP pass.
+Using extmapper maccmap for cells of type $macc_v2.
+  add \a (32 bits, unsigned)
+  add \e (32 bits, unsigned)
+  add \c (32 bits, unsigned)
+  add \b (32 bits, unsigned)
+  add \d (32 bits, unsigned)
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100000 for cells of type $fa.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $not.
+No more expansions possible.
+<suppressed ~420 debug messages>
+
+2.21. Executing OPT pass (performing simple optimizations).
+
+2.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module g02_add32_five.
+<suppressed ~144 debug messages>
+
+2.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\g02_add32_five'.
+Computing hashes of 735 cells of `\g02_add32_five'.
+Finding duplicate cells in `\g02_add32_five'.
+Removed a total of 0 cells.
+
+2.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \g02_add32_five..
+Removed 55 unused cells and 84 unused wires.
+<suppressed ~56 debug messages>
+
+2.21.5. Finished fast OPT passes.
+
+2.22. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `g02_add32_five'. Setting top module to g02_add32_five.
+
+2.22.1. Analyzing design hierarchy..
+Top module:  \g02_add32_five
+
+2.22.2. Analyzing design hierarchy..
+Top module:  \g02_add32_five
+Removed 0 unused modules.
+
+2.23. Printing statistics.
+
+=== g02_add32_five ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      119 wires
+      863 wire bits
+        6 public wires
+      192 public wire bits
+        6 ports
+      192 port bits
+      680 cells
+      287   $_AND_
+      142   $_OR_
+      251   $_XOR_
+
+2.24. Executing CHECK pass (checking for obvious problems).
+Checking module g02_add32_five...
+Found and reported 0 problems.
+
+3. Executing ABC pass (technology mapping using ABC).
+
+3.1. Extracting gate netlist of module `\g02_add32_five' to `<abc-temp-dir>/input.blif'..
+
+3.1.1. Executed ABC.
+Extracted 680 gates and 840 wires to a netlist network with 160 inputs and 32 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:      243
+ABC RESULTS:                OR cells:      132
+ABC RESULTS:               XOR cells:      251
+ABC RESULTS:        internal signals:      648
+ABC RESULTS:           input signals:      160
+ABC RESULTS:          output signals:       32
+Removing temp directory.
+Removing global temp directory.
+Removed 0 unused cells and 305 unused wires.
+
+4. Printing statistics.
+
+=== g02_add32_five ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      600 wires
+      786 wire bits
+        6 public wires
+      192 public wire bits
+        6 ports
+      192 port bits
+      626 cells
+      243   $_AND_
+      132   $_OR_
+      251   $_XOR_
+
+5. Executing LTP pass (find longest path).
+
+Longest topological path in g02_add32_five (length=68):
+    0: \a [0]
+    1: $abc$1155$new_n194 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1157)
+    2: $abc$1155$new_n195 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1158)
+    3: $abc$1155$new_n200 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1163)
+    4: $abc$1155$new_n206 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1169)
+    5: $abc$1155$new_n208 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1171)
+    6: $abc$1155$new_n210 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1173)
+    7: $abc$1155$new_n211 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1174)
+    8: $abc$1155$new_n701 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1664)
+    9: $abc$1155$new_n704 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1667)
+   10: $abc$1155$new_n705 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1668)
+   11: $abc$1155$new_n706 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1669)
+   12: $abc$1155$new_n708 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1671)
+   13: $abc$1155$new_n709 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1672)
+   14: $abc$1155$new_n711 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1674)
+   15: $abc$1155$new_n712 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1675)
+   16: $abc$1155$new_n713 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1676)
+   17: $abc$1155$new_n714 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1677)
+   18: $abc$1155$new_n715 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1678)
+   19: $abc$1155$new_n716 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1679)
+   20: $abc$1155$new_n717 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1680)
+   21: $abc$1155$new_n718 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1681)
+   22: $abc$1155$new_n719 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1682)
+   23: $abc$1155$new_n720 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1683)
+   24: $abc$1155$new_n721 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1684)
+   25: $abc$1155$new_n722 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1685)
+   26: $abc$1155$new_n723 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1686)
+   27: $abc$1155$new_n724 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1687)
+   28: $abc$1155$new_n725 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1688)
+   29: $abc$1155$new_n726 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1689)
+   30: $abc$1155$new_n727 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1690)
+   31: $abc$1155$new_n728 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1691)
+   32: $abc$1155$new_n729 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1692)
+   33: $abc$1155$new_n730 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1693)
+   34: $abc$1155$new_n731 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1694)
+   35: $abc$1155$new_n732 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1695)
+   36: $abc$1155$new_n733 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1696)
+   37: $abc$1155$new_n734 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1697)
+   38: $abc$1155$new_n735 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1698)
+   39: $abc$1155$new_n736 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1699)
+   40: $abc$1155$new_n737 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1700)
+   41: $abc$1155$new_n738 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1701)
+   42: $abc$1155$new_n739 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1702)
+   43: $abc$1155$new_n740 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1703)
+   44: $abc$1155$new_n741 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1704)
+   45: $abc$1155$new_n742 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1705)
+   46: $abc$1155$new_n743 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1706)
+   47: $abc$1155$new_n744 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1707)
+   48: $abc$1155$new_n745 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1708)
+   49: $abc$1155$new_n746 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1709)
+   50: $abc$1155$new_n747 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1710)
+   51: $abc$1155$new_n748 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1711)
+   52: $abc$1155$new_n749 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1712)
+   53: $abc$1155$new_n750 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1713)
+   54: $abc$1155$new_n751 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1714)
+   55: $abc$1155$new_n752 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1715)
+   56: $abc$1155$new_n754 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1717)
+   57: $abc$1155$new_n755 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1718)
+   58: $abc$1155$new_n756 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1719)
+   59: $abc$1155$new_n757 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1720)
+   60: $abc$1155$new_n758 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1721)
+   61: $abc$1155$new_n759 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1722)
+   62: $abc$1155$new_n760 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1723)
+   63: $abc$1155$new_n761 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1724)
+   64: $abc$1155$new_n762 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1725)
+   65: $abc$1155$new_n763 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1726)
+   66: $abc$1155$new_n764 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1727)
+   67: $abc$1155$new_n765 (via $abc$1155$auto$blifparse.cc:397:parse_blif$1728)
+   68: \y [31] (via $abc$1155$auto$blifparse.cc:397:parse_blif$1739)
+
+End of script. Logfile hash: f714a71bc6, CPU: user 0.10s system 0.02s, MEM: 21.11 MB peak
+Yosys 0.63 (git sha1 70a11c6bf0e8dd669f56c7da3587f78b405138e2, clang++ 17.0.0 -fPIC -O3)
+Time spent: 56% 1x abc (0 sec), 9% 1x techmap (0 sec), ...

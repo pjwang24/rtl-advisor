@@ -1,0 +1,84 @@
+{
+  "artifacts": {
+    "input": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-9552880e4f4f3fd95da6/input.json",
+    "review": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-9552880e4f4f3fd95da6/review.json",
+    "root": "/Users/peter/Desktop/CAD Stuff/experiments/plugin-abc-v1/runs/arm-c/r2/advisor-artifacts/agent-v2/runs/mvp-9552880e4f4f3fd95da6"
+  },
+  "candidate_generation_allowed": false,
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/private/tmp/arm-c-r2-rtl-advisor.toml",
+    "agent",
+    "review",
+    "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv",
+    "--objective",
+    "balanced",
+    "--top",
+    "prim_count",
+    "--schema-version",
+    "2",
+    "--json"
+  ],
+  "coverage": {
+    "eligible_site_count": 0,
+    "excluded_site_count": 1
+  },
+  "decision": "unsupported",
+  "document_type": "rtl-advisor.agent.v2.review",
+  "evidence": {
+    "input_semantic_hash": "3754d4efaf97a63a9a7eae4358452f36d371940dfd6ee70f412a79898ff65664",
+    "model_used": false,
+    "rules_only": true
+  },
+  "exclusions": [
+    {
+      "detail": "the top module header is ambiguous",
+      "exclusion_id": "addexclude_6bc251088373a548",
+      "reason_code": "unsupported_module_header",
+      "source": {
+        "end_offset": 12189,
+        "file": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv",
+        "sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb",
+        "start_offset": 1533
+      },
+      "status": "excluded",
+      "transformation_id": "adder_reduction_association",
+      "transformation_version": "balanced-unsigned-add-chain-v2"
+    }
+  ],
+  "findings": [],
+  "flow_version": "rtl-advisor-agent-v2",
+  "input": {
+    "compile_context_hash": "a80db492d9596f1015b1fda0f20b846d7c565bb5525beb70d8257186c0692c67",
+    "defines": [],
+    "design_hash": "1ea36d4a2711900add0d0c3170d405c8885234660ac0ebb95da3ad61cfcfae88",
+    "files": [
+      {
+        "path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv",
+        "sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb"
+      }
+    ],
+    "include_dirs": [],
+    "kind": "rtl_file",
+    "provenance": {
+      "scope": "explicitly_approved_open_or_generated"
+    },
+    "requested_path": "/Users/peter/Desktop/CAD Stuff/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv",
+    "source_integrity": {
+      "mismatches": [],
+      "ok": true
+    },
+    "top": "prim_count"
+  },
+  "limitations": [
+    "A finding is only a candidate to evaluate, not a recommendation.",
+    "The source is unchanged; any candidate must be requested explicitly."
+  ],
+  "objective": "balanced",
+  "run_id": "mvp-9552880e4f4f3fd95da6",
+  "run_schema": "rtl-advisor-run-v1",
+  "schema_version": 2,
+  "semantic_hash": "7a6db38598dd654103764b818f43440d2a4aab8cc845d7ae641aeec8e8d4a399",
+  "status": "completed"
+}

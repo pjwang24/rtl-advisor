@@ -1,0 +1,18 @@
+No-change source audit
+
+g09 is already a balanced two-level adder tree.
+g10 uses saturating addition, which is non-associative.
+g11 is a canonical one-entry elastic ready/valid register; adding or moving state changes latency or backpressure.
+g12 has an explicit two-cycle contract and combines registered a+b with current c; retiming c changes behavior.
+o01 already uses a parallel-prefix leading-one primitive and holds round-robin state under backpressure.
+o02 separates pass-through, singleton, and normal FIFO parameter cases and preserves reset/security semantics.
+o03 intentionally duplicates counters in opposite directions for fault detection; the saturation and priority logic is semantic.
+o04 variable pack/unpack shifts and depth transitions implement the width-ratio protocol; no proven local simplification was identified.
+o05 is only a compatibility wrapper around spill_register_flushable.
+o06 is a canonical single-entry ready/valid register with valid and data enables already separated.
+o07 has simultaneous push/pop, fall-through, non-power-of-two wrap, flush, and memory-write clock gating interactions; no safe local change was proven.
+o08 already implements logarithmic arbitration and documents the FairArb timing/area tradeoff.
+o09 is the minimal indexed data/valid mux plus one-hot selected ready decode.
+o10 implements parameter-selected bypass, simple-buffer, and skid-buffer contracts; no latency-neutral simplification was identified.
+o11 is a generate composition of axis_register stages; stage removal or retiming changes configured latency/capacity.
+o12 couples a registered pipeline to a FIFO sized for the pipeline latency; changing stages or gating invalid payloads changes observable or protocol behavior.

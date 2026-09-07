@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "authorization": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r1/attempt-002/workflow-inputs/g10/authorizations/authorization-1ca36026c94a3fa7a82f.json",
+    "capabilities": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r1/attempt-002/workflow-inputs/g10/capabilities/9a4948bf1aae1a68b741aabeafe0d17b35a2e79d0d07db3fa096a09eb2ce6d91.json",
+    "request": "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r1/attempt-002/workflow-inputs/g10/request.json"
+  },
+  "authorization_semantic_hash": "daac2b637620d5035aa1f1f4e694a1b88a5dcb74e38e77d439df57e0ce6531d4",
+  "authorized_through": "measure",
+  "capabilities_semantic_hash": "9a4948bf1aae1a68b741aabeafe0d17b35a2e79d0d07db3fa096a09eb2ce6d91",
+  "command": [
+    "rtl-advisor",
+    "--config",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r1/attempt-002/rtl-advisor.toml",
+    "agent",
+    "workflow",
+    "prepare",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/cases/generated/g10_function_boundary.sv",
+    "--input-kind",
+    "generated_rtl",
+    "--objective",
+    "balanced",
+    "--authorized-through",
+    "measure",
+    "--top",
+    "g10_function_boundary",
+    "--prompt-file",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r1/attempt-002/authorization-prompt.txt",
+    "--output-dir",
+    "/Users/peter/Desktop/rtl-advisor/experiments/plugin-abc-v1/instrumented/phase6/arm-b/r1/attempt-002/workflow-inputs/g10",
+    "--first-eligible",
+    "--start",
+    "--schema-version",
+    "1",
+    "--json"
+  ],
+  "document_type": "rtl-advisor.workflow.preparation",
+  "request_semantic_hash": "6594234c086dad32c6e72ecb9c9abe32edd9b00c71c3369e4733da40bbf71ca6",
+  "schema": "rtl-advisor-workflow-preparation-v1",
+  "schema_version": 1,
+  "semantic_hash": "a8fa62b530ea680b7b5e22d95108f00bc177c29053c8a2f82a5d338fbf693195",
+  "status": "prepared",
+  "workflow_id": "workflow-05a1b8fc98e6972890d3"
+}

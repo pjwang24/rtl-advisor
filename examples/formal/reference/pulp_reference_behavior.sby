@@ -1,0 +1,36 @@
+[tasks]
+spill
+stream
+fifo
+arbiter
+
+[options]
+mode prove
+depth 24
+expect pass
+
+[engines]
+abc pdr
+
+[script]
+plugin -i /opt/oss-cad-suite/share/yosys/plugins/slang.so
+spill: read_slang --top pulp_spill_register_behavior -D SYNTHESIS -D COMMON_CELLS_ASSERTS_OFF -I . spill_register_flushable.sv spill_register.sv pulp_reference_behavior_miter.sv
+spill: prep -top pulp_spill_register_behavior
+stream: read_slang --top pulp_stream_register_behavior -D SYNTHESIS -D COMMON_CELLS_ASSERTS_OFF -I . stream_register.sv pulp_reference_behavior_miter.sv
+stream: prep -top pulp_stream_register_behavior
+fifo: read_slang --top pulp_fifo_v3_behavior -D SYNTHESIS -D COMMON_CELLS_ASSERTS_OFF -I . fifo_v3.sv pulp_reference_behavior_miter.sv
+fifo: prep -top pulp_fifo_v3_behavior
+arbiter: read_slang --top pulp_rr_arb_tree_behavior -D SYNTHESIS -D COMMON_CELLS_ASSERTS_OFF -I . cf_math_pkg.sv lzc.sv rr_arb_tree.sv pulp_reference_behavior_miter.sv
+arbiter: prep -top pulp_rr_arb_tree_behavior
+
+[files]
+common_cells/assertions.svh corpus/upstream/common_cells/include/common_cells/assertions.svh
+common_cells/registers.svh corpus/upstream/common_cells/include/common_cells/registers.svh
+corpus/upstream/common_cells/src/spill_register_flushable.sv
+corpus/upstream/common_cells/src/spill_register.sv
+corpus/upstream/common_cells/src/stream_register.sv
+corpus/upstream/common_cells/src/fifo_v3.sv
+corpus/upstream/common_cells/src/cf_math_pkg.sv
+corpus/upstream/common_cells/src/lzc.sv
+corpus/upstream/common_cells/src/rr_arb_tree.sv
+examples/formal/reference/pulp_reference_behavior_miter.sv

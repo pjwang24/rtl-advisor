@@ -1,0 +1,17 @@
+{
+  "document_type": "rtl-advisor.workflow.request",
+  "input": {
+    "compile_context_hash": "a80db492d9596f1015b1fda0f20b846d7c565bb5525beb70d8257186c0692c67",
+    "defines": [],
+    "include_dirs": [],
+    "kind": "explicitly_approved_open_rtl",
+    "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/opentitan/hw/ip/prim/rtl/prim_count.sv",
+    "sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb",
+    "top": "prim_count"
+  },
+  "objective": "balanced",
+  "schema": "rtl-advisor-workflow-request-v1",
+  "schema_version": 1,
+  "semantic_hash": "72fb4adbda704ab3d206b25aabd5c39e789d660d60ac16a473fa6028aa158279",
+  "workflow_id": "workflow-5a458a9d40a0fdea4fda"
+}

@@ -1,0 +1,17 @@
+{
+  "document_type": "rtl-advisor.workflow.request",
+  "input": {
+    "compile_context_hash": "aa3b94a4a07ca5b208e2f9ff7f541a5baed45fa29283f0de1997c81bba1228ec",
+    "defines": [],
+    "include_dirs": [],
+    "kind": "explicitly_approved_open_rtl",
+    "path": "/Users/peter/Desktop/rtl-advisor/corpus/upstream/verilog-axis/rtl/axis_register.v",
+    "sha256": "599fde2d6c2d806643bbffb7c444297e69a71871f962d4b741ec1914342e0d39",
+    "top": "axis_register"
+  },
+  "objective": "balanced",
+  "schema": "rtl-advisor-workflow-request-v1",
+  "schema_version": 1,
+  "semantic_hash": "827b56c12b9749a493adc848dfd216aac83d88e50b939fc36c382028b3f62cff",
+  "workflow_id": "workflow-052e0191157d5925e13f"
+}
